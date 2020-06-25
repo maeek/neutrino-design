@@ -61,6 +61,7 @@
     "dist"
   ],
   "dependencies": {
-    "@material-ui/icons": "^4.9.1"
+    "@material-ui/icons": "^4.9.1",
+    "twemoji-parser": "^13.0.0"
   }
 }
