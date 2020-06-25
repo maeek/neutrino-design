@@ -17,7 +17,7 @@ export const computeAvatar = (text: string): Blob => {
   return new Blob(getInitials(text));
 };
 
-export const avatar = (props: Props): { avatarBlob: Blob } => {
+export default (props: Props): { avatarBlob: Blob } => {
   const { text } = props;
   const [avatarBlob, setAvatarBlob] = useState(new Blob([]));
 
