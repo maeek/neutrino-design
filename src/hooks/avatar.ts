@@ -4,8 +4,10 @@ interface Props {
   text: string;
 }
 
-const getInitials = (text: string): Array<string> => {
-  return text.split(' ');
+export const getInitials = (text: string): Array<string> => {
+  return text
+    .split(/(\s)|([_-/])/)
+    .map((word) => word.substr(0, 1).toUpperCase());
 };
 
 export const computeAvatar = (text: string): Blob => {
