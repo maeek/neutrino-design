@@ -27,4 +27,4 @@ export const emojiMapper = (emojis: string | Array<string>): Array<Emoji> => {
   throw new Error('Unsupported type');
 };
 
-// export default ()
+export default {};
