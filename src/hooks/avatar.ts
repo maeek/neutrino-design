@@ -83,15 +83,15 @@ export const computeAvatar = async (
   return await getBlob(canvas);
 };
 
-export default (props: PropsTypes): { avatarBlob: Blob } => {
+export default (props: PropsTypes): { imageBlob: Blob | null } => {
   const { text, options } = props;
-  const [avatarBlob, setAvatarBlob] = useState(new Blob([]));
+  const [imageBlob, setAvatarBlob] = useState<Blob | null>(null);
 
   useMemo(() => {
     computeAvatar(text, options).then((blob) => setAvatarBlob(blob));
   }, [text, options]);
 
   return {
-    avatarBlob
+    imageBlob
   };
 };
