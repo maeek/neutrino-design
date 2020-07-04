@@ -13,11 +13,13 @@ interface CanvasRatioExtendedProperties extends CanvasRenderingContext2D {
   backingStorePixelRatio: any;
 }
 
-interface AvatarProperties {
-  size: {
-    width: number;
-    height: number;
-  };
+export interface AvatarSize {
+  width: number;
+  height: number;
+}
+
+export interface AvatarProperties {
+  size: AvatarSize;
   background: string;
   color: string;
   font: string;
@@ -41,8 +43,13 @@ export const getInitials = (text: string): Array<string> => {
 
 export const computeAvatar = async (
   text: string,
-  options: AvatarProperties = DEFAULT_AVATAR_OPTIONS
+  options: AvatarProperties
 ): Promise<Blob> => {
+  const canvasOptions = {
+    ...DEFAULT_AVATAR_OPTIONS,
+    ...options
+  };
+
   // Prepare text
   const initials = getInitials(text).join('');
   // Create canvas
@@ -59,20 +66,24 @@ export const computeAvatar = async (
     ctx.backingStorePixelRatio ||
     1;
   const ratio = dpr / bsr;
-  canvas.width = options.size.width * ratio;
-  canvas.height = options.size.height * ratio;
+  canvas.width = canvasOptions.size.width * ratio;
+  canvas.height = canvasOptions.size.height * ratio;
 
   // Set bg
   ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-  ctx.fillStyle = options.background;
-  ctx.fillRect(0, 0, options.size.width, options.size.height);
+  ctx.fillStyle = canvasOptions.background;
+  ctx.fillRect(0, 0, canvasOptions.size.width, canvasOptions.size.height);
 
   // Place text
-  ctx.font = options.font;
-  ctx.fillStyle = options.color;
+  ctx.font = canvasOptions.font;
+  ctx.fillStyle = canvasOptions.color;
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'center';
-  ctx.fillText(initials, options.size.width / 2, options.size.height / 2);
+  ctx.fillText(
+    initials,
+    canvasOptions.size.width / 2,
+    canvasOptions.size.height / 2
+  );
 
   // Return blob
   const getBlob = (canvas: HTMLCanvasElement): Promise<Blob> =>
