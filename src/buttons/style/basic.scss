@@ -1,0 +1,17 @@
+.button-basic {
+  background-color: #313d47;
+  color: #fff;
+  &:hover,
+  &:focus {
+      background-color: #374553;
+  }
+  &:active {
+      background-color: #374553;
+      border-bottom: 3px solid #28323c;
+      border-right: 3px solid #28323c;
+  }
+  >svg {
+      font-size: 1.1rem;
+      margin-right: 0.4rem;
+  }
+}
