@@ -13,13 +13,13 @@ interface CanvasRatioExtendedProperties extends CanvasRenderingContext2D {
   backingStorePixelRatio: any;
 }
 
-export interface AvatarSize {
+export interface AvatarDimensions {
   width: number;
   height: number;
 }
 
 export interface AvatarProperties {
-  size: AvatarSize;
+  size: AvatarDimensions;
   background: string;
   color: string;
   font: string;
@@ -43,7 +43,7 @@ export const getInitials = (text: string): Array<string> => {
 
 export const computeAvatar = async (
   text: string,
-  options: AvatarProperties
+  options?: AvatarProperties
 ): Promise<Blob> => {
   const canvasOptions = {
     ...DEFAULT_AVATAR_OPTIONS,
