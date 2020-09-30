@@ -1,4 +1,4 @@
-.button-base {
+.buttonBase {
   margin: 0;
   display: flex;
   flex: 0 0 auto;
@@ -6,11 +6,16 @@
   align-items: center;
   border: 3px solid transparent;
   border-radius: 2px;
-  padding: 0.4rem 0.7rem;
-  height: 2.4rem;
+  padding: 0.2.4rem 0.7rem;
+  height: 2rem;
   font-family: "Roboto", "Helvetica Neue", -apple-system, BlinkMacSystemFont, Helvetica, Ubuntu, Roboto, Noto, "Segoe UI", Arial, sans-serif;
   font-weight: 900;
   font-size: 0.7rem;
   cursor: pointer;
   user-select: none;
+}
+
+.icon {
+  margin: 0 0.5rem 0 0;
+  font-size: 0.8rem;
 }

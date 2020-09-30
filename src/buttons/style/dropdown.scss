@@ -1,0 +1,58 @@
+$bg: transparent;
+$color: #ccc;
+$hov-bg: transparent;
+$ac-bg:#202328;
+$ac-border: transparent;
+$dis-bg: transparent;
+$dis-color: #888;
+
+.buttonDropdown {
+  background-color: $bg;
+  color: $color;
+  align-items: center;
+  justify-content: last baseline;
+  font-size: 1rem;
+  border-radius: 4px;
+  height: 2.2rem;
+  font-weight: 400;
+  padding: 0;
+  width: 100%;
+  &:hover,
+  &:focus {
+    background-color: $hov-bg;
+  }
+  
+  &:active {
+    background-color: inherit;
+    border-bottom: 3px solid $ac-border;
+    border-right: 3px solid $ac-border;
+  }
+  span:not(.icon) {
+    >svg {
+      font-size: 1.6rem;
+      margin-right: 1.2rem;
+    }
+  }
+  span:hover {
+    color: #5ea8ed;
+  }
+
+  &__active {
+    background-color: $ac-bg;
+    &:active,
+    &:hover {
+      background-color: $ac-bg;
+    }
+  }
+
+  &__disabled {
+    background-color: $dis-bg;
+    color: $dis-color;
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: inherit;
+      color: $dis-color;
+    }
+  }
+}

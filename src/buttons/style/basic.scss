@@ -1,17 +1,81 @@
-.button-basic {
-  background-color: #313d47;
-  color: #fff;
+$bg: #313d47;
+$color: #fff;
+$hov-bg: #374553;
+$ac-bg: #374553;
+$ac-border: #28323c;
+$dis-bg: #525e68;
+$dis-color: #13161f;
+
+.buttonBasic {
+  background-color: $bg;
+  color: $color;
+  transition: background-color 0.1s, color 0.15s;
   &:hover,
   &:focus {
-      background-color: #374553;
+    background-color: $hov-bg;
+    outline: 0 !important;
   }
   &:active {
-      background-color: #374553;
-      border-bottom: 3px solid #28323c;
-      border-right: 3px solid #28323c;
+    background-color: $ac-bg;
+    border-bottom-color: $ac-border;
+    border-right-color: $ac-border;
   }
-  >svg {
+  span:not(.icon) {
+    text-align: center;
+    >svg {
       font-size: 1.1rem;
       margin-right: 0.4rem;
+    }
+  }
+  .icon > svg{
+    font-size: 1rem;
+  }
+  &__icon {
+    .icon > svg{
+      margin-right: 0.3rem;
+    }
+  }
+  &__native {
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    cursor: inherit;
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    span {
+      text-align: center;
+      line-height: 1rem;
+    }
+    &:active {
+      border: 0;
+    }
+  }
+
+  &__link {
+    cursor: inherit;
+  }
+
+  &__compact {
+    width: 2.2rem !important;
+  }
+
+  &__disabled {
+    background-color: $dis-bg;
+    color: $dis-color;
+    cursor: default !important;
+    &:hover,
+    &:focus {
+      background-color: $dis-bg;
+      color: $dis-color;
+    }
+    &:active {
+      border-bottom-color: transparent !important;
+      border-right-color: transparent !important;
+    }
   }
 }

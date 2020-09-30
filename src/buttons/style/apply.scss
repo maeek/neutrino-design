@@ -1,0 +1,31 @@
+$bg: #28a459;
+$color: #1c1c1c;
+$hov-bg: #50ce82;
+$ac-bg: #24b15d;
+$ac-border: #136132;
+$dis-bg: #96eab8;
+$dis-color: #21663d;
+
+.buttonApply {
+  background-color: $bg;
+  color: $color;
+  &:hover,
+  &:focus {
+    background-color: $hov-bg;
+  }
+  &:active {
+    background-color: $ac-bg;
+    border-bottom: 3px solid $ac-border;
+    border-right: 3px solid $ac-border;
+  }
+  &__disabled {
+    background-color: $dis-bg;
+    color: $dis-color;
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: $dis-bg;
+      color: $dis-color;
+    }
+  }
+}

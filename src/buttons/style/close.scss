@@ -1,0 +1,31 @@
+$bg: #ff5f5f;
+$color: #fff;
+$hov-bg: #e84a4a;
+$ac-bg: #ff8282;
+$ac-border: #992424;
+$dis-bg: #ffbfbf;
+$dis-color: #884242;
+
+.buttonClose {
+  background-color: $bg;
+  color: $color;
+  &:hover,
+  &:focus {
+    background-color: $hov-bg;
+  }
+  &:active {
+    background-color: $ac-bg;
+    border-bottom: 3px solid $ac-border;
+    border-right: 3px solid $ac-border;
+  }
+  &__disabled {
+    background-color: $dis-bg;
+    color: $dis-color;
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: $dis-bg;
+      color: $dis-color;
+    }
+  }
+}

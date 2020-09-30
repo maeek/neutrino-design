@@ -1,0 +1,31 @@
+$bg: #267ce0;
+$color: #fff;
+$hov-bg: #0b54ab;
+$ac-bg: #0e4f9e;
+$ac-border: #034494;
+$dis-bg: #96c7ff;
+$dis-color: #275286;
+
+.buttonAdd {
+  background-color: $bg;
+  color: $color;
+  &:hover,
+  &:focus {
+    background-color: $hov-bg;
+  }
+  &:active {
+    background-color: $ac-bg;
+    border-bottom: 3px solid $ac-border;
+    border-right: 3px solid $ac-border;
+  }
+  &__disabled {
+    background-color: $dis-bg;
+    color: $dis-color;
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: $dis-bg;
+      color: $dis-color;
+    }
+  }
+}

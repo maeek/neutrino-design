@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import './style/base.scss';
-import './style/basic.scss';
+import baseStyle from './style/base.scss';
+import Style from './style/basic.scss';
 
 export type ButtonType = 'link' | 'native' | undefined;
 
@@ -13,9 +13,12 @@ export interface BasicButtonProps {
   icon?: React.ReactNode;
   children?: React.ReactNode;
 
+  disabled?: boolean;
   prefixCls?: string;
   style?: React.CSSProperties;
   className?: string;
+  compact: boolean;
+  primary: boolean;
 }
 
 export type LinkButton = {
@@ -32,13 +35,14 @@ export type NativeButton = {
 
 export type ButtonProps = Partial<LinkButton & NativeButton>;
 
-const Basic: React.ForwardRefRenderFunction<unknown, ButtonProps> = (
-  props,
-  ref
+export const Basic: React.FC<ButtonProps> = (
+  props
+  // ref
 ) => {
   const {
     type,
     title,
+    disabled,
     icon,
     children,
     prefixCls,
@@ -49,43 +53,62 @@ const Basic: React.ForwardRefRenderFunction<unknown, ButtonProps> = (
     rel,
     onClick,
     htmlType,
+    compact,
+    primary,
     ...rest
   } = props;
 
   const handleClick = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>
   ) => {
-    if (onClick) {
+    if (onClick && !disabled) {
       (onClick as React.MouseEventHandler<
         HTMLButtonElement | HTMLAnchorElement
       >)(e);
     }
   };
 
-  const classes = classNames('button-base button-basic', className);
+  const classes = classNames(
+    baseStyle.buttonBase,
+    Style.buttonBasic,
+    compact ? Style.buttonBasic__compact : null,
+    primary ? null : Style.buttonBasic__primary,
+    disabled ? Style.buttonBasic__disabled : null,
+    icon && !compact ? Style.buttonBasic__icon : null,
+    className
+  );
 
-  const NativeButton = (
-    <button onClick={handleClick} className={classes} {...rest}>
-      {icon && <span className='icon'>{icon}</span>}
-      {children}
+  const NativeButton = () => (
+    <button
+      onClick={handleClick}
+      className={Style.buttonBasic__native}
+      disabled={disabled}
+      {...rest}
+    >
+      {icon && <span className={Style.icon}>{icon}</span>}
+      <span>{children}</span>
     </button>
   );
 
-  // const LinkButton = (
+  const LinkButton = () => (
+    <a
+      href={href}
+      target={target}
+      className={Style.buttonBasic__link}
+      rel={rel}
+      onClick={onClick}
+      {...rest}
+    >
+      {icon && <span className={Style.icon}>{icon}</span>}
+      <span>{children}</span>
+    </a>
+  );
 
-  // );
-
-  // const ButtonWrapper = (
-  //   <div>
-  //     {type === 'link' ? (
-  //       <a href={href} target={target} rel={rel} onClick={onClick} {...rest}>
-  //         {InnerButton}
-  //       </a>
-  //     ) : (
-  //       { InnerButton }
-  //     )}
-  //   </div>
-  // );
+  const ButtonWrapper = (
+    <div className={classes}>
+      {type === 'link' ? <LinkButton /> : <NativeButton />}
+    </div>
+  );
 
   return ButtonWrapper;
 };
