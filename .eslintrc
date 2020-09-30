@@ -45,6 +45,7 @@
       "error",
       "never"
     ],
+    "indent": ["error", 2],
     "guard-for-in": 0,
     "no-param-reassign": 0,
     "react/require-default-props": 0,
