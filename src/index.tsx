@@ -1,10 +1,10 @@
-import * as React from 'react';
-import styles from './styles.module.css';
+import * as Buttons from './buttons';
+import * as Avatar from './avatar';
 
-interface Props {
-  text: string;
-}
+export * from './buttons';
+export * from './avatar';
 
-export const ExampleComponent = ({ text }: Props) => {
-  return <div className={styles.test}>Example Component: {text}</div>;
+export default {
+  Buttons,
+  Avatar
 };

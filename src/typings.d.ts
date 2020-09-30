@@ -7,6 +7,11 @@ declare module '*.css' {
   export default content;
 }
 
+declare module '*.scss' {
+  const content: { [className: string]: string };
+  export default content;
+}
+
 interface SvgrComponent
   extends React.StatelessComponent<React.SVGAttributes<SVGElement>> {}
 
@@ -17,4 +22,5 @@ declare module '*.svg' {
   export { svgComponent as ReactComponent };
 }
 
+declare module 'classnames';
 declare module 'twemoji-parser';
