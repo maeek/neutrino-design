@@ -4,13 +4,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "docz:dev": "docz dev",
-    "docz:build": "docz build",
-    "docz:serve": "docz build && docz serve",
-    "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
-    "build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
-    "test": "node ../node_modules/react-scripts/bin/react-scripts.js test",
-    "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
+    "dev": "docz dev",
+    "build": "docz build",
+    "start": "npm run build && docz serve"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -22,7 +18,7 @@
     "@types/node": "file:../node_modules/@types/node",
     "@types/react": "file:../node_modules/@types/react",
     "@types/react-dom": "file:../node_modules/@types/react-dom",
-    "docz": "^2.3.1",
+    "docz": "latest",
     "neutrino-design": "file:..",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
@@ -32,7 +28,7 @@
   "devDependencies": {
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
     "@mdx-js/mdx": "^1.6.16",
-    "docz-core": "^2.3.0"
+    "docz-core": "latest"
   },
   "eslintConfig": {
     "extends": "react-app"

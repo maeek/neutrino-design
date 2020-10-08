@@ -1,8 +1,11 @@
 export default {
-  title: 'Neutrino-Design',
+  title: 'Neutrino Design',
   typescript: true,
   notUseSpecifiers: true,
   filterComponents: files => files.filter(file => /([^d]\.tsx?)$/.test(file)),
+  themeConfig: {
+    initialColorMode: 'dark',
+  },
   htmlContext: {
     head: {
       links: [
