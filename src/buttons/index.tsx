@@ -1,18 +1,18 @@
-import Basic from './basic';
-import Add from './add';
-import Apply from './apply';
-import Cancel from './cancel';
-import Close from './close';
-import ButtonOption from './option';
-import ButtonDropdown from './dropdown';
+import Basic from './Basic';
+import Add from './Add';
+import Apply from './Apply';
+import Cancel from './Cancel';
+import Close from './Close';
+import ButtonOption from './Option';
+import ButtonDropdown from './Dropdown';
 
-export { default as ButtonBasic, ButtonProps } from './basic';
-export { default as ButtonAdd } from './add';
-export { default as ButtonApply } from './apply';
-export { default as ButtonCancel } from './cancel';
-export { default as ButtonClose } from './close';
-export { default as ButtonOption } from './option';
-export { default as ButtonDropdown } from './dropdown';
+export { default as ButtonBasic } from './Basic';
+export { default as ButtonAdd } from './Add';
+export { default as ButtonApply } from './Apply';
+export { default as ButtonCancel } from './Cancel';
+export { default as ButtonClose } from './Close';
+export { default as ButtonOption } from './Option';
+export { default as ButtonDropdown } from './Dropdown';
 
 export default {
   Basic,

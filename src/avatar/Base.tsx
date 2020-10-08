@@ -3,33 +3,47 @@ import React, { createRef, FC, ReactNode, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import Style from './avatar.scss';
 // eslint-disable-next-line no-unused-vars
-import AvatarHook, {
+import useAvatar, {
   AvatarProperties,
   DEFAULT_AVATAR_OPTIONS
 } from '../hooks/avatar';
 
+export const DEFAULT_AVATAR_OPTIONS__LIGHT: AvatarProperties = {
+  ...DEFAULT_AVATAR_OPTIONS,
+  background: '#D3EAFF',
+  color: '#1E2D3D'
+};
+
 type AvatarType = 'square' | 'circle' | undefined;
 export interface AvatarProps {
   type?: AvatarType;
+
   renderImage?: boolean;
   preloadImage?: boolean;
 
-  alt?: string;
   text?: string;
   title?: string;
+  alt?: string;
   src?: string | Blob | ArrayBuffer;
-  options?: AvatarProperties;
-  loader: React.ReactNode;
-
   draggable?: boolean;
+
+  /**
+   * This will be overwritten by options
+   */
+  theme?: 'light' | 'dark';
   className?: string;
-
   style?: any;
-  children: ReactNode;
 
+  options?: AvatarProperties;
+  loader?: React.ReactNode;
+
+  children?: ReactNode;
+
+  preloadGoogleFonts: boolean;
   fallbackToText?: boolean;
   onImageLoad?: Function;
   onError?: Function;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export const Avatar: FC<AvatarProps> = (props) => {
@@ -42,11 +56,18 @@ export const Avatar: FC<AvatarProps> = (props) => {
     draggable,
     renderImage,
     preloadImage,
+    fallbackToText,
+    theme = 'dark',
     className,
     loader,
     style,
     children,
-    options = DEFAULT_AVATAR_OPTIONS
+    options = DEFAULT_AVATAR_OPTIONS,
+    onClick,
+    onImageLoad,
+    onError: onErrorFromProps,
+    preloadGoogleFonts,
+    ...rest
   } = props;
   const imgRef = createRef<HTMLImageElement>();
 
@@ -55,6 +76,9 @@ export const Avatar: FC<AvatarProps> = (props) => {
 
   const classes = classNames(
     Style.avatarContainer,
+    theme === 'light'
+      ? Style.avatarContainer__light
+      : Style.avatarContainer__light,
     type === 'circle'
       ? Style.avatarContainer__circle
       : Style.avatarContainer__square,
@@ -73,9 +97,29 @@ export const Avatar: FC<AvatarProps> = (props) => {
   const [enforceFallback, setEnforceFallback] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingFailed, setLoadingFailed] = useState(false);
+  const [activeOptions, setActiveOptions] = useState<AvatarProperties>(
+    DEFAULT_AVATAR_OPTIONS
+  );
   const [imageSource, setImageSource] = useState<string>('');
 
-  const imageBlob = AvatarHook({ text, options });
+  const { imageBlob } = useAvatar({
+    text,
+    options: activeOptions
+  });
+
+  useEffect(() => {
+    if (theme === 'light') {
+      setActiveOptions({
+        ...DEFAULT_AVATAR_OPTIONS__LIGHT,
+        size: options?.size || DEFAULT_AVATAR_OPTIONS__LIGHT.size,
+        maxLength:
+          options?.maxLength || DEFAULT_AVATAR_OPTIONS__LIGHT.maxLength,
+        font: options?.font || DEFAULT_AVATAR_OPTIONS__LIGHT.font
+      });
+    } else {
+      setActiveOptions(options);
+    }
+  }, [theme, options]);
 
   /**
    *  Add events for load and error to <img />
@@ -85,16 +129,27 @@ export const Avatar: FC<AvatarProps> = (props) => {
     const onLoad = () => {
       setIsLoading(false);
       setLoadingFailed(false);
+      if (onImageLoad) {
+        onImageLoad();
+      }
     };
     const onError = () => {
-      setIsLoading(false);
-      setLoadingFailed(true);
       setEnforceFallback(true);
+      setLoadingFailed(true);
+      setIsLoading(false);
+      if (onErrorFromProps) {
+        onErrorFromProps();
+      }
     };
 
     imgRef.current.addEventListener('load', onLoad);
     imgRef.current.addEventListener('error', onError);
-  }, [imgRef, renderImage, setIsLoading, setLoadingFailed, setEnforceFallback]);
+    return () => {
+      if (!imgRef.current) return;
+      imgRef.current.removeEventListener('load', onLoad);
+      imgRef.current.removeEventListener('error', onError);
+    };
+  }, [imgRef, renderImage]);
 
   /**
    *  Select proper img.src
@@ -122,7 +177,9 @@ export const Avatar: FC<AvatarProps> = (props) => {
         img.onerror = () => {
           setIsLoading(false);
           setLoadingFailed(true);
-          setEnforceFallback(true);
+          if (fallbackToText) {
+            setEnforceFallback(true);
+          }
         };
         img.src = typeof src === 'string' ? src : URL.createObjectURL(src);
       }
@@ -143,7 +200,13 @@ export const Avatar: FC<AvatarProps> = (props) => {
   }, [imageSource, imgRef, renderImage]);
 
   return (
-    <div className={classes} style={styles} title={title}>
+    <div
+      className={classes}
+      style={styles}
+      title={title}
+      onClick={onClick}
+      {...rest}
+    >
       {renderImage && (
         <img
           alt={alt}
@@ -166,7 +229,8 @@ Avatar.defaultProps = {
   type: 'square',
   draggable: true,
   renderImage: true,
-  preloadImage: true
+  preloadImage: true,
+  fallbackToText: true
 };
 
 export default Avatar;

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Style from './style/option.scss';
 
 // eslint-disable-next-line no-unused-vars
-import Basic, { ButtonProps } from './basic';
+import Basic, { ButtonProps } from './Basic';
 
 export interface OptionItemProps extends ButtonProps {
   active: boolean;

@@ -1,23 +1,23 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import Style from './style/apply.scss';
+import Style from './style/cancel.scss';
 
 // eslint-disable-next-line no-unused-vars
-import Basic, { ButtonProps } from './basic';
+import Basic, { ButtonProps } from './Basic';
 
-export const Apply: React.FC<ButtonProps> = (
+export const Cancel: React.FC<ButtonProps> = (
   props
   // ref
 ) => {
   const { className, disabled } = props;
 
   const classes = classNames(
-    Style.buttonApply,
-    disabled ? Style.buttonApply__disabled : null,
+    Style.buttonCancel,
+    disabled ? Style.buttonCancel__disabled : null,
     className
   );
 
   return <Basic {...props} className={classes} />;
 };
 
-export default Apply;
+export default Cancel;
