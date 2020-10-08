@@ -1,0 +1,42 @@
+.breadcrumbs {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.breadcrumbItem {
+  padding: 0.2rem 0;
+  font-size: 1rem;
+  color: #eee;
+  text-decoration: none;
+  transition: color 0.1s;
+  display: block;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &:hover, &:focus {
+    color: #5ea8ed;
+  }
+  &:active {
+    text-decoration: underline;
+  }
+  &_light {
+    color: #000;
+  }
+
+  &__element {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+.breadcrumbSeparator {
+  margin: 0 1.2rem;
+  font-size: 1.2rem;
+  color: #888;
+  cursor: default;
+}
