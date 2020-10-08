@@ -9,10 +9,11 @@ export const Cancel: React.FC<ButtonProps> = (
   props
   // ref
 ) => {
-  const { className, disabled } = props;
+  const { className, disabled, theme } = props;
 
   const classes = classNames(
     Style.buttonCancel,
+    theme === 'light' ? Style.buttonCancel__light : Style.buttonCancel__dark,
     disabled ? Style.buttonCancel__disabled : null,
     className
   );

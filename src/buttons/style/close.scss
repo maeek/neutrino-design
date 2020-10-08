@@ -3,21 +3,33 @@ $color: #fff;
 $hov-bg: #e84a4a;
 $ac-bg: #ff8282;
 $ac-border: #992424;
-$dis-bg: #ffbfbf;
-$dis-color: #884242;
+$dis-bg: #2d2d2d;
+$dis-color: #aeaeae;
+
+$light-bg: #ffd6d6;
+$light-color:#350000;
+$light-hov-bg: #ffc5c5;
+$light-hov-color: #350000;
+$light-dis-bg: #d0d5d9;
+$light-dis-color:#4f565b;
+$light-ac-bg: #ffc0c0;
+$light-ac-border:#c18787;
 
 .buttonClose {
   background-color: $bg;
   color: $color;
+
   &:hover,
   &:focus {
     background-color: $hov-bg;
   }
+
   &:active {
     background-color: $ac-bg;
     border-bottom: 3px solid $ac-border;
     border-right: 3px solid $ac-border;
   }
+
   &__disabled {
     background-color: $dis-bg;
     color: $dis-color;
@@ -26,6 +38,28 @@ $dis-color: #884242;
     &:focus {
       background-color: $dis-bg;
       color: $dis-color;
+    }
+  }
+
+  &__light {
+    background-color: $light-bg;
+    color: $light-color;
+
+    &:hover,
+    &:focus {
+      background-color: $light-hov-bg;
+      color: $light-hov-color;
+    }
+
+    &.buttonClose__disabled {
+      background-color: $light-dis-bg;
+      color: $light-dis-color;
+    }
+
+    &:not(.buttonClose__disabled):active {
+      background-color: $light-ac-bg;
+      border-bottom-color: $light-ac-border;
+      border-right-color: $light-ac-border;
     }
   }
 }

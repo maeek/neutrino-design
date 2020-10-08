@@ -41,4 +41,25 @@ This UI library was created to full a niche in my other project [Neutrino-Chat](
       ]}
     />
   </div>
+  <div className="display-container">
+    <Breadcrumbs
+      separatorNode={<span>&</span>}
+      onClick={(e) => e.preventDefault()}
+      rel="noopener norefferer"
+      anchorTarget="_blank"
+      crumbs={[
+        {text: 'root', href: '/'},
+        {text: 'backuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuups', href: '/backups/'},
+        {
+          text: 'documents',
+          href: '/backups/#create-space',
+          node: (
+            <ButtonBasic className="button" icon={<AddRoundedIcon />}>
+              Create space
+            </ButtonBasic>
+          )
+        }
+      ]}
+    />
+  </div>
 </Playground>

@@ -3,21 +3,33 @@ $color: #fff;
 $hov-bg: #0b54ab;
 $ac-bg: #0e4f9e;
 $ac-border: #034494;
-$dis-bg: #96c7ff;
-$dis-color: #275286;
+$dis-bg: #2d2d2d;
+$dis-color: #aeaeae;
+
+$light-bg: #267ce0;
+$light-color: #fff;
+$light-hov-bg: #88bdea;
+$light-hov-color: #091926;
+$light-dis-bg: #d0d5d9;
+$light-dis-color:#4f565b;
+$light-ac-bg: #67bbff;
+$light-ac-border:#3f92e6;
 
 .buttonAdd {
   background-color: $bg;
   color: $color;
+
   &:hover,
   &:focus {
     background-color: $hov-bg;
   }
+
   &:active {
     background-color: $ac-bg;
     border-bottom: 3px solid $ac-border;
     border-right: 3px solid $ac-border;
   }
+
   &__disabled {
     background-color: $dis-bg;
     color: $dis-color;
@@ -26,6 +38,28 @@ $dis-color: #275286;
     &:focus {
       background-color: $dis-bg;
       color: $dis-color;
+    }
+  }
+
+  &__light {
+    background-color: $light-bg;
+    color: $light-color;
+
+    &:hover,
+    &:focus {
+      background-color: $light-hov-bg;
+      color: $light-hov-color;
+    }
+
+    &.buttonAdd__disabled {
+      background-color: $light-dis-bg;
+      color: $light-dis-color;
+    }
+
+    &:not(.buttonAdd__disabled):active {
+      background-color: $light-ac-bg;
+      border-bottom-color: $light-ac-border;
+      border-right-color: $light-ac-border;
     }
   }
 }

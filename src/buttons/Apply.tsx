@@ -9,10 +9,11 @@ export const Apply: React.FC<ButtonProps> = (
   props
   // ref
 ) => {
-  const { className, disabled } = props;
+  const { className, disabled, theme } = props;
 
   const classes = classNames(
     Style.buttonApply,
+    theme === 'light' ? Style.buttonApply__light : Style.buttonApply__dark,
     disabled ? Style.buttonApply__disabled : null,
     className
   );

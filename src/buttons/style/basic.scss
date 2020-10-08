@@ -3,8 +3,17 @@ $color: #fff;
 $hov-bg: #374553;
 $ac-bg: #374553;
 $ac-border: #28323c;
-$dis-bg: #525e68;
-$dis-color: #13161f;
+$dis-bg: #2d2d2d;
+$dis-color: #aeaeae;
+
+$light-bg: #b6deff;
+$light-color: #142737;
+$light-hov-bg: #88bdea;
+$light-hov-color: #091926;
+$light-dis-bg: #d0d5d9;
+$light-dis-color:#4f565b;
+$light-ac-bg: #67bbff;
+$light-ac-border:#3f92e6;
 
 .buttonBasic {
   background-color: $bg;
@@ -79,6 +88,25 @@ $dis-color: #13161f;
     &:active {
       border-bottom-color: transparent !important;
       border-right-color: transparent !important;
+    }
+  }
+
+  &__light {
+    background-color: $light-bg;
+    color: $light-color;
+    &:hover,
+    &:focus {
+      background-color: $light-hov-bg;
+      color: $light-hov-color;
+    }
+    &.buttonBasic__disabled {
+      background-color: $light-dis-bg;
+      color: $light-dis-color;
+    }
+    &:not(.buttonBasic__disabled):active {
+      background-color: $light-ac-bg;
+      border-bottom-color: $light-ac-border;
+      border-right-color: $light-ac-border;
     }
   }
 }

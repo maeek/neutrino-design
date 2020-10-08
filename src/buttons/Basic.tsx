@@ -19,6 +19,7 @@ export interface BasicButtonProps {
   className?: string;
   compact: boolean;
   primary: boolean;
+  theme: 'light' | 'dark';
 }
 
 export type LinkButton = {
@@ -55,6 +56,7 @@ export const Basic: React.FC<ButtonProps> = (
     htmlType,
     compact,
     primary,
+    theme,
     ...rest
   } = props;
 
@@ -71,6 +73,7 @@ export const Basic: React.FC<ButtonProps> = (
   const classes = classNames(
     baseStyle.buttonBase,
     Style.buttonBasic,
+    theme === 'light' ? Style.buttonBasic__light : Style.buttonBasic__dark,
     compact ? Style.buttonBasic__compact : null,
     primary ? null : Style.buttonBasic__primary,
     disabled ? Style.buttonBasic__disabled : null,

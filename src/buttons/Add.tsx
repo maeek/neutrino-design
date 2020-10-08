@@ -9,10 +9,11 @@ export const Add: React.FC<ButtonProps> = (
   props
   // ref
 ) => {
-  const { className, disabled } = props;
+  const { className, disabled, theme } = props;
 
   const classes = classNames(
     Style.buttonAdd,
+    theme === 'light' ? Style.buttonAdd__light : Style.buttonAdd__dark,
     disabled ? Style.buttonAdd__disabled : null,
     className
   );

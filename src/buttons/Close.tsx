@@ -9,10 +9,11 @@ export const Close: React.FC<ButtonProps> = (
   props
   // ref
 ) => {
-  const { className, disabled } = props;
+  const { className, disabled, theme } = props;
 
   const classes = classNames(
     Style.buttonClose,
+    theme === 'light' ? Style.buttonClose__light : Style.buttonClose__dark,
     disabled ? Style.buttonClose__disabled : null,
     className
   );

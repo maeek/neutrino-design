@@ -3,21 +3,33 @@ $color: #1c1c1c;
 $hov-bg: #50ce82;
 $ac-bg: #24b15d;
 $ac-border: #136132;
-$dis-bg: #96eab8;
-$dis-color: #21663d;
+$dis-bg: #2d2d2d;
+$dis-color: #aeaeae;
+
+$light-bg: #a3ffc7;
+$light-color: #054a20;
+$light-hov-bg: #65ffa1;
+$light-hov-color: #054a20;
+$light-dis-bg: #d0d5d9;
+$light-dis-color:#4f565b;
+$light-ac-bg: #c1ffda;
+$light-ac-border:#9be3b8;
 
 .buttonApply {
   background-color: $bg;
   color: $color;
+
   &:hover,
   &:focus {
     background-color: $hov-bg;
   }
+
   &:active {
     background-color: $ac-bg;
     border-bottom: 3px solid $ac-border;
     border-right: 3px solid $ac-border;
   }
+
   &__disabled {
     background-color: $dis-bg;
     color: $dis-color;
@@ -26,6 +38,28 @@ $dis-color: #21663d;
     &:focus {
       background-color: $dis-bg;
       color: $dis-color;
+    }
+  }
+
+  &__light {
+    background-color: $light-bg;
+    color: $light-color;
+
+    &:hover,
+    &:focus {
+      background-color: $light-hov-bg;
+      color: $light-hov-color;
+    }
+
+    &.buttonApply__disabled {
+      background-color: $light-dis-bg;
+      color: $light-dis-color;
+    }
+
+    &:not(.buttonApply__disabled):active {
+      background-color: $light-ac-bg;
+      border-bottom-color: $light-ac-border;
+      border-right-color: $light-ac-border;
     }
   }
 }
