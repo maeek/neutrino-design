@@ -1,5 +1,5 @@
 import emoji from './emoji';
-import avatar from './avatar';
+import useAvatar from './avatar';
 import connectivity from './connectivity';
 
 export { emojiMapper } from './emoji';
@@ -12,6 +12,6 @@ export {
 
 export default {
   emoji,
-  avatar,
+  useAvatar,
   connectivity
 };
