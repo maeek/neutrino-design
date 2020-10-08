@@ -50,6 +50,9 @@ $dis-color: #13161f;
     span {
       text-align: center;
       line-height: 1rem;
+      display: flex;
+      justify-content: center;
+      align-content: center;
     }
     &:active {
       border: 0;
