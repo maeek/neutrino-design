@@ -1,13 +1,15 @@
 ---
 name: Avatars
-route: /avatars
+route: /components/avatars
+menu: Components
 ---
 
 import { Playground, Props } from 'docz'
 import {
   Avatar,
   AvatarSquare,
-  AvatarCircle
+  AvatarCircle,
+  AvatarBadge
 } from 'neutrino-design/dist';
 import 'neutrino-design/dist/index.css';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
@@ -23,24 +25,30 @@ This UI library was created to full a niche in my other project [Neutrino-Chat](
 
 ## Avatar
 
-### Props example
+Other properties will be
+
+### Usage
 <Playground>
   <div className="display-container">
     <Avatar
-      text='Opat'
-      alt="Opat avatar"
-      title="This is an avatar"
-      src='https://static.suchanecki.me/avatar.pngp'
+      className="avatar"
+      text='Maek'
+      alt="Maeks avatar"
+      title="This is maeks avatar"
+      src='https://static.neutrino.chat/badAvatarPath.png'
       draggable={false}
       preloadImage={true}
       renderImage={true}
-      className="avatar"
+      theme="dark"
+      fallbackToText={true}
       options={{
         size: {
           width: 300,
           height: 300,
         },
         background: '#2B3036',
+        maxLength: 2,
+        preloadGoogleFonts: false,
         color: '#5EA8ED',
         font: {
           weight: 'bold',
@@ -60,7 +68,15 @@ This UI library was created to full a niche in my other project [Neutrino-Chat](
       text='Testing_Avatar'
       src='https://static.suchanecki.me/avatar.png'
       className="avatar"
+      preloadImage={true}
+    />
+    <AvatarCircle
+      text='#'
+      src='https://this.image.does.not.exist'
+      className="avatar"
       preloadImage={false}
+      fallbackToText={false}
+      theme="light"
     />
   </div>
 </Playground>
@@ -84,4 +100,37 @@ This UI library was created to full a niche in my other project [Neutrino-Chat](
     />
   </div>
 </Playground>
+
+## Badge
+
+<Playground>
+  <div className="display-container">
+    <AvatarBadge
+      text="Maek is an authorized user"
+      type="circle"
+      indicator="420"
+      onClick={(e) => alert('default click')}
+      indicatorOnClick={(e) => alert(e.target.innerText)}
+      theme="light"
+      options={{
+        maxLength: 2,
+        size: {
+          width: 60,
+          height: 60,
+        }
+      }}
+    />
+    <AvatarBadge
+      text="Authorized user"
+      type="circle"
+      options={{
+        size: {
+          width: 40,
+          height: 40,
+        }
+      }}
+    />
+  </div>
+</Playground>
+
 

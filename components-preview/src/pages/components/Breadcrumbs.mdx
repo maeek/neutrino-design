@@ -1,0 +1,44 @@
+---
+name: Breadcrumbs
+route: /components/breadcrumbs
+menu: Components
+---
+
+import { Playground, Props } from 'docz'
+import {
+  Breadcrumbs,
+  ButtonBasic
+} from 'neutrino-design/dist';
+import 'neutrino-design/dist/index.css';
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import '../../index.css'
+
+# Breadcrumbs
+
+This UI library was created to full a niche in my other project [Neutrino-Chat](https://github.com/maeek/).
+
+### Usage
+<Playground>
+  <div className="display-container">
+    <Breadcrumbs
+      separatorNode={<span>&</span>}
+      onClick={(e) => e.preventDefault()}
+      rel="noopener norefferer"
+      anchorTarget="_blank"
+      theme="light"
+      crumbs={[
+        {text: 'root', href: '/'},
+        {text: 'backuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuups', href: '/backups/'},
+        {
+          text: 'documents',
+          href: '/backups/#create-space',
+          node: (
+            <ButtonBasic className="button" icon={<AddRoundedIcon />}>
+              Create space
+            </ButtonBasic>
+          )
+        }
+      ]}
+    />
+  </div>
+</Playground>
