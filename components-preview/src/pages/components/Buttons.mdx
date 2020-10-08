@@ -200,7 +200,9 @@ This UI library was created to full a niche in my other project [Neutrino-Chat](
   <div className="display-container column">
     <ButtonOption active icon={<CheckRoundedIcon />}>Direct Messages</ButtonOption>
     <ButtonOption icon={<CheckRoundedIcon />}>Direct Messages</ButtonOption>
-    <ButtonOption icon={<CheckRoundedIcon />}>Direct Messages</ButtonOption>
+
+    <ButtonOption theme="light" active icon={<CheckRoundedIcon />}>Direct Messages</ButtonOption>
+    <ButtonOption theme="light" icon={<CheckRoundedIcon />}>Direct Messages</ButtonOption>
   </div>
 </Playground>
 
@@ -208,6 +210,9 @@ This UI library was created to full a niche in my other project [Neutrino-Chat](
 
 <Playground>
   <div className="display-container column">
-    <ButtonDropdown active icon={<NotificationsRoundedIcon />}>Direct Messages</ButtonDropdown>
+    <ButtonDropdown icon={<NotificationsRoundedIcon />}>Direct Messages</ButtonDropdown>
+    <ButtonDropdown disabled icon={<NotificationsRoundedIcon />}>Direct Messages</ButtonDropdown>
+    <ButtonDropdown theme="light" icon={<NotificationsRoundedIcon />}>Direct Messages</ButtonDropdown>
+    <ButtonDropdown disabled theme="light">Direct Messages</ButtonDropdown>
   </div>
 </Playground>

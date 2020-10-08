@@ -25,7 +25,50 @@ This UI library was created to full a niche in my other project [Neutrino-Chat](
 
 ## Avatar
 
-Other properties will be
+Component that displays user's avatar.
+
+### Props
+
+| Prop                   | Comment                                                                       | Required  | Default          |
+| ---------------------- | ----------------------------------------------------------------------------- | --------- | ---------------- |
+| **text**               | Fallback text for image load error                                            | yes       | --               |
+| **type**               | Type of image container: `square` or `circle`                                 | no        | `square`         |
+| **renderImage**        | Render `<img />` element                                                      | no        | `true`           |
+| **preloadImage**       | Load image before displaying in DOM                                           | no        | `true`           |
+| **title**              | Title to display on hover (native tooltip)                                    | no        | --               |
+| **alt**                | Alternative text to display instead of image                                  | no        | --               |
+| **src**                | Image resource, this can be a url, Blob or ArrayBuffer                        | no        | fallback to text |
+| **draggable**          | Specifies whether the image can be draggable                                  | no        | true             |
+| **theme**              | Sets which color palette will be used (`dark` or `light`)                     | no        | `dark`           |
+| **className**          | Pass className to component                                                   | no        | --               |
+| **style**              | Pass CSS properties                                                           | no        | --               |
+| **loader**             | React component displayed while loading image                                 | no        | --               |
+| **children**           | React children                                                                | no        | --               |
+| **preloadGoogleFonts** | Ensure the font is downloaded before rendering fallback (Only Google Fonts)   | no        | false            |
+| **fallbackToText**     | Enables rendering fallback image computed from text prop                      | no        | true             |
+| **onImageLoad**        | Callback to invoke on image load                                              | no        | --               |
+| **onError**            | Callback to invoke on image load error                                        | no        | --               |
+| **onClick**            | On click event function                                                       | no        | --               |
+| **options**            | Options for fallback image as well as for image container itself. Defines size, background-color, color, max length of initials it will show, font settings and preloadGoogleFonts switch | no | 
+```javascript
+{
+  size: {
+    width: number;
+    height: number;
+  };
+  background: string;
+  color: string;
+  maxLength: number;
+  preloadGoogleFonts: boolean;
+  font: {
+    weight: string | number;
+    size: string | number;
+    family: string;
+  };
+}
+``` 
+
+The rest of props will be passed to <img /> container
 
 ### Usage
 <Playground>
