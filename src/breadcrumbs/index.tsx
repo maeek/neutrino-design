@@ -29,7 +29,7 @@ export const Breadcrumbs = (props: BreadcrumbsProps) => {
   } = props;
   const classnames = classNames(
     Style.breadcrumbs,
-    theme === 'light' ? Style.breadcrumbs_light : Style.breadcrumbs_dark,
+    theme === 'light' ? Style.breadcrumbs__light : Style.breadcrumbs__dark,
     className
   );
 

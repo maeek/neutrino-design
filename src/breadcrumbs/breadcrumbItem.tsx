@@ -35,7 +35,9 @@ export const BreadcrumbItem: React.FC<BreadcrumbItemProps> = (
   } = props;
   const classes = classNames(
     Style.breadcrumbItem,
-    theme === 'light' ? Style.breadcrumbItem_light : Style.breadcrumbItem_dark,
+    theme === 'light'
+      ? Style.breadcrumbItem__light
+      : Style.breadcrumbItem__dark,
     className
   );
 
@@ -48,7 +50,7 @@ export const BreadcrumbItem: React.FC<BreadcrumbItemProps> = (
   };
 
   return (
-    <li className={Style.breadcrumbItem__element}>
+    <li className={Style.breadcrumbItem_element}>
       <a
         className={classes}
         href={href}

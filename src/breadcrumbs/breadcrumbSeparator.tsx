@@ -15,8 +15,8 @@ export const BreadcrumbSeparator: React.FC<BreadcrumbSeparatorProps> = (
   const classes = classNames(
     Style.breadcrumbSeparator,
     theme === 'light'
-      ? Style.breadcrumbSeparator_light
-      : Style.breadcrumbSeparator_dark,
+      ? Style.breadcrumbSeparator__light
+      : Style.breadcrumbSeparator__dark,
     className
   );
 

@@ -23,11 +23,11 @@
   &:active {
     text-decoration: underline;
   }
-  &_light {
+  &__light {
     color: #000;
   }
 
-  &__element {
+  &_element {
     display: flex;
     justify-content: flex-start;
     align-items: center;
