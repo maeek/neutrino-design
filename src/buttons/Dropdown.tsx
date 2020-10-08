@@ -13,11 +13,14 @@ export const Dropdown: React.FC<DropdownProps> = (
   props
   // ref
 ) => {
-  const { className, disabled, active } = props;
+  const { className, disabled, active, theme } = props;
 
   const classes = classNames(
     Style.buttonDropdown,
     active ? Style.buttonDropdown__active : null,
+    theme === 'light'
+      ? Style.buttonDropdown__light
+      : Style.buttonDropdown__dark,
     disabled ? Style.buttonDropdown__disabled : null,
     className
   );

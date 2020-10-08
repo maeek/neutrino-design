@@ -13,10 +13,13 @@ export const OptionItem: React.FC<OptionItemProps> = (
   props
   // ref
 ) => {
-  const { className, disabled, active } = props;
+  const { className, disabled, active, theme } = props;
 
   const classes = classNames(
     Style.buttonOptionItem,
+    theme === 'light'
+      ? Style.buttonOptionItem__light
+      : Style.buttonOptionItem__dark,
     active ? Style.buttonOptionItem__active : null,
     disabled ? Style.buttonOptionItem__disabled : null,
     className

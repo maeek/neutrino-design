@@ -14,7 +14,6 @@ export interface BasicButtonProps {
   children?: React.ReactNode;
 
   disabled?: boolean;
-  prefixCls?: string;
   style?: React.CSSProperties;
   className?: string;
   compact: boolean;
@@ -46,7 +45,6 @@ export const Basic: React.FC<ButtonProps> = (
     disabled,
     icon,
     children,
-    prefixCls,
     style,
     className,
     href,
