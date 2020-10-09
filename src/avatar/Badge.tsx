@@ -5,15 +5,24 @@ import Avatar, { AvatarProps } from './Base';
 import Style from './badge.scss';
 
 export interface BadgeEnhancedProps {
-  badgeType?: 'number' | 'icon';
   avatarClassName?: string;
   indicator: string | React.ReactNode;
   indicatorOnClick: React.MouseEventHandler<HTMLSpanElement>;
+  backgroundColor: string;
+  color: string;
+  status: 'active' | 'away' | 'offline' | 'warn';
 }
 
 export type BadgeProps = Partial<BadgeEnhancedProps & AvatarProps>;
 
 export const DEFAULT_DIMENSIONS = 30;
+
+enum statuses {
+  active = '#5bd969',
+  away = '#f0b834',
+  offline = '#b0b0b0',
+  warn = '#d14343'
+}
 
 export const Badge = (props: BadgeProps) => {
   const {
@@ -27,6 +36,9 @@ export const Badge = (props: BadgeProps) => {
     children,
     indicator,
     options,
+    backgroundColor,
+    color,
+    status = 'offline',
     ...rest
   } = props;
 
@@ -59,20 +71,12 @@ export const Badge = (props: BadgeProps) => {
       Style.badge__indicator,
       type === 'circle' ? Style.badge__indicator_circle : null
     );
-    const restSquareDiagonal = options?.size?.width
-      ? (1 / 2) * (options?.size?.width * Math.sqrt(2) - options?.size?.width)
-      : -5;
+    const styles = {
+      backgroundColor: backgroundColor || statuses[status],
+      color
+    };
     return (
-      <div
-        className={indicatorClasses}
-        style={
-          (type === 'circle' && {
-            bottom: `${restSquareDiagonal - 8}px`,
-            right: `${restSquareDiagonal - 8}px`
-          }) ||
-          {}
-        }
-      >
+      <div className={indicatorClasses} style={styles}>
         {indicator && (
           <span
             onClick={handleIndicatorClick}
@@ -100,10 +104,11 @@ export const Badge = (props: BadgeProps) => {
             className={avatarClassName}
             options={options}
             {...rest}
-          />
+          >
+            {renderBadge()}
+          </Avatar>
         )}
       </div>
-      {renderBadge()}
     </div>
   );
 };

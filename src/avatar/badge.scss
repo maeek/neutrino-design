@@ -1,23 +1,6 @@
-@keyframes hvr-bob {
-  0% {
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
-  }
-  50% {
-    -webkit-transform: translateY(0px);
-    transform: translateY(0px);
-  }
-  100% {
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
-  }
-}
-@keyframes hvr-bob-float {
-  100% {
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
-  }
-}
+$default-background: #d14343;
+$default-color: #fff;
+
 .badge {
   position: relative;
 
@@ -29,39 +12,32 @@
     &_square {
       border-radius: 4px;
     }
-    &_not_empty:hover ~ .badge__indicator,
-    &_not_empty ~ .badge__indicator:hover {
-      // transform: scale(1.6);
-      z-index: 2;
-      animation-name: hvr-bob-float, hvr-bob;
-      animation-duration: .3s, .7s;
-      animation-delay: 0s, .3s;
-      animation-timing-function: ease-out, ease-in-out;
-      animation-iteration-count: 1, infinite;
-      animation-fill-mode: forwards;
-      animation-direction: normal, alternate;
+    &_not_empty:hover .badge__indicator,
+    &_not_empty .badge__indicator:hover {
+      cursor: pointer;
+      transform: scale(1.7);
+    }
+
+    &_not_empty .badge__indicator:active {
+      transform: scale(2.2);
     }
   }
 
   &__indicator {
     align-items: center;
-    background-color: #d14343;
-    border-radius: 20px;
-    bottom: -2px;
-    cursor: pointer;
+    bottom: 0;
+    color: $default-color;
+    background-color: $default-background;
     display: flex;
     font-size: .65rem;
     font-weight: 900;
     justify-content: center;
-    min-height: 10px;
-    min-width: 10px;
+    min-height: 6%;
+    min-width: 100%;
     position: absolute;
-    right: -2px;
-
-    &_circle {
-      bottom: 25px;
-      right: 25px;
-    }
+    transform-origin: center 90%;
+    transition: transform .3s;
+    user-select: none;
 
     &__content {
       align-content: center;
@@ -70,6 +46,14 @@
       justify-content: center;
       min-width: 1rem;
       padding: .05rem .2rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.7);
+    }
+    &:active {
+      transform: scale(2.2);
     }
   }
 }
