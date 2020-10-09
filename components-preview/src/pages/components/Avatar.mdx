@@ -63,7 +63,7 @@ React children.
 ***
 
 ##### className
-Ads className to wrapper element.
+Adds className to wrapper element.
 ***
 
 ##### draggable
@@ -269,6 +269,41 @@ Alias of `Avatar` with `type` equal to `square`.
 Badge extends usage of `Avatar` component by adding an indicator badge which can display status by changing color or number of unread notifications.
 
 ### Props
+
+
+| Prop                   | Type                                | Required  | Default          |
+| ---------------------- | ----------------------------------- | --------- | ---------------- |
+| **avatarClassName**    | `string`                            | no        | --               |
+| **backgroundColor**    | `string`                            | no        | --               |
+| **color**              | `string`                            | no        | --               |
+| **indicator**          | `string` or `ReactNode`             | no        | --               |
+| **indicatorOnClick**   | `string`                            | no        | --               |
+| **status**             | `string`                            | no        | `offline`        |
+
+##### avatarClassName
+Pass className to underlying `Avatar` component.
+***
+
+##### backgroundColor
+Enforce indicator backgroundColor.
+***
+
+##### color
+Enforce indicator color.
+***
+
+##### indicator
+Pass `string` or `ReactNode` to display as indicator.
+***
+
+##### indicatorOnClick
+Indicator onClick event.
+***
+
+##### status
+Select predefined indicator appereance.
+
+### Usage and examples
 
 <Playground>
   <div className="display-container">

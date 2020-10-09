@@ -17,7 +17,50 @@ import '../../index.css'
 
 This UI library was created to full a niche in my other project [Neutrino-Chat](https://github.com/maeek/).
 
-### Usage
+### Props
+
+| Prop                   | Type                                | Required  | Default          |
+| ---------------------- | ----------------------------------- | --------- | ---------------- |
+| **anchorTarget**       | `string`                            | no        | --               |
+| **className**          | `string`                            | no        | --               |
+| **crumbs**             | `Array<Crumb>`                      | yes       | --               |
+| **rel**                | `string`                            | no        | --               |
+| **separatorNode**      | `ReactNode`                         | no        | --               |
+| **theme**              | `light` or `dark`                   | no        | --               |
+
+##### anchorTarget
+`target` attribute of `a` tag
+***
+
+##### className
+Adds className to wrapper element.
+***
+
+##### crumbs
+Array of crumbs
+
+```typescript
+interface Crumb {
+  text: string;
+  href?: string;
+  node?: React.ReactNode;
+}
+```
+***
+
+##### rel
+`rel` attribute of `a` tag
+***
+
+##### separatorNode
+Custom separator `ReactNode`
+***
+
+##### theme
+Sets which color palette will be used (`dark` or `light`)
+
+### Usage and examples
+
 <Playground>
   <div className="display-container">
     <Breadcrumbs

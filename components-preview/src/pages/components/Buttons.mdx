@@ -26,6 +26,59 @@ import '../../index.css'
 
 This UI library was created to full a niche in my other project [Neutrino-Chat](https://github.com/maeek/).
 
+### Props
+
+| Prop                   | Type                                | Required  | Default          |
+| ---------------------- | ----------------------------------- | --------- | ---------------- |
+| **type**               | `link` or `native` or `undefined`   | no        | --               |
+| **title**              | `string`                            | no        | --               |
+| **icon**               | `ReactNode`                         | no        | --               |
+| **children**           | `ReactNode`                         | no        | --               |
+| **disabled**           | `boolean`                           | no        | --               |
+| **style**              | `React.CSSProperties`               | no        | --               |
+| **className**          | `string`                            | no        | --               |
+| **compact**            | `boolean`                           | no        | --               |
+| **primary**            | `boolean`                           | no        | --               |
+| **theme**              | `light` or `dark`                   | no        | --               |
+
+##### type
+Type of button to render. There are 2 types, `native` and `link`. 
+***
+
+##### title
+Title to display on hover (browser tooltip)
+***
+
+##### icon
+Component that will be rendered on the left of the `text` or `children`
+***
+
+##### children
+React children.
+***
+
+##### disabled
+Disables the button.
+***
+
+##### style
+Pass CSS properties to wrapper element
+***
+
+##### className
+Adds className to wrapper element.
+***
+
+##### compact
+Boolean that specifies if button should render in compact mode (Only icon, no text)
+***
+
+##### primary
+***
+
+##### theme
+Sets which color palette will be used (`dark` or `light`)
+
 ## ButtonBasic
 
 <Playground>

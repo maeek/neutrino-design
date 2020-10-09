@@ -6,11 +6,11 @@ import Style from './badge.scss';
 
 export interface BadgeEnhancedProps {
   avatarClassName?: string;
-  indicator: string | React.ReactNode;
-  indicatorOnClick: React.MouseEventHandler<HTMLSpanElement>;
-  backgroundColor: string;
-  color: string;
-  status: 'active' | 'away' | 'offline' | 'warn';
+  indicator?: string | React.ReactNode;
+  indicatorOnClick?: React.MouseEventHandler<HTMLSpanElement>;
+  backgroundColor?: string;
+  color?: string;
+  status?: 'active' | 'away' | 'offline' | 'warn';
 }
 
 export type BadgeProps = Partial<BadgeEnhancedProps & AvatarProps>;

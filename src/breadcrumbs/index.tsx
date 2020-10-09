@@ -10,12 +10,12 @@ interface Crumb {
 }
 
 export interface BreadcrumbsProps {
-  className: string;
+  className?: string;
   crumbs: Array<Crumb>;
   separatorNode?: React.ReactNode;
   rel?: string;
   anchorTarget?: string;
-  theme: 'light' | 'dark';
+  theme?: 'light' | 'dark';
 }
 
 export const Breadcrumbs = (props: BreadcrumbsProps) => {
