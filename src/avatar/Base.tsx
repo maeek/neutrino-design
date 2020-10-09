@@ -1,5 +1,13 @@
+/**
+ * TODO:
+ * - Fix styling
+ * - Fix options prop
+ * - Implement tooltip
+ * - Fix passing blob/array buffer as src
+ */
+
 /* eslint-disable no-unused-vars */
-import React, { createRef, FC, ReactNode, useEffect, useState } from 'react';
+import React, { createRef, FC, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import Style from './avatar.scss';
 // eslint-disable-next-line no-unused-vars
@@ -37,9 +45,8 @@ export interface AvatarProps {
   options?: AvatarProperties;
   loader?: React.ReactNode;
 
-  children?: ReactNode;
+  children?: React.ReactNode;
 
-  preloadGoogleFonts: boolean;
   fallbackToText?: boolean;
   onImageLoad?: Function;
   onError?: Function;
@@ -62,16 +69,18 @@ export const Avatar: FC<AvatarProps> = (props) => {
     loader,
     style,
     children,
-    options = DEFAULT_AVATAR_OPTIONS,
+    options,
     onClick,
     onImageLoad,
     onError: onErrorFromProps,
-    preloadGoogleFonts,
     ...rest
   } = props;
   const imgRef = createRef<HTMLImageElement>();
 
-  const { size, background, color, font } = options;
+  const { size, background, color, font } = {
+    ...DEFAULT_AVATAR_OPTIONS,
+    ...options
+  };
   const { width, height } = size;
 
   const classes = classNames(
@@ -97,9 +106,11 @@ export const Avatar: FC<AvatarProps> = (props) => {
   const [enforceFallback, setEnforceFallback] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingFailed, setLoadingFailed] = useState(false);
-  const [activeOptions, setActiveOptions] = useState<AvatarProperties>(
-    DEFAULT_AVATAR_OPTIONS
-  );
+  const [activeOptions, setActiveOptions] = useState<AvatarProperties>({
+    ...DEFAULT_AVATAR_OPTIONS,
+    ...(theme === 'light' ? DEFAULT_AVATAR_OPTIONS__LIGHT : {}),
+    ...options
+  });
   const [imageSource, setImageSource] = useState<string>('');
 
   const { imageBlob } = useAvatar({
@@ -114,10 +125,13 @@ export const Avatar: FC<AvatarProps> = (props) => {
         size: options?.size || DEFAULT_AVATAR_OPTIONS__LIGHT.size,
         maxLength:
           options?.maxLength || DEFAULT_AVATAR_OPTIONS__LIGHT.maxLength,
-        font: options?.font || DEFAULT_AVATAR_OPTIONS__LIGHT.font
+        font: options?.font || DEFAULT_AVATAR_OPTIONS__LIGHT.font,
+        preloadGoogleFonts:
+          options?.preloadGoogleFonts ||
+          DEFAULT_AVATAR_OPTIONS__LIGHT.preloadGoogleFonts
       });
     } else {
-      setActiveOptions(options);
+      setActiveOptions({ ...DEFAULT_AVATAR_OPTIONS, ...options });
     }
   }, [theme, options]);
 
@@ -125,7 +139,8 @@ export const Avatar: FC<AvatarProps> = (props) => {
    *  Add events for load and error to <img />
    */
   useEffect(() => {
-    if (!imgRef.current || !renderImage) return;
+    const innerRef = imgRef.current;
+    if (!innerRef || !renderImage) return;
     const onLoad = () => {
       setIsLoading(false);
       setLoadingFailed(false);
@@ -142,12 +157,12 @@ export const Avatar: FC<AvatarProps> = (props) => {
       }
     };
 
-    imgRef.current.addEventListener('load', onLoad);
-    imgRef.current.addEventListener('error', onError);
+    innerRef.addEventListener('load', onLoad);
+    innerRef.addEventListener('error', onError);
     return () => {
-      if (!imgRef.current) return;
-      imgRef.current.removeEventListener('load', onLoad);
-      imgRef.current.removeEventListener('error', onError);
+      if (!innerRef) return;
+      innerRef.removeEventListener('load', onLoad);
+      innerRef.removeEventListener('error', onError);
     };
   }, [imgRef, renderImage]);
 
@@ -155,12 +170,21 @@ export const Avatar: FC<AvatarProps> = (props) => {
    *  Select proper img.src
    */
   useEffect(() => {
-    let imgSource: any = src || URL.createObjectURL(imageBlob);
-    if (loadingFailed || enforceFallback) {
+    let imgSource: any;
+
+    if (src) {
+      imgSource = src;
+    } else if (fallbackToText) {
+      imgSource = URL.createObjectURL(imageBlob);
+    } else {
+      imgSource = '';
+    }
+
+    if ((loadingFailed || enforceFallback) && fallbackToText) {
       imgSource = imageBlob ? URL.createObjectURL(imageBlob) : '';
     }
     setImageSource(imgSource);
-  }, [enforceFallback, imageBlob, src]);
+  }, [enforceFallback, imageBlob, src, fallbackToText]);
 
   /**
    * Load image and set src on <img /> ref

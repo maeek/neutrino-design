@@ -8,6 +8,41 @@ export interface PropsTypes {
   options?: AvatarProperties;
 }
 
+const mapTextToWeight = (text: string) =>
+  ({
+    light: 200,
+    lighter: 100,
+    normal: 400,
+    bold: 700,
+    bolder: 900
+  }[text]);
+
+const waitForFont = ({
+  family,
+  weight
+}: {
+  family: string;
+  weight: string | number;
+}) => {
+  return new Promise((resolve) => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = `https://fonts.googleapis.com/css2?family=${
+      family.split(',')[0]
+    }:wght@0,${
+      typeof weight === 'string' ? mapTextToWeight(weight) : weight
+    }&display=swap`;
+    document.getElementsByTagName('head')[0].appendChild(link);
+
+    const loadFont = new Image();
+    loadFont.onerror = () => {
+      resolve();
+    };
+    loadFont.src = link.href;
+  });
+};
+
 export default (
   props: PropsTypes
 ): { imageBlob: Blob; recompute: Function } => {
@@ -16,17 +51,9 @@ export default (
 
   const recompute = async () => {
     if (options?.preloadGoogleFonts) {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = `https://fonts.googleapis.com/css2?family=${options?.font?.family},wght@0,${options?.font?.weight}&display=swap`;
-      document.getElementsByTagName('head')[0].appendChild(link);
-
-      const loadFont = new Image();
-      loadFont.onerror = () => {
+      waitForFont(options.font).then(() => {
         computeAvatar(text, options).then((blob) => setAvatarBlob(blob));
-      };
-      loadFont.src = link.href;
+      });
     } else {
       computeAvatar(text, options).then((blob) => setAvatarBlob(blob));
     }
