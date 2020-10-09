@@ -25,33 +25,83 @@ This UI library was created to full a niche in my other project [Neutrino-Chat](
 
 ## Avatar
 
-Component that displays user's avatar.
+Component that displays user's avatar. There are 2 types of avatar. You can specify it by adding `type` prop or by importing 
+`AvatarCircle` or `AvatarSquare` directly.
+
+<Avatar text="Avatar component" />
+
 
 ### Props
 
-| Prop                   | Comment                                                                       | Required  | Default          |
-| ---------------------- | ----------------------------------------------------------------------------- | --------- | ---------------- |
-| **text**               | Fallback text for image load error                                            | yes       | --               |
-| **type**               | Type of image container: `square` or `circle`                                 | no        | `square`         |
-| **renderImage**        | Render `<img />` element                                                      | no        | `true`           |
-| **preloadImage**       | Load image before displaying in DOM                                           | no        | `true`           |
-| **title**              | Title to display on hover (native tooltip)                                    | no        | --               |
-| **alt**                | Alternative text to display instead of image                                  | no        | --               |
-| **src**                | Image resource, this can be a url, Blob or ArrayBuffer                        | no        | fallback to text |
-| **draggable**          | Specifies whether the image can be draggable                                  | no        | true             |
-| **theme**              | Sets which color palette will be used (`dark` or `light`)                     | no        | `dark`           |
-| **className**          | Pass className to component                                                   | no        | --               |
-| **style**              | Pass CSS properties                                                           | no        | --               |
-| **loader**             | React component displayed while loading image                                 | no        | --               |
-| **children**           | React children                                                                | no        | --               |
-| **preloadGoogleFonts** | Ensure the font is downloaded before rendering fallback (Only Google Fonts)   | no        | false            |
-| **fallbackToText**     | Enables rendering fallback image computed from text prop                      | no        | true             |
-| **onImageLoad**        | Callback to invoke on image load                                              | no        | --               |
-| **onError**            | Callback to invoke on image load error                                        | no        | --               |
-| **onClick**            | On click event function                                                       | no        | --               |
-| **options**            | Options for fallback image as well as for image container itself. Defines size, background-color, color, max length of initials it will show, font settings and preloadGoogleFonts switch | no | 
-```javascript
-{
+| Prop                   | Type                                | Required  | Default          |
+| ---------------------- | ----------------------------------- | --------- | ---------------- |
+| **alt**                | `string`                            | no        | --               |
+| **children**           | `ReactNode`                         | no        | --               |
+| **className**          | `string`                            | no        | --               |
+| **draggable**          | `boolean`                           | no        | true             |
+| **fallbackToText**     | `boolean`                           | no        | true             |
+| **loader**             | `ReactNode`                         | no        | --               |
+| **onClick**            | `Function`                          | no        | --               |
+| **onError**            | `Function`                          | no        | --               |
+| **onImageLoad**        | `Function`                          | no        | --               |
+| **options**            | `AvatarProperties`                  | no        |                  |
+| **preloadImage**       | `boolean`                           | no        | `true`           |
+| **renderImage**        | `boolean`                           | no        | `true`           |
+| **src**                | `string` or `Blob` or `ArrayBuffer` | no        | fallback to text |
+| **style**              | `any`                               | no        | --               |
+| **text**               | `string`                            | yes       | --               |
+| **theme**              | `dark` or `light`                   | no        | `dark`           |
+| **title**              | `string`                            | no        | --               |
+| **type**               | `square` or `circle` or `undefined` | no        | `square`         |
+
+##### alt
+Alternative text to display instead of image. (HTML <img /> tag attribute)
+***
+
+##### children
+React children.
+***
+
+##### className
+Ads className to wrapper element.
+***
+
+##### draggable
+Specifies whether the image can be draggable or not.
+***
+
+##### fallbackToText
+Enables or disables rendering of fallback image onError or in case the `src` is empty.
+***
+
+##### loader
+React component displayed while loading image. Gets replaced when image loads.
+***
+
+##### onImageLoad
+Callback to invoke after image loads.
+***
+
+##### onError
+Callback to invoke when error occurs during image loading.
+***
+
+##### onClick
+On click event function.
+***
+
+##### options
+Options for fallback image as well as for image container itself.
+
+- size - Sets dimensions of thecontainer and fallback image
+- background - Sets background for container and fallback image
+- color - Sets color for container and fallback image
+- maxLength - Specify how many first letters to display on fallback image
+- preloadGoogleFonts - This option specify if generation of fallback image should occur after font load. This ensures that
+all fallback images will look the same
+- font - Specify family, size and weight of a font
+```typescript
+interface AvatarProperties {
   size: {
     width: number;
     height: number;
@@ -66,11 +116,65 @@ Component that displays user's avatar.
     family: string;
   };
 }
+```
+###### Default values
+```javascript
+const options = {
+  size: {
+    width: 300,
+    height: 300
+  },
+  background: '#2B3036',
+  color: '#5EA8ED',
+  maxLength: 3,
+  preloadGoogleFonts: false,
+  font: {
+    weight: 'bold',
+    size: 'auto',
+    family: 'Roboto, sans-serif'
+  }
+}
 ``` 
+***
 
-The rest of props will be passed to <img /> container
+##### preloadImage
+Fetch image before displaying it in DOM. Displays loader while loading `src`. Otherwise the `src` of the image will be set directly.
+***
 
-### Usage
+##### renderImage
+Specify if the component should render <img /> tag. Displays loader or children when disabled.
+***
+
+##### src
+Image resource, this can be a string, Blob or ArrayBuffer
+***
+
+##### style
+Pass CSS properties to wrapper element
+***
+
+##### text
+Text for generating fallback image, used when `src` is not present. Can be disabled by setting `fallbackToText` to false.
+Only first letters of words will be placed onto image. This prop is __required__.
+***
+
+##### theme
+Sets which color palette will be used (`dark` or `light`)
+***
+
+##### title
+Title to display on hover (browser tooltip)
+***
+
+##### type
+There are 2 types of this component, one is `square` and the second is `circle`. This specify the appereance of the container.
+Default value is `square`.
+***
+
+
+The rest of props will be passed to wrapper element
+
+### Usage and examples
 <Playground>
   <div className="display-container">
     <Avatar
@@ -91,7 +195,7 @@ The rest of props will be passed to <img /> container
         },
         background: '#2B3036',
         maxLength: 2,
-        preloadGoogleFonts: false,
+        preloadGoogleFonts: true,
         color: '#5EA8ED',
         font: {
           weight: 'bold',
@@ -104,6 +208,9 @@ The rest of props will be passed to <img /> container
 </Playground>
 
 ### Disable preloading image
+
+Avatar on the left has image preloading enabled, it loads image in backgound and then attaching `src` to <img /> tag.
+Avatar on the right has preloading and fallbackToText disabled.
 
 <Playground>
   <div className="display-container">
@@ -125,7 +232,7 @@ The rest of props will be passed to <img /> container
 </Playground>
 
 ### Custom image loader
-
+`renderImage` prop can enforce component to show it's loader and children. Aditionally a custom loader can be passed in `loader` prop.
 <Playground>
   <div className="display-container">
     <Avatar
@@ -144,32 +251,60 @@ The rest of props will be passed to <img /> container
   </div>
 </Playground>
 
+## AvatarCircle
+Alias of `Avatar` with `type` equal to `circle`.
+<div className="display-container">
+  <AvatarCircle text="Avatar Circle" />
+  <AvatarCircle text="Avatar Circle" theme="light" />
+</div>
+
+## AvatarSquare
+Alias of `Avatar` with `type` equal to `square`.
+<div className="display-container">
+  <AvatarSquare text="Avatar Square" />
+  <AvatarSquare text="Avatar Square" theme="light" />
+</div>
+
 ## Badge
+Badge extends usage of `Avatar` component by adding an indicator badge which can display status by changing color or number of unread notifications.
+
+### Props
 
 <Playground>
   <div className="display-container">
     <AvatarBadge
       text="Maek is an authorized user"
       type="circle"
-      indicator="420"
-      onClick={(e) => alert('default click')}
-      indicatorOnClick={(e) => alert(e.target.innerText)}
-      theme="light"
+      indicator="22"
+      status="warn"
+      onClick={(e) => console.log('default click')}
+      indicatorOnClick={(e) => console.log(e.target.innerText)}
       options={{
         maxLength: 2,
-        size: {
-          width: 60,
-          height: 60,
-        }
+        preloadGoogleFonts: true
+      }}
+    />
+    <AvatarBadge
+      text="Maek is an authorized user"
+      type="square"
+      onClick={(e) => console.log('default click')}
+      theme="light"
+      color="#000"
+      indicator="1314"
+      status="offline"
+      options={{
+        maxLength: 3,
+        preloadGoogleFonts: false
       }}
     />
     <AvatarBadge
       text="Authorized user"
       type="circle"
+      status="away"
       options={{
         size: {
-          width: 40,
-          height: 40,
+          width: 60,
+          height: 60,
         }
       }}
     />
