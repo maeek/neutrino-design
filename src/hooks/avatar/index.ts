@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable promise/param-names */
+import Blob from 'cross-blob';
 import { useState, useEffect } from 'react';
 import { computeAvatar, AvatarProperties } from './compute';
 
@@ -8,14 +9,13 @@ export interface PropsTypes {
   options?: AvatarProperties;
 }
 
-const mapTextToWeight = (text: string) =>
-  ({
-    light: 200,
-    lighter: 100,
-    normal: 400,
-    bold: 700,
-    bolder: 900
-  }[text]);
+enum textToWeightEnum {
+  light = 200,
+  lighter = 100,
+  normal = 400,
+  bold = 700,
+  bolder = 900
+}
 
 const waitForFont = ({
   family,
@@ -31,7 +31,7 @@ const waitForFont = ({
     link.href = `https://fonts.googleapis.com/css2?family=${
       family.split(',')[0]
     }:wght@0,${
-      typeof weight === 'string' ? mapTextToWeight(weight) : weight
+      typeof weight === 'string' ? textToWeightEnum[weight] : weight
     }&display=swap`;
     document.getElementsByTagName('head')[0].appendChild(link);
 
