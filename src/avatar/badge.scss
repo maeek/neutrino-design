@@ -2,7 +2,15 @@ $default-background: #d14343;
 $default-color: #fff;
 
 .badge {
+  font-family: "Roboto", "Helvetica Neue", -apple-system, BlinkMacSystemFont, Helvetica, Ubuntu, Roboto, Noto, "Segoe UI", Arial, sans-serif;
   position: relative;
+  box-sizing: border-box;
+
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
 
   &__region {
     overflow: hidden;
@@ -25,9 +33,9 @@ $default-color: #fff;
 
   &__indicator {
     align-items: center;
+    background-color: $default-background;
     bottom: 0;
     color: $default-color;
-    background-color: $default-background;
     display: flex;
     font-size: .65rem;
     font-weight: 900;

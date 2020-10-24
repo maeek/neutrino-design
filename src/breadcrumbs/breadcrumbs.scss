@@ -1,42 +1,54 @@
 .breadcrumbs {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  font-family: 'Roboto', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, Helvetica, Ubuntu, Roboto, Noto, 'Segoe UI', Arial, sans-serif;
+  justify-content: flex-start;
   list-style: none;
   padding: 0;
+  width: 100%;
+
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
 }
 
 .breadcrumbItem {
-  padding: 0.2rem 0;
-  font-size: 1rem;
   color: #eee;
-  text-decoration: none;
-  transition: color 0.1s;
   display: block;
+  font-family: 'Roboto', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, Helvetica, Ubuntu, Roboto, Noto, 'Segoe UI', Arial, sans-serif;
+  font-size: 1rem;
   max-width: 180px;
   overflow: hidden;
+  padding: 0.2rem 0;
+  text-decoration: none;
   text-overflow: ellipsis;
+  transition: color 0.1s;
+
   &:hover, &:focus {
     color: #5ea8ed;
   }
+
   &:active {
     text-decoration: underline;
   }
+
   &__light {
     color: #000;
   }
 
   &_element {
+    align-items: center;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
   }
 }
 
 .breadcrumbSeparator {
-  margin: 0 1.2rem;
-  font-size: 1.2rem;
   color: #888;
   cursor: default;
+  font-size: 1.2rem;
+  margin: 0 1.2rem;
 }
