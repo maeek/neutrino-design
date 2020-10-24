@@ -1,18 +1,25 @@
 .buttonBase {
-  margin: 0;
-  display: flex;
-  flex: 0 0 auto;
-  justify-content: center;
   align-items: center;
   border: 3px solid transparent;
   border-radius: 2px;
-  padding: 0.2.4rem 0.7rem;
-  height: 2rem;
-  font-family: "Roboto", "Helvetica Neue", -apple-system, BlinkMacSystemFont, Helvetica, Ubuntu, Roboto, Noto, "Segoe UI", Arial, sans-serif;
-  font-weight: 900;
-  font-size: 0.7rem;
+  box-sizing: border-box;
   cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  font-family: "Roboto", "Helvetica Neue", -apple-system, BlinkMacSystemFont, Helvetica, Ubuntu, Roboto, Noto, "Segoe UI", Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  height: 2rem;
+  justify-content: center;
+  margin: 0;
+  padding: 0.2.4rem 0.7rem;
   user-select: none;
+
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
 }
 
 .icon {
