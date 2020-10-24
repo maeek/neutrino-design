@@ -26,3 +26,4 @@ declare module 'classnames';
 declare module 'twemoji-parser';
 declare module 'enzyme';
 declare module 'enzyme-adapter-react-16';
+declare module 'cross-blob';

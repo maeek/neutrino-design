@@ -1,0 +1,26 @@
+---
+name: Drag and Drop
+route: /components/drag-and-drop
+menu: Components
+---
+
+import { Playground } from 'docz'
+import { DragAndDrop } from 'neutrino-design/dist';
+import 'neutrino-design/dist/index.css';
+
+# Drag and Drop zone
+
+<Playground>
+  <div className="display-container margin">
+    <DragAndDrop
+      showOverlay={true}
+      renderOverlay={(_, items) => {
+        const droppedItems = [];
+        if (items.files) for (let i = 0; i < items.files.length; i++) {
+          droppedItems.push(items.files[i].name)
+        }
+        return droppedItems.map(i => <div key={i}>{i}</div>)
+      }}
+    />
+  </div>
+</Playground>

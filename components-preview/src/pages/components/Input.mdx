@@ -1,0 +1,83 @@
+---
+name: Input
+route: /components/input
+menu: Components
+---
+
+import { Playground } from 'docz'
+import { Input, Checkbox } from 'neutrino-design/dist';
+import 'neutrino-design/dist/index.css';
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+
+# Input
+
+<Playground>
+  <div className="display-container margin">
+    <Input
+      initValue="This is a value"
+      placeholder="Aa"
+      type="search"
+      prefix={<SearchRoundedIcon />}
+    />
+  </div>
+  <div className="display-container margin">
+    <Input required initValue="" placeholder="Aa" />
+  </div>
+  <div className="display-container margin">
+    <Input required initValue="This is a value" />
+  </div>
+  <div className="display-container margin">
+    <Input disabled initValue="This is a value" />
+  </div>
+  <div className="display-container margin">
+    <Input readOnly initValue="This is a value" />
+  </div>
+</Playground>
+
+<Playground>
+  <div className="display-container margin">
+    <Input
+      initValue="This is a value"
+      placeholder="Aa"
+      type="search"
+      prefix={<SearchRoundedIcon />}
+      theme="light"
+    />
+  </div>
+  <div className="display-container margin">
+    <Input required initValue="" placeholder="Aa" theme="light" />
+  </div>
+  <div className="display-container margin">
+    <Input required initValue="This is a value" theme="light" />
+  </div>
+  <div className="display-container margin">
+    <Input disabled initValue="This is a value" theme="light" />
+  </div>
+  <div className="display-container margin">
+    <Input readOnly initValue="This is a value" theme="light" />
+  </div>
+</Playground>
+
+# Checkbox
+
+<Playground>
+    <Checkbox
+      theme="dark"
+      ref={null}
+      name="remember-login"
+    />
+    <Checkbox required />
+    <Checkbox disabled />
+    <Checkbox disabled initValue={true} />
+    <Checkbox readOnly />
+    <Checkbox initValue={true} />
+</Playground>
+
+<Playground>
+    <Checkbox theme="light" />
+    <Checkbox theme="light" required />
+    <Checkbox theme="light" disabled />
+    <Checkbox theme="light" disabled initValue={true} />
+    <Checkbox theme="light" readOnly />
+    <Checkbox theme="light" initValue={true} />
+</Playground>

@@ -21,7 +21,8 @@
     "test:unit": "cross-env CI=1 jest --config jest.config.js --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "docz": "cd components-preview && npm run dev"
   },
   "peerDependencies": {
     "react": "^16.0.0"
@@ -74,6 +75,7 @@
   "dependencies": {
     "@material-ui/icons": "^4.9.1",
     "classnames": "^2.2.6",
+    "cross-blob": "^2.0.0",
     "twemoji-parser": "^13.0.0"
   }
 }
