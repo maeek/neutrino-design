@@ -1,6 +1,8 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import Style from './style.scss';
+import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
+import { debug } from 'console';
 
 declare global {
   interface FileList {
@@ -11,21 +13,60 @@ declare global {
   }
 }
 
-interface droppedItems {
+export interface droppedItems {
   items: DataTransferItemList | null;
   files: FileList | null;
 }
 
+enum dropTypes {
+  'file' = 'file',
+  'text' = 'text',
+  'any' = 'any'
+}
+
 export interface BaseTypoProps {
+  /**
+   * Render overlay, this also affects renderDropped
+   */
   showOverlay?: boolean;
-  renderOverlay?: (dropzoneRef: any, items: droppedItems) => React.ReactNode;
-  showDropped?: boolean;
+
+  /**
+   * Clear state of dropped elements on dragging over dropzone
+   */
+  clearOnDrag?: boolean;
+
+  /**
+   * Function to render dropped items
+   *
+   * @param any dropzoneRef
+   * @param droppedItems items
+   */
+  renderDropped?: (dropzoneRef: any, items: droppedItems) => React.ReactNode;
+
+  /**
+   * Allow dropping multiple files/elements
+   */
+  multiple?: boolean;
+
+  /**
+   * Type of dropzone
+   * @type file - accepts only files
+   * @type text - accepts only text and link based elements
+   * @type any - accepts any type of dropped item
+   */
+  type?: keyof typeof dropTypes;
 
   children?: React.ReactNode;
+
   style?: React.CSSProperties;
   className?: string;
   theme?: 'light' | 'dark';
+
   ref?: any;
+
+  /**
+   * Native dropEffect and effectAllowed properties
+   */
   dropEffect?: 'none' | 'copy' | 'link' | 'move';
   effectAllowed?:
     | 'none'
@@ -43,17 +84,20 @@ export interface BaseTypoProps {
   onDrop?: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
+
 export const DragAndDrop: React.FC<BaseTypoProps> = (props) => {
   const {
     theme,
     children,
     style,
     className,
+    multiple,
     showOverlay,
-    renderOverlay,
+    renderDropped,
+    clearOnDrag,
     ref = null,
-    // dropEffect = 'copy',
-    // effectAllowed = 'all',
+    dropEffect = 'copy',
+    effectAllowed = 'all',
     onDragStart,
     onDragStop,
     onDrop,
@@ -69,12 +113,16 @@ export const DragAndDrop: React.FC<BaseTypoProps> = (props) => {
 
   const dragEnableHighlight = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (e.dataTransfer) {
+      e.dataTransfer.dropEffect = dropEffect;
+      e.dataTransfer.effectAllowed = effectAllowed;
+    }
+
     clearItems();
     setIsHighlighted(true);
     if (onDragStart) onDragStart(e);
-    // e.dataTransfer?.dropEffect = dropEffect;
-    // e.dataTransfer?.effectAllowed = effectAllowed;
   };
+
   const dragDisableHighlight = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsHighlighted(false);
@@ -83,28 +131,29 @@ export const DragAndDrop: React.FC<BaseTypoProps> = (props) => {
 
   const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (e.dataTransfer) {
+      e.dataTransfer.dropEffect = dropEffect;
+      e.dataTransfer.effectAllowed = effectAllowed;
+    }
+
     getDroppedData(e);
 
     if (onDrop) onDrop(e);
   };
 
   const clearItems = () => {
-    setDroppedItems({ items: null, files: null });
+    if (clearOnDrag) setDroppedItems({ items: null, files: null });
   };
 
   const getDroppedData: any = (e: React.DragEvent<HTMLDivElement>) => {
     const { dataTransfer } = e;
     const { items, files } = dataTransfer;
 
-    // console.log(e.dataTransfer);
-    // console.log(items);
-    // console.log(files);
-
     setDroppedItems({ items, files });
 
     return {
-      items,
-      files
+      items: dropTypes.any || dropTypes.file ? items : null,
+      files: dropTypes.any || dropTypes.text ? files : null
     };
   };
 
@@ -142,9 +191,24 @@ export const DragAndDrop: React.FC<BaseTypoProps> = (props) => {
   return (
     <div style={style} className={classes} ref={dropzoneRef} {...rest}>
       {children}
-      {showOverlay && renderOverlay && renderOverlay(dropzoneRef, droppedItems)}
+      {showOverlay && renderDropped && renderDropped(dropzoneRef, droppedItems)}
+      {showOverlay && (
+        <div className={Style.dropzone_overlay}>
+          <MoveToInboxIcon />
+        </div>
+      )}
     </div>
   );
+};
+
+DragAndDrop.defaultProps = {
+  theme: 'dark',
+  showOverlay: true,
+  clearOnDrag: true,
+  type: 'any',
+  multiple: false,
+  dropEffect: 'copy',
+  effectAllowed: 'all'
 };
 
 export default DragAndDrop;

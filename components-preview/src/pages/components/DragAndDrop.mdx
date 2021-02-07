@@ -5,7 +5,7 @@ menu: Components
 ---
 
 import { Playground } from 'docz'
-import { DragAndDrop } from 'neutrino-design/dist';
+import { DragAndDrop, ButtonBasic } from 'neutrino-design';
 import 'neutrino-design/dist/index.css';
 
 # Drag and Drop zone
@@ -14,13 +14,19 @@ import 'neutrino-design/dist/index.css';
   <div className="display-container margin">
     <DragAndDrop
       showOverlay={true}
-      renderOverlay={(_, items) => {
+      theme="dark"
+      onDrop={data => console.log(data)}
+      renderDropped={(ref, items) => {
         const droppedItems = [];
         if (items.files) for (let i = 0; i < items.files.length; i++) {
           droppedItems.push(items.files[i].name)
         }
         return droppedItems.map(i => <div key={i}>{i}</div>)
       }}
-    />
+    >
+      <ButtonBasic className="button">
+        This is a <u>basic</u> button
+      </ButtonBasic>
+    </DragAndDrop>
   </div>
 </Playground>
