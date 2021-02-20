@@ -24,10 +24,11 @@ $focusColor: $lighterBlue;
 
     &-content {
       padding: 0.2rem 0.2rem 0.2rem 0.5rem;
+      outline: none;
 
-      &:hover, &:focus {
+      .ne-breadcrumbs-item:not([data-disabled="true"]) &:hover,
+      .ne-breadcrumbs-item:not([data-disabled="true"]) &:focus {
         cursor: pointer;
-        outline: none;
         text-decoration: underline;
         color: $focusColor;
       }
@@ -41,7 +42,7 @@ $focusColor: $lighterBlue;
         font-size: inherit;
       }
 
-    &:hover {
+      &:hover {
         color: lighten($focusColor, 5);
       }
     }

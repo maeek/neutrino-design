@@ -22,6 +22,7 @@ export interface BreadcrumbItemProps {
   moreMenuItems?: ContextMenuItems[];
   onClick?: MouseEventHandler<HTMLLIElement>;
   onKeyUp?: KeyboardEventHandler;
+  disabled?: boolean;
 }
 
 export const Item: FC<BreadcrumbItemProps> = (props) => {
@@ -32,6 +33,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
     onClick,
     onKeyUp,
     moreMenuItems,
+    disabled,
     ...rest
   } = props;
 
@@ -39,7 +41,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
   const [showMore, setShowMore] = useState(false);
 
   const onClickHandler = (e: MouseEvent<HTMLLIElement>) => {
-    if (onClick) onClick(e);
+    if (onClick && !disabled) onClick(e);
   };
 
   const onKeyUpHandler = (e: KeyboardEvent) => {
@@ -97,6 +99,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
     <li
       className={classes}
       title={title}
+      data-disabled={!!disabled}
       onClick={onClickHandler}
       {...rest}
     >

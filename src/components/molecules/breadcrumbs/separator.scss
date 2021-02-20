@@ -1,0 +1,14 @@
+@import '../../../style/colors';
+@import '../../../style/mixins';
+
+.ne {
+  &-breadcrumbs-separator {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: $lightBlue;
+    padding: 0 0.4rem;
+
+    @include defaultFont;
+    @include boxSizing;
+  }
+}

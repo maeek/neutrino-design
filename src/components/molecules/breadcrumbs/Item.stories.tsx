@@ -1,5 +1,4 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
-
 import { Item as BreadcrumbItemComponent, BreadcrumbItemProps } from './Item';
 
 export default {
@@ -7,12 +6,10 @@ export default {
   component: BreadcrumbItemComponent
 } as Meta;
 
-const TemplatePrimary: Story<BreadcrumbItemProps> = (args) => (
-  <BreadcrumbItemComponent {...args}>Channels</BreadcrumbItemComponent>
-);
+const Template: Story<BreadcrumbItemProps> = (args) => (<BreadcrumbItemComponent {...args}>Channels</BreadcrumbItemComponent>);
 
-export const Item = TemplatePrimary.bind({});
-Item.args = {
+export const ItemWithMenu = Template.bind({});
+ItemWithMenu.args = {
   title: 'This is an item',
   className: 'ne-breadcrumbs-item-story',
   moreMenuItems: [
@@ -22,3 +19,10 @@ Item.args = {
     { text: 'Item 4' }
   ]
 };
+
+export const Item = Template.bind({});
+Item.args = {
+  title: 'This is an item',
+  className: 'ne-breadcrumbs-item-story'
+};
+
