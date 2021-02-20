@@ -1,0 +1,39 @@
+@import '../../../../style/colors';
+
+@mixin actionButtonStyling {
+  $bg: $blue;
+  $color: $primaryColor;
+  $hoverBg: $lightBlue;
+  $activeBg: $blue;
+  $activeBorder: $darkBlue;
+
+  .ne-button_act &-item {
+    // Styling
+    border: 3px solid $bg;
+    background-color: $bg;
+    color: $color;
+  }
+  .ne-button_act &-item:not(.ne-button-item--disabled):hover,
+  .ne-button_act &-item:not(.ne-button-item--disabled):focus {
+    cursor: pointer;
+    border: 3px solid $hoverBg;
+    background-color: $hoverBg;
+  }
+  .ne-button_act &-item:not(.ne-button-item--disabled):active {
+    border: 3px solid $activeBg;
+    border-bottom: 3px solid $activeBorder;
+    background-color: $activeBg;
+  }
+  .ne-button_act &-item--disabled {
+    border: 3px solid $disabledBg;
+    background-color: $disabledBg;
+    color: $disabledColor;
+    cursor: not-allowed;
+  }
+}
+
+.ne {
+  &-button {
+    @include actionButtonStyling;
+  }
+}

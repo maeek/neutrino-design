@@ -1,0 +1,38 @@
+@import '../../../../style/colors';
+
+@mixin secondaryButtonStyling {
+  $bg: $altGray;
+  $hoverBg: $altLightGray;
+  $activeBg: $altGray;
+  $activeBorder: $altDarkGray;
+
+  .ne-button_secondary &-item {
+    // Styling
+    border: 3px solid $bg;
+    background-color: $bg;
+    color: $primaryColor;
+  }
+  .ne-button_secondary &-item:not(.ne-button-item--disabled):hover,
+  .ne-button_secondary &-item:not(.ne-button-item--disabled):focus {
+    cursor: pointer;
+    border: 3px solid $hoverBg;
+    background-color: $hoverBg;
+  }
+  .ne-button_secondary &-item:not(.ne-button-item--disabled):active {
+    border: 3px solid $activeBg;
+    border-bottom: 3px solid $activeBorder;
+    background-color: $activeBg;
+  }
+  .ne-button_secondary &-item--disabled {
+    border: 3px solid $disabledBg;
+    background-color: $disabledBg;
+    color: $disabledColor;
+    cursor: not-allowed;
+  }
+}
+
+.ne {
+  &-button {
+    @include secondaryButtonStyling;
+  }
+}

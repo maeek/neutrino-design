@@ -1,0 +1,55 @@
+@import '../../../style/colors';
+@import '../../../style/mixins';
+
+$bg: $darkGray;
+$activeBg: $green;
+$color: $primaryColor;
+$focusColor: $lighterBlue;
+
+.ne {
+  &-breadcrumbs-item {
+    position: relative;
+    list-style: none;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 20px;
+    max-width: 200px;
+    padding: 0;
+    font-size: 0.8rem;
+    color: $color;
+
+    @include defaultFont;
+    @include boxSizing;
+
+    &-content {
+      padding: 0.2rem 0.2rem 0.2rem 0.5rem;
+
+      &:hover, &:focus {
+        cursor: pointer;
+        outline: none;
+        text-decoration: underline;
+        color: $focusColor;
+      }
+    }
+
+    &-show-more {
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 0.9rem;
+      svg {
+        font-size: inherit;
+      }
+
+    &:hover {
+        color: lighten($focusColor, 5);
+      }
+    }
+
+    & .ne-context-menu {
+      position: absolute;
+      top: 110%;
+      left: 0;
+    }
+  }
+}

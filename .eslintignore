@@ -1,0 +1,9 @@
+build/
+dist/
+node_modules/
+.snapshots/
+*.min.js
+*.mdx
+jest.config.js
+*.d.ts
+*.stories.*

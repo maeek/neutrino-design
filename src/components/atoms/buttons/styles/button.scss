@@ -1,0 +1,72 @@
+@import '../../../../style/colors';
+@import '../../../../style/mixins';
+
+
+
+// $errorBg: #ff5f5f;
+// $errorColor: #fff;
+@mixin defaultButtonStyling {
+  $bg: $gray;
+  $hoverBg: $darkGray;
+  $activeBg: $lighterGray;
+  $activeBorder: $lightGray;
+
+  &-item {
+    border: 3px solid $bg;
+    background-color: $bg;
+    color: $primaryColor;
+  }
+  &-item:not(.ne-button-item--disabled):hover,
+  &-item:not(.ne-button-item--disabled):focus {
+    cursor: pointer;
+    border: 3px solid $hoverBg;
+    background-color: $hoverBg;
+  }
+  &-item:not(.ne-button-item--disabled):active {
+    border: 3px solid $activeBg;
+    border-bottom: 3px solid $activeBorder;
+    background-color: $activeBg;
+  }
+  &-item--disabled {
+    border: 3px solid $disabledBg;
+    background-color: $disabledBg;
+    color: $disabledColor;
+    cursor: not-allowed;
+  }
+}
+
+.ne {
+  &-button {
+    display: block;
+    height: 38px;
+    position: relative;
+    user-select: none;
+    
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    @include defaultFont;
+    @include boxSizing;
+
+    &-item {
+      padding: 0.5rem 0.7rem;
+      width: auto;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 2px;
+      transition: background-color 0.15s, color 0.15s, border 0.1s;
+    }
+
+    @include defaultButtonStyling;
+
+    &-anchor {
+      display: block;
+      width: auto;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}

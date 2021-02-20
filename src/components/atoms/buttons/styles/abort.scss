@@ -1,0 +1,40 @@
+@import '../../../../style/colors';
+
+@mixin abortButtonStyling {
+  $primaryBg: $lightRed;
+  $primaryHoverBg: $red;
+  $primaryActiveBg: $red;
+  $primaryActiveBorder: $darkRed;
+  $primaryDisabledBg: $disabledBg;
+  $primaryDisabledColor: $disabledColor;
+
+  .ne-button_abort &-item {
+    // Styling
+    border: 3px solid $primaryBg;
+    background-color: $primaryBg;
+    color: $primaryColor;
+  }
+  .ne-button_abort &-item:not(.ne-button-item--disabled):hover,
+  .ne-button_abort &-item:not(.ne-button-item--disabled):focus {
+    cursor: pointer;
+    border: 3px solid $primaryHoverBg;
+    background-color: $primaryHoverBg;
+  }
+  .ne-button_abort &-item:not(.ne-button-item--disabled):active {
+    border: 3px solid $primaryActiveBg;
+    border-bottom: 3px solid $primaryActiveBorder;
+    background-color: $primaryActiveBg;
+  }
+  .ne-button_abort &-item--disabled {
+    border: 3px solid $primaryDisabledBg;
+    background-color: $primaryDisabledBg;
+    color: $primaryDisabledColor;
+    cursor: not-allowed;
+  }
+}
+
+.ne {
+  &-button {
+    @include abortButtonStyling;
+  }
+}

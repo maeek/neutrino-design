@@ -1,0 +1,46 @@
+@import '../../../style/colors';
+@import '../../../style/mixins';
+
+$bg: $darkGray;
+$activeBg: $green;
+$color: $primaryColor;
+$focusColor: $lighterBlue;
+
+.ne {
+  &-context-menu-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    border: 0;
+    padding: 0.4rem 0.5rem;
+    width: 100%;
+    font-size: 0.75rem;
+    font-weight: 400;
+    cursor: pointer;
+    color: $color;
+
+    @include defaultFont;
+    @include boxSizing;
+
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    &:hover {
+      background: lighten($darkerGray, 2);
+      color: $focusColor;
+    }
+    
+    &:focus {
+      outline: none;
+      color: $focusColor;
+    }
+  }
+}

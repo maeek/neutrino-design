@@ -1,0 +1,80 @@
+@import '../../../../style/colors';
+@import '../../../../style/mixins';
+
+$bg: $darkGray;
+$activeBg: $green;
+$color: $altPrimaryColor;
+$sliderBg: $whiteGray;
+$sliderFocusBg: $lighterBlue;
+$borderRequired: $lightRed;
+
+.ne {
+  &-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    width: 44px;
+    height: 24px;
+    border-radius: 30px;
+    background-color: $bg;
+    border: 2px solid $bg;
+
+    @include defaultFont;
+    @include boxSizing;
+
+    &-controll {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+
+    &-decorator {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      &-slider {
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        outline: none;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+        transition: transform 0.1s, background-color 0.1s;
+        color: $color;
+        background-color: $sliderBg;
+      }
+    }
+
+    &[data-required="true"] {
+      border: 2px solid $borderRequired;
+    }
+
+    &[data-required="true"][data-checked="true"] {
+      border: 2px solid $bg;
+    }
+
+    &[data-checked="true"] &-decorator-slider {
+      transform: translateX(20px);
+      background-color: $activeBg;
+    }
+
+    &[data-disabled="true"] {
+      border: 2px solid $disabledBg;
+      background-color: $disabledBg;
+    }
+
+    &[data-disabled="false"][data-readonly="false"] &-decorator-slider:focus {
+      background-color: $sliderFocusBg !important;
+    }
+  }
+}
+

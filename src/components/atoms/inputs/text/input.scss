@@ -1,0 +1,152 @@
+@import '../../../../style/colors';
+@import '../../../../style/mixins';
+
+$bg: $gray;
+$color: $primaryColor;
+$clearColor: $secondaryColor;
+$labelColor: $secondaryColor;
+$borderColor: transparent;
+
+$focusBorderColor: $lighterBlue;
+$requiredBorderColor: $lightRed;
+$invalidBorderColor: $lightRed;
+$validBorderColor: $green;
+$disabledColor: $secondaryColor;
+
+.ne {
+  &-input {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    position: relative;
+    background-color: $bg;
+    color: $color;
+    border: 3px solid $borderColor;
+    border-left: 4px solid $borderColor;
+    border-radius: 2px;
+    font-size: 0.75rem;
+
+    @include defaultFont;
+    @include boxSizing;
+
+    &-label {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      cursor: text;
+      user-select: none;
+      &-content {
+        color: $labelColor;
+        font-size: 0.75rem;
+        font-weight: 500;
+        position: absolute;
+        left: 0;
+        transform: translateY(0);
+        transition: all 0.2s;
+        padding: 0.1rem 0.6rem;
+      }
+    }
+
+    &:focus-within &-label-content,
+    &[data-empty="false"] &-label-content {
+        transform: translateY(-1.5rem);
+        font-size: 0.6rem;
+    }
+
+    &-controll {
+      width: 100%;
+      padding: 0.5rem 0.6rem;
+      border: 0;
+      outline: none;
+      background-color: transparent;
+      color: inherit;
+      font: inherit;
+      cursor: inherit;
+
+      &::-webkit-input-placeholder {
+        color: $placeholderColor;
+      }
+      
+      &::-moz-placeholder {
+        color: $placeholderColor;
+      }
+      
+      &::-ms-placeholder {
+        color: $placeholderColor;
+      }
+      
+      &::placeholder {
+        color: $placeholderColor;
+      }
+    }
+
+    &-search-clear {
+      margin: 0 0.5rem;
+      color: $clearColor;
+      cursor: pointer;
+      user-select: none;
+      
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
+    }
+    
+    &[data-required="true"] {
+      border-left: 4px solid $requiredBorderColor;
+    }
+
+    &[data-required="true"] &-validation {
+      opacity: 0;
+      cursor: default;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0.3rem;
+      flex: 0 0 20px;
+      width: 20px;
+      height: 20px;
+      font-size: 16px;
+      line-height: 16px;
+      background-color: $requiredBorderColor;
+      border-radius: 50%;
+      transition: all 0.2s;
+      >svg {
+        font-size: inherit;
+      }
+    }
+    
+    &[data-required="true"]:focus-within &-validation {
+      opacity: 1;
+    }
+
+    &[data-required="true"][data-valid="true"] &-validation {
+      background-color: $validBorderColor;
+    }
+
+    &:focus-within, &[data-required="true"]:focus-within {
+      border-left: 4px solid $focusBorderColor;
+    }
+
+
+    &[data-required="true"][data-valid="true"] {
+      border-left: 4px solid $validBorderColor;
+    }
+
+    &[data-disabled="true"] {
+      background-color: $disabledBg;
+      color: $disabledColor;
+      cursor: not-allowed;
+    }
+
+    &[data-disabled="true"] &-search-clear {
+      cursor: not-allowed;
+      outline: none;
+    }
+  }
+}
+
