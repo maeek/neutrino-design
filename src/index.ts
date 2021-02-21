@@ -1,1 +1,1 @@
-export default {};
+export { Button } from './components/atoms/buttons/index';
