@@ -1,8 +1,11 @@
 import {
   FC,
   MouseEventHandler,
+  MouseEvent,
   MutableRefObject,
-  ReactNode
+  ReactNode,
+  createRef,
+  useEffect
 } from 'react';
 import classnames from 'classnames';
 import Item from './Item';
@@ -20,6 +23,7 @@ export interface ContextMenuProps {
   className?: string;
   items?: ContextMenuItems[];
   innerRef?: MutableRefObject<HTMLUListElement | null>;
+  onClickOutside?: (e: MouseEvent, isWithin: boolean, elementRef?: MutableRefObject<HTMLUListElement | null>) => void;
 }
 
 export const ContextMenu: FC<ContextMenuProps> = (props) => {
@@ -27,9 +31,28 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
     className,
     children,
     items,
-    innerRef = null,
+    innerRef = createRef(),
+    onClickOutside,
     ...rest
   } = props;
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent<any>) => {
+      if (
+        innerRef.current &&
+        e.target !== innerRef.current &&
+        !(innerRef.current as any).contains(e.target) &&
+        onClickOutside
+      ) {
+        onClickOutside(e, false, innerRef);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside as any);
+    return () => {
+      document.removeEventListener('click', handleClickOutside as any);
+    };
+  }, [innerRef, onClickOutside]);
 
   const classes = classnames({
     'ne-context-menu': true,

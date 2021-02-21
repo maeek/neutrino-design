@@ -20,5 +20,9 @@ $focusColor: $lighterBlue;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
+
+    &:hover, &:focus-within {
+      border: 1px solid lighten($darkerGray, 15);
+    }
   }
 }
