@@ -34,6 +34,10 @@ $focusColor: $lighterBlue;
       }
     }
 
+    &[data-disabled="true"] {
+      cursor: default;
+    }
+
     &-show-more {
       cursor: pointer;
       font-size: 1rem;

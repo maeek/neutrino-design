@@ -5,7 +5,6 @@ import {
   MouseEvent,
   MouseEventHandler,
   ReactNode,
-  useEffect,
   useRef,
   useState
 } from 'react';
@@ -56,23 +55,9 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
     if (e.code === 'Enter' || e.code === 'Space') onClickShowMoreHandler(e as any);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        showMore &&
-        moreMenuRef.current &&
-        e.target !== moreMenuRef.current &&
-        !(moreMenuRef.current as any).contains(e.target)
-      ) {
-        setShowMore(!showMore);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside as any);
-    return () => {
-      document.removeEventListener('click', handleClickOutside as any);
-    };
-  }, [showMore, moreMenuRef]);
+  const onClickOutsideMenu = (_: MouseEvent, isInside: boolean) => {
+    setShowMore(isInside);
+  };
 
   const classes = classnames({
     'ne-breadcrumbs-item': true,
@@ -91,7 +76,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
           showMore ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />
         }
       </span>
-      { showMore && <ContextMenu innerRef={moreMenuRef} items={moreMenuItems} />}
+      { showMore && <ContextMenu onClickOutside={onClickOutsideMenu} innerRef={moreMenuRef} items={moreMenuItems} />}
     </>
   );
 
@@ -103,7 +88,11 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
       onClick={onClickHandler}
       {...rest}
     >
-      <div className="ne-breadcrumbs-item-content" tabIndex={0} onKeyUp={onKeyUpHandler}>
+      <div
+        className="ne-breadcrumbs-item-content"
+        tabIndex={disabled ? -1 : 0}
+        onKeyUp={onKeyUpHandler}
+      >
         {children}
       </div>
       {

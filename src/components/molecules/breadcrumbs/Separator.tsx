@@ -15,9 +15,9 @@ export const Separator: FC<SeparatorProps> = (props) => {
 
   const classes = classnames('ne-breadcrumbs-separator', className);
   return (
-    <div className={classes}>
+    <li className={classes}>
       {children}
-    </div>
+    </li>
   );
 };
 
