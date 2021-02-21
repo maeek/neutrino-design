@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900');
+@import './colors';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900&family=Roboto+Mono:400,700');
 
 :root {
   font-size: 18px;
@@ -8,8 +9,72 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+@mixin monoFont {
+  font-family: 'Roboto Mono', monospace !important;
+}
+
 @mixin boxSizing {
   &, & *, & *::before, & *::after {
     box-sizing: border-box;
+  }
+}
+
+@mixin loader($name: "loader", $size: 5px, $distance: 12px) {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+
+  >div {
+    animation-direction: normal;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: #{$name};
+    animation-timing-function: linear;
+    border-radius: 50%;
+    flex: 0 0 #{$size};
+    height: #{$size};
+    position: absolute;
+    width: #{$size};
+
+    &:nth-of-type(2) {
+      animation-delay: 0.666s;
+    }
+
+    &:nth-of-type(3) {
+      animation-delay: 1.333s;
+    }
+  }
+  @include loaderKeyframe($name, $distance);
+}
+
+@mixin loaderKeyframe($name: "loader", $distance: 12px) {
+  @keyframes #{$name} {
+    0% {
+      background-color: rgb(126, 163, 211);
+      transform: translateX(-#{$distance*3}) scale(0);
+    }
+
+    10% {
+      transform: translateX(-#{$distance}) scale(1);
+    }
+
+    50% {
+      transform: translateX() scale(1);
+    }
+
+    90% {
+      background-color: transparentize($lightBlue, 0.1);
+      transform: translateX(#{$distance}) scale(1);
+    }
+
+    100% {
+      background-color: transparentize($darkBlue, 0.6);
+      transform: translateX(#{$distance*3}) scale(0);
+    }
   }
 }
