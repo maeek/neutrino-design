@@ -4,7 +4,7 @@
     "allowJs": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "isolatedModules": true,
+    "isolatedModules": false,
     "declaration": true,
     "strict": true,
     "baseUrl": "./",

@@ -9,7 +9,8 @@
     "prettier/standard",
     "prettier/react",
     "prettier/@typescript-eslint",
-    "plugin:@typescript-eslint/eslint-recommended"
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:testing-library/react"
   ],
   "env": {
     "node": true
@@ -23,7 +24,7 @@
   },
   "settings": {
     "react": {
-      "version": "16"
+      "version": "17"
     }
   },
   "rules": {
