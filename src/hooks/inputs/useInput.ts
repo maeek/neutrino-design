@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 export interface UseInput {
   value: string;
@@ -6,7 +6,7 @@ export interface UseInput {
   reset: () => void;
   bind: {
     value: string;
-    onChange: (event: React.ChangeEvent<any>) => void;
+    onChange: (event: ChangeEvent<any>) => void;
   };
 }
 
