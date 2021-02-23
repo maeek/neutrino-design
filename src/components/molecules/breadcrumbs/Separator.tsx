@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import './separator.scss';
 
 export interface SeparatorProps {
@@ -13,7 +13,7 @@ export const Separator: FC<SeparatorProps> = (props) => {
     className
   } = props;
 
-  const classes = classnames('ne-breadcrumbs-separator', className);
+  const classes = classNames('ne-breadcrumbs-separator', className);
   return (
     <li className={classes}>
       {children}

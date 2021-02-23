@@ -10,7 +10,7 @@ import {
   KeyboardEvent,
   useCallback
 } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import useInput from '../../../../hooks/inputs/useInput';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
@@ -117,7 +117,7 @@ export const Input: FC<InputProps> = (props) => {
     }
   }, [innerRef, value, setValue, ref, validateInput]);
 
-  const classes = classnames({
+  const classes = classNames({
     'ne-input': true,
     ...(className ? { [className]: true } : {})
   });

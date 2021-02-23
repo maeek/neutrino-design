@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import {
   FC,
   KeyboardEvent,
@@ -14,6 +14,8 @@ export interface ItemProps {
   children?: ReactNode;
   className?: string;
   onClick?: MouseEventHandler<HTMLLIElement>;
+  closeOnClick?: boolean;
+  closeHandler?: Function;
   disabled?: boolean;
 }
 
@@ -24,20 +26,27 @@ export const Item: FC<ItemProps> = (props) => {
     className,
     text,
     disabled,
+    closeOnClick,
+    closeHandler,
     ...rest
   } = props;
 
 
   const onClickHandler = (e: MouseEvent<HTMLLIElement>) => {
     e.stopPropagation();
-    if (onClick && !disabled) onClick(e);
+    if (closeOnClick && closeHandler) {
+      closeHandler();
+    }
+    if (onClick && !disabled) {
+      onClick(e);
+    }
   };
 
   const onKeyUpHandler = (e: KeyboardEvent) => {
     onClickHandler(e as any);
   };
 
-  const classes = classnames({
+  const classes = classNames({
     'ne-context-menu-item': true,
     ...(className ? {[className]: true} : {})
   });

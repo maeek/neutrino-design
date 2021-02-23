@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import './heading.scss';
 
@@ -16,7 +16,7 @@ export const Heading: FC<HeadingProps> = (props) => {
     ...rest
   } = props;
 
-  const classes = classnames('ne-typo', 'ne-typo-heading', `ne-typo-heading-level-${level}`, className);
+  const classes = classNames('ne-typo', 'ne-typo-heading', `ne-typo-heading-level-${level}`, className);
 
   switch (level) {
   case 2:

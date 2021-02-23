@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import Button, { ButtonProps } from '.';
 import './styles/action.scss';
 
 export const ActionButton: FC<ButtonProps> = (props) => {
-  const classes = classnames({
+  const classes = classNames({
     'ne-button_act': true,
     ...(props.className ? { [props.className]: true } : {})
   });

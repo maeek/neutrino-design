@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import CodeLine from '../../atoms/typography/code';
 import './code.scss';
 
@@ -17,7 +17,7 @@ export const Code: FC<CodeProps> = (props) => {
     ...rest
   } = props;
 
-  const classes = classnames(
+  const classes = classNames(
     'ne-typo', 'ne-typo-code',
     className
   );

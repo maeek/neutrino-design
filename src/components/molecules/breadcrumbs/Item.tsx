@@ -8,7 +8,7 @@ import {
   useRef,
   useState
 } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
 import ContextMenu, { ContextMenuItems } from '../context-menu/Menu';
@@ -55,11 +55,11 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
     if (e.code === 'Enter' || e.code === 'Space') onClickShowMoreHandler(e as any);
   };
 
-  const onClickOutsideMenu = (_: MouseEvent, isInside: boolean) => {
+  const closeContextMenuMenu = (_: MouseEvent, isInside: boolean) => {
     setShowMore(isInside);
   };
 
-  const classes = classnames({
+  const classes = classNames({
     'ne-breadcrumbs-item': true,
     ...(className ? {[className]: true} : {})
   });
@@ -76,7 +76,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
           showMore ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />
         }
       </span>
-      { showMore && <ContextMenu onClickOutside={onClickOutsideMenu} innerRef={moreMenuRef} items={moreMenuItems} />}
+      { showMore && <ContextMenu closeContextMenu={closeContextMenuMenu} innerRef={moreMenuRef} items={moreMenuItems} />}
     </>
   );
 

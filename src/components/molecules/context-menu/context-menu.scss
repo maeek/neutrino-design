@@ -8,21 +8,28 @@ $focusColor: $lighterBlue;
 
 .ne {
   &-context-menu {
-    list-style: none;
-    background: $darkerGray;
-    color: $color;
-    border: 1px solid lighten($darkerGray, 10);
-    border-radius: 4px;
-    min-width: 140px;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
+    &-wrapper {
+      width: max-content;
+      max-width: 300px;
+      min-width: 150px;
+      position: relative;
+    }
+    &-list {
+      list-style: none;
+      background: $darkerGray;
+      color: $color;
+      border: 1px solid lighten($darkerGray, 10);
+      border-radius: 4px;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: stretch;
+      align-items: flex-start;
+      flex-direction: column;
 
-    &:hover, &:focus-within {
-      border: 1px solid lighten($darkerGray, 15);
+      &:hover, &:focus-within {
+        border: 1px solid lighten($darkerGray, 15);
+      }
     }
   }
 }

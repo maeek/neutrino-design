@@ -1,5 +1,5 @@
 import { FC, KeyboardEvent, MouseEvent, MouseEventHandler, ReactNode } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import './styles/button.scss';
 
 export type ButtonTypes = 'link' | 'button';
@@ -60,7 +60,7 @@ export const Button: FC<ButtonProps> = (props) => {
     }
   };
 
-  const classes = classnames({
+  const classes = classNames({
     'ne-button-item': true,
     'ne-button-item--disabled': disabled
   });
@@ -80,7 +80,7 @@ export const Button: FC<ButtonProps> = (props) => {
     </div>
   );
 
-  const containerClasses = classnames({
+  const containerClasses = classNames({
     'ne-button': true,
     ...(className && { [className]: true })
   });

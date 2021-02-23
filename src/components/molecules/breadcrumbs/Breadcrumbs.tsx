@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler, ReactNode } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import './breadcrumbs.scss';
 import Item from './Item';
 import { ContextMenuItems } from '../context-menu/Menu';
@@ -20,7 +20,7 @@ export interface BreadcrumbsProps {
 export const Breadcrumbs: FC<BreadcrumbsProps> = (props) => {
   const { items, className, separator } = props;
 
-  const classes = classnames('ne-breadcrumbs', className);
+  const classes = classNames('ne-breadcrumbs', className);
   return (
     <ul className={classes}>
       {items.map((item, i, arr) => {
@@ -28,8 +28,14 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = (props) => {
 
         return (
           <>
-            <Item disabled={disabled} moreMenuItems={item.menuItems}>{item.text}</Item>
-            { !disabled && <Separator>{separator}</Separator> }
+            <Item
+              key={item.text}
+              disabled={disabled}
+              moreMenuItems={item.menuItems}
+            >
+              {item.text}
+            </Item>
+            { !disabled && <Separator key={i}>{separator}</Separator> }
           </>
         );
       })}

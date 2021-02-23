@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { FC } from 'react';
 import './code-line.scss';
 
@@ -14,7 +14,7 @@ export const CodeLine: FC<CodeLineProps> = (props) => {
     ...rest
   } = props;
 
-  const classes = classnames(
+  const classes = classNames(
     'ne-typo', 'ne-typo-code-line-content',
     className
   );

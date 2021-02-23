@@ -7,7 +7,7 @@ import {
   createRef,
   useEffect
 } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import Item from './Item';
 import './context-menu.scss';
 
@@ -16,14 +16,15 @@ export interface ContextMenuItems {
   text: string;
   node?: ReactNode;
   onClick?: MouseEventHandler<HTMLLIElement>;
+  closeOnClick?: boolean;
 }
 
 export interface ContextMenuProps {
   children?: ReactNode;
   className?: string;
   items?: ContextMenuItems[];
-  innerRef?: MutableRefObject<HTMLUListElement | null>;
-  onClickOutside?: (e: MouseEvent, isWithin: boolean, elementRef?: MutableRefObject<HTMLUListElement | null>) => void;
+  innerRef?: MutableRefObject<HTMLDivElement | null>;
+  closeContextMenu?: (e: MouseEvent, clickedInsideContextMenu: boolean, elementRef?: MutableRefObject<HTMLDivElement | null>) => void;
 }
 
 export const ContextMenu: FC<ContextMenuProps> = (props) => {
@@ -32,7 +33,7 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
     children,
     items,
     innerRef = createRef(),
-    onClickOutside,
+    closeContextMenu,
     ...rest
   } = props;
 
@@ -42,9 +43,9 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
         innerRef.current &&
         e.target !== innerRef.current &&
         !(innerRef.current as any).contains(e.target) &&
-        onClickOutside
+        closeContextMenu
       ) {
-        onClickOutside(e, false, innerRef);
+        closeContextMenu(e, false, innerRef);
       }
     };
 
@@ -52,25 +53,35 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
     return () => {
       document.removeEventListener('click', handleClickOutside as any);
     };
-  }, [innerRef, onClickOutside]);
+  }, [innerRef, closeContextMenu]);
 
-  const classes = classnames({
+  const handleCloseOnClick = () => {
+    if (closeContextMenu) closeContextMenu({} as MouseEvent, false, innerRef);
+  };
+
+  const classes = classNames({
     'ne-context-menu': true,
     ...(className ? {[className]: true} : {})
   });
 
   return (
-    <ul className={classes} ref={innerRef} {...rest}>
-      {items?.map((item) => (
-        <Item
-          key={item.text}
-          onClick={item.onClick}
-          text={item.text}
-        >
-          {item.node}
-        </Item>)
-      )}
-    </ul>
+    <div className={classes} ref={innerRef} {...rest}>
+      <div className="ne-context-menu-wrapper">
+        <ul className="ne-context-menu-list">
+          {items?.map((item) => (
+            <Item
+              key={item.index + item.text}
+              onClick={item.onClick}
+              text={item.text}
+              closeOnClick={item.closeOnClick}
+              closeHandler={handleCloseOnClick}
+            >
+              {item.node}
+            </Item>)
+          )}
+        </ul>
+      </div>
+    </div>
   );
 };
 

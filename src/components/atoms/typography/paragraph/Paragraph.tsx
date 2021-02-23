@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import Text from '../text';
 import './paragraph.scss';
@@ -17,7 +17,7 @@ export const Paragraph: FC<ParagraphProps> = (props) => {
     ...rest
   } = props;
 
-  const classes = classnames(
+  const classes = classNames(
     'ne-typo', 'ne-typo-paragraph',
     pre && 'ne-typo-paragraph--pre',
     className

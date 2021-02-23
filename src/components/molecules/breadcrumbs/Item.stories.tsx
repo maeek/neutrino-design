@@ -1,3 +1,4 @@
+import { DnsRounded } from '@material-ui/icons';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Item as BreadcrumbItemComponent, BreadcrumbItemProps } from './Item';
 
@@ -15,7 +16,11 @@ ItemWithMenu.args = {
   moreMenuItems: [
     { text: 'Item 1' },
     { text: 'Item 2' },
-    { text: 'Item 3' },
+    {
+      text: <><DnsRounded style={{fontSize: '0.9rem', margin: '0 0.3rem 0 0'}} /> Item 3, this closes context-menu on click</>,
+      closeOnClick: true,
+      onClick: (...args: any) => console.log(args)
+    },
     { text: 'Item 4' }
   ]
 };

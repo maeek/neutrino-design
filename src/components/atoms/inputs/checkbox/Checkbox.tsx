@@ -6,7 +6,7 @@ import {
   useRef,
   KeyboardEvent
 } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import useCheckbox from '../../../../hooks/inputs/useCheckbox';
 import './checkbox.scss';
 
@@ -76,7 +76,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
     (readOnly && 'Checkbox read only') ||
     '';
 
-  const classes = classnames({
+  const classes = classNames({
     'ne-checkbox': true,
     ...(className ? { [className]: true } : {})
   });

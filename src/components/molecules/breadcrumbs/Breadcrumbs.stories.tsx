@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import BreadcrumbsComponent, { BreadcrumbsProps } from './Breadcrumbs';
+import BreadcrumbsComponent, { BreadcrumbsProps } from './';
 
 export default {
   title: 'Molecules/Breadcrumbs',

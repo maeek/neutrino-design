@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import './text.scss';
 
@@ -38,7 +38,7 @@ export const Text: FC<TextProps> = (props) => {
     ...rest
   } = props;
 
-  const classes = classnames(
+  const classes = classNames(
     'ne-typo', 'ne-typo-text',
     `ne-typo-text--${type}`,
     disabled && 'ne-typo-text--disabled',
