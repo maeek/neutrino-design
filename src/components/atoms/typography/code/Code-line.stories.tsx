@@ -9,7 +9,7 @@ export default {
 
 const Template: Story<CodeLineProps> = (args) => (<CodeComponent {...args}>{args.children}</CodeComponent>);
 
-const text = `Code. Neutrino Design`;
+const text = 'Code. Neutrino Design';
 
 export const Code = Template.bind({});
 Code.args = {

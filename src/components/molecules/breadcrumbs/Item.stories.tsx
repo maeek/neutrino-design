@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { DnsRounded } from '@material-ui/icons';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Item as BreadcrumbItemComponent, BreadcrumbItemProps } from './Item';

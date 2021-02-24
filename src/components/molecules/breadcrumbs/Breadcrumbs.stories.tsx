@@ -17,6 +17,6 @@ Breadcrumbs.args = {
       { text: 'Direct Messages' },
       { text: 'Users' }
     ]},
-    {text: 'Main', onClick: () => ({})},
+    {text: 'Main', onClick: () => ({})}
   ]
 };

@@ -1,4 +1,4 @@
-import { FC, MouseEvent, MouseEventHandler, ReactNode } from "react";
+import { FC, MouseEvent, MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
 import './item.scss';
 
