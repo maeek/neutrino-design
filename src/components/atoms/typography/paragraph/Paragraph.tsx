@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
-import Text from '../text';
+import Text from '../text/Text';
 import './paragraph.scss';
 
 export interface ParagraphProps {

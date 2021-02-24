@@ -106,7 +106,7 @@ export const Button: FC<ButtonProps> = (props) => {
 
 export default Button;
 
-export {default as SecondaryButton } from './Secondary';
-export {default as AbortButton } from './Abort';
-export {default as ActionButton } from './Action';
-export {default as ProceedButton } from './Proceed';
+export { SecondaryButton } from './Secondary';
+export { AbortButton } from './Abort';
+export { ActionButton } from './Action';
+export { ProceedButton } from './Proceed';

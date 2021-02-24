@@ -1,2 +1,2 @@
-export * from './components/atoms';
+export * from './components';
 export * from './hooks/';

@@ -1,1 +1,1 @@
-export { default } from './Code-line';
+export { CodeLine } from './Code-line';

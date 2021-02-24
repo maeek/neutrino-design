@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import classNames from 'classnames';
-import CodeLine from '../../atoms/typography/code';
+import CodeLine from '../../atoms/typography/code/Code-line';
 import './code.scss';
 
 export interface CodeProps {
