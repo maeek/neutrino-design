@@ -7,8 +7,8 @@
     "isolatedModules": true,
     "declaration": true,
     "strict": true,
-    "baseUrl": "./",
-    "outDir": "build",
+    "baseUrl": ".",
+    "outDir": "dist",
     "sourceMap": true,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
@@ -17,6 +17,7 @@
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
+    "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
@@ -29,13 +30,13 @@
   },
   "include": [
     "./src/**/*.ts",
-    "./src/**/*.d.ts",
+    "./src/**/*.d.ts"
   ],
   "exclude": [
     "./src/stories",
     "./src/**/*.stories.*",
     "./src/**/tests",
     "./src/**/*.test.ts",
-    "./src/setupTests.ts"
+    "./src/setup-tests.ts"
   ]
 }
