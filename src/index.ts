@@ -1,1 +1,2 @@
-export { Button } from './components/atoms/buttons/index';
+export * from './components/atoms';
+export * from './hooks';

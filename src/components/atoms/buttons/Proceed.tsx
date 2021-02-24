@@ -1,9 +1,10 @@
-import { FC } from 'react';
+// eslint-disable-next-line no-use-before-define
+import React, { FC } from 'react';
 import classNames from 'classnames';
 import Button, { ButtonProps } from '.';
 import './styles/proceed.scss';
 
-export const SuccessButton: FC<ButtonProps> = (props) => {
+export const ProceedButton: FC<ButtonProps> = (props) => {
   const classes = classNames({
     'ne-button_proceed': true,
     ...(props.className ? { [props.className]: true } : {})
@@ -12,4 +13,4 @@ export const SuccessButton: FC<ButtonProps> = (props) => {
   return <Button {...props} className={classes} />;
 };
 
-export default SuccessButton;
+export default ProceedButton;
