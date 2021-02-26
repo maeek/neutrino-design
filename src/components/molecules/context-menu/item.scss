@@ -8,6 +8,7 @@ $focusColor: $lighterBlue;
 
 .ne {
   &-context-menu-item {
+    flex: 0 0 auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -15,13 +16,15 @@ $focusColor: $lighterBlue;
     border: 0;
     padding: 0.4rem 0.5rem;
     width: 100%;
-    font-size: 0.75rem;
-    font-weight: 400;
     cursor: pointer;
     color: $color;
-
-    @include defaultFont;
     @include boxSizing;
+    
+    &-text {
+      font-size: 0.75rem;
+      font-weight: 400;
+      @include defaultFont;
+    }
 
     &:first-child {
       border-top-left-radius: 3px;
@@ -38,8 +41,7 @@ $focusColor: $lighterBlue;
       color: $focusColor;
     }
     
-    &:focus {
-      outline: none;
+    &:focus &-text {
       color: $focusColor;
     }
   }
