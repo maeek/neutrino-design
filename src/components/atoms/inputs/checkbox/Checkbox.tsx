@@ -65,7 +65,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
   }, [innerRef, checked, setChecked, ref]);
 
   const onSliderKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.code === 'Enter' || e.code === 'Space') {
+    if (['Enter', 'Space'].includes(e.code)) {
       setChecked(!checked);
     }
   };

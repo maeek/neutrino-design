@@ -52,7 +52,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
   };
 
   const onKeyShowMoreHandler = (e: KeyboardEvent) => {
-    if (e.code === 'Enter' || e.code === 'Space') onClickShowMoreHandler(e as any);
+    if (['Enter', 'Space'].includes(e.code)) onClickShowMoreHandler(e as any);
   };
 
   const closeContextMenuMenu = (_: MouseEvent, isInside: boolean) => {

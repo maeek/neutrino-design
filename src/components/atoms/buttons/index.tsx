@@ -55,7 +55,7 @@ export const Button: FC<ButtonProps> = (props) => {
   };
 
   const onKeyUpHandler = (e: KeyboardEvent<HTMLDivElement>) => {
-    if ((e.code === 'Enter' || e.code === 'Space') && onClick) {
+    if (['Enter', 'Space'].includes(e.code) && onClick) {
       onClick(e as any);
     }
   };

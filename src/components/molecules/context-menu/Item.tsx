@@ -6,6 +6,7 @@ import {
   MouseEventHandler,
   ReactNode
 } from 'react';
+import { Text } from '../../atoms/typography';
 import './item.scss';
 
 export interface ItemProps {
@@ -43,7 +44,7 @@ export const Item: FC<ItemProps> = (props) => {
   };
 
   const onKeyUpHandler = (e: KeyboardEvent) => {
-    onClickHandler(e as any);
+    if (['Enter', 'Space'].includes(e.code)) onClickHandler(e as any);
   };
 
   const classes = classNames({
@@ -61,7 +62,9 @@ export const Item: FC<ItemProps> = (props) => {
       data-disabled={!!disabled}
       {...rest}
     >
-      {children || text}
+      <Text className="ne-context-menu-item-text">
+        {children || text}
+      </Text>
     </li>
   );
 };

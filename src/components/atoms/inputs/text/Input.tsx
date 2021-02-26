@@ -89,7 +89,7 @@ export const Input: FC<InputProps> = (props) => {
   };
 
   const onKeySearchClearHandler = (e: KeyboardEvent<HTMLSpanElement>) => {
-    if (e.code === 'Enter' || e.code === 'Space') {
+    if (['Enter', 'Space'].includes(e.code)) {
       onSearchClearHandler();
     }
   };
