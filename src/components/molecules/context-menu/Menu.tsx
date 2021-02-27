@@ -15,6 +15,7 @@ export interface ContextMenuItems {
   index?: number;
   text: string;
   node?: ReactNode;
+  icon?: ReactNode;
   onClick?: MouseEventHandler<HTMLLIElement>;
   closeOnClick?: boolean;
 }
@@ -71,10 +72,8 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
           {items?.map((item) => (
             <Item
               key={item.index + item.text}
-              onClick={item.onClick}
-              text={item.text}
-              closeOnClick={item.closeOnClick}
               closeHandler={handleCloseOnClick}
+              {...item}
             >
               {item.node}
             </Item>)

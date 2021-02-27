@@ -1,3 +1,4 @@
+import { ShareRounded, VisibilityRounded } from '@material-ui/icons';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import ContextMenuComponent, { ContextMenuProps } from './Menu';
@@ -14,9 +15,9 @@ const Template: Story<ContextMenuProps> = (args) => (
 export const Menu = Template.bind({});
 Menu.args = {
   items: [
-    { text: 'Item 1' },
-    { text: 'Item 2' },
-    { text: 'Item 3' },
-    { text: 'Item 4' }
+    { text: 'Join' },
+    { text: 'Share', icon: <ShareRounded /> },
+    { text: 'Delete Channel' },
+    { text: 'View Channel Properties', icon: <VisibilityRounded /> }
   ]
 };

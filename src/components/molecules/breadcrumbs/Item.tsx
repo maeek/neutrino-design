@@ -37,6 +37,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
   } = props;
 
   const moreMenuRef = useRef(null);
+  const expandRef = useRef(null);
   const [showMore, setShowMore] = useState(false);
 
   const onClickHandler = (e: MouseEvent<HTMLLIElement>) => {
@@ -56,6 +57,9 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
   };
 
   const closeContextMenuMenu = (_: MouseEvent, isInside: boolean) => {
+    if (expandRef && expandRef.current) {
+      expandRef.current.focus();
+    }
     setShowMore(isInside);
   };
 
@@ -71,6 +75,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
         onClick={onClickShowMoreHandler}
         onKeyUp={onKeyShowMoreHandler}
         tabIndex={0}
+        ref={expandRef}
       >
         {
           showMore ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />

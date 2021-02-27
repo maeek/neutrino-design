@@ -8,6 +8,7 @@ $focusColor: $lighterBlue;
 
 .ne {
   &-context-menu {
+    z-index: 400;
     &-wrapper {
       width: max-content;
       max-width: 300px;

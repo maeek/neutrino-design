@@ -18,7 +18,9 @@ ItemWithMenu.args = {
     { text: 'Item 1' },
     { text: 'Item 2' },
     {
-      text: <><DnsRounded style={{fontSize: '0.9rem', margin: '0 0.3rem 0 0'}} /> Item 3, this closes context-menu on click</>,
+      text: 'Item 3, this closes context-menu on click',
+      icon: <DnsRounded />,
+      iconPosition: 'left',
       closeOnClick: true,
       onClick: (...args: any) => console.log(args)
     },
