@@ -6,6 +6,8 @@
     @include boxSizing;
     &-code {
       @include defaultFont;
+      display: flex;
+      flex-direction: column;
       padding: 0;
       margin: 0;
       color: darken($secondaryColor, 10);
@@ -34,11 +36,22 @@
           border-radius: 3px;
           border: 1px solid lighten($darkerGray, 2);
           background-color: $darkerGray;
+
+          &--wrap {
+            white-space: pre-wrap;
+          }
         }
 
         &:hover &-number {
           color: darken($secondaryColor, 15)
         }
+      }
+
+      &--block {
+        padding: 0.5rem 0.7rem;
+        border: 1px solid $gray;
+        background-color: darken($altDarkGray, 30);
+        border-radius: 4px;
       }
     }
   }
