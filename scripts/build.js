@@ -2,27 +2,10 @@
 const path = require('path');
 const config = require('./config');
 const util = require('./common');
-const childProc = require('child_process');
 const { processScss } = require('./processors/sassProcessor');
 const { processTypescript } = require('./processors/tsProcessor');
 
-
-const genTypes = () => {
-  console.time('[\x1b[32m✓\x1b[0m] Generated types in');
-  console.log('Generating typescript files...');
-
-  console.log(
-    childProc.execSync('npm run compile:types', {
-      cwd: path.resolve(__dirname, '..')
-    }).toString()
-  );
-  
-  console.timeEnd('[\x1b[32m✓\x1b[0m] Generated types in');
-};
-
 const loadedModules = util.getEntries(path.resolve(__dirname, '..', config.entryFolder));
-
-genTypes();
 
 console.log();
 console.log();

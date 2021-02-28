@@ -18,10 +18,9 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
     "@types/classnames": "^2.2.11",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
-    "classnames": "^2.2.6",
-    "web-vitals": "^1.1.0"
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "classnames": "^2.2.6"
   },
   "scripts": {
     "publish-package": "npm run build && node scripts/publish.js",
@@ -29,7 +28,7 @@
     "clean": "rm -rf ./build ./dist",
     "compile": "node scripts/build.js",
     "compile:types": "tsc",
-    "build": "NODE_ENV=production npm run compile",
+    "build": "NODE_ENV=production npm run compile:types && npm run compile",
     "prebuild": "npm run clean",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
@@ -92,7 +91,7 @@
     "react-dom": "^17.0.1",
     "sass-loader": "^10.1.1",
     "ts-jest": "^26.5.2",
-    "typescript": "^4.2.2"
+    "typescript": "^4.1.5"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
