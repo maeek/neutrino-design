@@ -1,0 +1,30 @@
+@import '../../../styles/mixins.scss';
+
+.ne {
+  &-layout {
+    &-top-content {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      margin: 0;
+      padding: 0;
+      @include boxSizing;
+
+      &-top {
+        width: 100%;
+        flex: 0 0 auto;
+      }
+
+      &-content {
+        width: 100%;
+        flex: 1 1 auto;
+        margin: 0 auto;
+        overflow: auto;
+      }
+    }
+  }
+}
