@@ -7,7 +7,7 @@ import {
   useEffect,
   useRef,
   MouseEvent,
-  KeyboardEvent,
+  KeyboardEvent as ReactKeyboardEvent,
   useCallback
 } from 'react';
 import classNames from 'classnames';
@@ -88,8 +88,8 @@ export const Input: FC<InputProps> = (props) => {
     }
   };
 
-  const onKeySearchClearHandler = (e: KeyboardEvent<HTMLSpanElement>) => {
-    if (['Enter', 'Space'].includes(e.code)) {
+  const onKeySearchClearHandler = (e: ReactKeyboardEvent<HTMLSpanElement>) => {
+    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code)) {
       onSearchClearHandler();
     }
   };

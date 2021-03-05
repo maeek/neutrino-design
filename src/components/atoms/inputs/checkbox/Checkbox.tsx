@@ -4,7 +4,7 @@ import {
   MutableRefObject,
   useEffect,
   useRef,
-  KeyboardEvent
+  KeyboardEvent as ReactKeyboardEvent
 } from 'react';
 import classNames from 'classnames';
 import useCheckbox from '../../../../hooks/inputs/useCheckbox';
@@ -64,8 +64,8 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
     }
   }, [innerRef, checked, setChecked, ref]);
 
-  const onSliderKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (['Enter', 'Space'].includes(e.code)) {
+  const onSliderKeyUp = (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code)) {
       setChecked(!checked);
     }
   };

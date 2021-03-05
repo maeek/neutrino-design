@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import {
   FC,
-  KeyboardEvent,
+  KeyboardEvent as ReactKeyboardEvent,
   MouseEvent,
   MouseEventHandler,
   ReactNode
@@ -47,8 +47,8 @@ export const Item: FC<ItemProps> = (props) => {
     }
   };
 
-  const onKeyUpHandler = (e: KeyboardEvent) => {
-    if (['Enter', 'Space'].includes(e.code)) onClickHandler(e as any);
+  const onKeyUpHandler = (e: ReactKeyboardEvent) => {
+    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code)) onClickHandler(e as any);
   };
 
   const iconNode = icon && <span className={`ne-context-menu-item-icon ne-context-menu-item-icon--${iconPosition}`}>{icon}</span>;

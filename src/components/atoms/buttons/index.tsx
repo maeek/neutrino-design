@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, MouseEvent, MouseEventHandler, ReactNode } from 'react';
+import { FC, KeyboardEvent as ReactKeyboardEvent, MouseEvent, MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
 import './styles/button.scss';
 
@@ -54,8 +54,8 @@ export const Button: FC<ButtonProps> = (props) => {
     if (onClick && !disabled) onClick(e);
   };
 
-  const onKeyUpHandler = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (['Enter', 'Space'].includes(e.code) && onClick) {
+  const onKeyUpHandler = (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code) && onClick) {
       onClick(e as any);
     }
   };

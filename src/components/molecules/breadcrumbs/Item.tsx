@@ -1,6 +1,6 @@
 import {
   FC,
-  KeyboardEvent,
+  KeyboardEvent as ReactKeyboardEvent,
   KeyboardEventHandler,
   MouseEvent,
   MouseEventHandler,
@@ -44,7 +44,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
     if (onClick && !disabled) onClick(e);
   };
 
-  const onKeyUpHandler = (e: KeyboardEvent) => {
+  const onKeyUpHandler = (e: ReactKeyboardEvent) => {
     if (onKeyUp) onKeyUp(e);
   };
 
@@ -52,8 +52,8 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
     setShowMore(!showMore);
   };
 
-  const onKeyShowMoreHandler = (e: KeyboardEvent) => {
-    if (['Enter', 'Space'].includes(e.code)) onClickShowMoreHandler(e as any);
+  const onKeyShowMoreHandler = (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code)) onClickShowMoreHandler(e as any);
   };
 
   const closeContextMenuMenu = (_: MouseEvent, isInside: boolean) => {
