@@ -1,5 +1,5 @@
 import {
-  createRef,
+  // createRef,
   FC,
   MouseEventHandler,
   MutableRefObject,
@@ -8,7 +8,8 @@ import {
   useRef,
   MouseEvent,
   KeyboardEvent as ReactKeyboardEvent,
-  useCallback
+  useCallback,
+  forwardRef
 } from 'react';
 import classNames from 'classnames';
 import useInput from '../../../../hooks/inputs/useInput';
@@ -24,7 +25,7 @@ export type InputSupportedTypes = 'text'
 | 'time'
 | 'url';
 
-interface InputRef {
+export interface InputRef {
   value: string;
   setValue: any;
   isValid: boolean;
@@ -33,7 +34,7 @@ interface InputRef {
 
 export interface InputProps {
   type?: InputSupportedTypes;
-  ref?: MutableRefObject<InputRef>;
+  // ref?: MutableRefObject<InputRef>;
   name?: string;
   className?: string;
   title?: string;
@@ -50,11 +51,11 @@ export interface InputProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
   onSearchClear?: () => void;
   validate?: (text: string) => boolean;
+  [key: string]: any;
 }
 
-export const Input: FC<InputProps> = (props) => {
+export const Input: FC<InputProps> = forwardRef<InputRef, InputProps>((props, ref: any) => {
   const {
-    ref = createRef(),
     type,
     name,
     className,
@@ -69,6 +70,7 @@ export const Input: FC<InputProps> = (props) => {
     onSearchClear,
     validate,
     clearButtonText = 'Clear',
+    children,
     label,
     ...rest
   } = props;
@@ -89,7 +91,7 @@ export const Input: FC<InputProps> = (props) => {
   };
 
   const onKeySearchClearHandler = (e: ReactKeyboardEvent<HTMLSpanElement>) => {
-    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code)) {
+    if (['Enter', ' '].includes(e.key)) {
       onSearchClearHandler();
     }
   };
@@ -107,7 +109,7 @@ export const Input: FC<InputProps> = (props) => {
   }, [onChange, value]);
 
   useEffect(() => {
-    if (innerRef.current) {
+    if (innerRef.current && ref) {
       (ref.current as InputRef) = {
         value,
         setValue,
@@ -175,8 +177,9 @@ export const Input: FC<InputProps> = (props) => {
         }
         {type === 'search' && !isEmpty && clearSearch}
       </label>
+      {children}
     </div>
   );
-};
+});
 
 export default Input;

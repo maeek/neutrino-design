@@ -18,6 +18,7 @@ export interface ContextMenuItems {
   icon?: ReactNode;
   onClick?: MouseEventHandler<HTMLLIElement>;
   closeOnClick?: boolean;
+  [key: string]: any;
 }
 
 export interface ContextMenuProps {
@@ -26,6 +27,7 @@ export interface ContextMenuProps {
   items?: ContextMenuItems[];
   innerRef?: MutableRefObject<HTMLDivElement | null>;
   closeContextMenu?: (e: MouseEvent, clickedInsideContextMenu: boolean, elementRef?: MutableRefObject<HTMLDivElement | null>) => void;
+  [key: string]: any;
 }
 
 export const ContextMenu: FC<ContextMenuProps> = (props) => {

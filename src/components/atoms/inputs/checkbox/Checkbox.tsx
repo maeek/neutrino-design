@@ -30,6 +30,7 @@ export interface CheckboxProps {
   readOnly?: boolean;
 
   onChange?: Function;
+  [key: string]: any;
 }
 
 export const Checkbox: FC<CheckboxProps> = (props) => {
@@ -65,7 +66,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
   }, [innerRef, checked, setChecked, ref]);
 
   const onSliderKeyUp = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code)) {
+    if (['Enter', ' '].includes(e.key)) {
       setChecked(!checked);
     }
   };

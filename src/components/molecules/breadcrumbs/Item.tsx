@@ -22,6 +22,7 @@ export interface BreadcrumbItemProps {
   onClick?: MouseEventHandler<HTMLLIElement>;
   onKeyUp?: KeyboardEventHandler;
   disabled?: boolean;
+  [key: string]: any;
 }
 
 export const Item: FC<BreadcrumbItemProps> = (props) => {
@@ -53,7 +54,7 @@ export const Item: FC<BreadcrumbItemProps> = (props) => {
   };
 
   const onKeyShowMoreHandler = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code)) onClickShowMoreHandler(e as any);
+    if (['Enter', ' '].includes(e.key)) onClickShowMoreHandler(e as any);
   };
 
   const closeContextMenuMenu = (_: MouseEvent, isInside: boolean) => {

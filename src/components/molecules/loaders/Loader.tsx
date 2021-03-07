@@ -4,15 +4,16 @@ import './loader.scss';
 export interface LoaderProps {
   isVisible?: boolean;
   className?: string | { [key: string]: boolean };
+  [key: string]: any;
 }
 
 export const Loader: React.FC<LoaderProps> = (props: LoaderProps) => {
-  const { isVisible, className } = props;
+  const { isVisible, className, ...rest } = props;
   const classes = classNames('ne-loader', className);
 
   if (isVisible)
     return (
-      <div className={classes}>
+      <div className={classes} {...rest}>
         <div />
         <div />
         <div />

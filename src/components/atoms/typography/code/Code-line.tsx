@@ -9,6 +9,7 @@ export interface CodeLineProps {
   onClick?: (e: MouseEvent<HTMLPreElement>) => void;
   wrap?: boolean;
   highlight?: boolean;
+  [key: string]: any;
 }
 
 export const CodeLine: FC<CodeLineProps> = (props) => {

@@ -20,6 +20,7 @@ export interface ItemProps {
   closeOnClick?: boolean;
   closeHandler?: Function;
   disabled?: boolean;
+  [key: string]: any;
 }
 
 export const Item: FC<ItemProps> = (props) => {
@@ -48,7 +49,7 @@ export const Item: FC<ItemProps> = (props) => {
   };
 
   const onKeyUpHandler = (e: ReactKeyboardEvent) => {
-    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code)) onClickHandler(e as any);
+    if (['Enter', ' '].includes(e.key)) onClickHandler(e as any);
   };
 
   const iconNode = icon && <span className={`ne-context-menu-item-icon ne-context-menu-item-icon--${iconPosition}`}>{icon}</span>;

@@ -20,6 +20,7 @@ export interface TextProps {
   lineThrough?: boolean;
   link?: string;
   pre?: boolean;
+  [key: string]: any;
 }
 
 export const Text: FC<TextProps> = (props) => {

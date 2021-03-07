@@ -5,17 +5,19 @@ import './separator.scss';
 export interface SeparatorProps {
   children?: ReactNode;
   className?: string;
+  [key: string]: any;
 }
 
 export const Separator: FC<SeparatorProps> = (props) => {
   const {
     children = '/',
-    className
+    className,
+    ...rest
   } = props;
 
   const classes = classNames('ne-breadcrumbs-separator', className);
   return (
-    <li className={classes}>
+    <li className={classes} {...rest}>
       {children}
     </li>
   );

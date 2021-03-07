@@ -34,6 +34,8 @@ export interface ButtonProps {
    * Only with type = 'link'
    */
   rel?: string;
+
+  [key: string]: any;
 }
 
 export const Button: FC<ButtonProps> = (props) => {
@@ -55,7 +57,7 @@ export const Button: FC<ButtonProps> = (props) => {
   };
 
   const onKeyUpHandler = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (['Enter', 'Space'].includes((e as unknown as KeyboardEvent).code) && onClick) {
+    if (['Enter', ' '].includes(e.key) && onClick) {
       onClick(e as any);
     }
   };
