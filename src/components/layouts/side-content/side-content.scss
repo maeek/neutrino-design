@@ -15,8 +15,16 @@
       @include boxSizing;
 
       &-side {
+        overflow: auto;
         height: 100%;
         flex: 0 0 auto;
+        overflow: hidden;
+        min-width: 16rem;
+        @include customScroll;
+      }
+
+      &--active &-side {
+        overflow: auto;
       }
 
       &-content {
