@@ -59,13 +59,13 @@ TopContentFooter.args = {
   ),
   sideNode: (
     <div style={{
-      width: '300px',
-      height: '100%',
+      width: '100%',
+      height: 'auto',
       backgroundColor: '#1f1f1f',
       color: '#fff',
       padding: '1rem'
     }}>
-      Neutrino-design sidebar
+      <div>Neutrino-design sidebar</div>
     </div>
   )
 };

@@ -29,7 +29,7 @@ export const SideContent = Template.bind({});
 SideContent.args = {
   sideNode: (
     <div style={{
-      width: '300px',
+      width: '100%',
       height: '100%',
       backgroundColor: '#0f0f0f',
       color: '#fff',
