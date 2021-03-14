@@ -6,21 +6,20 @@ export interface LayoutSideContentProps {
   sideNode: ReactNode;
   children: ReactNode;
   className?: string;
+  hideScroll?: boolean;
   fallbackToBurgerMenu?: boolean;
 }
 
 export const LayoutSideContent: FC<LayoutSideContentProps> = (props) => {
-  const {children: content, className, sideNode} = props;
+  const {children: content, className, sideNode, hideScroll} = props;
   const [isOver, setIsOver] = useState(false);
-  // const [isBurger, setIsBurger] = useState(false);
-  // useEffect(() => {
-  // }, []);
+
   const handleOnOver = () => {
-    setIsOver(true);
+    hideScroll && setIsOver(true);
   };
 
   const handleOnOut = () => {
-    setIsOver(false);
+    hideScroll && setIsOver(false);
   };
 
   const classes = classnames(
