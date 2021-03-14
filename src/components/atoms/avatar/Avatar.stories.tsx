@@ -73,3 +73,14 @@ AvatarExtraLarge.args = {
   size: 'extra-large'
 };
 
+export const AvatarSelectable = Template.bind({});
+AvatarSelectable.args = {
+  name: 'text',
+  src: 'https://static.suchanecki.me/pepe1.jpg',
+  type: 'round',
+  size: 'extra-large',
+  tabIndex: 0,
+  selectable: true
+};
+
+

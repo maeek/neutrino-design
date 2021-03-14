@@ -13,6 +13,8 @@ export interface AvatarProps {
   children?: ReactNode | ((url: string) => ReactNode);
   type?: 'round' | 'rounded' | 'square';
   size?: 'small' | 'medium' | 'large' | 'larger' | 'extra-large';
+  selectable?: boolean;
+  tabIndex?: number;
   [key: string]: any;
 }
 
@@ -24,18 +26,21 @@ export const Avatar: FC<AvatarProps> = (props) => {
     type = 'round',
     size = 'medium',
     className,
+    selectable,
+    tabIndex,
     ...rest
   } = props;
 
   const classes = classnames(
     'ne-avatar-content',
+    selectable && 'ne-avatar-content--selectable',
     getTypeClass(type),
     getSizeClass(size)
   );
 
   return (
     <div className={classnames('ne-avatar', className)} {...rest}>
-      <div className={classes}>
+      <div className={classes} tabIndex={tabIndex}>
         <ImageContainer src={src || ''} alt={name} />
       </div>
       {children}

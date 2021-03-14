@@ -1,5 +1,8 @@
+@import '../../../styles/mixins.scss';
+
 .ne {
   &-image {
+    @include boxSizing;
     width: 100%;
     height: 100%;
 
