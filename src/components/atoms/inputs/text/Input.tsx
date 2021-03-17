@@ -1,5 +1,4 @@
 import {
-  // createRef,
   FC,
   MouseEventHandler,
   MutableRefObject,
@@ -18,7 +17,7 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import './input.scss';
 
 export type InputSupportedTypes = 'text' 
-|'search' 
+| 'search' 
 | 'password' 
 | 'email' 
 | 'tel'
@@ -38,7 +37,7 @@ export interface InputProps {
   name?: string;
   className?: string;
   title?: string;
-  label?: string;
+  label?: ReactNode;
 
   value?: string;
   placeholder?: string;
@@ -131,7 +130,11 @@ export const Input: FC<InputProps> = forwardRef<InputRef, InputProps>((props, re
 
   const validIndicator = (
     <div className="ne-input-validation">
-      {isValid ? <CheckRoundedIcon/> : <CloseRoundedIcon />}
+      {
+        isValid 
+          ? <CheckRoundedIcon className="ne-input-validation--valid" />
+          : <CloseRoundedIcon className="ne-input-validation--invalid" />
+      }
     </div>
   );
 
