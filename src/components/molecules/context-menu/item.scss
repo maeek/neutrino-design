@@ -19,11 +19,11 @@ $focusColor: $lighterBlue;
     cursor: pointer;
     color: $color;
     @include boxSizing;
+    @include defaultFont;
     
     &-text {
       font-size: 0.75rem;
       font-weight: 400;
-      @include defaultFont;
     }
 
     &-icon {
@@ -59,7 +59,7 @@ $focusColor: $lighterBlue;
       color: $focusColor;
     }
     
-    &:focus &-text, &:focus &-icon {
+    &:focus > &-text, &:focus > &-icon {
       color: $focusColor;
     }
   }

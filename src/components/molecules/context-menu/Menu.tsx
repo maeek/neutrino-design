@@ -23,6 +23,7 @@ export interface ContextMenuItems {
 
 export interface ContextMenuProps {
   children?: ReactNode;
+  suffixNode?: ReactNode;
   className?: string;
   items?: ContextMenuItems[];
   innerRef?: MutableRefObject<HTMLDivElement | null>;
@@ -33,7 +34,8 @@ export interface ContextMenuProps {
 export const ContextMenu: FC<ContextMenuProps> = (props) => {
   const {
     className,
-    children,
+    children: prefixNode,
+    suffixNode,
     items,
     innerRef = createRef(),
     closeContextMenu,
@@ -70,6 +72,7 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
   return (
     <div className={classes} ref={innerRef} {...rest}>
       <div className="ne-context-menu-wrapper">
+        {prefixNode}
         <ul className="ne-context-menu-list">
           {items?.map((item) => (
             <Item
@@ -81,6 +84,7 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
             </Item>)
           )}
         </ul>
+        {suffixNode}
       </div>
     </div>
   );

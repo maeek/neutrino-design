@@ -70,9 +70,7 @@ export const Item: FC<ItemProps> = (props) => {
       {...rest}
     >
       {iconPosition === 'left' && iconNode}
-      <Text className="ne-context-menu-item-text">
-        {children || text}
-      </Text>
+      {children || <Text className="ne-context-menu-item-text">{text}</Text>}
       {iconPosition === 'right' && iconNode}
     </li>
   );
