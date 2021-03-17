@@ -3,6 +3,10 @@ import userEvent from '@testing-library/user-event';
 import Button from '../index';
 
 describe('atoms/buttons/index', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should render', () => {
     render(<Button>test button</Button>);
     
@@ -80,7 +84,7 @@ describe('atoms/buttons/index', () => {
     expect(screen.getByText('test button')).toHaveFocus();
   });
 
-  it('should invoke onClick when pressed enter or space on focus', () => {
+  it('should invoke onClick when pressed enter or space on focus', async () => {
     const onClickMock = jest.fn();
 
     render(
@@ -92,9 +96,9 @@ describe('atoms/buttons/index', () => {
     );
 
     userEvent.tab();
-    userEvent.type(screen.getByText('test button'), '{enter}');
+    await userEvent.type(screen.getByText('test button'), '{enter}', { skipClick: true });
     expect(onClickMock).toHaveBeenCalledTimes(1);
-    userEvent.type(screen.getByText('test button'), '{space}');
+    await userEvent.type(screen.getByText('test button'), '{space}', { skipClick: true });
     expect(onClickMock).toHaveBeenCalledTimes(2);
   });
 
