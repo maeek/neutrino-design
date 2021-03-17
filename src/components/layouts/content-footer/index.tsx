@@ -1,7 +1,6 @@
 import { FC, ReactNode } from 'react';
 import classnames from 'classnames';
 import './content-footer.scss';
-import LayoutTopContent from '../top-content';
 
 export interface LayoutContentFooterProps {
   children: ReactNode;
@@ -11,16 +10,13 @@ export interface LayoutContentFooterProps {
 
 export const LayoutContentFooter: FC<LayoutContentFooterProps> = (props) => {
   const {children: content, className, footerNode} = props;
-  const topNode = <div />;
-  const classes = classnames('ne-layout-top-content-footer', className);
+  const classes = classnames('ne-layout-content-footer', className);
   return (
     <div className={classes}>
-      <LayoutTopContent topNode={topNode}>
-        <div className="ne-layout-top-content-footer-content">
-          {content}
-        </div>
-        {footerNode}
-      </LayoutTopContent>
+      <div className="ne-layout-content-footer-content">
+        {content}
+      </div>
+      {footerNode}
     </div>
   );
 };
