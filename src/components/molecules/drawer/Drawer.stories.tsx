@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { useState } from 'react';
-import { Drawer as DrawerComponent, DrawerProps } from './drawer';
+import { Drawer as DrawerComponent, DrawerProps } from './Drawer';
 import Heading from '../../atoms/typography/heading/Heading';
 import AbortButton from '../../atoms/buttons/Abort';
 
