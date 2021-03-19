@@ -34,7 +34,6 @@ export interface ButtonProps {
    * Only with type = 'link'
    */
   rel?: string;
-
   [key: string]: any;
 }
 
