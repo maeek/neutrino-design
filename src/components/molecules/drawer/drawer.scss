@@ -84,7 +84,7 @@
           left: 0;
           height: 100%;
           max-width: 95vw;
-          min-width: 450px;
+          width: 450px;
           border-right: 1px solid lighten($darkerGray, 5);
           @include getAnimation("left", translate3d(-100%, 0, 0), var(--animation-speed));
 
@@ -97,7 +97,7 @@
           right: 0;
           height: 100%;
           max-width: 95vw;
-          min-width: 450px;
+          width: 450px;
           border-left: 1px solid lighten($darkerGray, 5);
           @include getAnimation("right", translate3d(100%, 0, 0), var(--animation-speed));
 
@@ -109,7 +109,7 @@
           top: 0;
           left: 0;
           width: 100%;
-          min-height: 450px;
+          height: 450px;
           max-height: 95vh;
           border-bottom: 1px solid lighten($darkerGray, 5);
           @include getAnimation("top", translate3d(0, -100%, 0), var(--animation-speed));
@@ -122,7 +122,7 @@
           bottom: 0;
           left: 0;
           width: 100%;
-          min-height: 450px;
+          height: 450px;
           max-height: 95vh;
           border-top: 1px solid lighten($darkerGray, 5);
           @include getAnimation("bottom", translate3d(0, 100%, 0), var(--animation-speed));
