@@ -3,12 +3,38 @@ import classnames from 'classnames';
 import './image.scss';
 
 export interface ImageContainerProps {
+  /**
+   * Alt text that will be displayed when image fail to laod
+   */
   alt?: string;
+  /**
+   * Source url of the image
+   */
   src: string;
+  /**
+   * Skip loading the image and display it directly
+   */
   innerSrc?: string;
+  /**
+   * Additional classname for the wrapper div
+   */
   className?: string;
+  /**
+   * Image loader callback, if the argument is true then the image failed to load
+   */
   onImageLoaded?: (error?: boolean) => void;
+  /**
+   * Fallback to error image when failed to load,
+   * only when loader is present
+   */
   withFallback?: boolean;
+  /**
+   * Url of fallback image
+   */
+  fallbackSrc?: string;
+  /**
+   * Loader that will be displayed when src is provided
+   */
   loader?: ReactNode;
   [key: string]: any;
 }
@@ -20,6 +46,7 @@ export const ImageContainer: FC<ImageContainerProps> = (props) => {
     className,
     innerSrc = null,
     withFallback = true,
+    fallbackSrc,
     onImageLoaded,
     loader = null,
     ...rest
@@ -27,7 +54,6 @@ export const ImageContainer: FC<ImageContainerProps> = (props) => {
 
   const [imageSrc, setImageSrc] = useState(src);
   const [loading, setLoading] = useState(true);
-  const errorImg = '';
 
   useEffect(() => { // TODO: Refactor
     let isCancelled = false;
@@ -47,17 +73,17 @@ export const ImageContainer: FC<ImageContainerProps> = (props) => {
       image.src = source;
     });
 
-    const loadInnerSrc = () => withFallback ? innerSrc || errorImg : innerSrc;
+    const loadInnerSrc = () => withFallback ? innerSrc || fallbackSrc : innerSrc;
 
     const failLoad = () => {
       const url = loadInnerSrc();
       if (url) {
         if (onImageLoaded) onImageLoaded();
-        setImageSrc(url || errorImg);
+        setImageSrc(url || fallbackSrc || '');
       }
       else {
         if (onImageLoaded) onImageLoaded(true);
-        setImageSrc(errorImg);
+        setImageSrc(fallbackSrc || '');
       }
 
       setLoading(false);
@@ -84,7 +110,7 @@ export const ImageContainer: FC<ImageContainerProps> = (props) => {
     return () => {
       isCancelled = true;
     };
-  }, [innerSrc, onImageLoaded, withFallback, src]);
+  }, [innerSrc, onImageLoaded, withFallback, src, fallbackSrc]);
 
   const classes = classnames(
     'ne-image',
@@ -100,4 +126,5 @@ export const ImageContainer: FC<ImageContainerProps> = (props) => {
   );
 };
 
-export default memo(ImageContainer);
+const ImageContainerCached = memo(ImageContainer);
+export default ImageContainerCached;
