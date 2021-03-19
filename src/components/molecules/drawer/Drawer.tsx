@@ -52,7 +52,7 @@ export const Drawer: FC<DrawerProps> = (props) => {
     ...rest
   } = props;
   const ref = useRef(null);
-  const shouldRender = useDelayUnmount(isOpened, animationSpeed);
+  const shouldRender = useDelayUnmount(!!isOpened, animationSpeed);
   const classes = classnames(
     'ne-drawer',
     isOpened && 'ne-drawer--opened',
