@@ -1,0 +1,13 @@
+@mixin avatarTypes {
+  &--round {
+    border-radius: 50%;
+  }
+
+  &--rounded {
+    border-radius: 8px;
+  }
+
+  &--square {
+    border-radius: 0;
+  }
+}
