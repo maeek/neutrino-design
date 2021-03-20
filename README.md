@@ -25,3 +25,46 @@ import { PrimaryLoader } from '@maeek/neutrino-design/components/molecules/';
 import { PrimaryLoader } from '@maeek/neutrino-design/components/molecules/loaders/';
 import PrimaryLoader from '@maeek/neutrino-design/components/molecules/loaders/Loader';
 ```
+
+## TODO
+
+- [ ] Github Actions
+- [ ] Tests
+
+### Atoms
+
+- [ ] Input - Range/Slider
+- [ ] Input - Multiline text
+- [ ] Input - Select
+- [ ] Input - File Select
+- [ ] Tooltip
+- [ ] Badge
+- [ ] Chip
+- [ ] Notification popup
+- [ ] Divider
+
+### Molecules
+
+- [ ] Progress
+- [ ] Card
+- [ ] Setting with heading, description and checkbox
+- [ ] Navigation
+- [ ] Searchbar
+- [ ] Avatar picker
+- [ ] Modal
+- [ ] List input aka tags
+- [ ] Expandable block
+- [ ] Box
+- [ ] Message bubble
+- [ ] Reaction selector
+- [ ] Skeleton
+- [ ] Popup
+
+### Organisms
+
+- [ ] Stepper
+- [ ] Tabs
+- [ ] Bottom navigation
+- [ ] Gallery
+- [ ] Player
+- [ ] Image editor
