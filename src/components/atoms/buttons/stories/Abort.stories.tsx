@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { ButtonProps } from '..';
+import { ButtonProps } from '../Button';
 import AbortButtonComponent from '../Abort';
 
 export default {

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import classNames from 'classnames';
-import Button, { ButtonProps } from '.';
+import Button, { ButtonProps } from './Button';
 import './styles/abort.scss';
 
 export const AbortButton: FC<ButtonProps> = (props) => {

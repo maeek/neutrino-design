@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React, { FC } from 'react';
 import classNames from 'classnames';
-import Button, { ButtonProps } from '.';
+import Button, { ButtonProps } from './Button';
 import './styles/proceed.scss';
 
 export const ProceedButton: FC<ButtonProps> = (props) => {
