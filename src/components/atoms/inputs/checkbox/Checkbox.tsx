@@ -4,7 +4,8 @@ import {
   MutableRefObject,
   useEffect,
   useRef,
-  KeyboardEvent as ReactKeyboardEvent
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent
 } from 'react';
 import classNames from 'classnames';
 import useCheckbox from '../../../../hooks/inputs/useCheckbox';
@@ -65,6 +66,10 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
     }
   }, [innerRef, checked, setChecked, ref]);
 
+  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+    setChecked(!checked);
+  };
+
   const onSliderKeyUp = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     if (['Enter', ' '].includes(e.key)) {
       setChecked(!checked);
@@ -99,6 +104,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         required={required}
         disabled={disabled}
         readOnly={readOnly}
+        role="disabled"
         {...bind}
         {...rest}
       />
@@ -107,7 +113,9 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
           title={sliderTitle}
           className="ne-checkbox-decorator-slider"
           onKeyUp={onSliderKeyUp}
+          onClick={onClick}
           tabIndex={0}
+          role="checkbox"
         >
           {required && !checked && '!'}
         </div>
