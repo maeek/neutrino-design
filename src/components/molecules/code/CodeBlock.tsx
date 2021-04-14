@@ -1,9 +1,8 @@
-import { FC } from 'react';
 import classNames from 'classnames';
 import { Code, CodeProps } from './Code';
 import './code.scss';
 
-export const CodeBlock: FC<CodeProps> = (props) => {
+export const CodeBlock = (props: CodeProps) => {
   const {
     children: code = '',
     className,

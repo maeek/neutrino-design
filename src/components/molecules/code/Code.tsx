@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import classNames from 'classnames';
 import CodeLine from '../../atoms/typography/code/Code-line';
 import './code.scss';
@@ -12,7 +12,7 @@ export interface CodeProps {
   [key: string]: any;
 }
 
-export const Code: FC<CodeProps> = (props) => {
+export const Code = (props: CodeProps) => {
   const {
     children: code,
     className,

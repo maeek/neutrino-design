@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import {
-  FC,
   KeyboardEvent as ReactKeyboardEvent,
   MouseEvent,
   MouseEventHandler,
@@ -23,7 +22,7 @@ export interface ItemProps {
   [key: string]: any;
 }
 
-export const Item: FC<ItemProps> = (props) => {
+export const Item = (props: ItemProps) => {
   const {
     children,
     onClick,

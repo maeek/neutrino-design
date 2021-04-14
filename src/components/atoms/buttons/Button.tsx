@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent as ReactKeyboardEvent, MouseEvent, MouseEventHandler, ReactNode } from 'react';
+import { KeyboardEvent as ReactKeyboardEvent, MouseEvent, MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
 import './styles/button.scss';
 
@@ -37,7 +37,7 @@ export interface ButtonProps {
   [key: string]: any;
 }
 
-export const Button: FC<ButtonProps> = (props) => {
+export const Button = (props: ButtonProps) => {
   const {
     type = 'button',
     onClick,

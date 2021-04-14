@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 import './center.scss';
 
@@ -7,7 +7,7 @@ export interface LayoutCenterProps {
   className?: string;
 }
 
-export const LayoutCenter: FC<LayoutCenterProps> = (props) => {
+export const LayoutCenter = (props: LayoutCenterProps) => {
   const {children, className} = props;
 
   const classes = classnames('ne-layout-center', className);

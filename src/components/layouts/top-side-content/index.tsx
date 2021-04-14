@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 import LayoutTopContent, { LayoutTopContentProps } from '../top-content';
 import LayoutSideContent from '../side-content';
@@ -8,7 +8,7 @@ export interface LayoutTopSideContentProps extends LayoutTopContentProps {
   sideNode: ReactNode;
 }
 
-export const LayoutTopSideContent: FC<LayoutTopSideContentProps> = (props) => {
+export const LayoutTopSideContent = (props: LayoutTopSideContentProps) => {
   const {children: content, className, topNode, sideNode} = props;
 
   const classes = classnames('ne-layout-top-side-content', className);

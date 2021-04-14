@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 import './top-content.scss';
 
@@ -8,7 +8,7 @@ export interface LayoutTopContentProps {
   className?: string;
 }
 
-export const LayoutTopContent: FC<LayoutTopContentProps> = (props) => {
+export const LayoutTopContent = (props: LayoutTopContentProps) => {
   const {children: content, className, topNode} = props;
 
   const classes = classnames('ne-layout-top-content', className);

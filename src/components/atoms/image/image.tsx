@@ -1,4 +1,4 @@
-import { FC, memo, ReactNode, useEffect, useState } from 'react';
+import { memo, ReactNode, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import './image.scss';
 
@@ -39,7 +39,7 @@ export interface ImageContainerProps {
   [key: string]: any;
 }
 
-export const ImageContainer: FC<ImageContainerProps> = (props) => {
+export const ImageContainer = (props: ImageContainerProps) => {
   const {
     alt,
     src,

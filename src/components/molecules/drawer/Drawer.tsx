@@ -1,4 +1,4 @@
-import { CSSProperties, FC, MouseEventHandler, ReactNode, useRef } from 'react';
+import { CSSProperties, MouseEventHandler, ReactNode, useRef } from 'react';
 import classnames from 'classnames';
 import './drawer.scss';
 import { useDelayUnmount } from '../../../hooks/useDelayUnmount';
@@ -39,7 +39,7 @@ export interface DrawerProps {
   [key: string]: any;
 }
 
-export const Drawer: FC<DrawerProps> = (props) => {
+export const Drawer = (props: DrawerProps) => {
   const {
     children,
     className,

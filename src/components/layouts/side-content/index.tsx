@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import classnames from 'classnames';
 import './side-content.scss';
 
@@ -10,7 +10,7 @@ export interface LayoutSideContentProps {
   fallbackToBurgerMenu?: boolean;
 }
 
-export const LayoutSideContent: FC<LayoutSideContentProps> = (props) => {
+export const LayoutSideContent = (props: LayoutSideContentProps) => {
   const {children: content, className, sideNode, hideScroll} = props;
   const [isOver, setIsOver] = useState(false);
 

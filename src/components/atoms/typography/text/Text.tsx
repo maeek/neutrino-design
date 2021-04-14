@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import './text.scss';
 
 export type TextType = 'primary' |
@@ -23,7 +23,7 @@ export interface TextProps {
   [key: string]: any;
 }
 
-export const Text: FC<TextProps> = (props) => {
+export const Text = (props: TextProps) => {
   const {
     type = 'primary',
     children,

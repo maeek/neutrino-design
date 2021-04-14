@@ -1,5 +1,4 @@
 import {
-  FC,
   MouseEventHandler,
   MouseEvent,
   MutableRefObject,
@@ -31,7 +30,7 @@ export interface ContextMenuProps {
   [key: string]: any;
 }
 
-export const ContextMenu: FC<ContextMenuProps> = (props) => {
+export const ContextMenu = (props: ContextMenuProps) => {
   const {
     className,
     children: prefixNode,

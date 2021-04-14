@@ -7,7 +7,7 @@ export interface LoaderProps {
   [key: string]: any;
 }
 
-export const Loader: React.FC<LoaderProps> = (props: LoaderProps) => {
+export const Loader = (props: LoaderProps) => {
   const { isVisible, className, ...rest } = props;
   const classes = classNames('ne-loader', className);
 

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import './code-line.scss';
 import { Text } from '../';
 
@@ -12,7 +12,7 @@ export interface CodeLineProps {
   [key: string]: any;
 }
 
-export const CodeLine: FC<CodeLineProps> = (props) => {
+export const CodeLine = (props: CodeLineProps) => {
   const {
     children: code,
     className,

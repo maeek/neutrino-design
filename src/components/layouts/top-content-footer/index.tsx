@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 import './top-content-footer.scss';
 import LayoutTopContent, { LayoutTopContentProps } from '../top-content';
@@ -8,7 +8,7 @@ export interface LayoutTopContentFooterProps extends LayoutTopContentProps {
   footerNode: ReactNode;
 }
 
-export const LayoutTopContentFooter: FC<LayoutTopContentFooterProps> = (props) => {
+export const LayoutTopContentFooter = (props: LayoutTopContentFooterProps) => {
   const {children: content, className, topNode, footerNode} = props;
 
   const classes = classnames('ne-layout-top-content-footer', className);

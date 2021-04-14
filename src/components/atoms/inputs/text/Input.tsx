@@ -1,5 +1,4 @@
 import {
-  FC,
   MouseEventHandler,
   MutableRefObject,
   ReactNode,
@@ -53,7 +52,7 @@ export interface InputProps {
   [key: string]: any;
 }
 
-export const Input: FC<InputProps> = forwardRef<InputRef, InputProps>((props, ref: any) => {
+export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: any) => {
   const {
     type,
     name,

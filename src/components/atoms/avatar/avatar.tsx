@@ -1,4 +1,4 @@
-import { FC, ReactNode, memo } from 'react';
+import { ReactNode, memo } from 'react';
 import classnames from 'classnames';
 import ImageContainer from '../image/image';
 import './styles/avatar.scss';
@@ -54,7 +54,7 @@ export interface AvatarProps {
   [key: string]: any;
 }
 
-export const Avatar: FC<AvatarProps> = (props) => {
+export const Avatar = (props: AvatarProps) => {
   const {
     children,
     src,

@@ -1,9 +1,8 @@
-import { FC } from 'react';
 import classNames from 'classnames';
 import Button, { ButtonProps } from './Button';
 import './styles/abort.scss';
 
-export const AbortButton: FC<ButtonProps> = (props) => {
+export const AbortButton = (props: ButtonProps) => {
   const classes = classNames({
     'ne-button_abort': true,
     ...(props.className ? { [props.className]: true } : {})

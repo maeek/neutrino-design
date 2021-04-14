@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 import './content-footer.scss';
 
@@ -8,7 +8,7 @@ export interface LayoutContentFooterProps {
   className?: string;
 }
 
-export const LayoutContentFooter: FC<LayoutContentFooterProps> = (props) => {
+export const LayoutContentFooter = (props: LayoutContentFooterProps) => {
   const {children: content, className, footerNode} = props;
   const classes = classnames('ne-layout-content-footer', className);
   return (

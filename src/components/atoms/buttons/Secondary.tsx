@@ -1,9 +1,8 @@
-import { FC } from 'react';
 import classNames from 'classnames';
 import Button, { ButtonProps } from './Button';
 import './styles/secondary.scss';
 
-export const SecondaryButton: FC<ButtonProps> = (props) => {
+export const SecondaryButton = (props: ButtonProps) => {
   const classes = classNames({
     'ne-button_secondary': true,
     ...(props.className ? { [props.className]: true } : {})

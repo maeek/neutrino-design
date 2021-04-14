@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import classNames from 'classnames';
 import './separator.scss';
 
@@ -8,7 +8,7 @@ export interface SeparatorProps {
   [key: string]: any;
 }
 
-export const Separator: FC<SeparatorProps> = (props) => {
+export const Separator = (props: SeparatorProps) => {
   const {
     children = '/',
     className,

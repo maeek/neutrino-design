@@ -1,5 +1,4 @@
 import {
-  FC,
   KeyboardEvent as ReactKeyboardEvent,
   KeyboardEventHandler,
   MouseEvent,
@@ -25,7 +24,7 @@ export interface BreadcrumbItemProps {
   [key: string]: any;
 }
 
-export const Item: FC<BreadcrumbItemProps> = (props) => {
+export const Item = (props: BreadcrumbItemProps) => {
   const {
     className,
     children,

@@ -1,6 +1,5 @@
 import {
   createRef,
-  FC,
   MutableRefObject,
   useEffect,
   useRef,
@@ -34,7 +33,7 @@ export interface CheckboxProps {
   [key: string]: any;
 }
 
-export const Checkbox: FC<CheckboxProps> = (props) => {
+export const Checkbox = (props: CheckboxProps) => {
   const {
     ref = createRef(),
     name,

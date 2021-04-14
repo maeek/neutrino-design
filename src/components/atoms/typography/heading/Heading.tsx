@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import './heading.scss';
 
 export interface HeadingProps {
@@ -9,7 +9,7 @@ export interface HeadingProps {
   [key: string]: any;
 }
 
-export const Heading: FC<HeadingProps> = (props) => {
+export const Heading = (props: HeadingProps) => {
   const {
     children,
     className,

@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
 import './breadcrumbs.scss';
 import Item from './Item';
@@ -17,7 +17,7 @@ export interface BreadcrumbsProps {
   separator?: ReactNode;
 }
 
-export const Breadcrumbs: FC<BreadcrumbsProps> = (props) => {
+export const Breadcrumbs = (props: BreadcrumbsProps) => {
   const { items, className, separator } = props;
 
   const classes = classNames('ne-breadcrumbs', className);
