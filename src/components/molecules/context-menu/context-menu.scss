@@ -11,16 +11,16 @@ $focusColor: $lighterBlue;
     z-index: 400;
     &-wrapper {
       width: max-content;
-      max-width: 300px;
-      min-width: 150px;
+      max-width: 16.667rem;
+      min-width: 8.333rem;
       position: relative;
     }
     &-list {
       list-style: none;
       background: $darkerGray;
       color: $color;
-      border: 1px solid lighten($darkerGray, 10);
-      border-radius: 4px;
+      border: 0.05rem solid lighten($darkerGray, 10);
+      border-radius: 0.2rem;
       padding: 0;
       margin: 0;
       display: flex;
@@ -29,7 +29,7 @@ $focusColor: $lighterBlue;
       flex-direction: column;
 
       &:hover, &:focus-within {
-        border: 1px solid lighten($darkerGray, 15);
+        border: 0.05rem solid lighten($darkerGray, 15);
       }
     }
   }

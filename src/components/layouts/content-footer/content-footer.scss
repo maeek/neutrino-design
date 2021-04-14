@@ -14,12 +14,6 @@
       padding: 0;
       @include boxSizing;
 
-      &-top {
-        display: flex;
-        width: 100%;
-        flex: 0 0 0px;
-      }
-
       &-content {
         display: flex;
         width: 100%;

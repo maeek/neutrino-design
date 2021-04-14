@@ -3,8 +3,8 @@
 .ne{
   &-loader {
     display: inline-block;
-    min-height: 100px;
-    min-width: 100px;
-    @include loader("loaderStandalone", 10px, 20px);
+    min-height: 5.556rem;
+    min-width: 5.556rem;
+    @include loader("loaderStandalone", 0.556rem, 1.11rem);
   }
 }

@@ -9,23 +9,23 @@
 
   .ne-button_act &-item {
     // Styling
-    border: 3px solid $bg;
+    border: 0.15rem solid $bg;
     background-color: $bg;
     color: $color;
   }
   .ne-button_act &-item:not(.ne-button-item--disabled):hover,
   .ne-button_act &-item:not(.ne-button-item--disabled):focus {
     cursor: pointer;
-    border: 3px solid $hoverBg;
+    border: 0.15rem solid $hoverBg;
     background-color: $hoverBg;
   }
   .ne-button_act &-item:not(.ne-button-item--disabled):active {
-    border: 3px solid $activeBg;
-    border-bottom: 3px solid $activeBorder;
+    border: 0.15rem solid $activeBg;
+    border-bottom: 0.15rem solid $activeBorder;
     background-color: $activeBg;
   }
   .ne-button_act &-item--disabled {
-    border: 3px solid $disabledBg;
+    border: 0.15rem solid $disabledBg;
     background-color: $disabledBg;
     color: $disabledColor;
     cursor: not-allowed;

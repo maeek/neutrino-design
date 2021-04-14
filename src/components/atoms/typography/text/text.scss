@@ -46,7 +46,7 @@
       }
 
       &--highlight {
-        border-radius: 3px;
+        border-radius: 0.15rem;
         background-color: transparentize(#ff9900, 0.8);
         &:hover {
           background-color: transparentize(#ff9900, 0.7);

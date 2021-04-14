@@ -35,7 +35,7 @@
   }
 }
 
-@mixin loader($name: "loader", $size: 5px, $distance: 12px) {
+@mixin loader($name: "loader", $size: 0.278rem, $distance: 0.667rem) {
   align-items: center;
   display: flex;
   height: 100%;
@@ -68,7 +68,7 @@
   @include loaderKeyframe($name, $distance);
 }
 
-@mixin loaderKeyframe($name: "loader", $distance: 12px) {
+@mixin loaderKeyframe($name: "loader", $distance: 0.667rem) {
   @keyframes #{$name} {
     0% {
       background-color: rgb(126, 163, 211);

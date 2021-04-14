@@ -12,23 +12,23 @@
   $activeBorder: $lightGray;
 
   &-item {
-    border: 3px solid $bg;
+    border: 0.15rem solid $bg;
     background-color: $bg;
     color: $primaryColor;
   }
   &-item:not(.ne-button-item--disabled):hover,
   &-item:not(.ne-button-item--disabled):focus {
     cursor: pointer;
-    border: 3px solid $hoverBg;
+    border: 0.15rem solid $hoverBg;
     background-color: $hoverBg;
   }
   &-item:not(.ne-button-item--disabled):active {
-    border: 3px solid $activeBg;
-    border-bottom: 3px solid $activeBorder;
+    border: 0.15rem solid $activeBg;
+    border-bottom: 0.15rem solid $activeBorder;
     background-color: $activeBg;
   }
   &-item--disabled {
-    border: 3px solid $disabledBg;
+    border: 0.15rem solid $disabledBg;
     background-color: $disabledBg;
     color: $disabledColor;
     cursor: not-allowed;
@@ -38,7 +38,7 @@
 .ne {
   &-button {
     display: block;
-    height: 38px;
+    height: 2rem;
     position: relative;
     user-select: none;
     
@@ -55,7 +55,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 2px;
+      border-radius: 0.15rem;
       transition: background-color 0.15s, color 0.15s, border 0.1s;
     }
 

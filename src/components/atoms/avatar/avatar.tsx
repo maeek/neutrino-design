@@ -76,9 +76,9 @@ export const Avatar: FC<AvatarProps> = (props) => {
   );
 
   return (
-    <div className={classnames('ne-avatar', className)} {...rest}>
+    <div className={classnames('ne-avatar', className)} draggable={false} {...rest}>
       <div className={classes} tabIndex={tabIndex}>
-        <ImageContainer src={src || ''} alt={name} loader={loader} />
+        <ImageContainer src={src || ''} alt={name} loader={loader} draggable={false} />
       </div>
       {children}
     </div>

@@ -120,7 +120,7 @@ export const ImageContainer: FC<ImageContainerProps> = (props) => {
   return (
     <div className={classes} {...rest}>
       <div className="ne-image-content">
-        {loading && loader ? loader : <img src={imageSrc} alt={alt} />}
+        {loading && loader ? loader : <img src={imageSrc} draggable={false} alt={alt} />}
       </div>
     </div>
   );

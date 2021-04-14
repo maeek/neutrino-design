@@ -23,10 +23,10 @@
 
       &--selectable {
         transition: border 0.1s;
-        border: 3px solid transparent;
+        border: 0.15rem solid transparent;
 
         &:active, &:focus {
-          border: 3px solid $blue;
+          border: 0.15rem solid $blue;
         }
       }
 

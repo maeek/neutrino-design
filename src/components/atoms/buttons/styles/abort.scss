@@ -10,23 +10,23 @@
 
   .ne-button_abort &-item {
     // Styling
-    border: 3px solid $primaryBg;
+    border: 0.15rem solid $primaryBg;
     background-color: $primaryBg;
     color: $primaryColor;
   }
   .ne-button_abort &-item:not(.ne-button-item--disabled):hover,
   .ne-button_abort &-item:not(.ne-button-item--disabled):focus {
     cursor: pointer;
-    border: 3px solid $primaryHoverBg;
+    border: 0.15rem solid $primaryHoverBg;
     background-color: $primaryHoverBg;
   }
   .ne-button_abort &-item:not(.ne-button-item--disabled):active {
-    border: 3px solid $primaryActiveBg;
-    border-bottom: 3px solid $primaryActiveBorder;
+    border: 0.15rem solid $primaryActiveBg;
+    border-bottom: 0.15rem solid $primaryActiveBorder;
     background-color: $primaryActiveBg;
   }
   .ne-button_abort &-item--disabled {
-    border: 3px solid $primaryDisabledBg;
+    border: 0.15rem solid $primaryDisabledBg;
     background-color: $primaryDisabledBg;
     color: $primaryDisabledColor;
     cursor: not-allowed;

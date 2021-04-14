@@ -14,11 +14,11 @@ $borderRequired: $lightRed;
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    width: 44px;
-    height: 24px;
-    border-radius: 30px;
+    width: 2.5rem;
+    height: 1.31rem;
+    border-radius: 1.4rem;
     background-color: $bg;
-    border: 2px solid $bg;
+    border: 0.1rem solid $bg;
 
     @include defaultFont;
     @include boxSizing;
@@ -44,10 +44,10 @@ $borderRequired: $lightRed;
         justify-content: center;
         outline: none;
         position: absolute;
-        width: 20px;
-        height: 20px;
+        width: 1.11rem;
+        height: 1.11rem;
         border-radius: 50%;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
         transition: transform 0.1s, background-color 0.1s;
         color: $color;
         background-color: $sliderBg;
@@ -55,20 +55,20 @@ $borderRequired: $lightRed;
     }
 
     &[data-required="true"] {
-      border: 2px solid $borderRequired;
+      border: 0.1rem solid $borderRequired;
     }
 
     &[data-required="true"][data-checked="true"] {
-      border: 2px solid $bg;
+      border: 0.1rem solid $bg;
     }
 
     &[data-checked="true"] &-decorator-slider {
-      transform: translateX(20px);
+      transform: translateX(1.2rem);
       background-color: $activeBg;
     }
 
     &[data-disabled="true"] {
-      border: 2px solid $disabledBg;
+      border: 0.1rem solid $disabledBg;
       background-color: $disabledBg;
     }
 

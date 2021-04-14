@@ -24,9 +24,9 @@ $disabledColor: $secondaryColor;
     position: relative;
     background-color: $bg;
     color: $color;
-    border: 3px solid $borderColor;
-    border-left: 4px solid $borderColor;
-    border-radius: 2px;
+    border: 0.15rem solid $borderColor;
+    border-left: 0.2rem solid $borderColor;
+    border-radius: 0.1rem;
     font-size: 0.75rem;
 
     @include defaultFont;
@@ -96,7 +96,7 @@ $disabledColor: $secondaryColor;
     }
     
     &[data-required="true"] {
-      border-left: 4px solid $requiredBorderColor;
+      border-left: 0.2rem solid $requiredBorderColor;
     }
 
     &[data-required="true"] &-validation {
@@ -107,11 +107,11 @@ $disabledColor: $secondaryColor;
       align-items: center;
       justify-content: center;
       margin: 0 0.3rem;
-      flex: 0 0 20px;
-      width: 20px;
-      height: 20px;
-      font-size: 16px;
-      line-height: 16px;
+      flex: 0 0 1.11rem;
+      width: 1.11rem;
+      height: 1.11rem;
+      font-size: 0.96rem;
+      line-height: 0.96rem;
       background-color: $requiredBorderColor;
       border-radius: 50%;
       transition: all 0.2s;
@@ -129,12 +129,12 @@ $disabledColor: $secondaryColor;
     }
 
     &:focus-within, &[data-required="true"]:focus-within {
-      border-left: 4px solid $focusBorderColor;
+      border-left: 0.2rem solid $focusBorderColor;
     }
 
 
     &[data-required="true"][data-valid="true"] {
-      border-left: 4px solid $validBorderColor;
+      border-left: 0.2rem solid $validBorderColor;
     }
 
     &[data-disabled="true"] {
