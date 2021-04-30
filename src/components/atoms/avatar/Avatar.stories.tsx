@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { Avatar as AvatarComponent, AvatarProps } from './avatar';
+import { Avatar as AvatarComponent, AvatarProps } from './Avatar';
 
 export default {
   title: 'Atoms/Avatar',
@@ -82,5 +82,3 @@ AvatarSelectable.args = {
   tabIndex: 0,
   selectable: true
 };
-
-

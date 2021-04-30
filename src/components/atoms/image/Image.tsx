@@ -52,8 +52,8 @@ export const ImageContainer = (props: ImageContainerProps) => {
     ...rest
   } = props;
 
-  const [imageSrc, setImageSrc] = useState(src);
-  const [loading, setLoading] = useState(true);
+  const [ imageSrc, setImageSrc ] = useState(src);
+  const [ loading, setLoading ] = useState(true);
 
   useEffect(() => { // TODO: Refactor
     let isCancelled = false;
@@ -110,7 +110,7 @@ export const ImageContainer = (props: ImageContainerProps) => {
     return () => {
       isCancelled = true;
     };
-  }, [innerSrc, onImageLoaded, withFallback, src, fallbackSrc]);
+  }, [ innerSrc, onImageLoaded, withFallback, src, fallbackSrc ]);
 
   const classes = classnames(
     'ne-image',

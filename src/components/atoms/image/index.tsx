@@ -1,1 +1,1 @@
-export { default as ImageContainerCached, ImageContainer } from './image';
+export { default as ImageContainerCached, ImageContainer } from './Image';
