@@ -1,35 +1,82 @@
-import { FC, MouseEvent, MouseEventHandler, ReactNode } from 'react';
+import { KeyboardEvent as ReactKeyboardEvent, MouseEvent, MouseEventHandler, ReactNode, useState } from 'react';
 import classNames from 'classnames';
 import './item.scss';
-
+import { Text } from '../../atoms/typography';
+import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
+import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 export interface NavSubItemProps {
-  path?: string;
+  active?: boolean;
+  title?: string;
+  link?: string;
   children: ReactNode;
+  icon?: ReactNode;
   className?: string;
-  onClick?: MouseEventHandler<HTMLLIElement>;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 export interface NavItemProps extends NavSubItemProps {
   subItems?: NavSubItemProps[];
   collapsible?: boolean;
-  stickySelectionWhenCollapsed?: boolean;
+  dontCollapseActive?: boolean;
+  [key: string]: any;
 }
 
-export const NavItem: FC<NavItemProps> = (props) => {
+export const NavItem = (props: NavItemProps) => {
   const {
     className,
     children,
-    onClick
+    icon,
+    active,
+    subItems,
+    onClick,
+    collapsible
   } = props;
 
-  const onClickHandler = (e: MouseEvent<HTMLLIElement>) => {
+  const [ isExpanded, setIsExpanded ] = useState(false);
+
+  const onClickHandler = (e: MouseEvent<HTMLDivElement>) => {
     if (onClick) onClick(e);
   };
 
-  const classes = classNames('ne-nav-item', className);
+  const onKeyUpHandler = (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    if ([ 'Enter', ' ' ].includes(e.key) && onClick) {
+      onClick(e as unknown as MouseEvent<HTMLDivElement>);
+    }
+  };
+
+  const handleExpandClick = () => setIsExpanded(!isExpanded);
+  const handleExpandKey = (e: ReactKeyboardEvent<HTMLDivElement>) => [ 'Enter', ' ' ].includes(e.key)
+                                                                      && setIsExpanded(!isExpanded);
+
+  const iconNode = icon && <span className="ne-nav-item-content-icon">{icon}</span>;
+  const subItemsNode = subItems && subItems.length > 0 && isExpanded && (
+    <ul className="ne-nav-item-sub">
+      {subItems.map((subItem) => subItem)}
+    </ul>
+  );
+  const expandNode = (
+    <div className="ne-nav-item-content-expand" onClick={handleExpandClick} onKeyUp={handleExpandKey} tabIndex={0}>
+      {isExpanded && <ExpandLessRoundedIcon /> || <ExpandMoreRoundedIcon />}
+    </div>
+  );
+
+  const classes = classNames(
+    'ne-nav-item',
+    active && 'ne-nav-item--active',
+    className
+  );
   return (
-    <li className={classes} onClick={onClickHandler}>
-      {children}
+    <li className={classes} data-active={active}>
+      <div className="ne-nav-item-content">
+        <div className="ne-nav-item-content-wrapper" onClick={onClickHandler} onKeyUp={onKeyUpHandler} tabIndex={0}>
+          {iconNode}
+          <Text className="ne-nav-item-content-children">
+            {children}
+          </Text>
+        </div>
+        {collapsible && expandNode}
+      </div>
+      {subItemsNode}
     </li>
   );
 };
