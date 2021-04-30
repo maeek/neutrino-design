@@ -23,15 +23,17 @@
 
 @mixin customScroll {
   &::-webkit-scrollbar {
-    width: 0.7rem;
+    width: 0.5rem;
   }
 
   &::-webkit-scrollbar-track {
+    border-radius: 1rem;
     background-color: $darkerGray;
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: $darkGray;
+    border-radius: 1rem;
   }
 }
 
