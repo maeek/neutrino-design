@@ -43,8 +43,8 @@ const copyFiles = (files = [], destination = path.join(__dirname, '..', config.o
   });
 };
 
-const getScssFiles = (rootPath) => getFilesWithExt(['.scss'], rootPath);
-const getTsFiles = (rootPath) => getFilesWithExt(['.ts', '.tsx'], rootPath);
+const getScssFiles = (rootPath) => getFilesWithExt([ '.scss' ], rootPath);
+const getTsFiles = (rootPath) => getFilesWithExt([ '.ts', '.tsx' ], rootPath);
 
 const saveFile = (filepath, data) => {
   createDir(path.dirname(filepath));
@@ -60,7 +60,9 @@ const getEntries = (rootPath, arr = []) => {
   componentType = (componentType.startsWith('components') 
     ? componentType.substr(11) 
     : componentType) || path.basename(relativePath);
-  const type = componentType.substr(0, componentType.indexOf('/') || componentType.length) || componentType; // atom, molecule..
+
+  // atom, molecule..
+  const type = componentType.substr(0, componentType.indexOf('/') || componentType.length) || componentType;
   const name = path.basename(relativePath);
 
   const typescript = filterNonProductionFiles(getTsFiles(rootPath));
@@ -76,7 +78,7 @@ const getEntries = (rootPath, arr = []) => {
       relativePath,
       meta: {
         type,
-        name: name === type ? 'root' : name,
+        name: name === type ? 'index' : name,
         componentType,
         typescriptCount: typescript.length,
         scssCount: scss.length,

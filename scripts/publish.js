@@ -4,7 +4,7 @@ const util = require('./common');
 const childProc = require('child_process');
 const pkgPath = path.resolve(__dirname, '..', 'package.json');
 
-util.copyFiles([pkgPath]);
+util.copyFiles([ pkgPath ]);
 
 console.log(
   childProc.execSync('npm publish', {
