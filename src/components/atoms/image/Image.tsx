@@ -110,7 +110,7 @@ export const ImageContainer = (props: ImageContainerProps) => {
     return () => {
       isCancelled = true;
     };
-  }, [ innerSrc, onImageLoaded, withFallback, src, fallbackSrc ]);
+  }, [ innerSrc, onImageLoaded, withFallback, src, fallbackSrc, loader ]);
 
   const classes = classnames(
     'ne-image',

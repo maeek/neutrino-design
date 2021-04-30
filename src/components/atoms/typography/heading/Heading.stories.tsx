@@ -7,7 +7,9 @@ export default {
   component: HeadingComponent
 } as Meta;
 
-const Template: Story<HeadingProps> = (args) => (<HeadingComponent {...args}>h{args.level}. Neutrino-design</HeadingComponent>);
+const Template: Story<HeadingProps> = (args) => (
+  <HeadingComponent {...args}>h{args.level}. Neutrino-design</HeadingComponent>
+);
 
 export const Heading = Template.bind({});
 Heading.args = {

@@ -12,7 +12,6 @@ export default {
 
 const Template: Story<NavItemProps> = (args) => <NavItem {...args}>Contacts</NavItem>;
 
-
 // <NavItem icon={<SendRounded />}>Direct messages</NavItem>
 // <NavItem icon={<ChatRounded />}>Channels</NavItem>
 // <NavItem>Item</NavItem>
@@ -39,9 +38,8 @@ ItemWithSubitems.args = {
   icon: <PeopleRounded />,
   collapsible: true,
   subItems: [
-    <NavItem icon={<ChatRounded />}>Item</NavItem>,
-    <NavItem>Item</NavItem>,
-    <NavItem>Item</NavItem>
+    <NavItem key="k1" icon={<ChatRounded />}>Item</NavItem>,
+    <NavItem key="k2">Item</NavItem>,
+    <NavItem key="k3">Item</NavItem>
   ]
 };
-

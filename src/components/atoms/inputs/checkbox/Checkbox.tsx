@@ -3,8 +3,7 @@ import {
   MutableRefObject,
   useEffect,
   useRef,
-  KeyboardEvent as ReactKeyboardEvent,
-  MouseEvent
+  KeyboardEvent as ReactKeyboardEvent
 } from 'react';
 import classNames from 'classnames';
 import useCheckbox from '../../../../hooks/inputs/useCheckbox';
@@ -17,9 +16,6 @@ interface CheckboxRef {
 }
 
 export interface CheckboxProps {
-  /**
-   * CheckboxRef interface consists of - checked: boolean, setChecked: any, element: MutableRefObject HTMLInputElement | null
-   */
   ref?: MutableRefObject<CheckboxRef>;
   name?: string;
   value?: boolean;
@@ -53,7 +49,7 @@ export const Checkbox = (props: CheckboxProps) => {
 
   useEffect(() => {
     if (onChange) onChange(checked);
-  }, [onChange, checked]);
+  }, [ onChange, checked ]);
 
   useEffect(() => {
     if (innerRef.current) {
@@ -63,14 +59,14 @@ export const Checkbox = (props: CheckboxProps) => {
         element: innerRef.current
       };
     }
-  }, [innerRef, checked, setChecked, ref]);
+  }, [ innerRef, checked, setChecked, ref ]);
 
-  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+  const onClick = () => {
     setChecked(!checked);
   };
 
   const onSliderKeyUp = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (['Enter', ' '].includes(e.key)) {
+    if ([ 'Enter', ' ' ].includes(e.key)) {
       setChecked(!checked);
     }
   };
@@ -83,7 +79,7 @@ export const Checkbox = (props: CheckboxProps) => {
 
   const classes = classNames({
     'ne-checkbox': true,
-    ...(className ? { [className]: true } : {})
+    ...(className ? { [ className ]: true } : {})
   });
 
   return (

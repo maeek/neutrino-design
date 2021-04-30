@@ -11,7 +11,7 @@ export interface UseInput {
 }
 
 export const useInput = (initialValue: string): UseInput => {
-  const [value, setValue] = useState(initialValue);
+  const [ value, setValue ] = useState(initialValue);
 
   return {
     value,

@@ -11,7 +11,7 @@ export default {
 } as Meta;
 
 const Template: Story<DrawerProps> = (args) => {
-  const [isOpened, setIsOpened] = useState(false);
+  const [ isOpened, setIsOpened ] = useState(false);
 
   return (
     <>
@@ -29,6 +29,5 @@ Drawer.args = {
   showMask: true,
   position: 'right',
   animationSpeed: 250,
-  style: {padding: '1rem'}
+  style: { padding: '1rem' }
 };
-

@@ -40,8 +40,12 @@ export const Code = (props: CodeProps) => {
       {
         code.split('\n')
           .map((line, i) => (
-            <span className="ne-typo-code-line">
-              {numbers && <span onClick={onNumberClickHandler(line, i)} className="ne-typo-code-line-number">{i + 1}</span>}
+            <span key={line} className="ne-typo-code-line">
+              {
+                numbers && (
+                  <span onClick={onNumberClickHandler(line, i)} className="ne-typo-code-line-number">{i + 1}</span>
+                )
+              }
               <CodeLine onClick={onLineClickHandler(line, i)}>{line}</CodeLine>
             </span>
           ))

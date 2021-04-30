@@ -5,7 +5,7 @@ import './styles/secondary.scss';
 export const SecondaryButton = (props: ButtonProps) => {
   const classes = classNames({
     'ne-button_secondary': true,
-    ...(props.className ? { [props.className]: true } : {})
+    ...(props.className ? { [ props.className ]: true } : {})
   });
 
   return <Button {...props} className={classes} />;

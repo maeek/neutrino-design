@@ -20,7 +20,7 @@ const contStyle = {
 };
 
 const Template: Story<any> = (args) => (
-  <div style={{height: '600px'}}>
+  <div style={{ height: '600px' }}>
     <LayoutTopContentComponent topNode={args.topNode}>
       <LayoutSideContentComponent sideNode={args.sideNode}>
         <LayoutContentFooterComponent footerNode={args.footerNode}>

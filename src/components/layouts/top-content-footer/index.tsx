@@ -9,7 +9,7 @@ export interface LayoutTopContentFooterProps extends LayoutTopContentProps {
 }
 
 export const LayoutTopContentFooter = (props: LayoutTopContentFooterProps) => {
-  const {children: content, className, topNode, footerNode} = props;
+  const { children: content, className, topNode, footerNode } = props;
 
   const classes = classnames('ne-layout-top-content-footer', className);
   return (

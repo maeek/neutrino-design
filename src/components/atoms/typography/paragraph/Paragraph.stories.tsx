@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import ParagraphComponent, { ParagraphProps } from './Paragraph';

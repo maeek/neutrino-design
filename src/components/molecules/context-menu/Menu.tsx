@@ -26,7 +26,11 @@ export interface ContextMenuProps {
   className?: string;
   items?: ContextMenuItems[];
   innerRef?: MutableRefObject<HTMLDivElement | null>;
-  closeContextMenu?: (e: MouseEvent, clickedInsideContextMenu: boolean, elementRef?: MutableRefObject<HTMLDivElement | null>) => void;
+  closeContextMenu?: (
+    e: MouseEvent,
+    clickedInsideContextMenu: boolean,
+    elementRef?: MutableRefObject<HTMLDivElement | null>
+  ) => void;
   [key: string]: any;
 }
 
@@ -57,7 +61,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
     return () => {
       document.removeEventListener('click', handleClickOutside as any);
     };
-  }, [innerRef, closeContextMenu]);
+  }, [ innerRef, closeContextMenu ]);
 
   const handleCloseOnClick = () => {
     if (closeContextMenu) closeContextMenu({} as MouseEvent, false, innerRef);
@@ -65,7 +69,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
 
   const classes = classNames({
     'ne-context-menu': true,
-    ...(className ? {[className]: true} : {})
+    ...(className ? { [ className ]: true } : {})
   });
 
   return (

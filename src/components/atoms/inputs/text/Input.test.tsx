@@ -48,17 +48,17 @@ describe('atoms/input/text', () => {
   it('should validate input', () => {
     const validate = jest.fn((val: string) => val === 'test');
 
-    const {container} = render(<Input required validate={validate} data-testid="inputTest" />);
+    const { container } = render(<Input required validate={validate} data-testid="inputTest" />);
     
     userEvent.type(screen.getByTestId('inputTest'), 'te');
 
     for (let i = 0; i < 3; i++) {
-      expect(validate.mock.results[i].value).toBeFalsy();
+      expect(validate.mock.results[ i ].value).toBeFalsy();
     }
 
     userEvent.type(screen.getByTestId('inputTest'), 'st');
 
-    expect(validate.mock.results[4].value).toBeTruthy();
+    expect(validate.mock.results[ 4 ].value).toBeTruthy();
     expect(container.getElementsByClassName('ne-input-validation--valid')).toHaveLength(1);
   });
 

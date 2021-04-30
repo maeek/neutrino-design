@@ -36,7 +36,6 @@ export const Item = (props: ItemProps) => {
     ...rest
   } = props;
 
-
   const onClickHandler = (e: MouseEvent<HTMLLIElement>) => {
     e.stopPropagation();
     if (closeOnClick && closeHandler) {
@@ -48,14 +47,18 @@ export const Item = (props: ItemProps) => {
   };
 
   const onKeyUpHandler = (e: ReactKeyboardEvent) => {
-    if (['Enter', ' '].includes(e.key)) onClickHandler(e as any);
+    if ([ 'Enter', ' ' ].includes(e.key)) onClickHandler(e as any);
   };
 
-  const iconNode = icon && <span className={`ne-context-menu-item-icon ne-context-menu-item-icon--${iconPosition}`}>{icon}</span>;
+  const iconNode = icon && (
+    <span className={`ne-context-menu-item-icon ne-context-menu-item-icon--${iconPosition}`}>
+      {icon}
+    </span>
+  );
 
   const classes = classNames({
     'ne-context-menu-item': true,
-    ...(className ? {[className]: true} : {})
+    ...(className ? { [ className ]: true } : {})
   });
 
   return (

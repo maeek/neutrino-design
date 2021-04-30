@@ -56,7 +56,7 @@ export const Button = (props: ButtonProps) => {
   };
 
   const onKeyUpHandler = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (['Enter', ' '].includes(e.key) && onClick) {
+    if ([ 'Enter', ' ' ].includes(e.key) && onClick) {
       onClick(e as any);
     }
   };
@@ -83,7 +83,7 @@ export const Button = (props: ButtonProps) => {
 
   const containerClasses = classNames({
     'ne-button': true,
-    ...(className && { [className]: true })
+    ...(className && { [ className ]: true })
   });
 
   return (

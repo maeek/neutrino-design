@@ -38,7 +38,7 @@ export const Item = (props: BreadcrumbItemProps) => {
 
   const moreMenuRef = useRef(null);
   const expandRef = useRef<HTMLSpanElement>(null);
-  const [showMore, setShowMore] = useState(false);
+  const [ showMore, setShowMore ] = useState(false);
 
   const onClickHandler = (e: MouseEvent<HTMLLIElement>) => {
     if (onClick && !disabled) onClick(e);
@@ -48,12 +48,12 @@ export const Item = (props: BreadcrumbItemProps) => {
     if (onKeyUp) onKeyUp(e);
   };
 
-  const onClickShowMoreHandler = (e: MouseEvent<HTMLLIElement>) => {
+  const onClickShowMoreHandler = () => {
     setShowMore(!showMore);
   };
 
   const onKeyShowMoreHandler = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (['Enter', ' '].includes(e.key)) onClickShowMoreHandler(e as any);
+    if ([ 'Enter', ' ' ].includes(e.key)) onClickShowMoreHandler();
   };
 
   const closeContextMenuMenu = (_: MouseEvent, isInside: boolean) => {
@@ -65,7 +65,7 @@ export const Item = (props: BreadcrumbItemProps) => {
 
   const classes = classNames({
     'ne-breadcrumbs-item': true,
-    ...(className ? {[className]: true} : {})
+    ...(className ? { [ className ]: true } : {})
   });
 
   const menuItems = (
@@ -81,7 +81,9 @@ export const Item = (props: BreadcrumbItemProps) => {
           showMore ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />
         }
       </span>
-      { showMore && <ContextMenu closeContextMenu={closeContextMenuMenu} innerRef={moreMenuRef} items={moreMenuItems} />}
+      {showMore && (
+        <ContextMenu closeContextMenu={closeContextMenuMenu} innerRef={moreMenuRef} items={moreMenuItems} />
+      )}
     </>
   );
 

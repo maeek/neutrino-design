@@ -9,7 +9,7 @@ export interface LayoutTopContentProps {
 }
 
 export const LayoutTopContent = (props: LayoutTopContentProps) => {
-  const {children: content, className, topNode} = props;
+  const { children: content, className, topNode } = props;
 
   const classes = classnames('ne-layout-top-content', className);
   return (

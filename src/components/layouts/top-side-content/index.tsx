@@ -9,7 +9,7 @@ export interface LayoutTopSideContentProps extends LayoutTopContentProps {
 }
 
 export const LayoutTopSideContent = (props: LayoutTopSideContentProps) => {
-  const {children: content, className, topNode, sideNode} = props;
+  const { children: content, className, topNode, sideNode } = props;
 
   const classes = classnames('ne-layout-top-side-content', className);
   return (

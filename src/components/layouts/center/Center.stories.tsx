@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import LayoutCenterComponent, { LayoutCenterProps } from './';
@@ -16,7 +17,7 @@ const contStyle = {
 };
 
 const Template: Story<LayoutCenterProps> = (args) => (
-  <div style={{height: '600px', backgroundColor: '#1f1f1f'}}>
+  <div style={{ height: '600px', backgroundColor: '#1f1f1f' }}>
     <LayoutCenterComponent {...args}>
       <div style={contStyle}>I'm centered</div>
     </LayoutCenterComponent>

@@ -14,7 +14,7 @@ export const useCheckbox = (
   initialValue?: boolean,
   readOnly?: boolean
 ): UseCheckbox => {
-  const [checked, setChecked] = useState(!!initialValue);
+  const [ checked, setChecked ] = useState(!!initialValue);
 
   return {
     checked,

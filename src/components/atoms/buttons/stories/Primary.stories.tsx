@@ -25,4 +25,3 @@ TypeLink.args = {
   title: 'This button will open google.com in new tab',
   className: 'ne-button-story'
 };
-

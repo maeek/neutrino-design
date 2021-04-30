@@ -8,7 +8,9 @@ export default {
   component: BreadcrumbItemComponent
 } as Meta;
 
-const Template: Story<BreadcrumbItemProps> = (args) => (<BreadcrumbItemComponent {...args}>Channels</BreadcrumbItemComponent>);
+const Template: Story<BreadcrumbItemProps> = (args) => (
+  <BreadcrumbItemComponent {...args}>Channels</BreadcrumbItemComponent>
+);
 
 export const ItemWithMenu = Template.bind({});
 ItemWithMenu.args = {
@@ -33,4 +35,3 @@ Item.args = {
   title: 'This is an item',
   className: 'ne-breadcrumbs-item-story'
 };
-

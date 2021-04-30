@@ -89,7 +89,7 @@ export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: a
   };
 
   const onKeySearchClearHandler = (e: ReactKeyboardEvent<HTMLSpanElement>) => {
-    if (['Enter', ' '].includes(e.key)) {
+    if ([ 'Enter', ' ' ].includes(e.key)) {
       onSearchClearHandler();
     }
   };
@@ -100,11 +100,11 @@ export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: a
     }
 
     return text.trim().length > 0;
-  }, [validate]);
+  }, [ validate ]);
 
   useEffect(() => {
     if (onChange) onChange(value);
-  }, [onChange, value]);
+  }, [ onChange, value ]);
 
   useEffect(() => {
     if (innerRef.current && ref) {
@@ -115,11 +115,11 @@ export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: a
         element: innerRef.current
       };
     }
-  }, [innerRef, value, setValue, ref, validateInput]);
+  }, [ innerRef, value, setValue, ref, validateInput ]);
 
   const classes = classNames({
     'ne-input': true,
-    ...(className ? { [className]: true } : {})
+    ...(className ? { [ className ]: true } : {})
   });
 
   const isValid = required && validateInput(value);

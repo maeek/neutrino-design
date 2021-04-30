@@ -9,7 +9,7 @@ export interface LayoutContentFooterProps {
 }
 
 export const LayoutContentFooter = (props: LayoutContentFooterProps) => {
-  const {children: content, className, footerNode} = props;
+  const { children: content, className, footerNode } = props;
   const classes = classnames('ne-layout-content-footer', className);
   return (
     <div className={classes}>

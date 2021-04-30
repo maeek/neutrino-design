@@ -82,7 +82,7 @@ export const Drawer = (props: DrawerProps) => {
           <div
             className={maskClasses}
             onClick={onClose}
-            style={{'--animation-speed': `${animationSpeed}ms`} as CSSProperties}
+            style={{ '--animation-speed': `${animationSpeed}ms` } as CSSProperties}
           />
         )
       }

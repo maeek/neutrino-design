@@ -6,7 +6,7 @@ import './styles/proceed.scss';
 export const ProceedButton = (props: ButtonProps) => {
   const classes = classNames({
     'ne-button_proceed': true,
-    ...(props.className ? { [props.className]: true } : {})
+    ...(props.className ? { [ props.className ]: true } : {})
   });
 
   return <Button {...props} className={classes} />;

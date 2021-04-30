@@ -8,7 +8,7 @@ export interface LayoutCenterProps {
 }
 
 export const LayoutCenter = (props: LayoutCenterProps) => {
-  const {children, className} = props;
+  const { children, className } = props;
 
   const classes = classnames('ne-layout-center', className);
   return (

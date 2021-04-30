@@ -17,7 +17,7 @@ const contStyle = {
 };
 
 const Template: Story<LayoutContentFooterProps> = (args) => (
-  <div style={{height: '600px'}}>
+  <div style={{ height: '600px' }}>
     <LayoutContentFooterComponent {...args}>
       <div style={contStyle}>Neutrino-design</div>
     </LayoutContentFooterComponent>
