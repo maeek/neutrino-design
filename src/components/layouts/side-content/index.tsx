@@ -11,15 +11,15 @@ export interface LayoutSideContentProps {
 }
 
 export const LayoutSideContent = (props: LayoutSideContentProps) => {
-  const {children: content, className, sideNode, hideScroll} = props;
-  const [isOver, setIsOver] = useState(false);
+  const { children: content, className, sideNode, hideScroll } = props;
+  const [ isOver, setIsOver ] = useState(false);
 
-  const handleOnOver = () => {
-    hideScroll && setIsOver(true);
+  const handleOnEnter = () => {
+    hideScroll && !isOver && setIsOver(true);
   };
 
   const handleOnOut = () => {
-    hideScroll && setIsOver(false);
+    hideScroll && isOver && setIsOver(false);
   };
 
   const classes = classnames(
@@ -32,7 +32,7 @@ export const LayoutSideContent = (props: LayoutSideContentProps) => {
       <div
         className="ne-layout-side-content-side"
         onMouseOut={handleOnOut}
-        onMouseOver={handleOnOver}
+        onMouseEnter={handleOnEnter}
       >
         {sideNode}
       </div>
