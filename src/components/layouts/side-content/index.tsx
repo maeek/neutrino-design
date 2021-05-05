@@ -14,7 +14,7 @@ export const LayoutSideContent = (props: LayoutSideContentProps) => {
   const { children: content, className, sideNode, hideScroll } = props;
   const [ isOver, setIsOver ] = useState(false);
 
-  const handleOnEnter = () => {
+  const handleOnOver = () => {
     hideScroll && !isOver && setIsOver(true);
   };
 
@@ -32,7 +32,7 @@ export const LayoutSideContent = (props: LayoutSideContentProps) => {
       <div
         className="ne-layout-side-content-side"
         onMouseOut={handleOnOut}
-        onMouseEnter={handleOnEnter}
+        onMouseOver={handleOnOver}
       >
         {sideNode}
       </div>
