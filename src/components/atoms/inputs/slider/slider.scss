@@ -1,0 +1,223 @@
+@import '../../../../styles/colors';
+@import '../../../../styles/mixins';
+
+.ne {
+  &-input-slider {
+    margin-top: 1rem;
+
+    position: relative;
+    @include defaultFont;
+    @include boxSizing;
+    color: $disabledColor;
+    font-size: 0.6rem;
+
+    &--horizontal {
+      width: 100%;
+    }
+
+    &--horizontal &-bar {
+      width: 100%;
+      height: 0.7rem;
+
+      &-steps {
+        width: calc(100% - 0.9rem);
+        top: 0.1rem;
+        margin: 0 0.2rem;
+        position: relative;
+        &-step {
+          left: var(--step-pos);
+        }
+      }
+    }
+
+    &--horizontal &-thumb {
+      top: -0.1rem;
+    }
+
+    &--vertical {
+      width: 0.7rem;
+    }
+
+    &--vertical &-bar {
+      height: 100%;
+      min-height: 200px;
+      width: 0.7rem;
+
+      &-steps {
+        height: calc(100% - 0.4rem);
+        left: 0.1rem;
+        padding: 0.2rem 0;
+        flex-direction: column;
+    box-sizing: border-box;
+
+        &-step {
+          top: var(--step-pos);
+        }
+      }
+    }
+
+    &--vertical &-thumb {
+      left: -0.1rem;
+    }
+
+    &-bar {
+      background-color: $darkerGray;
+      border-radius: 4rem;
+
+      &-selected {
+        width: var(--w);
+        height: 100%;
+        border-radius: 1rem;
+        background-color: $darkGreen;
+      }
+
+      &-steps {
+        // position: relative;
+        // display: flex;
+        // justify-content: space-between;
+        // align-items: center;
+        
+        &-step {
+          width: 0.5rem;
+          height: 0.5rem;
+          border-radius: 50%;
+          background-color: transparentize($gray, 0.8);
+          transition: background-color .1s;
+          user-select: none;
+          top: 0;
+          position: absolute;
+
+          &:hover {
+            background-color: transparentize($gray, 0.6);
+          }
+
+          &-tooltip {
+            position: relative;
+            width: max-content;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            top: 0.8rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.1rem 0.3rem;
+            background: transparentize(#000, 0.5);
+            border-radius: 0.15rem;
+            opacity: 0.6;
+            font-size: 0.8rem;
+
+            >svg {
+              font-size: inherit;
+            }
+
+            &--left {
+              top: 50%;
+              left: -0.8rem;
+              transform: translateY(-50%);
+              float: right;
+            }
+      
+            &--top {
+              top: -1.2rem;
+              left: 50%;
+              transform: translateX(-50%);
+            }
+      
+            &--right {
+              top: 50%;
+              right: -0.8rem;
+              left: unset;
+              transform: translateY(-50%);
+            }
+      
+            &--bottom {
+              bottom: -1.2rem;
+              left: 50%;
+              transform: translateX(-50%);
+            }
+          }
+
+          &:hover &-tooltip {
+            display: flex;
+          }
+        }
+      }
+    }
+
+    &-thumb {
+      width: 0.9rem;
+      height: 0.9rem;
+      background-color: $green;
+      border-radius: 4rem;
+      position: absolute;
+      transform: translateX(var(--x)) translateY(var(--y));
+    }
+
+    &--active &-tooltip {
+      display: flex;
+    }
+
+    &-tooltip {
+      position: relative;
+      width: max-content;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+
+      &-default {
+        padding: 0.1rem 0.3rem;
+        background: transparentize(#000, 0.5);
+        border-radius: 0.15rem;
+        opacity: 0.6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &-steps {
+        padding: 0.1rem 0.3rem;
+        background: transparentize(#000, 0.5);
+        border-radius: 0.15rem;
+        opacity: 0.6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8rem;
+
+        >svg {
+          font-size: inherit;
+        }
+      }
+
+      &--disabled {
+        display: none;
+      }
+
+      &--left {
+        top: 50%;
+        left: -1.2rem;
+        transform: translateY(-50%);
+        float: right;
+      }
+
+      &--top {
+        top: -1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &--right {
+        top: 50%;
+        right: -1.2rem;
+        transform: translateY(-50%);
+      }
+
+      &--bottom {
+        bottom: -1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
