@@ -44,6 +44,8 @@ loadedModules.forEach((mod) => {
   }
 });
 
+util.copyFiles([ path.resolve(__dirname, '..', 'src') ], path.resolve(__dirname, '..', 'dist'));
+
 console.log();
 console.timeEnd(`[${chalk.green('✓')}] Compilation ended successfuly in`);
 console.log();

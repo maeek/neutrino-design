@@ -32,6 +32,7 @@ const processScss = (rootPath) => {
           path.join(outDir, relativePath, appendPath, newFileName),
           result.css
         );
+        util.copyFiles([ path.resolve(fullPath, file) ], path.join(outDir, relativePath, appendPath));
       })
       .catch((e) => {
         console.error(e);

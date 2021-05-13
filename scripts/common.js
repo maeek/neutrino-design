@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const fse = require('fs-extra');
 const config = require('./config');
 
 const getRelativePath = (rootPath) => rootPath.replace(path.resolve(__dirname, '..', config.entryFolder), '');
@@ -39,7 +40,7 @@ const createDir = (dir) => {
 
 const copyFiles = (files = [], destination = path.join(__dirname, '..', config.outDir)) => {
   files.forEach((file) => {
-    fs.copyFileSync(file, path.join(destination, path.basename(file)));
+    fse.copySync(file, path.join(destination, path.basename(file)));
   });
 };
 
