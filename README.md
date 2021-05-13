@@ -18,72 +18,15 @@ After install is complete you can import it in your project
 Some examples:
 
 ```javascript
-import { Button } from '@maeek/neutrino-design';
-import Button from '@maeek/neutrino-design/components/atoms/buttons/';
+import { Button } from "@maeek/neutrino-design";
+import Button from "@maeek/neutrino-design/components/atoms/buttons/";
 
-import { PrimaryLoader } from '@maeek/neutrino-design/components/molecules/';
-import { PrimaryLoader } from '@maeek/neutrino-design/components/molecules/loaders/';
-import PrimaryLoader from '@maeek/neutrino-design/components/molecules/loaders/Loader';
+import { PrimaryLoader } from "@maeek/neutrino-design/components/molecules/";
+import { PrimaryLoader } from "@maeek/neutrino-design/components/molecules/loaders/";
+import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/Loader";
 ```
 
 ## List of components
-
-### Atoms
-
-#### Avatar
-
-- Avatar
-- AvatarCached
-
-#### Buttons
-
-- Button
-- AbortButton
-- ActionButton
-- ProceedButton
-- SecondaryButton
-
-#### Image
-
-- Image
-- ImageCached
-
-#### Inputs
-
-- CheckBox
-- Input
-
-#### Typography
-
-- Code
-- Heading
-- Paragraph
-- Text
-
-### Layouts
-
-- LayoutCenter
-- LayoutContentFooter
-- LayoutSideContent
-- LayoutTopContent
-- LayoutTopContentFooter
-- LayoutTopSideContent
-
-### Molecules
-
-- Breadcrumbs
-- Code
-- ContextMenu
-- Drawer
-- Loader
-
-### Hooks
-
-- useInput
-- useCheckbox
-- useConnection
-- useDelayUnmount
-- usePagination
 
 ## TODO
 
@@ -92,7 +35,9 @@ import PrimaryLoader from '@maeek/neutrino-design/components/molecules/loaders/L
 
 ### Atoms
 
-- [ ] Input - Range/Slider
+- [x] Avatar
+- [x] AvatarCached
+- [x] Input - Range/Slider
 - [ ] Input - Multiline text
 - [ ] Input - Select
 - [ ] Input - File Select
@@ -101,6 +46,28 @@ import PrimaryLoader from '@maeek/neutrino-design/components/molecules/loaders/L
 - [ ] Chip
 - [ ] Notification popup
 - [ ] Divider
+- [x] Button
+- [x] AbortButton
+- [x] ActionButton
+- [x] ProceedButton
+- [x] SecondaryButton
+- [x] Image
+- [x] ImageCached
+- [x] CheckBox
+- [x] Input
+- [x] Code
+- [x] Heading
+- [x] Paragraph
+- [x] Text
+
+### Layouts
+
+- [x] LayoutCenter
+- [x] LayoutContentFooter
+- [x] LayoutSideContent
+- [x] LayoutTopContent
+- [x] LayoutTopContentFooter
+- [x] LayoutTopSideContent
 
 ### Molecules
 
@@ -110,7 +77,7 @@ import PrimaryLoader from '@maeek/neutrino-design/components/molecules/loaders/L
 - [ ] Navigation
 - [ ] Searchbar
 - [ ] Avatar picker
-- [ ] Modal
+- [x] Modal
 - [ ] List input aka tags
 - [ ] Expandable block
 - [ ] Box
@@ -121,6 +88,11 @@ import PrimaryLoader from '@maeek/neutrino-design/components/molecules/loaders/L
 - [ ] Dialogs
 - [ ] Drag and Drop
 - [ ] Loaders (Partially completed)
+- [x] Breadcrumbs
+- [x] Code
+- [x] ContextMenu
+- [x] Drawer
+- [x] Loader
 
 ### Organisms
 
@@ -130,3 +102,11 @@ import PrimaryLoader from '@maeek/neutrino-design/components/molecules/loaders/L
 - [ ] Gallery
 - [ ] Player
 - [ ] Image editor
+
+### Hooks
+
+- [x] useInput
+- [x] useCheckbox
+- [x] useConnection
+- [x] useDelayUnmount
+- [x] usePagination
