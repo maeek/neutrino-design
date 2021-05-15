@@ -1,38 +1,22 @@
-@import '../../../../styles/colors';
+@use '../../../../styles/main' as *;
 
-@mixin secondaryButtonStyling {
-  $bg: $altGray;
-  $hoverBg: $altLightGray;
-  $activeBg: $altGray;
-  $activeBorder: $altDarkGray;
-
-  .ne-button_secondary &-item {
-    // Styling
-    border: 0.15rem solid $bg;
-    background-color: $bg;
-    color: $primaryColor;
-  }
-  .ne-button_secondary &-item:not(.ne-button-item--disabled):hover,
-  .ne-button_secondary &-item:not(.ne-button-item--disabled):focus {
-    cursor: pointer;
-    border: 0.15rem solid $hoverBg;
-    background-color: $hoverBg;
-  }
-  .ne-button_secondary &-item:not(.ne-button-item--disabled):active {
-    border: 0.15rem solid $activeBg;
-    border-bottom: 0.15rem solid $activeBorder;
-    background-color: $activeBg;
-  }
-  .ne-button_secondary &-item--disabled {
-    border: 0.15rem solid $disabledBg;
-    background-color: $disabledBg;
-    color: $disabledColor;
-    cursor: not-allowed;
-  }
-}
-
-.ne {
+.#{$prefix} {
   &-button {
-    @include secondaryButtonStyling;
+    .#{$prefix}-button_secondary &-item:not(.#{$prefix}-button-item--disabled) {
+      border: 0.15rem solid get-color('primary', 300);
+      background-color: get-color('primary', 300);
+      color: get-color('basic', 100);
+    }
+    .#{$prefix}-button_secondary &-item:not(.#{$prefix}-button-item--disabled):hover,
+    .#{$prefix}-button_secondary &-item:not(.#{$prefix}-button-item--disabled):focus {
+      cursor: pointer;
+      border: 0.15rem solid get-color('primary', 200);
+      background-color: get-color('primary', 200);
+    }
+    .#{$prefix}-button_secondary &-item:not(.#{$prefix}-button-item--disabled):active {
+      border: 0.15rem solid get-color('primary', 100);
+      border-bottom: 0.15rem solid get-color('primary', 200);
+      background-color: get-color('primary', 100);
+    }
   }
 }

@@ -1,36 +1,34 @@
-@import '../../../../styles/mixins';
-@import '../../../../styles/colors';
-@import './sizes';
-@import './types';
+@use '../../../../styles/main' as *;
+@use 'sizes' as *;
+@use 'types' as *;
 
-.ne {
+.#{$prefix} {
   &-avatar {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @include boxSizing;
-    @include defaultFont;
+    @include box-sizing;
+    @include default-font;
+    @include flexbox($alignItems: center, $justifyContent: center);
 
     &-content {
       flex: 0 0 auto;
       overflow: hidden;
-      background-color: $darkerGray;
+      background-color: get-color('primary', 1000);
       transition: all 0.3s;
 
-      @include avatarTypes;
-      @include avatarSizes;
+      @include get-avatar-types();
+      @include get-avatar-sizes();
 
       &--selectable {
         transition: border 0.1s;
         border: 0.15rem solid transparent;
 
-        &:active, &:focus {
-          border: 0.15rem solid $blue;
+        &:active,
+        &:focus {
+          border: 0.15rem solid get-color('actions', 500);
         }
       }
 
-      .ne-image img{
+      .#{$prefix}-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;

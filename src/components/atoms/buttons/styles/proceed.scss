@@ -1,41 +1,23 @@
-@import '../../../../styles/colors';
+@use '../../../../styles/main' as *;
 
-@mixin proceedButtonStyling {
-  $bg: $green;
-  $color: $altPrimaryColor;
-  $hoverBg: $lightGreen;
-  $activeColor: #000;
-  $activeBg: $green;
-  $activeBorder: $darkGreen;
-
-  .ne-button_proceed &-item {
-    // Styling
-    border: 0.15rem solid $bg;
-    background-color: $bg;
-    color: $color;
-  }
-  .ne-button_proceed &-item:not(.ne-button-item--disabled):hover,
-  .ne-button_proceed &-item:not(.ne-button-item--disabled):focus {
-    cursor: pointer;
-    border: 0.15rem solid $hoverBg;
-    background-color: $hoverBg;
-  }
-  .ne-button_proceed &-item:not(.ne-button-item--disabled):active {
-    border: 0.15rem solid $activeBg;
-    border-bottom: 0.15rem solid $activeBorder;
-    background-color: $activeBg;
-    color: $activeColor;
-  }
-  .ne-button_proceed &-item--disabled {
-    border: 0.15rem solid $disabledBg;
-    background-color: $disabledBg;
-    color: $disabledColor;
-    cursor: not-allowed;
-  }
-}
-
-.ne {
+.#{$prefix} {
   &-button {
-    @include proceedButtonStyling;
+    .#{$prefix}-button_proceed &-item:not(.#{$prefix}-button-item--disabled) {
+      border: 0.15rem solid get-color('positive', 100);
+      background-color: get-color('positive', 100);
+      color: get-color('basic', 800);
+    }
+    .#{$prefix}-button_proceed &-item:not(.#{$prefix}-button-item--disabled):hover,
+    .#{$prefix}-button_proceed &-item:not(.#{$prefix}-button-item--disabled):focus {
+      cursor: pointer;
+      border: 0.15rem solid get-color('positive', 200);
+      background-color: get-color('positive', 200);
+    }
+    .#{$prefix}-button_proceed &-item:not(.#{$prefix}-button-item--disabled):active {
+      border: 0.15rem solid get-color('positive', 100);
+      border-bottom: 0.15rem solid get-color('positive', 300);
+      background-color: get-color('positive', 100);
+      color: get-color('primary', 9999);
+    }
   }
 }

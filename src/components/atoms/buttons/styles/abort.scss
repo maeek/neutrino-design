@@ -1,40 +1,24 @@
-@import '../../../../styles/colors';
+@use '../../../../styles/main' as *;
 
-@mixin abortButtonStyling {
-  $primaryBg: $lightRed;
-  $primaryHoverBg: $red;
-  $primaryActiveBg: $red;
-  $primaryActiveBorder: $darkRed;
-  $primaryDisabledBg: $disabledBg;
-  $primaryDisabledColor: $disabledColor;
-
-  .ne-button_abort &-item {
-    // Styling
-    border: 0.15rem solid $primaryBg;
-    background-color: $primaryBg;
-    color: $primaryColor;
-  }
-  .ne-button_abort &-item:not(.ne-button-item--disabled):hover,
-  .ne-button_abort &-item:not(.ne-button-item--disabled):focus {
-    cursor: pointer;
-    border: 0.15rem solid $primaryHoverBg;
-    background-color: $primaryHoverBg;
-  }
-  .ne-button_abort &-item:not(.ne-button-item--disabled):active {
-    border: 0.15rem solid $primaryActiveBg;
-    border-bottom: 0.15rem solid $primaryActiveBorder;
-    background-color: $primaryActiveBg;
-  }
-  .ne-button_abort &-item--disabled {
-    border: 0.15rem solid $primaryDisabledBg;
-    background-color: $primaryDisabledBg;
-    color: $primaryDisabledColor;
-    cursor: not-allowed;
-  }
-}
-
-.ne {
+.#{$prefix} {
   &-button {
-    @include abortButtonStyling;
+    .#{$prefix}-button_abort &-item:not(.#{$prefix}-button-item--disabled) {
+      border: 0.15rem solid get-color('negative', 100);
+      background-color: get-color('negative', 100);
+      color: get-color('basic', 100);
+    }
+
+    .#{$prefix}-button_abort &-item:not(.#{$prefix}-button-item--disabled):hover,
+    .#{$prefix}-button_abort &-item:not(.#{$prefix}-button-item--disabled):focus {
+      cursor: pointer;
+      border: 0.15rem solid get-color('negative', 200);
+      background-color: get-color('negative', 200);
+    }
+
+    .#{$prefix}-button_abort &-item:not(.#{$prefix}-button-item--disabled):active {
+      border: 0.15rem solid get-color('negative', 200);
+      border-bottom: 0.15rem solid get-color('negative', 300);
+      background-color: get-color('negative', 200);
+    }
   }
 }

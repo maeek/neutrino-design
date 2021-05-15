@@ -1,47 +1,38 @@
-@import '../../../../styles/colors';
-@import '../../../../styles/mixins';
+@use '../../../../styles/main' as *;
+// @import '../../../../styles/colors';
+// @import '../../../../styles/mixins';
 
-$bg: $gray;
-$color: $primaryColor;
-$clearColor: $secondaryColor;
-$labelColor: $secondaryColor;
-$borderColor: transparent;
+// get-color('actions', 300): $lighterBlue;
+// get-color('negative', 100): $lightRed;
+// get-color('negative', 100): $lightRed;
+// get-color('positive', 100): $green;
+// get-color('basic', 200): $secondaryColor;
 
-$focusBorderColor: $lighterBlue;
-$requiredBorderColor: $lightRed;
-$invalidBorderColor: $lightRed;
-$validBorderColor: $green;
-$disabledColor: $secondaryColor;
-
-.ne {
+.#{$prefix} {
   &-input {
+    @include flexbox($justifyContent: flex-start, $alignItems: center);
+    position: relative;
     width: 100%;
     min-width: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
     margin: 0;
-    position: relative;
-    background-color: $bg;
-    color: $color;
-    border: 0.15rem solid $borderColor;
-    border-left: 0.2rem solid $borderColor;
+    background-color: get-color('primary', 500);
+    color: get-color('basic', 100);
+    border: 0.15rem solid transparent;
+    border-left: 0.2rem solid transparent;
     border-radius: 0.1rem;
     font-size: 0.75rem;
 
-    @include defaultFont;
-    @include boxSizing;
+    @include default-font;
+    @include box-sizing;
 
     &-label {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
+      @include flexbox($justifyContent: flex-start, $alignItems: center);
       width: 100%;
       cursor: text;
       user-select: none;
       &-content {
-        color: $labelColor;
-        font-size: 0.75rem;
+        color: get-color('basic', 200);
+        font-size: get-font-size(250);
         font-weight: 500;
         position: absolute;
         left: 0;
@@ -52,12 +43,12 @@ $disabledColor: $secondaryColor;
     }
 
     &:focus-within &-label-content,
-    &[data-empty="false"] &-label-content {
-        transform: translateY(-1.5rem);
-        font-size: 0.6rem;
+    &[data-empty='false'] &-label-content {
+      transform: translateY(-1.5rem);
+      font-size: get-font-size(100);
     }
 
-    &-controll {
+    &-control {
       width: 100%;
       padding: 0.5rem 0.6rem;
       border: 0;
@@ -68,85 +59,83 @@ $disabledColor: $secondaryColor;
       cursor: inherit;
 
       &::-webkit-input-placeholder {
-        color: $placeholderColor;
+        color: get-color('basic', 500);
       }
-      
+
       &::-moz-placeholder {
-        color: $placeholderColor;
+        color: get-color('basic', 500);
       }
-      
+
       &::-ms-placeholder {
-        color: $placeholderColor;
+        color: get-color('basic', 500);
       }
-      
+
       &::placeholder {
-        color: $placeholderColor;
+        color: get-color('basic', 500);
       }
     }
 
     &-search-clear {
       margin: 0 0.5rem;
-      color: $clearColor;
+      color: get-color('basic', 200);
       cursor: pointer;
       user-select: none;
-      
-      &:hover, &:focus {
+
+      &:hover,
+      &:focus {
         text-decoration: underline;
       }
     }
-    
-    &[data-required="true"] {
-      border-left: 0.2rem solid $requiredBorderColor;
+
+    &[data-required='true'] {
+      border-left: 0.2rem solid get-color('negative', 100);
     }
 
-    &[data-required="true"] &-validation {
+    &[data-required='true'] &-validation {
+      @include flexbox($justifyContent: center, $alignItems: center, $flex: 0 0 1.11rem);
       opacity: 0;
       cursor: default;
       user-select: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin: 0 0.3rem;
-      flex: 0 0 1.11rem;
       width: 1.11rem;
       height: 1.11rem;
-      font-size: 0.96rem;
-      line-height: 0.96rem;
-      background-color: $requiredBorderColor;
+      font-size: get-font-size(400);
+      line-height: get-font-size(400);
+      background-color: get-color('negative', 100);
       border-radius: 50%;
       transition: all 0.2s;
-      >svg {
+
+      > svg {
         font-size: inherit;
       }
     }
-    
-    &[data-required="true"]:focus-within &-validation {
+
+    &[data-required='true']:focus-within &-validation {
       opacity: 1;
     }
 
-    &[data-required="true"][data-valid="true"] &-validation {
-      background-color: $validBorderColor;
+    &[data-required='true'][data-valid='true'] &-validation {
+      background-color: get-color('positive', 100);
     }
 
-    &:focus-within, &[data-required="true"]:focus-within {
-      border-left: 0.2rem solid $focusBorderColor;
+    &:focus-within,
+    &[data-required='true']:focus-within {
+      border-left: 0.2rem solid get-color('actions', 300);
     }
 
-
-    &[data-required="true"][data-valid="true"] {
-      border-left: 0.2rem solid $validBorderColor;
+    &[data-required='true'][data-valid='true'] {
+      border-left: 0.2rem solid get-color('positive', 100);
     }
 
-    &[data-disabled="true"] {
-      background-color: $disabledBg;
-      color: $disabledColor;
+    &[data-disabled='true'] {
+      background-color: get-color('basic', 700);
+      color: get-color('basic', 200);
       cursor: not-allowed;
     }
 
-    &[data-disabled="true"] &-search-clear {
+    &[data-disabled='true'] &-search-clear {
       cursor: not-allowed;
       outline: none;
     }
   }
 }
-

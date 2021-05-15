@@ -1,65 +1,52 @@
-@import '../../../../styles/colors';
-@import '../../../../styles/mixins';
+@use '../../../../styles/main' as *;
 
-
-
-// $errorBg: #ff5f5f;
-// $errorColor: #fff;
-@mixin defaultButtonStyling {
-  $bg: $gray;
-  $hoverBg: $darkGray;
-  $activeBg: $lighterGray;
-  $activeBorder: $lightGray;
-
+@mixin default-button-styling() {
   &-item {
-    border: 0.15rem solid $bg;
-    background-color: $bg;
-    color: $primaryColor;
+    background-color: get-color('primary', 500);
+    border: 0.15rem solid get-color('primary', 500);
+    color: get-color('basic', 100);
   }
-  &-item:not(.ne-button-item--disabled):hover,
-  &-item:not(.ne-button-item--disabled):focus {
+  &-item:not(.#{$prefix}-button-item--disabled):hover,
+  &-item:not(.#{$prefix}-button-item--disabled):focus {
+    background-color: get-color('primary', 400);
+    border: 0.15rem solid get-color('primary', 400);
     cursor: pointer;
-    border: 0.15rem solid $hoverBg;
-    background-color: $hoverBg;
   }
-  &-item:not(.ne-button-item--disabled):active {
-    border: 0.15rem solid $activeBg;
-    border-bottom: 0.15rem solid $activeBorder;
-    background-color: $activeBg;
+  &-item:not(.#{$prefix}-button-item--disabled):active {
+    background-color: get-color('primary', 400);
+    border: 0.15rem solid get-color('primary', 400);
+    border-bottom: 0.15rem solid get-color('primary', 300);
   }
   &-item--disabled {
-    border: 0.15rem solid $disabledBg;
-    background-color: $disabledBg;
-    color: $disabledColor;
+    color: get-color('basic', 200);
     cursor: not-allowed;
+    background-color: get-color('basic', 700);
+    border: 0.15rem solid get-color('basic', 700);
   }
 }
 
-.ne {
+.#{$prefix} {
   &-button {
     display: block;
     height: 2rem;
     position: relative;
     user-select: none;
-    
-    font-size: 0.75rem;
+
+    font-size: get-font-size(250);
     font-weight: 700;
 
-    @include defaultFont;
-    @include boxSizing;
+    @include box-sizing;
+    @include default-font;
+    @include default-button-styling;
 
     &-item {
+      @include flexbox($justifyContent: center, $alignItems: center);
       padding: 0.5rem 0.7rem;
       width: auto;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       border-radius: 0.15rem;
       transition: background-color 0.15s, color 0.15s, border 0.1s;
     }
-
-    @include defaultButtonStyling;
 
     &-anchor {
       display: block;

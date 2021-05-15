@@ -170,7 +170,7 @@ export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: a
           required={required}
           disabled={disabled}
           readOnly={readOnly}
-          className="ne-input-controll"
+          className="ne-input-control"
           {...bind}
           {...rest}
         />

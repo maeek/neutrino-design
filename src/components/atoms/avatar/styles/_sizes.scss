@@ -1,0 +1,16 @@
+$avatar-sizes: (
+  small: 1.8rem,
+  medium: 2.5rem,
+  large: 4rem,
+  larger: 5.5rem,
+  extra-large: 12rem,
+);
+
+@mixin get-avatar-sizes() {
+  @each $type, $value in $avatar-sizes {
+    &--#{$type} {
+      height: #{$value};
+      width: #{$value};
+    }
+  }
+}

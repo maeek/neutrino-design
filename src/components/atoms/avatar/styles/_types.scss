@@ -1,0 +1,13 @@
+$avatar-types: (
+  round: 50%,
+  rounded: 0.4rem,
+  square: 0,
+);
+
+@mixin get-avatar-types() {
+  @each $type, $value in $avatar-types {
+    &--#{$type} {
+      border-radius: #{$value};
+    }
+  }
+}

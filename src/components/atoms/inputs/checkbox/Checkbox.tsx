@@ -92,7 +92,7 @@ export const Checkbox = (props: CheckboxProps) => {
       htmlFor={name}
     >
       <input
-        className="ne-checkbox-controll"
+        className="ne-checkbox-control"
         ref={innerRef}
         type="checkbox"
         name={name}

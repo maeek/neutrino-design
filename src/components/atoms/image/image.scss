@@ -1,17 +1,21 @@
-@import '../../../styles/mixins.scss';
+@use '../../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-image {
-    @include boxSizing;
+    @include box-sizing;
     width: 100%;
     height: 100%;
+    object-fit: inherit;
 
     &-content {
       width: 100%;
       height: 100%;
-      >img {
+      object-fit: inherit;
+
+      > img {
         width: 100%;
         height: 100%;
+        object-fit: inherit;
       }
     }
   }
