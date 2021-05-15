@@ -1,9 +1,11 @@
 const path = require('path');
-const fs = require('fs');
-const fse = require('fs-extra');
+const fs = require('fs-extra');
 const config = require('./config');
 
-const getRelativePath = (rootPath) => rootPath.replace(path.resolve(__dirname, '..', config.entryFolder), '');
+const getRelativePath = (rootPath) => rootPath.replace(
+  path.resolve(__dirname, '..', config.entryFolder),
+  ''
+);
 
 const getFolders = (rootPath) => {
   return fs.readdirSync(rootPath)
@@ -40,12 +42,12 @@ const createDir = (dir) => {
 
 const copyFiles = (files = [], destination = path.join(__dirname, '..', config.outDir)) => {
   files.forEach((file) => {
-    fse.copySync(file, path.join(destination, path.basename(file)));
+    fs.copySync(file, path.join(destination, path.basename(file)));
   });
 };
 
 const getScssFiles = (rootPath) => getFilesWithExt([ '.scss' ], rootPath);
-const getTsFiles = (rootPath) => getFilesWithExt([ '.ts', '.tsx' ], rootPath);
+const getTypescriptFiles = (rootPath) => getFilesWithExt([ '.ts', '.tsx' ], rootPath);
 
 const saveFile = (filepath, data) => {
   createDir(path.dirname(filepath));
@@ -66,7 +68,7 @@ const getEntries = (rootPath, arr = []) => {
   const type = componentType.substr(0, componentType.indexOf('/') || componentType.length) || componentType;
   const name = path.basename(relativePath);
 
-  const typescript = filterNonProductionFiles(getTsFiles(rootPath));
+  const typescript = filterNonProductionFiles(getTypescriptFiles(rootPath));
   const scss = filterNonProductionFiles(getScssFiles(
     stylesFolderExists 
       ? path.resolve(rootPath, config.stylesFolder) 
@@ -104,7 +106,7 @@ module.exports = {
   getFolders,
   getFilesWithExt,
   getScssFiles,
-  getTsFiles,
+  getTypescriptFiles,
   createDir,
   saveFile,
   filterNonProductionFiles,

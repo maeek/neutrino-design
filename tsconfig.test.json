@@ -1,41 +1,8 @@
 {
-  "compileOnSave": true,
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "allowJs": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "isolatedModules": false,
-    "declaration": true,
-    "strict": true,
-    "baseUrl": "./",
-    "outDir": "build",
-    "sourceMap": true,
-    "removeComments": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "target": "es6",
-    "forceConsistentCasingInFileNames": true,
-    "emitDecoratorMetadata": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "jsx": "react-jsx",
-    "types": [
-      "node",
-      "jest",
-      "@types/react"
-    ],
-    "lib": ["es2020", "dom", "esnext"]
-  },
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.d.ts",
-  ],
-  "exclude": [
-    "./src/stories",
-    "./src/**/*.stories.*",
-    "./src/**/tests",
-    "./src/**/*.test.ts",
-    "./src/setupTests.ts"
-  ]
+    "noImplicitAny": false,
+    "strictNullChecks": false
+  }
 }

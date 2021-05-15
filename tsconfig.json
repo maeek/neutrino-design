@@ -26,6 +26,9 @@
       "jest",
       "@types/react"
     ],
+    "paths": {
+      "@/*": [ "src/*" ]
+    },
     "lib": ["es2020", "dom", "esnext"]
   },
   "include": [
