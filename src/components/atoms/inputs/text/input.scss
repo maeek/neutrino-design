@@ -1,16 +1,10 @@
 @use '../../../../styles/main' as *;
-// @import '../../../../styles/colors';
-// @import '../../../../styles/mixins';
-
-// get-color('actions', 300): $lighterBlue;
-// get-color('negative', 100): $lightRed;
-// get-color('negative', 100): $lightRed;
-// get-color('positive', 100): $green;
-// get-color('basic', 200): $secondaryColor;
 
 .#{$prefix} {
   &-input {
     @include flexbox($justifyContent: flex-start, $alignItems: center);
+    @include default-font;
+    @include box-sizing;
     position: relative;
     width: 100%;
     min-width: 0;
@@ -20,10 +14,7 @@
     border: 0.15rem solid transparent;
     border-left: 0.2rem solid transparent;
     border-radius: 0.1rem;
-    font-size: 0.75rem;
-
-    @include default-font;
-    @include box-sizing;
+    font-size: get-font-size(250);
 
     &-label {
       @include flexbox($justifyContent: flex-start, $alignItems: center);
