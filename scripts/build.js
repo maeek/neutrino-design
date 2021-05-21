@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 const path = require('path');
 const chalk = require('chalk');
-const config = require('./config');
+const { config } = require('./config');
 const util = require('./common');
 const { processScss } = require('./processors/sass');
 const { processTypescript } = require('./processors/typescript');

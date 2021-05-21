@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra');
-const config = require('./config');
+const { config } = require('./config');
 
 const getRelativePath = (rootPath) => rootPath.replace(
   path.resolve(__dirname, '..', config.entryFolder),

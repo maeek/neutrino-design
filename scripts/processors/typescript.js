@@ -1,5 +1,5 @@
 const path = require('path');
-const config = require('../config');
+const { config } = require('../config');
 const util = require('../common');
 const babel = require('@babel/core');
 const chalk = require('chalk');
