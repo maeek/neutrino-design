@@ -58,8 +58,10 @@ export const ContextMenu = (props: ContextMenuProps) => {
     };
 
     document.addEventListener('click', handleClickOutside as any);
+    document.addEventListener('keyup', handleClickOutside as any);
     return () => {
       document.removeEventListener('click', handleClickOutside as any);
+      document.removeEventListener('keyup', handleClickOutside as any);
     };
   }, [ innerRef, closeContextMenu ]);
 
