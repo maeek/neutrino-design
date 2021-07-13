@@ -76,6 +76,12 @@ export const ContextMenu = (props: ContextMenuProps) => {
     if (closeContextMenu) closeContextMenu({} as MouseEvent, false, innerRef);
   };
 
+  const preventScroll: KeyboardEventHandler = (e) => {
+    if ([ 'ArrowDown', 'ArrowUp' ].includes(e.code)) {
+      e.preventDefault();
+    }
+  };
+
   const onKeyUp: (i: number) => KeyboardEventHandler = (i) => (e) => {
     if (e.code === 'ArrowDown') {
       e.preventDefault();
@@ -115,6 +121,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
         key={item.index + item.text}
         closeHandler={handleCloseOnClick}
         onKeyUp={onKeyUp(i)}
+        onKeyDown={preventScroll}
         {...item}
       >
         {item.node}
@@ -122,10 +129,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
   });
 
   useEffect(() => {
-    if (
-      itemsRefs.current.length > 0
-      && !itemsRefs.current.some((r) => r.current === document.activeElement)
-    ) {
+    if (itemsRefs.current.length > 0) {
       itemsRefs.current[ 0 ].current.focus();
     }
   }, [ itemsRefs ]);
