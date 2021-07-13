@@ -3,7 +3,9 @@ import {
   KeyboardEvent as ReactKeyboardEvent,
   MouseEvent,
   MouseEventHandler,
-  ReactNode
+  ReactNode,
+  forwardRef,
+  KeyboardEventHandler
 } from 'react';
 import { Text } from '../../atoms/typography';
 import './item.scss';
@@ -19,10 +21,11 @@ export interface ItemProps {
   closeOnClick?: boolean;
   closeHandler?: Function;
   disabled?: boolean;
+  onKeyUp?: KeyboardEventHandler;
   [key: string]: any;
 }
 
-export const Item = (props: ItemProps) => {
+export const Item = forwardRef<HTMLLIElement, ItemProps>((props, ref) => {
   const {
     children,
     onClick,
@@ -33,6 +36,7 @@ export const Item = (props: ItemProps) => {
     closeHandler,
     icon,
     iconPosition = 'right',
+    onKeyUp,
     ...rest
   } = props;
 
@@ -48,6 +52,8 @@ export const Item = (props: ItemProps) => {
 
   const onKeyUpHandler = (e: ReactKeyboardEvent) => {
     if ([ 'Enter', ' ' ].includes(e.key)) onClickHandler(e as any);
+
+    if(onKeyUp) onKeyUp(e); 
   };
 
   const iconNode = icon && (
@@ -63,6 +69,7 @@ export const Item = (props: ItemProps) => {
 
   return (
     <li
+      ref={ref}
       className={classes}
       onClick={onClickHandler}
       onKeyUp={onKeyUpHandler}
@@ -76,6 +83,6 @@ export const Item = (props: ItemProps) => {
       {iconPosition === 'right' && iconNode}
     </li>
   );
-};
+});
 
 export default Item;
