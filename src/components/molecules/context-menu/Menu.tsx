@@ -121,6 +121,15 @@ export const ContextMenu = (props: ContextMenuProps) => {
       </Item>);
   });
 
+  useEffect(() => {
+    if (
+      itemsRefs.current.length > 0
+      && !itemsRefs.current.some((r) => r.current === document.activeElement)
+    ) {
+      itemsRefs.current[ 0 ].current.focus();
+    }
+  }, [ itemsRefs ]);
+
   return (
     <div className={classes} ref={innerRef} {...rest}>
       {
