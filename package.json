@@ -1,6 +1,6 @@
 {
   "name": "@maeek/neutrino-design",
-  "version": "0.4.13",
+  "version": "0.4.14",
   "repository": {
     "type": "git",
     "url": "https://github.com/maeek/neutrino-design.git"
@@ -24,7 +24,8 @@
     "clean": "rm -rf ./build ./dist",
     "compile": "node scripts/build.js",
     "compile:types": "tsc",
-    "build": "NODE_ENV=production npm run compile:types && npm run compile",
+    "build": "NODE_ENV=production npm run compile:types && npm run compile && npm run copy",
+    "copy": "cp ./package.json ./dist/",
     "prebuild": "npm run clean",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
@@ -51,7 +52,6 @@
     "@babel/plugin-transform-modules-commonjs": "^7.13.8",
     "@babel/plugin-transform-runtime": "^7.13.6",
     "@babel/plugin-transform-typescript": "^7.13.0",
-    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.13.5",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
@@ -66,7 +66,6 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
-    "@types/classnames": "^2.2.11",
     "@types/jest": "^26.0.20",
     "@types/lodash.debounce": "^4.0.6",
     "@types/node": "^14.14.31",
