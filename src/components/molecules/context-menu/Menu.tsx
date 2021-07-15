@@ -131,7 +131,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
   });
 
   return (
-    <div className={classes} ref={innerRef} {...rest}>
+    <div className={classes} ref={innerRef} onContextMenu={(e) => e.stopPropagation()} {...rest}>
       {
         isMobile && showMaskOnMobile
           ? <div onClick={handleCloseOnClick} className="ne-context-menu-mask" />
