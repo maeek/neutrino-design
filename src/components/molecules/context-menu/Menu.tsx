@@ -6,7 +6,8 @@ import {
   ReactNode,
   createRef,
   useEffect,
-  useRef
+  useRef,
+  forwardRef
 } from 'react';
 import classNames from 'classnames';
 import { useMediaQuery } from 'react-responsive';
@@ -28,7 +29,6 @@ export interface ContextMenuProps {
   suffixNode?: ReactNode;
   className?: string;
   items?: ContextMenuItems[];
-  innerRef?: MutableRefObject<HTMLDivElement | null>;
   showMaskOnMobile?: boolean;
   closeContextMenu?: (
     e: MouseEvent,
@@ -38,7 +38,7 @@ export interface ContextMenuProps {
   [key: string]: any;
 }
 
-export const ContextMenu = (props: ContextMenuProps) => {
+export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>((props, ref) => {
   const {
     className,
     children: prefixNode,
@@ -131,7 +131,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
   });
 
   return (
-    <div className={classes} ref={innerRef} onContextMenu={(e) => e.stopPropagation()} {...rest}>
+    <div className={classes} ref={ref} onContextMenu={(e) => e.stopPropagation()} {...rest}>
       {
         isMobile && showMaskOnMobile
           ? <div onClick={handleCloseOnClick} className="ne-context-menu-mask" />
@@ -146,6 +146,6 @@ export const ContextMenu = (props: ContextMenuProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default ContextMenu;
