@@ -29,6 +29,7 @@ export interface ContextMenuProps {
   suffixNode?: ReactNode;
   className?: string;
   items?: ContextMenuItems[];
+  innerRef?: MutableRefObject<HTMLDivElement | null>;
   showMaskOnMobile?: boolean;
   closeContextMenu?: (
     e: MouseEvent,
@@ -38,12 +39,13 @@ export interface ContextMenuProps {
   [key: string]: any;
 }
 
-export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>((props, ref: any = createRef()) => {
+export const ContextMenu = forwardRef((props: ContextMenuProps) => {
   const {
     className,
     children: prefixNode,
     suffixNode,
     items,
+    innerRef = createRef(),
     closeContextMenu,
     showMaskOnMobile,
     ...rest
@@ -54,12 +56,12 @@ export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>((props, 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent<any>) => {
       if (
-        ref.current
-        && e.target !== ref.current
-        && !(ref.current as any).contains(e.target)
+        innerRef.current
+        && e.target !== innerRef.current
+        && !(innerRef.current as any).contains(e.target)
         && closeContextMenu
       ) {
-        closeContextMenu(e, false, ref);
+        closeContextMenu(e, false, innerRef);
       }
     };
 
@@ -71,10 +73,10 @@ export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>((props, 
       document.removeEventListener('contextmenu', handleClickOutside as any);
       document.removeEventListener('keyup', handleClickOutside as any);
     };
-  }, [ ref, closeContextMenu ]);
+  }, [ innerRef, closeContextMenu ]);
 
   const handleCloseOnClick = () => {
-    if (closeContextMenu) closeContextMenu({} as MouseEvent, false, ref);
+    if (closeContextMenu) closeContextMenu({} as MouseEvent, false, innerRef);
   };
 
   const preventScroll: KeyboardEventHandler = (e) => {
@@ -130,7 +132,7 @@ export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>((props, 
   });
 
   return (
-    <div className={classes} ref={ref} onContextMenu={(e) => e.stopPropagation()} {...rest}>
+    <div className={classes} ref={innerRef} onContextMenu={(e) => e.stopPropagation()} {...rest}>
       {
         isMobile && showMaskOnMobile
           ? <div onClick={handleCloseOnClick} className="ne-context-menu-mask" />
