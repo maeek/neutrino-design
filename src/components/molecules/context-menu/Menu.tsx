@@ -38,13 +38,12 @@ export interface ContextMenuProps {
   [key: string]: any;
 }
 
-export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>((props, ref) => {
+export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>((props, ref: any = createRef()) => {
   const {
     className,
     children: prefixNode,
     suffixNode,
     items,
-    innerRef = createRef(),
     closeContextMenu,
     showMaskOnMobile,
     ...rest
@@ -55,12 +54,12 @@ export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>((props, 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent<any>) => {
       if (
-        innerRef.current
-        && e.target !== innerRef.current
-        && !(innerRef.current as any).contains(e.target)
+        ref.current
+        && e.target !== ref.current
+        && !(ref.current as any).contains(e.target)
         && closeContextMenu
       ) {
-        closeContextMenu(e, false, innerRef);
+        closeContextMenu(e, false, ref);
       }
     };
 
@@ -72,10 +71,10 @@ export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>((props, 
       document.removeEventListener('contextmenu', handleClickOutside as any);
       document.removeEventListener('keyup', handleClickOutside as any);
     };
-  }, [ innerRef, closeContextMenu ]);
+  }, [ ref, closeContextMenu ]);
 
   const handleCloseOnClick = () => {
-    if (closeContextMenu) closeContextMenu({} as MouseEvent, false, innerRef);
+    if (closeContextMenu) closeContextMenu({} as MouseEvent, false, ref);
   };
 
   const preventScroll: KeyboardEventHandler = (e) => {
