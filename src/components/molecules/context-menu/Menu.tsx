@@ -6,8 +6,7 @@ import {
   ReactNode,
   createRef,
   useEffect,
-  useRef,
-  forwardRef
+  useRef
 } from 'react';
 import classNames from 'classnames';
 import { useMediaQuery } from 'react-responsive';
@@ -39,7 +38,7 @@ export interface ContextMenuProps {
   [key: string]: any;
 }
 
-export const ContextMenu = forwardRef((props: ContextMenuProps) => {
+export const ContextMenu = (props: ContextMenuProps) => {
   const {
     className,
     children: prefixNode,
@@ -147,6 +146,6 @@ export const ContextMenu = forwardRef((props: ContextMenuProps) => {
       </div>
     </div>
   );
-});
+};
 
 export default ContextMenu;
