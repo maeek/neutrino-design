@@ -36,6 +36,7 @@ export interface ImageContainerProps {
    * Loader that will be displayed when src is provided
    */
   loader?: ReactNode;
+  draggable?: boolean;
 }
 
 export const ImageContainer = (props: ImageContainerProps) => {
@@ -48,6 +49,7 @@ export const ImageContainer = (props: ImageContainerProps) => {
     fallbackSrc,
     onImageLoaded,
     loader = null,
+    draggable = false,
     ...rest
   } = props;
 
@@ -117,9 +119,9 @@ export const ImageContainer = (props: ImageContainerProps) => {
   );
 
   return (
-    <div className={classes} {...rest}>
+    <div className={classes} {...rest} draggable={draggable}>
       <div className="ne-image-content">
-        {loading && loader ? loader : <img src={imageSrc} draggable={false} alt={alt} />}
+        {loading && loader ? loader : <img src={imageSrc} draggable={draggable} alt={alt} />}
       </div>
     </div>
   );
