@@ -6,7 +6,6 @@ export interface HeadingProps {
   children: ReactNode;
   className?: string;
   level?: 1 | 2 | 3 | 4 | 5;
-  [key: string]: any;
 }
 
 export const Heading = (props: HeadingProps) => {

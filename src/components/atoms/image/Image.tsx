@@ -36,7 +36,6 @@ export interface ImageContainerProps {
    * Loader that will be displayed when src is provided
    */
   loader?: ReactNode;
-  [key: string]: any;
 }
 
 export const ImageContainer = (props: ImageContainerProps) => {

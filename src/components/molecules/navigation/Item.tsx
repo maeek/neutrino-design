@@ -18,7 +18,6 @@ export interface NavItemProps extends NavSubItemProps {
   subItems?: NavSubItemProps[];
   collapsible?: boolean;
   dontCollapseActive?: boolean;
-  [key: string]: any;
 }
 
 export const NavItem = (props: NavItemProps) => {

@@ -5,7 +5,6 @@ import './separator.scss';
 export interface SeparatorProps {
   children?: ReactNode;
   className?: string;
-  [key: string]: any;
 }
 
 export const Separator = (props: SeparatorProps) => {

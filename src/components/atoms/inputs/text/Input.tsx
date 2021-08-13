@@ -30,26 +30,33 @@ export interface InputRef {
   element: MutableRefObject<HTMLInputElement> | null;
 }
 
+type InputValidate = (text: string) => boolean;
+
+interface RendererOptions {
+  type?: InputSupportedTypes;
+  required?: boolean;
+  disabled?: boolean;
+  readOnly?: boolean;
+  reset?: () => void;
+  setValue?: (value: string) => void;
+}
 export interface InputProps {
   type?: InputSupportedTypes;
-  // ref?: MutableRefObject<InputRef>;
   name?: string;
   className?: string;
   title?: string;
-  label?: ReactNode;
-
+  renderLabel?: ReactNode | ((value: string, opts?: RendererOptions) => ReactNode);
   value?: string;
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
   readOnly?: boolean;
   clearButtonText?: ReactNode;
-
   onChange?: (value: string) => void;
   onClick?: MouseEventHandler<HTMLDivElement>;
   onSearchClear?: () => void;
-  validate?: (text: string) => boolean;
-  [key: string]: any;
+  validate?: InputValidate;
+  children: ReactNode;
 }
 
 export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: any) => {
@@ -69,7 +76,7 @@ export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: a
     validate,
     clearButtonText = 'Clear',
     children,
-    label,
+    renderLabel,
     ...rest
   } = props;
   const innerRef: MutableRefObject<any> = useRef(null);
@@ -125,7 +132,13 @@ export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: a
   const isValid = required && validateInput(value);
   const isEmpty = value.trim().length === 0;
 
-  const floatingLabel = <span className="ne-input-label-content">{label}</span>;
+  const floatingLabel = (
+    <span className="ne-input-label-content">{
+      typeof renderLabel === 'function'
+        ? renderLabel(value, { type, readOnly, required, disabled, reset, setValue })
+        : renderLabel
+    }</span>
+  );
 
   const validIndicator = (
     <div className="ne-input-validation">
@@ -161,7 +174,7 @@ export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: a
       onClick={onClickHandler}
     >
       <label className="ne-input-label">
-        {label && !placeholder && floatingLabel}
+        {renderLabel && !placeholder && floatingLabel}
         <input
           ref={innerRef}
           type={type === 'search' ? 'text' : type}

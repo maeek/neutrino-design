@@ -26,7 +26,6 @@ export interface CheckboxProps {
   readOnly?: boolean;
 
   onChange?: Function;
-  [key: string]: any;
 }
 
 export const Checkbox = (props: CheckboxProps) => {

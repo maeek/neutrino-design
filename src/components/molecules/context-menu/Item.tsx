@@ -22,7 +22,7 @@ export interface ItemProps {
   closeHandler?: Function;
   disabled?: boolean;
   onKeyUp?: KeyboardEventHandler;
-  [key: string]: any;
+  onKeyDown?: KeyboardEventHandler;
 }
 
 export const Item = forwardRef<HTMLLIElement, ItemProps>((props, ref) => {
@@ -37,6 +37,7 @@ export const Item = forwardRef<HTMLLIElement, ItemProps>((props, ref) => {
     icon,
     iconPosition = 'right',
     onKeyUp,
+    onKeyDown,
     ...rest
   } = props;
 
@@ -73,6 +74,7 @@ export const Item = forwardRef<HTMLLIElement, ItemProps>((props, ref) => {
       className={classes}
       onClick={onClickHandler}
       onKeyUp={onKeyUpHandler}
+      onKeyDown={onKeyDown}
       tabIndex={0}
       title={text}
       data-disabled={!!disabled}

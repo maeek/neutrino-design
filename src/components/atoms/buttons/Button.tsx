@@ -2,13 +2,9 @@ import { KeyboardEvent as ReactKeyboardEvent, MouseEvent, MouseEventHandler, Rea
 import classNames from 'classnames';
 import './styles/button.scss';
 
-export type ButtonTypes = 'link' | 'button';
-export interface ButtonProps {
-  /**
-   * Link type creates a tag surrounding the button element, when button is disabled
-   * the anchor will be hidden
-   */
-  type?: ButtonTypes;
+interface ButtonTypeBase {
+  type: 'button';
+
   onClick?: MouseEventHandler<HTMLDivElement>;
   /**
    * Title that will be displayed on hover, standard browser behaviour
@@ -21,33 +17,43 @@ export interface ButtonProps {
    * Disable buttons onClick and href action
    */
   disabled?: boolean;
+}
 
+export interface ButtonTypeLinkProps extends Omit<ButtonTypeBase, 'type'> {
   /**
+   * Link type creates a tag surrounding the button element, when button is disabled
+   * the anchor will be hidden
+   */
+  type: 'link';
+  /**
+   * Disable buttons onClick and href action
+   */
+  disabled?: boolean;
+   /**
    * Only with type = 'link'
    */
   href?: string;
   /**
-   * Only with type = 'link'
-   */
+    * Only with type = 'link'
+    */
   target?: string;
   /**
    * Only with type = 'link'
    */
   rel?: string;
-  [key: string]: any;
 }
+
+export type ButtonProps = ButtonTypeLinkProps | ButtonTypeBase;
 
 export const Button = (props: ButtonProps) => {
   const {
-    type = 'button',
+    type,
     onClick,
     title,
     children,
     className,
     disabled = false,
-    href,
-    target,
-    rel = 'noreferrer',
+    
     ...rest
   } = props;
 
@@ -86,21 +92,26 @@ export const Button = (props: ButtonProps) => {
     ...(className && { [ className ]: true })
   });
 
+  let btnNode = buttonBody;
+
+  if (type === 'link' && !disabled) {
+    const { href, target, rel } = rest as ButtonTypeLinkProps;
+    btnNode = (
+      <a
+        className="ne-button-anchor"
+        href={href}
+        target={target}
+        title={title}
+        rel={rel}
+      >
+        {buttonBody}
+      </a>
+    );
+  }
+
   return (
     <div className={containerClasses}>
-      {type === 'link' && !disabled ? (
-        <a
-          className="ne-button-anchor"
-          href={href}
-          target={target}
-          title={title}
-          rel={rel}
-        >
-          {buttonBody}
-        </a>
-      ) : (
-        buttonBody
-      )}
+      {btnNode}
     </div>
   );
 };

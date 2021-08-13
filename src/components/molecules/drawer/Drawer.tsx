@@ -33,10 +33,7 @@ export interface DrawerProps {
    * Position where the drawer will be displayed
    */
   position?: 'left' | 'right' | 'top' | 'bottom';
-  /**
-   * Any additional props that can be passed to drawer element
-   */
-  [key: string]: any;
+  style?: CSSProperties
 }
 
 export const Drawer = (props: DrawerProps) => {
@@ -46,7 +43,7 @@ export const Drawer = (props: DrawerProps) => {
     isOpened,
     onClose,
     showMask,
-    animationSpeed = 200,
+    animationSpeed = 0,
     position = 'right',
     style,
     ...rest
@@ -70,7 +67,7 @@ export const Drawer = (props: DrawerProps) => {
     isOpened && 'animate'
   );
 
-  const joinedStyles: CSSProperties = {
+  const joinedStyles = {
     ...style,
     '--animation-speed': `${animationSpeed}ms`
   };
@@ -87,7 +84,7 @@ export const Drawer = (props: DrawerProps) => {
         )
       }
       {
-        shouldRender && (
+        (
           <aside
             ref={ref}
             className={drawerClasses}

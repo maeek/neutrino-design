@@ -22,7 +22,7 @@ export interface AvatarProps {
   /**
    * Children that will be rendered below the avatar
    */
-  children?: ReactNode | ((url: string) => ReactNode);
+  children?: ReactNode | ((url?: string) => ReactNode);
   /**
    * Type of avatar appereance, defaults to 'round'
    */
@@ -51,7 +51,6 @@ export interface AvatarProps {
    * No loader will be displayed if omitted
    */
   loader?: ReactNode;
-  [key: string]: any;
 }
 
 export const Avatar = (props: AvatarProps) => {
@@ -80,38 +79,42 @@ export const Avatar = (props: AvatarProps) => {
       <div className={classes} tabIndex={tabIndex}>
         <ImageContainer src={src || ''} alt={name} loader={loader} draggable={false} />
       </div>
-      {children}
+      {
+        typeof children === 'function'
+          ? children(src)
+          : children
+      }
     </div>
   );
 };
 
-const getTypeClass = (type: AvatarTypes) => {
+const getTypeClass = (type: AvatarTypes, baseClass = 'ne-avatar-content') => {
   switch(type) {
   case 'round':
-    return 'ne-avatar-content--round';
+    return`${baseClass}--round`;
   case 'rounded':
-    return 'ne-avatar-content--rounded';
+    return`${baseClass}--rounded`;
   case 'square':
-    return 'ne-avatar-content--square';
+    return`${baseClass}--square`;
   default:
-    return 'ne-avatar-content--round';
+    return`${baseClass}--round`;
   }
 };
 
-const getSizeClass = (size: AvatarSizes) => {
+const getSizeClass = (size: AvatarSizes, baseClass = 'ne-avatar-content') => {
   switch(size) {
   case 'small':
-    return 'ne-avatar-content--small';
+    return `${baseClass}--small`;
   case 'medium':
-    return 'ne-avatar-content--medium';
+    return `${baseClass}--medium`;
   case 'large':
-    return 'ne-avatar-content--large';
+    return `${baseClass}--large`;
   case 'larger':
-    return 'ne-avatar-content--larger';
+    return `${baseClass}--larger`;
   case 'extra-large':
-    return 'ne-avatar-content--extra-large';
+    return `${baseClass}--extra-large`;
   default:
-    return 'ne-avatar-content--small';
+    return `${baseClass}--small`;
   }
 };
 

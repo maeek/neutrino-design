@@ -1,7 +1,8 @@
+@use '../../../../styles/main' as *;
 @import '../../../../styles/colors';
 @import '../../../../styles/mixins';
 
-.ne {
+.#{$prefix} {
   &-input-slider {
     margin-top: 1rem;
 
@@ -48,7 +49,7 @@
         left: 0.1rem;
         padding: 0.2rem 0;
         flex-direction: column;
-    box-sizing: border-box;
+        box-sizing: border-box;
 
         &-step {
           top: var(--step-pos);
@@ -76,13 +77,13 @@
         // display: flex;
         // justify-content: space-between;
         // align-items: center;
-        
+
         &-step {
           width: 0.5rem;
           height: 0.5rem;
           border-radius: 50%;
           background-color: transparentize($gray, 0.8);
-          transition: background-color .1s;
+          transition: background-color 0.1s;
           user-select: none;
           top: 0;
           position: absolute;
@@ -106,7 +107,7 @@
             opacity: 0.6;
             font-size: 0.8rem;
 
-            >svg {
+            > svg {
               font-size: inherit;
             }
 
@@ -116,20 +117,20 @@
               transform: translateY(-50%);
               float: right;
             }
-      
+
             &--top {
               top: -1.2rem;
               left: 50%;
               transform: translateX(-50%);
             }
-      
+
             &--right {
               top: 50%;
               right: -0.8rem;
               left: unset;
               transform: translateY(-50%);
             }
-      
+
             &--bottom {
               bottom: -1.2rem;
               left: 50%;
@@ -185,7 +186,7 @@
         align-items: center;
         font-size: 0.8rem;
 
-        >svg {
+        > svg {
           font-size: inherit;
         }
       }

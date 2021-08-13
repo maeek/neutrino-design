@@ -4,7 +4,6 @@ import './loader.scss';
 export interface LoaderProps {
   isVisible?: boolean;
   className?: string | { [key: string]: boolean };
-  [key: string]: any;
 }
 
 export const Loader = (props: LoaderProps) => {

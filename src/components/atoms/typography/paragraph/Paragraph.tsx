@@ -7,7 +7,6 @@ export interface ParagraphProps {
   children: ReactNode;
   className?: string;
   pre?: boolean;
-  [key: string]: any;
 }
 
 export const Paragraph = (props: ParagraphProps) => {

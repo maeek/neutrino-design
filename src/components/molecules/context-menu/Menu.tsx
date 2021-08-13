@@ -14,13 +14,15 @@ import Item from './Item';
 import './context-menu.scss';
 
 export interface ContextMenuItems {
-  index?: number;
   text: string;
-  node?: ReactNode;
+  render?: ReactNode
+    | ((
+        itemRef: MutableRefObject<HTMLLIElement>,
+        menuRef: MutableRefObject<HTMLDivElement | null>
+      ) => ReactNode);
   icon?: ReactNode;
   onClick?: MouseEventHandler<HTMLLIElement>;
   closeOnClick?: boolean;
-  [key: string]: any;
 }
 
 export interface ContextMenuProps {
@@ -35,7 +37,6 @@ export interface ContextMenuProps {
     clickedInsideContextMenu: boolean,
     elementRef?: MutableRefObject<HTMLDivElement | null>
   ) => void;
-  [key: string]: any;
 }
 
 export const ContextMenu = (props: ContextMenuProps) => {
@@ -120,13 +121,17 @@ export const ContextMenu = (props: ContextMenuProps) => {
     return (
       <Item
         ref={tmpRef}
-        key={item.index + item.text}
+        key={item.text}
         closeHandler={handleCloseOnClick}
         onKeyUp={onKeyUp(i)}
         onKeyDown={preventScroll}
         {...item}
       >
-        {item.node}
+        {
+          typeof item.render === 'function'
+            ? item.render(tmpRef, innerRef)
+            : item.render
+        }
       </Item>);
   });
 

@@ -1,15 +1,14 @@
 import classNames from 'classnames';
-import { MouseEvent } from 'react';
-import './code-line.scss';
+import { MouseEvent, ReactNode } from 'react';
 import { Text } from '../';
+import './code-line.scss';
 
 export interface CodeLineProps {
-  children: string;
+  children: ReactNode;
   className?: string;
   onClick?: (e: MouseEvent<HTMLPreElement>) => void;
   wrap?: boolean;
   highlight?: boolean;
-  [key: string]: any;
 }
 
 export const CodeLine = (props: CodeLineProps) => {

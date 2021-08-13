@@ -21,7 +21,6 @@ export interface BreadcrumbItemProps {
   onClick?: MouseEventHandler<HTMLLIElement>;
   onKeyUp?: KeyboardEventHandler;
   disabled?: boolean;
-  [key: string]: any;
 }
 
 export const Item = (props: BreadcrumbItemProps) => {
