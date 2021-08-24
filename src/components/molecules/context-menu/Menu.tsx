@@ -11,10 +11,10 @@ import {
 } from 'react';
 import classNames from 'classnames';
 import { useMediaQuery } from 'react-responsive';
-import Item from './Item';
+import Item, { ItemProps } from './Item';
 import './context-menu.scss';
 
-export interface ContextMenuItems {
+export interface ContextMenuItems extends ItemProps {
   text: string;
   render?: ReactNode
     | ((
