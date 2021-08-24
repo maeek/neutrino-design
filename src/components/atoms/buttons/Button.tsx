@@ -1,4 +1,4 @@
-import { KeyboardEvent as ReactKeyboardEvent, MouseEvent, MouseEventHandler, ReactNode } from 'react';
+import { CSSProperties, KeyboardEvent as ReactKeyboardEvent, MouseEvent, MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
 import './styles/button.scss';
 
@@ -17,6 +17,7 @@ interface ButtonTypeBase {
    * Disable buttons onClick and href action
    */
   disabled?: boolean;
+  style?: CSSProperties;
 }
 
 export interface ButtonTypeLinkProps extends Omit<ButtonTypeBase, 'type'> {
@@ -41,6 +42,7 @@ export interface ButtonTypeLinkProps extends Omit<ButtonTypeBase, 'type'> {
    * Only with type = 'link'
    */
   rel?: string;
+  style?: CSSProperties;
 }
 
 export type ButtonProps = ButtonTypeLinkProps | ButtonTypeBase;

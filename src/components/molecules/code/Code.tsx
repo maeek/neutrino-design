@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { CSSProperties, MouseEvent } from 'react';
 import classNames from 'classnames';
 import CodeLine from '../../atoms/typography/code/Code-line';
 import './code.scss';
@@ -9,6 +9,7 @@ export interface CodeProps {
   numbers?: boolean;
   onLineClick?: (line: string, lineNumber: number, e: MouseEvent<HTMLSpanElement>) => void
   onNumberClick?: (line: string, lineNumber: number, e: MouseEvent<HTMLSpanElement>) => void
+  style?: CSSProperties;
 }
 
 export const Code = (props: CodeProps) => {

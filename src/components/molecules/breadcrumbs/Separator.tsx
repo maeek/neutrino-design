@@ -1,10 +1,11 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import classNames from 'classnames';
 import './separator.scss';
 
 export interface SeparatorProps {
   children?: ReactNode;
   className?: string;
+  style?: CSSProperties;
 }
 
 export const Separator = (props: SeparatorProps) => {

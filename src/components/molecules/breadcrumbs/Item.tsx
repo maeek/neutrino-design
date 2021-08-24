@@ -1,4 +1,5 @@
 import {
+  CSSProperties,
   KeyboardEvent as ReactKeyboardEvent,
   KeyboardEventHandler,
   MouseEvent,
@@ -21,6 +22,7 @@ export interface BreadcrumbItemProps {
   onClick?: MouseEventHandler<HTMLLIElement>;
   onKeyUp?: KeyboardEventHandler;
   disabled?: boolean;
+  style?: CSSProperties;
 }
 
 export const Item = (props: BreadcrumbItemProps) => {

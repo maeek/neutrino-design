@@ -1,4 +1,4 @@
-import { memo, ReactNode, useEffect, useState } from 'react';
+import { CSSProperties, memo, ReactNode, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import './image.scss';
 
@@ -37,6 +37,7 @@ export interface ImageContainerProps {
    */
   loader?: ReactNode;
   draggable?: boolean;
+  style?: CSSProperties;
 }
 
 export const ImageContainer = (props: ImageContainerProps) => {

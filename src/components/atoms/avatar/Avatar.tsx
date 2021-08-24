@@ -1,4 +1,4 @@
-import { ReactNode, memo } from 'react';
+import { ReactNode, memo, CSSProperties } from 'react';
 import classnames from 'classnames';
 import ImageContainer from '../image/Image';
 import './styles/avatar.scss';
@@ -51,6 +51,7 @@ export interface AvatarProps {
    * No loader will be displayed if omitted
    */
   loader?: ReactNode;
+  style?: CSSProperties;
 }
 
 export const Avatar = (props: AvatarProps) => {

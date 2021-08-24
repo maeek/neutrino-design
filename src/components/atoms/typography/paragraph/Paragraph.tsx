@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import Text from '../text/Text';
 import './paragraph.scss';
 
@@ -7,6 +7,7 @@ export interface ParagraphProps {
   children: ReactNode;
   className?: string;
   pre?: boolean;
+  style?: CSSProperties;
 }
 
 export const Paragraph = (props: ParagraphProps) => {

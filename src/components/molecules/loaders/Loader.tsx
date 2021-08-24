@@ -1,9 +1,11 @@
 import classNames from 'classnames';
+import { CSSProperties } from 'react';
 import './loader.scss';
 
 export interface LoaderProps {
   isVisible?: boolean;
   className?: string | { [key: string]: boolean };
+  style?: CSSProperties;
 }
 
 export const Loader = (props: LoaderProps) => {

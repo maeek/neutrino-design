@@ -6,7 +6,8 @@ import {
   ReactNode,
   createRef,
   useEffect,
-  useRef
+  useRef,
+  CSSProperties
 } from 'react';
 import classNames from 'classnames';
 import { useMediaQuery } from 'react-responsive';
@@ -37,6 +38,7 @@ export interface ContextMenuProps {
     clickedInsideContextMenu: boolean,
     elementRef?: MutableRefObject<HTMLDivElement | null>
   ) => void;
+  style?: CSSProperties;
 }
 
 export const ContextMenu = (props: ContextMenuProps) => {

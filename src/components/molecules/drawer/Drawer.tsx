@@ -33,7 +33,7 @@ export interface DrawerProps {
    * Position where the drawer will be displayed
    */
   position?: 'left' | 'right' | 'top' | 'bottom';
-  style?: CSSProperties
+  style?: CSSProperties;
 }
 
 export const Drawer = (props: DrawerProps) => {

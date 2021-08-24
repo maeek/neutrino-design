@@ -3,7 +3,8 @@ import {
   MutableRefObject,
   useEffect,
   useRef,
-  KeyboardEvent as ReactKeyboardEvent
+  KeyboardEvent as ReactKeyboardEvent,
+  CSSProperties
 } from 'react';
 import classNames from 'classnames';
 import useCheckbox from '../../../../hooks/inputs/useCheckbox';
@@ -26,6 +27,7 @@ export interface CheckboxProps {
   readOnly?: boolean;
 
   onChange?: Function;
+  style?: CSSProperties;
 }
 
 export const Checkbox = (props: CheckboxProps) => {
@@ -38,6 +40,7 @@ export const Checkbox = (props: CheckboxProps) => {
     readOnly,
     onChange,
     value: initValue,
+    style,
     ...rest
   } = props;
   const innerRef = useRef(null);
@@ -110,6 +113,7 @@ export const Checkbox = (props: CheckboxProps) => {
           onClick={onClick}
           tabIndex={0}
           role="checkbox"
+          style={style}
         >
           {required && !checked && '!'}
         </div>

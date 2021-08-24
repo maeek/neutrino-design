@@ -5,7 +5,8 @@ import {
   MouseEventHandler,
   ReactNode,
   forwardRef,
-  KeyboardEventHandler
+  KeyboardEventHandler,
+  CSSProperties
 } from 'react';
 import { Text } from '../../atoms/typography';
 import './item.scss';
@@ -23,6 +24,7 @@ export interface ItemProps {
   disabled?: boolean;
   onKeyUp?: KeyboardEventHandler;
   onKeyDown?: KeyboardEventHandler;
+  style?: CSSProperties;
 }
 
 export const Item = forwardRef<HTMLLIElement, ItemProps>((props, ref) => {

@@ -1,11 +1,12 @@
 import classNames from 'classnames';
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import './heading.scss';
 
 export interface HeadingProps {
   children: ReactNode;
   className?: string;
   level?: 1 | 2 | 3 | 4 | 5;
+  style?: CSSProperties;
 }
 
 export const Heading = (props: HeadingProps) => {

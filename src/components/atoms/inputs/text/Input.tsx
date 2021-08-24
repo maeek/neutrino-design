@@ -7,7 +7,8 @@ import {
   MouseEvent,
   KeyboardEvent as ReactKeyboardEvent,
   useCallback,
-  forwardRef
+  forwardRef,
+  CSSProperties
 } from 'react';
 import classNames from 'classnames';
 import useInput from '../../../../hooks/inputs/useInput';
@@ -57,6 +58,7 @@ export interface InputProps {
   onSearchClear?: () => void;
   validate?: InputValidate;
   children: ReactNode;
+  style?: CSSProperties;
 }
 
 export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: any) => {
@@ -77,6 +79,7 @@ export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: a
     clearButtonText = 'Clear',
     children,
     renderLabel,
+    style,
     ...rest
   } = props;
   const innerRef: MutableRefObject<any> = useRef(null);
@@ -172,6 +175,7 @@ export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: a
       data-valid={isValid}
       data-empty={isEmpty}
       onClick={onClickHandler}
+      style={style}
     >
       <label className="ne-input-label">
         {renderLabel && !placeholder && floatingLabel}

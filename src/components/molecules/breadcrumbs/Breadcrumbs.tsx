@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactNode } from 'react';
+import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
 import './breadcrumbs.scss';
 import Item from './Item';
@@ -15,25 +15,27 @@ export interface BreadcrumbsProps {
   items: Breadcrumb[];
   className?: string;
   separator?: ReactNode;
+  style?: CSSProperties;
 }
 
 export const Breadcrumbs = (props: BreadcrumbsProps) => {
-  const { items, className, separator } = props;
+  const { items, className, separator, style } = props;
 
   const classes = classNames('ne-breadcrumbs', className);
   return (
-    <ul className={classes}>
-      {items.map((item, i, arr) => {
+    <ul className={classes} style={style}>
+      {items.map(({ text, menuItems, ...item }, i, arr) => {
         const disabled = i === arr.length - 1;
 
         return (
           <>
             <Item
-              key={item.text}
+              key={text}
               disabled={disabled}
-              moreMenuItems={item.menuItems}
+              moreMenuItems={menuItems}
+              {...item}
             >
-              {item.text}
+              {text}
             </Item>
             { !disabled && <Separator key={i}>{separator}</Separator> }
           </>

@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { CSSProperties, ReactNode, useState } from 'react';
 import classnames from 'classnames';
 import './side-content.scss';
 
@@ -8,10 +8,11 @@ export interface LayoutSideContentProps {
   className?: string;
   hideScroll?: boolean;
   fallbackToBurgerMenu?: boolean;
+  style?: CSSProperties;
 }
 
 export const LayoutSideContent = (props: LayoutSideContentProps) => {
-  const { children: content, className, sideNode, hideScroll } = props;
+  const { children: content, className, sideNode, hideScroll, style } = props;
   const [ isOver, setIsOver ] = useState(false);
 
   const handleOnOver = () => {
@@ -28,7 +29,7 @@ export const LayoutSideContent = (props: LayoutSideContentProps) => {
     className
   );
   return (
-    <div className={classes}>
+    <div className={classes} style={style}>
       <div
         className="ne-layout-side-content-side"
         onMouseOut={handleOnOut}

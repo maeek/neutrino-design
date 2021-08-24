@@ -1,4 +1,11 @@
-import { KeyboardEvent as ReactKeyboardEvent, MouseEvent, MouseEventHandler, ReactNode, useState } from 'react';
+import {
+  CSSProperties,
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent,
+  MouseEventHandler,
+  ReactNode,
+  useState
+} from 'react';
 import classNames from 'classnames';
 import './item.scss';
 import { Text } from '../../atoms/typography';
@@ -12,6 +19,7 @@ export interface NavSubItemProps {
   icon?: ReactNode;
   className?: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
+  style?: CSSProperties;
 }
 
 export interface NavItemProps extends NavSubItemProps {
@@ -28,7 +36,8 @@ export const NavItem = (props: NavItemProps) => {
     active,
     subItems,
     onClick,
-    collapsible
+    collapsible,
+    style
   } = props;
 
   const [ isExpanded, setIsExpanded ] = useState(false);
@@ -65,7 +74,7 @@ export const NavItem = (props: NavItemProps) => {
     className
   );
   return (
-    <li className={classes} data-active={active}>
+    <li className={classes} data-active={active} style={style}>
       <div className="ne-nav-item-content">
         <div className="ne-nav-item-content-wrapper" onClick={onClickHandler} onKeyUp={onKeyUpHandler} tabIndex={0}>
           {iconNode}

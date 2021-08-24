@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import './text.scss';
 
 export type TextType = 'primary' |
@@ -20,6 +20,7 @@ export interface TextProps {
   lineThrough?: boolean;
   link?: string;
   pre?: boolean;
+  style?: CSSProperties;
 }
 
 export const Text = (props: TextProps) => {
