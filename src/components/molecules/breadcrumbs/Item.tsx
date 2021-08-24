@@ -23,6 +23,7 @@ export interface BreadcrumbItemProps {
   onKeyUp?: KeyboardEventHandler;
   disabled?: boolean;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Item = (props: BreadcrumbItemProps) => {

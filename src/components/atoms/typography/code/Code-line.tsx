@@ -10,6 +10,7 @@ export interface CodeLineProps {
   wrap?: boolean;
   highlight?: boolean;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const CodeLine = (props: CodeLineProps) => {

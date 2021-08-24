@@ -7,6 +7,7 @@ import './top-content-footer.scss';
 export interface LayoutTopContentFooterProps extends LayoutTopContentProps {
   footerNode: ReactNode;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const LayoutTopContentFooter = (props: LayoutTopContentFooterProps) => {

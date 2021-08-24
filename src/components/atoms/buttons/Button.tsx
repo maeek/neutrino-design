@@ -18,6 +18,7 @@ interface ButtonTypeBase {
    */
   disabled?: boolean;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export interface ButtonTypeLinkProps extends Omit<ButtonTypeBase, 'type'> {
@@ -43,6 +44,7 @@ export interface ButtonTypeLinkProps extends Omit<ButtonTypeBase, 'type'> {
    */
   rel?: string;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export type ButtonProps = ButtonTypeLinkProps | ButtonTypeBase;

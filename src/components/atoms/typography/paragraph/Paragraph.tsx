@@ -8,6 +8,7 @@ export interface ParagraphProps {
   className?: string;
   pre?: boolean;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Paragraph = (props: ParagraphProps) => {

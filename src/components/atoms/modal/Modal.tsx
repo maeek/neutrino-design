@@ -5,6 +5,7 @@ export interface ModalProps {
   mountPointId?: string;
   className?: string;
   children?: ReactNode;
+  [key: string]: any;
 }
 
 export const Modal = (props: ModalProps) => {

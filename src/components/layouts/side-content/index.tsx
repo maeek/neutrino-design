@@ -9,6 +9,7 @@ export interface LayoutSideContentProps {
   hideScroll?: boolean;
   fallbackToBurgerMenu?: boolean;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const LayoutSideContent = (props: LayoutSideContentProps) => {

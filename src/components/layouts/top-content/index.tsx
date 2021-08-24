@@ -7,6 +7,7 @@ export interface LayoutTopContentProps {
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const LayoutTopContent = (props: LayoutTopContentProps) => {

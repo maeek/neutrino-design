@@ -39,6 +39,7 @@ export interface ContextMenuProps {
     elementRef?: MutableRefObject<HTMLDivElement | null>
   ) => void;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const ContextMenu = (props: ContextMenuProps) => {

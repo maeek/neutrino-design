@@ -28,6 +28,7 @@ export interface CheckboxProps {
 
   onChange?: Function;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Checkbox = (props: CheckboxProps) => {

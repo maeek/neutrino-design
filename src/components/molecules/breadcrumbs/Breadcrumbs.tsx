@@ -16,6 +16,7 @@ export interface BreadcrumbsProps {
   className?: string;
   separator?: ReactNode;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Breadcrumbs = (props: BreadcrumbsProps) => {

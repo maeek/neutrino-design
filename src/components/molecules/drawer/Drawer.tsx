@@ -34,6 +34,7 @@ export interface DrawerProps {
    */
   position?: 'left' | 'right' | 'top' | 'bottom';
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Drawer = (props: DrawerProps) => {

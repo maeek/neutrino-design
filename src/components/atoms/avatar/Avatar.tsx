@@ -52,6 +52,7 @@ export interface AvatarProps {
    */
   loader?: ReactNode;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Avatar = (props: AvatarProps) => {

@@ -10,6 +10,7 @@ export interface CodeProps {
   onLineClick?: (line: string, lineNumber: number, e: MouseEvent<HTMLSpanElement>) => void
   onNumberClick?: (line: string, lineNumber: number, e: MouseEvent<HTMLSpanElement>) => void
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Code = (props: CodeProps) => {

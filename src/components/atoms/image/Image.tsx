@@ -38,6 +38,7 @@ export interface ImageContainerProps {
   loader?: ReactNode;
   draggable?: boolean;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const ImageContainer = (props: ImageContainerProps) => {

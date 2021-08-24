@@ -7,6 +7,7 @@ export interface HeadingProps {
   className?: string;
   level?: 1 | 2 | 3 | 4 | 5;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Heading = (props: HeadingProps) => {

@@ -6,6 +6,7 @@ export interface LayoutCenterProps {
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const LayoutCenter = (props: LayoutCenterProps) => {

@@ -25,6 +25,7 @@ export interface ItemProps {
   onKeyUp?: KeyboardEventHandler;
   onKeyDown?: KeyboardEventHandler;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Item = forwardRef<HTMLLIElement, ItemProps>((props, ref) => {

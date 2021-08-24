@@ -21,6 +21,7 @@ export interface TextProps {
   link?: string;
   pre?: boolean;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Text = (props: TextProps) => {

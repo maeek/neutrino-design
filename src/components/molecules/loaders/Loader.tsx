@@ -6,6 +6,7 @@ export interface LoaderProps {
   isVisible?: boolean;
   className?: string | { [key: string]: boolean };
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Loader = (props: LoaderProps) => {

@@ -7,6 +7,7 @@ import './top-side-content.scss';
 export interface LayoutTopSideContentProps extends LayoutTopContentProps {
   sideNode: ReactNode;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const LayoutTopSideContent = (props: LayoutTopSideContentProps) => {

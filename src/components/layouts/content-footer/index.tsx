@@ -7,6 +7,7 @@ export interface LayoutContentFooterProps {
   footerNode: ReactNode;
   className?: string;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const LayoutContentFooter = (props: LayoutContentFooterProps) => {

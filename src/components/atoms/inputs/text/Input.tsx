@@ -59,6 +59,7 @@ export interface InputProps {
   validate?: InputValidate;
   children: ReactNode;
   style?: CSSProperties;
+  [key: string]: any;
 }
 
 export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: any) => {
