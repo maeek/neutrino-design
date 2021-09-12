@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export interface ModalProps {
@@ -10,8 +10,8 @@ export interface ModalProps {
 
 export const Modal = (props: ModalProps) => {
   const { mountPointId = 'ne-portal', children, className } = props;
-  const mountPointRef = useRef(null);
-  const [ portal, setPortal ] = useState(null);
+  const mountPointRef = useRef<HTMLDivElement>(null);
+  const [ portal, setPortal ] = useState<HTMLDivElement>(null as unknown as HTMLDivElement);
 
   useEffect(() => {
     const existingMountPoint = document.getElementById(mountPointId);
@@ -20,20 +20,20 @@ export const Modal = (props: ModalProps) => {
       const mountPoint = document.createElement('div');
       mountPoint.id = mountPointId;
       document.body.appendChild(mountPoint);
-      mountPointRef.current = mountPoint;
+      (mountPointRef as MutableRefObject<HTMLDivElement>).current = mountPoint;
     } else {
-      mountPointRef.current = existingMountPoint;
+      (mountPointRef as MutableRefObject<HTMLDivElement>).current = existingMountPoint as HTMLDivElement;
     }
 
     const portalNode = document.createElement('div');
     portalNode.classList.add('ne-modal');
-    portalNode.classList.add(className);
-    mountPointRef.current.appendChild(portalNode);;
+    portalNode.classList.add(className as string);
+    (mountPointRef as MutableRefObject<HTMLDivElement>).current.appendChild(portalNode);;
     setPortal(portalNode);
 
     return () => {
-      mountPointRef.current.removeChild(portalNode);
-      setPortal(null);
+      (mountPointRef as MutableRefObject<HTMLDivElement>).current.removeChild(portalNode);
+      setPortal(null as unknown as HTMLDivElement);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ mountPointId, className ]);
