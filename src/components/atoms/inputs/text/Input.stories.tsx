@@ -19,7 +19,7 @@ export const InputDynamicLabel = Template.bind({});
 InputDynamicLabel.args = {
   type: 'text',
   className: 'ne-input-story',
-  label: 'Username'
+  renderLabel: 'Username'
 };
 
 export const InputPlaceholder = Template.bind({});
@@ -33,7 +33,7 @@ export const InputSearch = Template.bind({});
 InputSearch.args = {
   type: 'search',
   className: 'ne-input-story',
-  label: 'Search'
+  renderLabel: 'Search'
 };
 
 export const InputRequired = Template.bind({});
@@ -66,5 +66,5 @@ InputCustomValidation.args = {
   className: 'ne-input-story',
   required: true,
   validate: (text: string) => text === 'foo bar',
-  label: 'Only "foo bar" string will be valid'
+  renderLabel: 'Only "foo bar" string will be valid'
 };
