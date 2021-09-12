@@ -104,6 +104,7 @@ export const ImageContainer = (props: ImageContainerProps) => {
             failLoad();
           });
       } else {
+        setImageSrc(src);
         setLoading(false);
       }
     } else {

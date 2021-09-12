@@ -1,6 +1,6 @@
 import { ReactNode, memo, CSSProperties } from 'react';
 import classnames from 'classnames';
-import ImageContainer from '../image/Image';
+import { ImageContainer } from '../image/Image';
 import './styles/avatar.scss';
 
 export type AvatarTypes = 'round' | 'rounded' | 'square';
