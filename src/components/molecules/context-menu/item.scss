@@ -14,13 +14,13 @@ $focusColor: $lighterBlue;
     align-items: center;
     margin: 0;
     border: 0;
-    padding: 0.4rem 0.7rem;
+    padding: 0.4rem 1.4rem;
     width: 100%;
     cursor: pointer;
     color: $color;
     @include boxSizing;
     @include defaultFont;
-    
+
     &-text {
       font-size: 0.75rem;
       font-weight: 400;
@@ -39,7 +39,7 @@ $focusColor: $lighterBlue;
         margin-left: 0.8rem;
       }
 
-      >svg {
+      > svg {
         font-size: inherit;
       }
     }
@@ -58,8 +58,9 @@ $focusColor: $lighterBlue;
       background: lighten($darkerGray, 2);
       color: $focusColor;
     }
-    
-    &:focus > &-text, &:focus > &-icon {
+
+    &:focus > &-text,
+    &:focus > &-icon {
       color: $focusColor;
     }
   }
