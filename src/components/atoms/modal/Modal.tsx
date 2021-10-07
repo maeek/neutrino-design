@@ -27,7 +27,9 @@ export const Modal = (props: ModalProps) => {
 
     const portalNode = document.createElement('div');
     portalNode.classList.add('ne-modal');
-    portalNode.classList.add(className as string);
+    className?.trim().split(' ').filter((e) => e).forEach((e: string) => {
+      portalNode.classList.add(e);
+    });
     (mountPointRef as MutableRefObject<HTMLDivElement>).current.appendChild(portalNode);;
     setPortal(portalNode);
 
