@@ -26,8 +26,8 @@ $focusColor: $lighterBlue;
       position: relative;
 
       @media (max-width: 768px) {
+        max-width: 600px;
         max-width: calc(100% - 1rem);
-        width: 600px;
         margin: 0 0.5rem;
         position: sticky;
       }
