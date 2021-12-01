@@ -70,6 +70,8 @@ export const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
   }, [ initValue, onChange, setChecked ]);
 
   const onClick = () => {
+    if (disabled || readOnly) return;
+
     setChecked(!checked);
   };
 
