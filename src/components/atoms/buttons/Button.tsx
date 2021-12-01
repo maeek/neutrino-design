@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import './styles/button.scss';
 
 interface ButtonTypeBase {
-  type: 'button';
+  type?: 'button';
 
   onClick?: MouseEventHandler<HTMLDivElement>;
   /**
@@ -26,7 +26,7 @@ export interface ButtonTypeLinkProps extends Omit<ButtonTypeBase, 'type'> {
    * Link type creates a tag surrounding the button element, when button is disabled
    * the anchor will be hidden
    */
-  type: 'link';
+  type?: 'link';
   /**
    * Disable buttons onClick and href action
    */
@@ -57,7 +57,6 @@ export const Button = (props: ButtonProps) => {
     children,
     className,
     disabled = false,
-    
     ...rest
   } = props;
 
