@@ -1,16 +1,17 @@
 import {
-  createRef,
   MutableRefObject,
   useEffect,
   useRef,
   KeyboardEvent as ReactKeyboardEvent,
-  CSSProperties
+  CSSProperties,
+  forwardRef,
+  useImperativeHandle
 } from 'react';
 import classNames from 'classnames';
 import useCheckbox from '../../../../hooks/inputs/useCheckbox';
 import './checkbox.scss';
 
-interface CheckboxRef {
+export interface CheckboxRef {
   checked: boolean;
   setChecked: any;
   element: MutableRefObject<HTMLInputElement> | null;
@@ -31,9 +32,8 @@ export interface CheckboxProps {
   [key: string]: any;
 }
 
-export const Checkbox = (props: CheckboxProps) => {
+export const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
   const {
-    ref = createRef(),
     name,
     className,
     required,
@@ -44,7 +44,7 @@ export const Checkbox = (props: CheckboxProps) => {
     style,
     ...rest
   } = props;
-  const innerRef = useRef(null);
+  const innerRef = useRef<HTMLInputElement>(null);
   const { checked, setChecked, bind } = useCheckbox(
     initValue,
     readOnly || disabled
@@ -54,15 +54,20 @@ export const Checkbox = (props: CheckboxProps) => {
     if (onChange) onChange(checked);
   }, [ onChange, checked ]);
 
+  useImperativeHandle(ref, () => ({
+    checked,
+    setChecked,
+    element: innerRef
+  }));
+
+  /**
+   * Define behaviour for controlled component
+   */
   useEffect(() => {
-    if (innerRef.current) {
-      (ref.current as CheckboxRef) = {
-        checked,
-        setChecked,
-        element: innerRef.current
-      };
+    if (!onChange) {
+      setChecked(!!initValue);
     }
-  }, [ innerRef, checked, setChecked, ref ]);
+  }, [ initValue, onChange, setChecked ]);
 
   const onClick = () => {
     setChecked(!checked);
@@ -96,7 +101,7 @@ export const Checkbox = (props: CheckboxProps) => {
     >
       <input
         className="ne-checkbox-control"
-        ref={innerRef}
+        ref={innerRef as any}
         type="checkbox"
         name={name}
         required={required}
@@ -121,6 +126,6 @@ export const Checkbox = (props: CheckboxProps) => {
       </div>
     </label>
   );
-};
+});
 
 export default Checkbox;
