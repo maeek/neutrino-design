@@ -4,14 +4,14 @@ import Input from './Input';
 
 describe('atoms/input/text', () => {
   it('should render input with label', () => {
-    render(<Input label="Input" />);
-    
+    render(<Input renderLabel="Input" />);
+
     expect(screen.getByLabelText('Input')).toBeInTheDocument();
   });
 
   it('should render input with placeholder', () => {
     render(<Input placeholder="Input" />);
-    
+
     expect(screen.getByPlaceholderText('Input')).toBeInTheDocument();
   });
 
@@ -19,7 +19,7 @@ describe('atoms/input/text', () => {
     const onChangeFn = jest.fn();
 
     render(<Input onChange={onChangeFn} data-testid="inputTest" />);
-    
+
     userEvent.type(screen.getByTestId('inputTest'), 'test');
 
     expect(onChangeFn).toHaveBeenCalledTimes(5);
@@ -29,7 +29,7 @@ describe('atoms/input/text', () => {
     const onChangeFn = jest.fn();
 
     render(<Input onChange={onChangeFn} disabled value="test" data-testid="inputTest" />);
-    
+
     userEvent.type(screen.getByTestId('inputTest'), 'something different');
 
     expect(onChangeFn).toHaveBeenCalledTimes(1);
@@ -39,7 +39,7 @@ describe('atoms/input/text', () => {
     const onChangeFn = jest.fn();
 
     render(<Input onChange={onChangeFn} readOnly value="test" data-testid="inputTest" />);
-    
+
     userEvent.type(screen.getByTestId('inputTest'), 'something different');
 
     expect(onChangeFn).toHaveBeenCalledTimes(1);
@@ -49,7 +49,7 @@ describe('atoms/input/text', () => {
     const validate = jest.fn((val: string) => val === 'test');
 
     const { container } = render(<Input required validate={validate} data-testid="inputTest" />);
-    
+
     userEvent.type(screen.getByTestId('inputTest'), 'te');
 
     for (let i = 0; i < 3; i++) {
@@ -63,8 +63,8 @@ describe('atoms/input/text', () => {
   });
 
   it('should focus input on floating label click', () => {
-    render(<Input label="Input" data-testid="inputTest" />);
-    
+    render(<Input renderLabel="Input" data-testid="inputTest" />);
+
     userEvent.click(screen.getByText('Input'));
 
     expect(screen.getByTestId('inputTest')).toHaveFocus();
