@@ -1,134 +1,150 @@
-import { CSSProperties, memo, ReactNode, useEffect, useState } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
+import { ReactNode, useEffect, useState, useRef, forwardRef, useImperativeHandle } from 'react';
+import { Blurhash } from 'react-blurhash';
 import './image.scss';
 
-export interface ImageContainerProps {
-  /**
-   * Alt text that will be displayed when image fail to laod
-   */
+type ImageUrl = string;
+type ObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+
+export interface ImageProps {
+  src: ImageUrl;
   alt?: string;
-  /**
-   * Source url of the image
-   */
-  src: string;
-  /**
-   * Skip loading the image and display it directly
-   */
-  innerSrc?: string;
-  /**
-   * Additional classname for the wrapper div
-   */
-  className?: string;
-  /**
-   * Image loader callback, if the argument is true then the image failed to load
-   */
-  onImageLoaded?: (error?: boolean) => void;
-  /**
-   * Fallback to error image when failed to load,
-   * only when loader is present
-   */
-  withFallback?: boolean;
-  /**
-   * Url of fallback image
-   */
-  fallbackSrc?: string;
-  /**
-   * Loader that will be displayed when src is provided
-   */
+
+  fallback?: ImageUrl;
+
+  lazy?: boolean;
   loader?: ReactNode;
+  blurhash?: string;
+  animations?: boolean;
+
+  className?: string;
+  style?: React.CSSProperties;
   draggable?: boolean;
-  style?: CSSProperties;
-  [key: string]: any;
+  objectFit?: ObjectFit;
+
+  onError?: (err: string | Event) => void;
+  onLoad?: () => void;
 }
 
-export const ImageContainer = (props: ImageContainerProps) => {
+export const Image = forwardRef((props: ImageProps, ref) => {
   const {
-    alt,
     src,
+    alt,
+    fallback,
+    lazy = true,
+    loader,
+    blurhash,
     className,
-    innerSrc = null,
-    withFallback = true,
-    fallbackSrc,
-    onImageLoaded,
-    loader = null,
+    style,
     draggable = false,
-    ...rest
+    objectFit = 'cover',
+    onError,
+    onLoad,
+    animations = true
   } = props;
+  const [ isLoading, setIsLoading ] = useState(true);
+  const [ hasError, setHasError ] = useState<string | Event | null>(null);
+  const [ imageSrc, setImageSrc ] = useState<string | undefined>('');
+  const containerRef = useRef<HTMLImageElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
 
-  const [ imageSrc, setImageSrc ] = useState(src);
-  const [ loading, setLoading ] = useState(true);
+  useImperativeHandle(ref, () => ({
+    imgRef: imgRef.current,
+    src,
+    error: hasError,
+    loading: isLoading
+  }));
 
-  useEffect(() => { // TODO: Refactor
+  useEffect(() => {
+    if (!imgRef.current) return;
+
     let isCancelled = false;
 
-    const onImageLoad = (source: string) => new Promise((resolve, reject) => {
-      const image = new Image();
-      image.onload = () => {
-        if (!isCancelled) {
-          resolve(source);
-        }
-      };
-      image.onerror = () => {
-        if (!isCancelled) {
-          reject(new Error('Failed to load the image'));
-        }
-      };
-      image.src = source;
-    });
+    imgRef.current.onload = () => {
+      if (isCancelled) return;
 
-    const loadInnerSrc = () => withFallback ? innerSrc || fallbackSrc : innerSrc;
+      if (onLoad) onLoad();
+      setIsLoading(false);
+    };
+    imgRef.current.onerror = (error) => {
+      if (isCancelled) return;
 
-    const failLoad = () => {
-      const url = loadInnerSrc();
-      if (url) {
-        if (onImageLoaded) onImageLoaded();
-        setImageSrc(url || fallbackSrc || '');
-      }
-      else {
-        if (onImageLoaded) onImageLoaded(true);
-        setImageSrc(fallbackSrc || '');
-      }
-
-      setLoading(false);
+      setHasError(error);
+      setIsLoading(false);
     };
 
-    if (!innerSrc) {
-      if (loader) {
-        onImageLoad(src)
-          .then(() => {
-            setImageSrc(src);
-            if (onImageLoaded) onImageLoaded();
-            setLoading(false);
-          })
-          .catch(() => {
-            failLoad();
-          });
-      } else {
-        setImageSrc(src);
-        setLoading(false);
-      }
-    } else {
-      failLoad();
-    }
+    setIsLoading(true);
+    setImageSrc(src);
 
     return () => {
       isCancelled = true;
     };
-  }, [ innerSrc, onImageLoaded, withFallback, src, fallbackSrc, loader ]);
+  }, [ src, onLoad ]);
 
-  const classes = classnames(
-    'ne-image',
-    className
+  useEffect(() => {
+    if (hasError) {
+      if (onError) onError(hasError);
+
+      setImageSrc(undefined);
+    }
+  }, [ hasError, onError ]);
+
+  const imgStyle = {
+    objectFit,
+    opacity: isLoading || hasError ? 0 : 1
+  };
+
+  const img = (
+    <img
+      draggable={draggable}
+      ref={imgRef}
+      loading={lazy ? 'lazy' : 'eager'}
+      style={imgStyle}
+      src={imageSrc}
+      alt={alt}
+    />
+  );
+
+  const blurhashContainer = blurhash
+    ? (
+      <Blurhash
+        hash={blurhash}
+        width="100%"
+        height="100%"
+      />
+    )
+    : null;
+
+  const loaderClassNames = classNames(
+    'ne-image-loader',
+    lazy && isLoading && (loader || blurhash) && 'ne-image-loader--loading',
+    hasError && 'ne-image-loader--error'
+  );
+  const loaderContainer = (
+    <div className={loaderClassNames}>
+      {blurhashContainer || loader}
+    </div>
+  );
+
+  const fallbackContainer = (
+    <div className='ne-image-fallback'>
+      {fallback}
+    </div>
   );
 
   return (
-    <div className={classes} {...rest} draggable={draggable}>
-      <div className="ne-image-content">
-        {loading && loader ? loader : <img src={imageSrc} draggable={draggable} alt={alt} />}
-      </div>
+    <div
+      ref={containerRef}
+      className={classNames('ne-image', animations && 'ne-image--animated', className)}
+      style={style}
+      data-loading={isLoading}
+    >
+      {hasError ? fallbackContainer : img}
+      {loaderContainer}
     </div>
   );
-};
+});
 
-const ImageContainerCached = memo(ImageContainer);
-export default ImageContainerCached;
+Image.displayName = 'Image';
+
+export default Image;

@@ -1,6 +1,6 @@
 import { ReactNode, memo, CSSProperties } from 'react';
 import classnames from 'classnames';
-import { ImageContainer } from '../image/Image';
+import { Image } from '../image/Image';
 import './styles/avatar.scss';
 
 export type AvatarTypes = 'round' | 'rounded' | 'square';
@@ -34,7 +34,7 @@ export interface AvatarProps {
    *  - large 50x50
    *  - larger 100x100
    *  - extra-large 200x200
-   * 
+   *
    * Defaults to 'medium'
    */
   size?: 'small' | 'medium' | 'large' | 'larger' | 'extra-large';
@@ -47,7 +47,7 @@ export interface AvatarProps {
    */
   tabIndex?: number;
   /**
-   * Loader that will be passed to ImageContainer and displayed when image is Loading
+   * Loader that will be passed to Image and displayed when image is Loading
    * No loader will be displayed if omitted
    */
   loader?: ReactNode;
@@ -79,7 +79,7 @@ export const Avatar = (props: AvatarProps) => {
   return (
     <div className={classnames('ne-avatar', className)} draggable={false} {...rest}>
       <div className={classes} tabIndex={tabIndex}>
-        <ImageContainer src={src || ''} alt={name} loader={loader} draggable={false} />
+        <Image src={src || ''} alt={name} loader={loader} draggable={false} />
       </div>
       {
         typeof children === 'function'
