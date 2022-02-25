@@ -5,13 +5,13 @@ import CheckBox from './Checkbox';
 describe('atoms/inputs/checkbox', () => {
   it('should render', () => {
     render(<CheckBox data-testid="inputTest" />);
-    
+
     expect(screen.getByTestId('inputTest')).toBeInTheDocument();
   });
 
   it('should render with initial value', () => {
-    const { container } = render(<CheckBox data-testid="inputTest" value={true} />);
-    
+    const { container } = render(<CheckBox data-testid="inputTest" checked={true} />);
+
     expect(container.querySelector('[data-checked="true"]')).toBeInTheDocument();
   });
 

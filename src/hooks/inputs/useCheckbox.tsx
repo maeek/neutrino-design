@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface UseCheckbox {
   checked: boolean;
-  setChecked: (value: boolean) => void;
+  setChecked: (value: boolean | ((prevState: boolean) => boolean)) => void;
   reset: () => void;
   bind: {
     checked: boolean;
@@ -15,6 +15,10 @@ export const useCheckbox = (
   readOnly?: boolean
 ): UseCheckbox => {
   const [ checked, setChecked ] = useState(!!initialValue);
+
+  useEffect(() => {
+    setChecked(!!initialValue);
+  }, [ initialValue ]);
 
   return {
     checked,

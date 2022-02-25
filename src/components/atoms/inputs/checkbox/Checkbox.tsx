@@ -1,127 +1,114 @@
+import classNames from 'classnames';
 import {
-  MutableRefObject,
-  useEffect,
-  useRef,
-  KeyboardEvent as ReactKeyboardEvent,
   CSSProperties,
   forwardRef,
-  useImperativeHandle
+  MouseEvent,
+  KeyboardEvent,
+  useEffect,
+  useImperativeHandle,
+  useRef
 } from 'react';
-import classNames from 'classnames';
 import useCheckbox from '../../../../hooks/inputs/useCheckbox';
 import './checkbox.scss';
 
-export interface CheckboxRef {
-  checked: boolean;
-  setChecked: any;
-  element: MutableRefObject<HTMLInputElement> | null;
-}
-
 export interface CheckboxProps {
-  ref?: MutableRefObject<CheckboxRef>;
   name?: string;
-  value?: boolean;
-  className?: string;
 
-  required?: boolean;
+  /**
+   * Provide 'checked' prop to use this component as a controlled component.
+   */
+  checked?: boolean;
+  onChange?: (checked: boolean) => void;
+
+  className?: string;
+  style?: CSSProperties;
+
   disabled?: boolean;
   readOnly?: boolean;
-
-  onChange?: Function;
-  style?: CSSProperties;
-  [key: string]: any;
+  required?: boolean;
 }
 
 export const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
   const {
     name,
+    checked: value,
+    onChange,
     className,
-    required,
+    style,
     disabled,
     readOnly,
-    onChange,
-    value: initValue,
-    style,
+    required,
     ...rest
   } = props;
   const innerRef = useRef<HTMLInputElement>(null);
   const { checked, setChecked, bind } = useCheckbox(
-    initValue,
+    value,
     readOnly || disabled
   );
-
-  useEffect(() => {
-    if (onChange) onChange(checked);
-  }, [ onChange, checked ]);
 
   useImperativeHandle(ref, () => ({
     checked,
     setChecked,
-    element: innerRef
+    element: innerRef.current
   }));
 
-  /**
-   * Define behaviour for controlled component
-   */
   useEffect(() => {
-    if (!onChange) {
-      setChecked(!!initValue);
+    if (value === undefined && onChange) {
+      onChange(checked);
     }
-  }, [ initValue, onChange, setChecked ]);
+  }, [ checked, value, onChange ]);
 
-  const onClick = () => {
+  const onClick = (e: MouseEvent) => {
+    e.preventDefault();
+
     if (disabled || readOnly) return;
 
-    setChecked(!checked);
+    setChecked((isChecked) => !isChecked);
   };
 
-  const onSliderKeyUp = (e: ReactKeyboardEvent<HTMLDivElement>) => {
+  const onSliderKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
     if ([ 'Enter', ' ' ].includes(e.key)) {
-      setChecked(!checked);
+      setChecked((isChecked) => !isChecked);
     }
   };
 
   const sliderTitle =
-    (required && 'Required') ||
-    (disabled && 'Checkbox disabled') ||
-    (readOnly && 'Checkbox read only') ||
-    '';
-
-  const classes = classNames({
-    'ne-checkbox': true,
-    ...(className ? { [ className ]: true } : {})
-  });
+  (required && 'Required') ||
+  (disabled && 'Checkbox disabled') ||
+  (readOnly && 'Checkbox read only') ||
+  '';
 
   return (
     <label
-      className={classes}
+      className={classNames('ne-checkbox', className)}
+      style={style}
+      htmlFor={name}
       data-required={!!required}
       data-disabled={!!disabled}
       data-readonly={!!readOnly}
       data-checked={!!checked}
-      htmlFor={name}
     >
       <input
-        className="ne-checkbox-control"
-        ref={innerRef as any}
-        type="checkbox"
         name={name}
-        required={required}
-        disabled={disabled}
+        className="ne-checkbox-control"
+        type="checkbox"
+        ref={innerRef}
         readOnly={readOnly}
+        disabled={disabled}
+        required={required}
+        tabIndex={-1}
         role="disabled"
         {...bind}
         {...rest}
       />
       <div className="ne-checkbox-decorator">
         <div
-          title={sliderTitle}
           className="ne-checkbox-decorator-slider"
           onKeyUp={onSliderKeyUp}
           onClick={onClick}
           tabIndex={0}
           role="checkbox"
-          style={style}
+          title={sliderTitle}
         >
           {required && !checked && '!'}
         </div>
@@ -129,5 +116,7 @@ export const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     </label>
   );
 });
+
+Checkbox.displayName = 'Checkbox';
 
 export default Checkbox;
