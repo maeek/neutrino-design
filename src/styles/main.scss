@@ -62,16 +62,15 @@ $prefix: 'ne';
 @mixin custom-scroll {
   &::-webkit-scrollbar {
     width: 0.5rem;
+    height: 0.5rem;
   }
 
   &::-webkit-scrollbar-track {
-    border-radius: 1rem;
-    background-color: #{'var(--#{$prefix}-clr-primary-400)'};
+    background-color: #{'var(--#{$prefix}-clr-primary-600, #2b3036)'};
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #{'var(--#{$prefix}-clr-primary-400)'};
-    border-radius: 1rem;
+    background-color: #{'var(--#{$prefix}-clr-primary-300, #4d5c68)'};
   }
 }
 
