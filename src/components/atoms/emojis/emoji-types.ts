@@ -1,4 +1,4 @@
-export interface EmojisType {
+export interface EmojiType {
   name: string;
   unicode_version: number;
   category: Category;
@@ -45,3 +45,5 @@ export enum Diversity {
   The1F3Fe = '1f3fe',
   The1F3Ff = '1f3ff',
 }
+
+export type EmojisType = { [ key: string ]: EmojiType };
