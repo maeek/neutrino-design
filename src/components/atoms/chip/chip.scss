@@ -1,0 +1,94 @@
+@use '../../../styles/main' as *;
+
+.#{$prefix} {
+  &-chip {
+    @include flexbox($display: inline-flex, $justifyContent: flex-start, $alignItems: center);
+    @include default-font;
+    @include box-sizing;
+    position: relative;
+    color: get-color('basic', 100);
+    background-color: var(--color, get-color('primary', 500));
+    padding: 0.3rem 0.4rem;
+    margin: 0;
+    font-size: get-font-size(150);
+    font-weight: 500;
+    cursor: default;
+    gap: 0.25rem;
+    max-width: 20rem;
+    transition: background 0.2s, color 0.15s, border-radius 0.15s;
+
+    &--round {
+      border-radius: 2rem;
+    }
+
+    &--rounded {
+      border-radius: 0.4rem;
+    }
+
+    &--square {
+      border-radius: 0;
+    }
+
+    &--color-blue {
+      background-color: get-color('actions', 400);
+    }
+
+    &--color-green {
+      background-color: get-color('positive', 300);
+    }
+
+    &--color-red {
+      background-color: get-color('negative', 200);
+    }
+
+    &--color-yellow {
+      background-color: get-color('warning', 200);
+      color: get-color('primary', 800);
+    }
+
+    &--color-purple {
+      background-color: rgb(71, 11, 182);
+    }
+
+    &-icon {
+      @include flexbox($display: flex, $justifyContent: flex-start, $alignItems: flex-start);
+
+      > svg,
+      > img {
+        width: get-font-size(300);
+        height: get-font-size(300);
+        margin-right: 0.25rem;
+        object-fit: contain;
+        line-height: get-font-size(200);
+      }
+    }
+
+    &-delete {
+      @include flexbox($display: inline-flex, $justifyContent: flex-start, $alignItems: center);
+      background-color: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      padding: 0;
+      opacity: 0;
+      transition: opacity 0.1s;
+
+      > svg {
+        font-size: get-font-size(300);
+        line-height: get-font-size(300);
+      }
+
+      // &:hover {
+      //   color: get-color('basic', 100);
+      // }
+    }
+
+    &--disabled &-delete {
+      cursor: not-allowed;
+    }
+
+    &:hover &-delete {
+      opacity: 1;
+    }
+  }
+}
