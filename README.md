@@ -14,7 +14,7 @@ Install package from command line
 npm install @maeek/neutrino-design
 ```
 
-After install is complete you can import it in your project  
+After install is complete you can import it in your project
 Some examples:
 
 ```javascript
@@ -39,11 +39,11 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [x] AvatarCached
 - [x] Input - Range/Slider
 - [ ] Input - Multiline text
-- [ ] Input - Select
+- [x] Input - Select
 - [ ] Input - File Select
 - [ ] Tooltip
 - [ ] Badge
-- [ ] Chip
+- [x] Chip
 - [ ] Notification popup
 - [ ] Divider
 - [x] Button
@@ -97,7 +97,7 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 ### Organisms
 
 - [ ] Stepper
-- [ ] Tabs
+- [ ] Tabs                 <- TODO: | tab 1 x | tab 2 x | tab 3 x |
 - [ ] Bottom navigation
 - [ ] Gallery
 - [ ] Player
@@ -110,3 +110,6 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [x] useConnection
 - [x] useDelayUnmount
 - [x] usePagination
+- [x] useAccessibility
+- [x] useClickOutside
+- [x] useContinuativeSearch
