@@ -1,0 +1,21 @@
+@use '../../../../styles/main' as *;
+
+.#{$prefix} {
+  &-bubble {
+    &-reactions {
+      padding: 0;
+      margin: 0;
+      position: relative;
+
+      @include box-sizing;
+    }
+
+    &--recipient &-reactions {
+      margin-left: 3rem;
+    }
+
+    &--sender &-reactions {
+      margin-right: 0.5rem;
+    }
+  }
+}

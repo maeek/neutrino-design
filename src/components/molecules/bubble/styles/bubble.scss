@@ -1,0 +1,42 @@
+@use '../../../../styles/main' as *;
+
+.#{$prefix} {
+  &-bubble {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    color: get-color('basic', 300);
+
+    @include box-sizing;
+    @include default-font;
+
+    &-row {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    &--sender &-row {
+      justify-content: flex-end;
+    }
+
+    &-content-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    &--recipient &-content-wrapper {
+      flex-direction: row-reverse;
+    }
+
+    &-content-row {
+      display: flex;
+      align-items: stretch;
+      flex-direction: row;
+    }
+
+    &--sender &-content-row {
+      flex-direction: row-reverse;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@use '../../../../styles/main' as *;
+
+.#{$prefix} {
+  &-bubble {
+    &--bulked &-row &-timestamp--single {
+      display: none;
+    }
+
+    &-timestamp {
+      visibility: hidden;
+      font-size: 0.8rem;
+      color: get-color('basic', 300);
+      margin: 0.33rem 0;
+      cursor: default;
+      position: relative;
+
+      &--bulked {
+        margin-right: 0.75rem;
+      }
+
+      @media screen and (max-width: 30rem) {
+        .#{$prefix}-bubble-timestamp--not-last-in-bulked {
+          display: none !important;
+        }
+      }
+    }
+
+    &--sender &-timestamp--single {
+      margin-right: 0.5rem;
+    }
+
+    &--recipient &-timestamp {
+      margin-left: 3rem;
+    }
+
+    &:hover + .#{$prefix}-bubble--last-in-bulked &-timestamp,
+    &:focus-within + .#{$prefix}-bubble--last-in-bulked &-timestamp,
+    &:hover &-timestamp:not(.#{$prefix}-bubble-timestamp--not-last-in-bulked),
+    &:focus-within &-timestamp:not(.#{$prefix}-bubble-timestamp--not-last-in-bulked) {
+      visibility: visible;
+    }
+  }
+}
