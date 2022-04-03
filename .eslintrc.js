@@ -6,13 +6,10 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:testing-library/react'
+    'plugin:testing-library/react',
+    'plugin:storybook/recommended'
   ],
-  plugins: [
-    'react',
-    'prettier',
-    '@typescript-eslint'
-  ],
+  plugins: [ 'react', 'prettier', '@typescript-eslint' ],
   env: {
     node: true
   },
@@ -35,27 +32,12 @@ module.exports = {
     }
   },
   rules: {
-    semi: [
-      'error',
-      'always'
-    ],
-    quotes: [
-      'error',
-      'single'
-    ],
-    'no-console': [
-      'error',
-      {
-        allow: [
-          'warn',
-          'error'
-        ]
-      }
-    ],
-    'comma-dangle': [
-      'error',
-      'never'
-    ],
+    semi: [ 'error', 'always' ],
+    quotes: [ 'error', 'single' ],
+    'no-console': [ 'error', {
+      allow: [ 'warn', 'error' ]
+    } ],
+    'comma-dangle': [ 'error', 'never' ],
     indent: [ 'error', 2 ],
     'guard-for-in': 0,
     'no-param-reassign': 0,
@@ -68,18 +50,21 @@ module.exports = {
     'import/export': 0,
     'prettier/prettier': 0,
     'linebreak-style': 0,
-    'no-multiple-empty-lines': [ 'error', { max: 1, maxEOF: 0 } ],
+    'no-multiple-empty-lines': [ 'error', {
+      max: 1,
+      maxEOF: 0
+    } ],
     'eol-last': 2,
     'object-curly-spacing': [ 'error', 'always' ],
     'array-bracket-spacing': [ 'error', 'always' ],
     'computed-property-spacing': [ 'error', 'always' ],
     'quote-props': [ 'error', 'as-needed' ],
-    'max-len': [ 'error', { code: 120, ignoreUrls: true } ],
-    '@typescript-eslint/no-unused-vars': [
-      2,
-      {
-        args: 'none'
-      }
-    ]
+    'max-len': [ 'error', {
+      code: 120,
+      ignoreUrls: true
+    } ],
+    '@typescript-eslint/no-unused-vars': [ 2, {
+      args: 'none'
+    } ]
   }
 };
