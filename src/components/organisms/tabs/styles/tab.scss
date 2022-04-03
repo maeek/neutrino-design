@@ -1,0 +1,73 @@
+@use '../../../../styles/main' as *;
+
+.#{$prefix} {
+  &-tab {
+    @include box-sizing;
+    @include default-font;
+    @include flexbox($alignItems: center, $justifyContent: space-between);
+    gap: 0.3rem;
+    color: get-color('basic', 400);
+    background-color: get-color('primary', 1100);
+    font-size: get-font-size(300);
+    padding: 0 0.5rem;
+    user-select: none;
+    min-width: 4rem;
+    height: 2.2rem;
+    letter-spacing: 0.05rem;
+    transition: all 0.05s linear;
+    flex: 0 0 auto;
+    list-style: none;
+
+    &:focus,
+    &:focus-within {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: get-color('primary', 200) solid 0.1rem;
+    }
+
+    &-title {
+      max-width: 15rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    &--active &-title {
+      max-width: unset;
+    }
+
+    &-close {
+      @include flexbox($alignItems: center, $justifyContent: center);
+      visibility: hidden;
+      cursor: pointer;
+      color: get-color('basic', 300);
+      padding: 0.1rem;
+      border-radius: 0.4rem;
+
+      > svg {
+        @include flexbox($alignItems: center, $justifyContent: center);
+        width: 1rem;
+        height: 1rem;
+      }
+
+      &:hover {
+        background-color: get-color('primary', 400);
+      }
+    }
+
+    &--active {
+      color: get-color('basic', 100);
+      background-color: get-color('primary', 500);
+    }
+
+    &--active &-close {
+      visibility: visible;
+    }
+
+    &:hover &-close {
+      visibility: visible;
+    }
+  }
+}

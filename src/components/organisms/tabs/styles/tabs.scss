@@ -1,0 +1,56 @@
+@use '../../../../styles/main' as *;
+
+.#{$prefix} {
+  &-tabs {
+    @include box-sizing;
+    @include default-font;
+    @include flexbox($alignItems: flex-start, $justifyContent: flex-start, $direction: column);
+    margin: 0;
+    width: 100%;
+    user-select: none;
+
+    &-panel {
+      @include flexbox($alignItems: flex-start, $justifyContent: space-between);
+      width: 100%;
+      color: get-color('basic', 500);
+
+      &-left {
+        @include flexbox($alignItems: flex-start, $justifyContent: flex-start);
+        @include custom-scroll($height: 0.2rem);
+        background-color: get-color('primary', 600);
+        flex: 1 1 auto;
+        height: 2.2rem;
+        overflow-x: hidden;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      &:hover &-left {
+        overflow-y: hidden;
+        overflow-x: auto;
+      }
+
+      &-right {
+        @include flexbox($alignItems: center, $justifyContent: center);
+        flex: 0 0 auto;
+        background-color: get-color('primary', 1000);
+        height: 2.2rem;
+        padding: 0 0.4rem;
+      }
+
+      &-btn {
+        @include flexbox($alignItems: center, $justifyContent: center);
+
+        > svg {
+          height: 2rem;
+        }
+
+        &:hover {
+          color: get-color('basic', 300);
+          transition: color 0.1s linear;
+        }
+      }
+    }
+  }
+}
