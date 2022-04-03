@@ -59,18 +59,23 @@ $prefix: 'ne';
   @return null;
 }
 
-@mixin custom-scroll {
+@mixin custom-scroll(
+  $width: 0.5rem,
+  $height: 0.5rem,
+  $thumbColor: get-color('primary', 300),
+  $trackColor: get-color('primary', 600)
+) {
   &::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: $width;
+    height: $height;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: #{'var(--#{$prefix}-clr-primary-600, #2b3036)'};
+    background-color: $trackColor;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #{'var(--#{$prefix}-clr-primary-300, #4d5c68)'};
+    background-color: $thumbColor;
   }
 }
 
