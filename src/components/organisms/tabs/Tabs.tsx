@@ -41,7 +41,7 @@ export const Tabs = (props: TabsProps) => {
   } = props;
   const [ selectedTab, setSelectedTab ] = useState<number | null>(null);
   const [ order, setOrder ] = useState<number[]>([]);
-  const scrollingPanel = useRef(null);
+  const scrollingPanel = useRef<HTMLUListElement>(null);
   const tabsRef = useRef<{ index: number; element: MutableRefObject<HTMLLIElement> }[]>([]);
 
   useEffect(() => {
@@ -74,19 +74,23 @@ export const Tabs = (props: TabsProps) => {
   };
 
   const onLeftArrowClick = () => {
+    if (selectedTab === null || disabled) return;
+
     const newIndex = selectedTab - 1;
     const calculatedIndex = newIndex < 0 ? 0 : newIndex;
 
-    if (disabled || tabChildren[ calculatedIndex ].props.disabled) return;
+    if (tabChildren[ calculatedIndex ].props.disabled) return;
 
     setSelectedTab(newIndex < 0 ? 0 : newIndex);
   };
 
   const onRightArrowClick = () => {
+    if (selectedTab === null || disabled) return;
+
     const newIndex = selectedTab + 1;
     const calculatedIndex = newIndex === tabChildren.length ? tabChildren.length - 1 : newIndex;
 
-    if (disabled || tabChildren[ calculatedIndex ].props.disabled) return;
+    if (tabChildren[ calculatedIndex ].props.disabled) return;
 
     setSelectedTab(calculatedIndex);
   };
@@ -94,6 +98,8 @@ export const Tabs = (props: TabsProps) => {
   const onWheel = (e: WheelEvent<HTMLUListElement>) => {
     const x = e.deltaX;
     const y = e.deltaY;
+
+    if (scrollingPanel.current === null) return;
 
     scrollingPanel.current.scrollBy({
       left: (Math.abs(x) > Math.abs(y) ? x : y) * 0.1
@@ -106,7 +112,7 @@ export const Tabs = (props: TabsProps) => {
   };
 
   const onDrag = (e: DragEvent<HTMLUListElement>) => {
-    e.dataTransfer.setData('dragIndex', e.currentTarget.dataset.index);
+    e.dataTransfer.setData('dragIndex', e.currentTarget.dataset?.index || '');
   };
 
   const onDrop = (e: DragEvent<HTMLUListElement>) => {
@@ -136,7 +142,7 @@ export const Tabs = (props: TabsProps) => {
               if (!foundRef) {
                 tabsRef.current.push({
                   index,
-                  element: currRef
+                  element: currRef as MutableRefObject<HTMLLIElement>
                 });
               }
 
@@ -178,4 +184,5 @@ export const Tabs = (props: TabsProps) => {
   );
 };
 
-export { Tab, TabProps } from './Tab';
+export { Tab } from './Tab';
+export type { TabProps } from './Tab';

@@ -19,7 +19,7 @@ export interface TabProps {
   className?: string;
 }
 
-export const Tab = forwardRef<HTMLLIElement, TabProps>((props, ref) => {
+export const Tab = forwardRef<HTMLLIElement | null, TabProps>((props, ref) => {
   const {
     index,
     title,
@@ -44,6 +44,7 @@ export const Tab = forwardRef<HTMLLIElement, TabProps>((props, ref) => {
 
   return (
     <li
+      ref={ref}
       className={classNames(
         'ne-tab',
         {
@@ -56,12 +57,11 @@ export const Tab = forwardRef<HTMLLIElement, TabProps>((props, ref) => {
       onClick={disabled ? undefined : onClick}
       onKeyUp={disabled ? undefined : onEnterOrSpace(onClick)}
       tabIndex={disabled ? -1 : 0}
-      onDragOver={(ev) => ev.preventDefault()}
       onDragStart={onDrag}
+      onDragOver={(e) => e.preventDefault()}
       onDrop={onDrop}
       role="tab"
       draggable={draggable}
-      ref={ref}
       title={`${
         typeof title === 'string'
           ? title

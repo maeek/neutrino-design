@@ -57,6 +57,10 @@
       }
     }
 
+    &--over {
+      background-color: get-color('primary', 900);
+    }
+
     &--active {
       color: get-color('basic', 100);
       background-color: get-color('primary', 500);
