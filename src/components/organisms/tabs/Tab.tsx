@@ -1,11 +1,11 @@
-import { ReactNode, MouseEventHandler, CSSProperties, forwardRef } from 'react';
+import { ReactNode, MouseEventHandler, CSSProperties, forwardRef, DragEventHandler } from 'react';
 import classNames from 'classnames';
 import { CloseRounded } from '@material-ui/icons';
 import { useAccessibility } from '../../../hooks/useAccessibility';
 import './styles/tab.scss';
 
 export interface TabProps {
-  index: number;
+  index?: number;
   children: ReactNode;
   title: ReactNode;
   active?: boolean;
@@ -13,7 +13,8 @@ export interface TabProps {
   draggable?: boolean;
   onClick?: MouseEventHandler;
   onClose?: MouseEventHandler;
-  moveTab?: (dragIndex: number, hoverIndex: number) => void;
+  onDrag?: DragEventHandler;
+  onDrop?: DragEventHandler;
   style?: CSSProperties;
   className?: string;
 }
@@ -26,6 +27,8 @@ export const Tab = forwardRef<HTMLLIElement, TabProps>((props, ref) => {
     active,
     onClick,
     onClose,
+    onDrag,
+    onDrop,
     draggable,
     style,
     className
@@ -53,6 +56,9 @@ export const Tab = forwardRef<HTMLLIElement, TabProps>((props, ref) => {
       onClick={disabled ? undefined : onClick}
       onKeyUp={disabled ? undefined : onEnterOrSpace(onClick)}
       tabIndex={disabled ? -1 : 0}
+      onDragOver={(ev) => ev.preventDefault()}
+      onDragStart={onDrag}
+      onDrop={onDrop}
       role="tab"
       draggable={draggable}
       ref={ref}

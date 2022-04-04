@@ -1,13 +1,16 @@
 import {
   Children,
   cloneElement,
+  createRef,
   CSSProperties,
   ReactElement,
   useEffect,
   useMemo,
   useRef,
   useState,
-  WheelEvent
+  WheelEvent,
+  DragEvent,
+  MutableRefObject
 } from 'react';
 import classNames from 'classnames';
 import { Tab } from './Tab';
@@ -39,6 +42,7 @@ export const Tabs = (props: TabsProps) => {
   const [ selectedTab, setSelectedTab ] = useState<number | null>(null);
   const [ order, setOrder ] = useState<number[]>([]);
   const scrollingPanel = useRef(null);
+  const tabsRef = useRef<{ index: number; element: MutableRefObject<HTMLLIElement> }[]>([]);
 
   useEffect(() => {
     const tabs = Children.map(
@@ -101,17 +105,49 @@ export const Tabs = (props: TabsProps) => {
     e.stopPropagation();
   };
 
+  const onDrag = (e: DragEvent<HTMLUListElement>) => {
+    e.dataTransfer.setData('dragIndex', e.currentTarget.dataset.index);
+  };
+
+  const onDrop = (e: DragEvent<HTMLUListElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const dragIndex = Number(e.dataTransfer.getData('dragIndex'));
+    const hoverIndex = Number(e.currentTarget.getAttribute('data-index'));
+
+    if (dragIndex === hoverIndex) return;
+
+    const newOrder = [ ...order ];
+    newOrder.splice(hoverIndex, 0, newOrder.splice(dragIndex, 1)[ 0 ]);
+
+    setOrder(newOrder);
+  };
+
   return (
     <div className={classNames('ne-tabs', className)} style={style}>
       <div className="ne-tabs-panel">
         <ul className="ne-tabs-panel-left" onScroll={onScroll} onWheel={onWheel} ref={scrollingPanel}>
           {
-            order.map((index) => {
+            order.map((index, i) => {
+              const foundRef = tabsRef.current.find(ref => ref.index === index);
+              const currRef = foundRef?.element || createRef();
+
+              if (!foundRef) {
+                tabsRef.current.push({
+                  index,
+                  element: currRef
+                });
+              }
+
               return cloneElement(tabChildren[ index ], {
-                index,
+                index: i,
+                ref: currRef,
                 active: selectedTab === index,
                 onClick: () => onTabSelect(index),
                 onClose: () => onTabClose?.(index),
+                onDrag,
+                onDrop,
                 ...tabChildren[ index ].props,
                 disabled: tabChildren[ index ].props.disabled || disabled
               });
