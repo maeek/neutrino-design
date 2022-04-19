@@ -1,0 +1,46 @@
+@use '../../../../styles/main' as *;
+
+.#{$prefix} {
+  &-player-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0.2rem;
+    @include box-sizing;
+    @include default-font;
+
+    &-icon,
+    &-icon svg {
+      transition: all 0.1s;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      color: get-color('basic', 150);
+      fill: get-color('basic', 150);
+
+      &:hover {
+        color: get-color('basic', 100);
+        fill: get-color('basic', 100);
+      }
+    }
+
+    &--small &-icon,
+    &--small &-icon svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    &--medium &-icon,
+    &--medium &-icon svg {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+
+    &--large &-icon,
+    &--large &-icon svg {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+}
