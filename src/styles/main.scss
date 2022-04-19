@@ -140,3 +140,25 @@ $prefix: 'ne';
   -o-animation: $name $duration $iterations $timing-function $delay;
   animation: $name $duration $iterations $timing-function $delay;
 }
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  height: auto;
+
+  &:before {
+    display: block;
+    content: '';
+    width: 100%;
+    padding-top: calc(($height / $width) * 100%);
+  }
+
+  & > video,
+  & > img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
