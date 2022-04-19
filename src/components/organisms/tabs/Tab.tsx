@@ -17,6 +17,7 @@ export interface TabProps {
   onDrop?: DragEventHandler;
   style?: CSSProperties;
   className?: string;
+  type?: 'compact' | 'default';
 }
 
 export const Tab = forwardRef<HTMLLIElement | null, TabProps>((props, ref) => {
@@ -31,7 +32,8 @@ export const Tab = forwardRef<HTMLLIElement | null, TabProps>((props, ref) => {
     onDrop,
     draggable,
     style,
-    className
+    className,
+    type
   } = props;
   const { onEnterOrSpace } = useAccessibility();
 
@@ -47,6 +49,7 @@ export const Tab = forwardRef<HTMLLIElement | null, TabProps>((props, ref) => {
       ref={ref}
       className={classNames(
         'ne-tab',
+        `ne-tab--${type}`,
         {
           'ne-tab--disabled': disabled,
           'ne-tab--active': active

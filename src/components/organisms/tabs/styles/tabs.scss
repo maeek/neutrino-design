@@ -17,7 +17,6 @@
       &-left {
         @include flexbox($alignItems: flex-start, $justifyContent: flex-start);
         @include custom-scroll($height: 0.2rem);
-        background-color: get-color('primary', 600);
         flex: 1 1 auto;
         height: 2.2rem;
         overflow-x: hidden;

@@ -27,6 +27,7 @@ export interface TabsProps {
   style?: CSSProperties;
   disabled?: boolean;
   showControlls?: boolean;
+  type?: 'compact' | 'default';
 }
 
 export const Tabs = (props: TabsProps) => {
@@ -37,7 +38,8 @@ export const Tabs = (props: TabsProps) => {
     disabled,
     className,
     style,
-    showControlls
+    showControlls,
+    type
   } = props;
   const [ selectedTab, setSelectedTab ] = useState<number | null>(null);
   const [ order, setOrder ] = useState<number[]>([]);
@@ -149,6 +151,7 @@ export const Tabs = (props: TabsProps) => {
               return cloneElement(tabChildren[ index ], {
                 index: i,
                 ref: currRef,
+                type,
                 active: selectedTab === index,
                 onClick: () => onTabSelect(index),
                 onClose: () => onTabClose?.(index),

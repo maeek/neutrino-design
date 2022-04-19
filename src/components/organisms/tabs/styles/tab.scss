@@ -17,6 +17,8 @@
     transition: all 0.05s linear;
     flex: 0 0 auto;
     list-style: none;
+    margin: 0 0.2rem;
+    border-radius: 0.3rem;
 
     &:focus,
     &:focus-within {
@@ -61,9 +63,24 @@
       background-color: get-color('primary', 900);
     }
 
+    &--compact {
+      font-size: get-font-size(200);
+      padding: 0.2rem;
+      height: 1.5rem;
+    }
+
+    &--compact &-title {
+      max-width: 10rem;
+    }
+
     &--active {
       color: get-color('basic', 100);
       background-color: get-color('primary', 500);
+      box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+    }
+
+    &--disabled {
+      cursor: not-allowed;
     }
 
     &--active &-close {
