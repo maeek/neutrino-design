@@ -1,0 +1,50 @@
+@use '../../../../styles/main' as *;
+
+.#{$prefix} {
+  &-player-seek-bar {
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    &-live {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 0.3rem;
+      background-color: lightblue;
+      transform: scaleX(var(--pos, 1));
+    }
+
+    &-timeline {
+      position: relative;
+      height: 0.25rem;
+      width: 100%;
+      background-color: hsla(
+        0,
+        0%,
+        6.7%,
+        0.4
+      ); // hsla(0, 0%, 53.3%, 0.4); // hsla(0, 0%, 6.7%, 0.2); // hsla(0, 0%, 6.7%, 0.4)
+      border-radius: 0.1rem;
+      transform-origin: center;
+      transition: all 0.1s;
+
+      &:hover {
+        transform: scaleY(2);
+        border-radius: 0.05rem;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 400%;
+        width: 100%;
+        transform: translateY(-50%);
+        pointer-events: painted;
+      }
+    }
+  }
+}
