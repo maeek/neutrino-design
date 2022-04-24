@@ -1,59 +1,65 @@
 @use '../../../../styles/main' as *;
 
 .#{$prefix} {
-  &-player-renderer {
-    width: 100%;
-    background-color: #000;
-    position: relative;
-    @include box-sizing;
-    @include default-font;
-
-    > video {
+  &-player {
+    &-renderer {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+      background-color: #000;
+      position: relative;
+      @include box-sizing;
+      @include default-font;
 
-    &--aspect-ratio {
-      @include aspect-ratio(var(--renderer-width), var(--renderer-height));
-    }
+      > video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
 
-    &-controls {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 3.5rem;
-      height: 3.5rem;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      &--aspect-ratio {
+        @include aspect-ratio(var(--renderer-width), var(--renderer-height));
+      }
 
-      svg {
-        color: get-color('basic', 200);
+      &-controls {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 3.5rem;
         height: 3.5rem;
-        padding: 0.8rem;
-        font-size: 2rem;
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-        animation-name: NeBubbleFadeOut;
-        animation-fill-mode: forwards;
-        animation-duration: 0.4s;
-        animation-iteration-count: 1;
-        animation-timing-function: ease-in;
-      }
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      @keyframes NeBubbleFadeOut {
-        0% {
-          opacity: 1;
+        svg {
+          color: get-color('basic', 200);
+          width: 3.5rem;
+          height: 3.5rem;
+          padding: 0.8rem;
+          font-size: 2rem;
+          background-color: rgba(0, 0, 0, 0.5);
+          border-radius: 50%;
+          animation-name: NeBubbleFadeOut;
+          animation-fill-mode: forwards;
+          animation-duration: 0.3s;
+          animation-iteration-count: 1;
+          animation-timing-function: ease-in;
         }
-        100% {
-          opacity: 0;
-          transform: scale(2);
+
+        @keyframes NeBubbleFadeOut {
+          0% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+            transform: scale(2);
+          }
         }
       }
+    }
+
+    &:fullscreen &-renderer {
+      height: 100%;
     }
   }
 }
