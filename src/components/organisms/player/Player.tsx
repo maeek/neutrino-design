@@ -5,9 +5,10 @@ import {
   useRef,
   useState
 } from 'react';
-import { useControlls } from './hooks/useControlls';
+import { useControls } from './hooks/useControls';
 import { PlayerContextType, PlayerProvider, VideoDimensions } from './PlayerContext';
 import { listenToEvent } from './eventUtil';
+import './styles/player.scss';
 
 export interface PlayerProps {
   children: React.ReactNode;
@@ -19,7 +20,6 @@ export interface PlayerProps {
   poster?: string;
   volume?: number;
   playbackRate?: number;
-  maxPlaybackRate?: number;
   aspectRatio?: string;
   forceAspectRatio?: boolean;
   keyboardControl?: boolean;
@@ -62,7 +62,6 @@ export const Player = (props: PlayerProps) => {
     onFullscreenChange,
     getNodeElement,
     mediaElement = 'video',
-    maxPlaybackRate = 5,
     volume: initialVolume = 1,
     keyboardControl
   } = props;
@@ -81,6 +80,7 @@ export const Player = (props: PlayerProps) => {
   const [ hasEnded, setHasEnded ] = useState<boolean>(false);
   const [ internalPlaybackRate, setInternalPlaybackRate ] = useState<number>(mediaRef.current.defaultPlaybackRate);
   const [ volume, setVolume ] = useState<number>(initialVolume);
+  const [ buffered, setBuffered ] = useState<[number, number][]>(null);
 
   /**
    * Video properties
@@ -109,7 +109,9 @@ export const Player = (props: PlayerProps) => {
   /**
    * Context API methods
    */
-  const { play, seek, toggleFullscreen } = useControlls(mediaRef, playerRef);
+  const { play, seek, toggleFullscreen } = useControls(mediaRef, playerRef, {
+    setCurrentTime
+  });
 
   /**
    * Lifecycle events
@@ -154,6 +156,13 @@ export const Player = (props: PlayerProps) => {
     });
 
     const unsubscribeOnProgress = listenToEvent(mediaElement, 'progress', (...args: unknown[]) => {
+      const result = [];
+
+      for (let i = 0; i < mediaElement.buffered.length; i++) {
+        result.push([ mediaElement.buffered.start(i), mediaElement.buffered.end(i) ]);
+      }
+
+      setBuffered(result);
 
       if (mediaElement.buffered.length > 0) {
         onProgress?.((mediaElement.buffered.end(0) / mediaElement.duration) * 100, ...args);
@@ -250,9 +259,9 @@ export const Player = (props: PlayerProps) => {
   // Update playback speed from props
   useEffect(() => {
     if (playbackRate !== undefined) {
-      setInternalPlaybackRate(Math.max(0.5, Math.min(maxPlaybackRate, playbackRate)));
+      setInternalPlaybackRate(Math.max(0.25, Math.min(playbackRate, 15)));
     }
-  }, [ playbackRate, maxPlaybackRate ]);
+  }, [ playbackRate ]);
 
   // Update playback speed
   useEffect(() => {
@@ -308,6 +317,8 @@ export const Player = (props: PlayerProps) => {
     } : undefined;
   }, [ aspectRatio, forceAspectRatio ]);
 
+  const [ controlsHidden, hideControls ] = useState(false);
+
   const value: PlayerContextType = {
     url,
     mediaElement: mediaRef,
@@ -326,6 +337,8 @@ export const Player = (props: PlayerProps) => {
     hasEnded,
     videoAspectRatio,
     playing,
+    controlsHidden,
+    hideControls,
     mediaProps: {
       autoPlay,
       controls,
@@ -334,7 +347,7 @@ export const Player = (props: PlayerProps) => {
     },
     play,
     toggleFullscreen,
-    buffered: undefined,
+    buffered,
     setUrl: function (url: string): void {
       throw new Error('Function not implemented. ' + url);
     },
@@ -346,7 +359,7 @@ export const Player = (props: PlayerProps) => {
 
   return (
     <PlayerProvider value={value}>
-      <div className="ne-player" ref={playerRef}>
+      <div className="ne-player" data-hidden={controlsHidden} ref={playerRef}>
         {children}
       </div>
     </PlayerProvider>

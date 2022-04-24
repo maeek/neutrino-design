@@ -1,8 +1,11 @@
 import { RefObject, useCallback } from 'react';
 
-export const useControlls = (
+export const useControls = (
   mediaRef: RefObject<HTMLVideoElement | HTMLAudioElement>,
-  playerRef: RefObject<HTMLDivElement>
+  playerRef: RefObject<HTMLDivElement>,
+  updateFunc?: {
+    setCurrentTime: (time: number) => void;
+  }
 ) => {
   const play = useCallback((state?: boolean) => {
     const isControlled = typeof state === 'boolean';
@@ -33,7 +36,8 @@ export const useControlls = (
 
   const seek = useCallback((time: number) => {
     mediaRef.current.currentTime = time;
-  }, [ mediaRef ]);
+    updateFunc?.setCurrentTime(time);
+  }, [ mediaRef, updateFunc ]);
 
   return {
     play,
