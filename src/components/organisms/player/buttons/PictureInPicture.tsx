@@ -10,7 +10,7 @@ export const PictureInPictureButton = ({ size = 'medium' }: ButtonProps) => {
   const classes = classNames(
     'ne-player-button',
     `ne-player-button--${size}`,
-    'ne-player-button-pnp'
+    'ne-player-button-pip'
   );
 
   const btn = (

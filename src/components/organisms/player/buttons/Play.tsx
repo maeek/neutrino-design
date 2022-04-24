@@ -12,7 +12,8 @@ export const PlayButton = ({ size = 'medium' }: ButtonProps) => {
     'ne-player-button',
     `ne-player-button--${size}`,
     'ne-player-button-play',
-    playing && 'ne-player-button-play--playing'
+    playing && 'ne-player-button-play--playing',
+    stalled && 'ne-player-button-play--stalled'
   );
 
   const btn = (
@@ -26,13 +27,12 @@ export const PlayButton = ({ size = 'medium' }: ButtonProps) => {
   );
 
   return (
-    <button className={classes} onClick={() => {
+    <button data-cancellable={true} className={classes} onClick={() => {
       if (stalled) return;
 
       play(!playing);
     }}>
-      {!stalled && btn}
-      {stalled && 'Loading...'}
+      {btn}
     </button>
   );
 };

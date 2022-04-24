@@ -42,5 +42,36 @@
       width: 5rem;
       height: 5rem;
     }
+
+    // Scale volume and pip icons
+    &--small.#{$prefix}-player-button-play--stalled &-icon,
+    &--small.#{$prefix}-player-button-play--stalled &-icon svg,
+    &--small.#{$prefix}-player-button-volume &-icon,
+    &--small.#{$prefix}-player-button-volume &-icon svg,
+    &--small.#{$prefix}-player-button-pip &-icon,
+    &--small.#{$prefix}-player-button-pip &-icon svg {
+      width: 0.8rem;
+      height: 0.8rem;
+    }
+
+    &--medium.#{$prefix}-player-button-play--stalled &-icon,
+    &--medium.#{$prefix}-player-button-play--stalled &-icon svg,
+    &--medium.#{$prefix}-player-button-volume &-icon,
+    &--medium.#{$prefix}-player-button-volume &-icon svg,
+    &--medium.#{$prefix}-player-button-pip &-icon,
+    &--medium.#{$prefix}-player-button-pip &-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    &--large.#{$prefix}-player-button-play--stalled &-icon,
+    &--large.#{$prefix}-player-button-play--stalled &-icon svg,
+    &--large.#{$prefix}-player-button-volume &-icon,
+    &--large.#{$prefix}-player-button-volume &-icon svg,
+    &--large.#{$prefix}-player-button-pip &-icon,
+    &--large.#{$prefix}-player-button-pip &-icon svg {
+      width: 4.5rem;
+      height: 4.5rem;
+    }
   }
 }
