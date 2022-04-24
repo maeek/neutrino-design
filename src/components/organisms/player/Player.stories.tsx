@@ -21,7 +21,7 @@ Player.args = {
   keyboardControl: true,
   children: (
     <>
-      <Controls renderer={<VideoRenderer interactive />}>
+      <Controls renderer={<VideoRenderer interactive />} autohide>
         <SeekBar />
         <LeftControls>
           <PlayButton size='medium' />

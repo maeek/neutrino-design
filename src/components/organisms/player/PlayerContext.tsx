@@ -1,4 +1,4 @@
-import { RefObject, createContext } from 'react';
+import { RefObject, createContext, Dispatch } from 'react';
 
 export type VideoDimensions = { width: number; height: number } | null;
 
@@ -6,7 +6,7 @@ export interface PlayerContextType {
   url: string;
   duration: number;
   currentTime: number;
-  buffered: TimeRanges;
+  buffered: [number, number][];
   playing: boolean;
   stalled: boolean;
   isAborted: boolean;
@@ -25,6 +25,8 @@ export interface PlayerContextType {
   playerElement: RefObject<HTMLDivElement>;
   dimensions?: VideoDimensions;
   isFullscreen?: boolean;
+  controlsHidden: boolean;
+  hideControls: Dispatch<boolean>;
   videoAspectRatio?: {
     force?: boolean;
     width: number;

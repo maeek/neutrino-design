@@ -1,21 +1,124 @@
-import { CSSProperties } from 'react';
-import { useStats } from './hooks/useStats';
+import classNames from 'classnames';
+import { CSSProperties, MouseEventHandler, useEffect, useRef, useState } from 'react';
+import { useVideoPlayer } from './hooks/useVideoPlayer';
 import './styles/seekbar.scss';
 
-export interface SeekBarProps {
-}
+export const SeekBar = () => {
+  const { currentTime, duration, buffered, seek } = useVideoPlayer();
+  const [ isSeeking, setIsSeeking ] = useState(false);
+  const [ seekingPos, setSeekingPos ] = useState(0);
+  const seekBarRef = useRef<HTMLDivElement>(null);
+  const [ seekBarWidth, setSeekBarWidth ] = useState(seekBarRef.current?.clientWidth);
 
-export const SeekBar = ({}: SeekBarProps) => {
-  const { currentTime, duration } = useStats();
+  useEffect(() => {
+    const observer = new ResizeObserver(() => {
+      setSeekBarWidth(seekBarRef.current?.clientWidth);
+    });
 
-  const thumbPosition = (currentTime / duration) * 100;
+    observer.observe(seekBarRef.current);
 
-  console.log(thumbPosition);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const videoPositionPercentage = (currentTime / duration) || 0;
+  const seekBarPositionPercentage = seekBarWidth * videoPositionPercentage;
+
+  const clickHandler: MouseEventHandler = (e) => {
+    const seekBar = seekBarRef.current;
+    const seekBarPosition = seekBar.getBoundingClientRect();
+    const seekBarPositionPercentage = (e.clientX - seekBarPosition.left) / seekBarPosition.width;
+    const seekBarPositionPercentageInSeconds = seekBarPositionPercentage * duration;
+
+    seek(seekBarPositionPercentageInSeconds);
+  };
+
+  useEffect(() => {
+    const seekPos = (e: MouseEvent) => {
+      const seekBarPosition = seekBarRef.current.getBoundingClientRect();
+      const seekBarPositionPercentage = (e.clientX - seekBarPosition.left) / seekBarPosition.width;
+      const seekBarPositionPercentageInSeconds = seekBarPositionPercentage * duration;
+
+      setSeekingPos(Math.max(0, Math.min(seekBarPositionPercentage, 1)));
+      seek(Math.max(0, Math.min(seekBarPositionPercentageInSeconds, duration)));
+    };
+
+    const startSeeking = (e: MouseEvent) => {
+      if (e.target === seekBarRef.current || seekBarRef.current?.contains(e.target as Node)) {
+        e.preventDefault();
+        setIsSeeking(true);
+
+        seekPos(e);
+      }
+    };
+
+    const stopSeeking = (e: MouseEvent) => {
+      if (!isSeeking) return;
+      e.preventDefault();
+      setIsSeeking(false);
+
+      seekPos(e);
+    };
+
+    const seeking = (e: MouseEvent) => {
+      if (!isSeeking) return;
+      e.preventDefault();
+
+      seekPos(e);
+    };
+
+    document.addEventListener('mousedown', startSeeking);
+    document.addEventListener('mouseup', stopSeeking);
+    document.addEventListener('mousemove', seeking);
+
+    return () => {
+      document.removeEventListener('mousedown', startSeeking);
+      document.removeEventListener('mouseup', stopSeeking);
+      document.removeEventListener('mousemove', seeking);
+    };
+  }, [ duration, isSeeking, seek ]);
+
+  const progressWidth = isSeeking ? seekingPos : videoPositionPercentage;
+  const progressThumbPosition = isSeeking ? seekingPos * seekBarWidth : seekBarPositionPercentage;
 
   return (
-    <div className='ne-player-seek-bar'>
+    <div
+      className={classNames('ne-player-seek-bar', {
+        'ne-player-seek-bar--seeking': isSeeking
+      })}
+      ref={seekBarRef}
+      onClick={clickHandler}
+    >
+      <div className='ne-player-seek-bar-buffered'>
+        {
+          (buffered || []).map((range, index) => {
+            const start = range[ 0 ];
+            const end = range[ 1 ];
+            const width = (end - start) / duration * 100;
+
+            return (
+              <div
+                key={index}
+                className='ne-player-seek-bar-buffered-range'
+                style={{
+                  '--left': `${start / duration * 100}%`,
+                  '--width': `${width}%`
+                } as CSSProperties}
+              ></div>
+            );
+          })
+        }
+      </div>
       <div className='ne-player-seek-bar-timeline'></div>
-      <div className='ne-player-seek-bar-live' style={{ '--pos': thumbPosition } as CSSProperties} />
+      <div
+        className='ne-player-seek-bar-progress'
+        style={{ '--width': progressWidth } as CSSProperties}
+      />
+      <div
+        className='ne-player-seek-bar-thumb'
+        style={{ '--left': `${progressThumbPosition}px` } as CSSProperties}
+      />
     </div>
   );
 };
