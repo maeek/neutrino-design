@@ -1,6 +1,6 @@
 export const listenToEvent = (
   element: HTMLElement,
-  eventName: string,
+  eventName: keyof HTMLElementEventMap,
   callback: (...args: unknown[]) => void,
   options?: boolean | AddEventListenerOptions
 ) => {

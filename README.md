@@ -59,6 +59,7 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [x] Heading
 - [x] Paragraph
 - [x] Text
+- [ ] Progress
 
 ### Layouts
 
@@ -71,7 +72,6 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 
 ### Molecules
 
-- [ ] Progress
 - [ ] Card
 - [ ] Setting with heading, description and checkbox
 - [ ] Navigation
@@ -97,10 +97,10 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 ### Organisms
 
 - [ ] Stepper
-- [ ] Tabs                 <- TODO: | tab 1 x | tab 2 x | tab 3 x |
+- [ ] Tabs
 - [ ] Bottom navigation
 - [ ] Gallery
-- [ ] Player
+- [x] Player
 - [ ] Image editor
 
 ### Hooks

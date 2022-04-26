@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import dayjs from 'dayjs';
 import durationPlugin from 'dayjs/plugin/duration';
 import { useMemo } from 'react';
-import { useVideoPlayer } from './hooks/useVideoPlayer';
-import './styles/timestamp.scss';
+import { useVideoPlayer } from '../hooks/useVideoPlayer';
+import './timestamp.scss';
 
 dayjs.extend(durationPlugin);
 

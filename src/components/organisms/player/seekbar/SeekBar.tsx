@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import { CSSProperties, MouseEventHandler, useEffect, useRef, useState } from 'react';
-import { useVideoPlayer } from './hooks/useVideoPlayer';
-import './styles/seekbar.scss';
+import { useSwipeable } from 'react-swipeable';
+import { useVideoPlayer } from '../hooks/useVideoPlayer';
+import './seekbar.scss';
 
 export const SeekBar = () => {
-  const { currentTime, duration, buffered, seek } = useVideoPlayer();
+  const { currentTime, duration, buffered, seek, seeking } = useVideoPlayer();
   const [ isSeeking, setIsSeeking ] = useState(false);
   const [ seekingPos, setSeekingPos ] = useState(0);
   const seekBarRef = useRef<HTMLDivElement>(null);
@@ -24,6 +25,34 @@ export const SeekBar = () => {
 
   const videoPositionPercentage = (currentTime / duration) || 0;
   const seekBarPositionPercentage = seekBarWidth * videoPositionPercentage;
+
+  const handlers = useSwipeable({
+    delta: 0,
+    preventDefaultTouchmoveEvent: true,
+    onSwipeStart: (e) => {
+      const { event } = e;
+      const seekBarPosition = seekBarRef.current.getBoundingClientRect();
+      const seekBarPositionPercentage = (
+        (event as TouchEvent).touches[ 0 ].clientX - seekBarPosition.left
+      ) / seekBarPosition.width;
+      const seekBarPositionPercentageInSeconds = seekBarPositionPercentage * duration;
+
+      setIsSeeking(true);
+      setSeekingPos(Math.max(0, Math.min(seekBarPositionPercentage, 1)));
+      seek(Math.max(0, Math.min(seekBarPositionPercentageInSeconds, duration)));
+    },
+    onSwiping: (e) => {
+      const { event } = e;
+      const seekBarPosition = seekBarRef.current.getBoundingClientRect();
+      const seekBarPositionPercentage = (
+        (event as TouchEvent).touches[ 0 ].clientX - seekBarPosition.left
+      ) / seekBarPosition.width;
+      const seekBarPositionPercentageInSeconds = seekBarPositionPercentage * duration;
+
+      setSeekingPos(Math.max(0, Math.min(seekBarPositionPercentage, 1)));
+      seek(Math.max(0, Math.min(seekBarPositionPercentageInSeconds, duration)));
+    }
+  });
 
   const clickHandler: MouseEventHandler = (e) => {
     const seekBar = seekBarRef.current;
@@ -84,10 +113,14 @@ export const SeekBar = () => {
 
   return (
     <div
+      {...handlers}
       className={classNames('ne-player-seek-bar', {
-        'ne-player-seek-bar--seeking': isSeeking
+        'ne-player-seek-bar--seeking': isSeeking || seeking
       })}
-      ref={seekBarRef}
+      ref={(el) => {
+        handlers.ref(el);
+        seekBarRef.current = el;
+      }}
       onClick={clickHandler}
     >
       <div className='ne-player-seek-bar-buffered'>

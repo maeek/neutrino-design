@@ -6,9 +6,9 @@ import {
   useState
 } from 'react';
 import { useControls } from './hooks/useControls';
-import { PlayerContextType, PlayerProvider, VideoDimensions } from './PlayerContext';
+import { PlayerContextType, PlayerProvider, VideoDimensions } from './context';
 import { listenToEvent } from './eventUtil';
-import './styles/player.scss';
+import './player.scss';
 
 export interface PlayerProps {
   children: React.ReactNode;
@@ -77,6 +77,7 @@ export const Player = (props: PlayerProps) => {
   const [ stalled, setStalled ] = useState<boolean>(false);
   const [ isAborted, setIsAborted ] = useState<boolean>(false);
   const [ playing, setPlaying ] = useState<boolean>(false);
+  const [ seeking, setSeeking ] = useState<boolean>(false);
   const [ hasEnded, setHasEnded ] = useState<boolean>(false);
   const [ internalPlaybackRate, setInternalPlaybackRate ] = useState<number>(mediaRef.current.defaultPlaybackRate);
   const [ volume, setVolume ] = useState<number>(initialVolume);
@@ -86,12 +87,15 @@ export const Player = (props: PlayerProps) => {
    * Video properties
    */
   const [ dimensions, setDimensions ] = useState<VideoDimensions | undefined>();
+  const [ videoPlaybackQuality, setVideoPlaybackQuality ] = useState<VideoPlaybackQuality| undefined>(undefined);
 
   /**
    * Player properties
    */
   const [ isFullscreen, setIsFullscreen ] = useState<boolean>(false);
   const [ error, setError ] = useState<Event>(null);
+  const [ controlsHidden, hideControls ] = useState(false);
+  const [ isVisible, setIsVisible ] = useState<boolean>(true);
 
   /**
    * Internal methods
@@ -202,6 +206,14 @@ export const Player = (props: PlayerProps) => {
       setDuration(mediaElement.duration);
     });
 
+    const unsubscribeOnSeekingChange = listenToEvent(mediaElement, 'seeking', () => {
+      setSeeking(true);
+    });
+
+    const unsubscribeOnSeekedChange = listenToEvent(mediaElement, 'seeked', () => {
+      setSeeking(false);
+    });
+
     let unsubscribeOnResize;
     if (mediaElement instanceof HTMLVideoElement) {
       unsubscribeOnResize = listenToEvent(mediaElement, 'resize', () => {
@@ -236,6 +248,8 @@ export const Player = (props: PlayerProps) => {
       unsubscribeOnVolumeChange();
       unsubscribeOnDurationChange();
       unsubscribeOnResize?.();
+      unsubscribeOnSeekingChange();
+      unsubscribeOnSeekedChange();
     };
   }, [
     url,
@@ -268,6 +282,14 @@ export const Player = (props: PlayerProps) => {
     mediaRef.current.playbackRate = internalPlaybackRate;
   }, [ internalPlaybackRate ]);
 
+  useEffect(() => {
+    const mediaElement = mediaRef.current;
+
+    if (mediaElement instanceof HTMLVideoElement) {
+      setVideoPlaybackQuality(mediaElement.getVideoPlaybackQuality());
+    }
+  }, [ currentTime ]);
+
   // Update internal volume level from props
   useEffect(() => {
     if (initialVolume !== undefined) {
@@ -281,17 +303,46 @@ export const Player = (props: PlayerProps) => {
     mediaRef.current.volume = volume;
   }, [ volume, autoPlay ]);
 
+  /**
+   * Keyboard events mapping
+   */
   useEffect(() => {
-    if (!keyboardControl) return;
+    if (!keyboardControl || !isVisible) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === ' ') {
+      if (event.key === ' ' || event.key.toLowerCase() === 'k') {
         event.preventDefault();
         play();
       }
-      if (event.key.toLocaleLowerCase() === 'f') {
+      if (event.key.toLowerCase() === 'f') {
         event.preventDefault();
         toggleFullscreen();
+      }
+
+      // Video seeking
+      if ([ 'ArrowRight', 'ArrowLeft' ].includes(event.key)) {
+        event.preventDefault();
+        seek(Math.max(0, Math.min(currentTime + (event.key === 'ArrowRight' ? 5 : -5), duration)));
+      }
+      if ([ 'j', 'l' ].includes(event.key)) {
+        event.preventDefault();
+        seek(Math.max(0, Math.min(currentTime + (event.key === 'l' ? 10 : -10), duration)));
+      }
+      if ([ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' ].includes(event.key)) {
+        event.preventDefault();
+        seek((parseInt(event.key) / 10) * duration);
+      }
+
+      // Volume control
+      if (event.key.toLowerCase() === 'm') {
+        event.preventDefault();
+        setVolume(prev => prev === 0 ? 1 : 0);
+      }
+      if ([ 'ArrowUp', 'ArrowDown' ].includes(event.key)) {
+        event.preventDefault();
+        setVolume(prev => Math.max(0, Math.min(
+          prev + (event.key === 'ArrowUp' ? 0.1 : -0.1), 1)
+        ));
       }
     };
 
@@ -300,7 +351,25 @@ export const Player = (props: PlayerProps) => {
     return () => {
       document.removeEventListener('keydown', onKeyDown, false);
     };
-  }, [ keyboardControl, play, toggleFullscreen ]);
+  }, [ keyboardControl, play, toggleFullscreen, currentTime, seek, duration, isVisible ]);
+
+  useEffect(() => {
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[ 0 ].isIntersecting) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      }
+    );
+
+    intersectionObserver.observe(mediaRef.current);
+
+    return () => {
+      intersectionObserver.disconnect();
+    };
+  }, []);
 
   /**
    * Derivative values
@@ -317,13 +386,12 @@ export const Player = (props: PlayerProps) => {
     } : undefined;
   }, [ aspectRatio, forceAspectRatio ]);
 
-  const [ controlsHidden, hideControls ] = useState(false);
-
   const value: PlayerContextType = {
     url,
     mediaElement: mediaRef,
     playerElement: playerRef,
     playbackRate: internalPlaybackRate,
+    isVisible,
     currentTime,
     duration,
     dimensions,
@@ -337,8 +405,10 @@ export const Player = (props: PlayerProps) => {
     hasEnded,
     videoAspectRatio,
     playing,
+    seeking,
     controlsHidden,
     hideControls,
+    videoPlaybackQuality,
     mediaProps: {
       autoPlay,
       controls,

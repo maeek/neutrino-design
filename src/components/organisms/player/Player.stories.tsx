@@ -1,10 +1,11 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { FullscreenButton, PictureInPictureButton, PlayButton, VolumeButton } from './buttons/';
-import { Controls, LeftControls, RightControls } from './Controls';
+import { InfoButton } from './buttons/Info';
+import { Controls, HeaderLeft, HeaderRight, LeftControls, RightControls } from './controls';
 import { Player as PlayerComponent, PlayerProps } from './Player';
 import { VideoRenderer } from './renderers/VideoRenderer';
-import { SeekBar } from './SeekBar';
-import { Timestamp } from './Timestamp';
+import { SeekBar } from './seekbar';
+import { Timestamp } from './timestamp';
 
 export default {
   title: 'Organisms/Player/Player',
@@ -17,11 +18,18 @@ export const Player = Template.bind({});
 Player.args = {
   url: 'https://video.blender.org/download/videos/bf1f3fb5-b119-4f9f-9930-8e20e892b898-720.mp4',
   poster: 'https://static.suchanecki.me/jupiter.jpg',
-  aspectRatio: '4:3',
+  aspectRatio: '16:9',
   keyboardControl: true,
   children: (
     <>
       <Controls renderer={<VideoRenderer interactive />} autohide>
+        <HeaderLeft>
+          Titleeeeeee
+        </HeaderLeft>
+        <HeaderRight>
+          <PictureInPictureButton showLabel size='medium' />
+          <InfoButton showLabel size='medium' />
+        </HeaderRight>
         <SeekBar />
         <LeftControls>
           <PlayButton size='medium' />
@@ -29,7 +37,6 @@ Player.args = {
           <Timestamp />
         </LeftControls>
         <RightControls>
-          <PictureInPictureButton size='medium' />
           <FullscreenButton size='medium' />
         </RightControls>
       </Controls>

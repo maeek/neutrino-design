@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { PlayerContext } from '../PlayerContext';
+import { PlayerContext } from '../context/PlayerContext';
 
 export const useVideoPlayer = () => {
   const context = useContext(PlayerContext);

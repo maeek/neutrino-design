@@ -26,9 +26,7 @@ export const InfoButton = ({ size = 'medium', showLabel, labelPosition = 'bottom
   );
 
   return (
-    <button className={classes} onClick={() => {
-      console.log(videoPlaybackQuality);
-    }}>
+    <button className={classes} onClick={() => {}}>
       {btn}
       {showLabel && label}
     </button>

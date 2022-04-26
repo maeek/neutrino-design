@@ -9,6 +9,8 @@ export interface PlayerContextType {
   buffered: [number, number][];
   playing: boolean;
   stalled: boolean;
+  seeking: boolean;
+  isVisible: boolean;
   isAborted: boolean;
   error?: Event;
   canPlay?: boolean;
@@ -32,6 +34,7 @@ export interface PlayerContextType {
     width: number;
     height: number;
   };
+  videoPlaybackQuality?: VideoPlaybackQuality;
   mediaProps?: {
     poster?: string;
     autoPlay?: boolean;
