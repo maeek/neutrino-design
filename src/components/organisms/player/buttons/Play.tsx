@@ -3,7 +3,7 @@ import { useVideoPlayer } from '../hooks/useVideoPlayer';
 import PauseRounded from '@material-ui/icons/PauseRounded';
 import PlayArrowRounded from '@material-ui/icons/PlayArrowRounded';
 import { ButtonProps } from './types';
-import '../styles/buttons.scss';
+import './buttons.scss';
 
 export const PlayButton = ({ size = 'medium' }: ButtonProps) => {
   const { playing, stalled, play } = useVideoPlayer();
@@ -27,7 +27,7 @@ export const PlayButton = ({ size = 'medium' }: ButtonProps) => {
   );
 
   return (
-    <button data-cancellable={true} className={classes} onClick={() => {
+    <button className={classes} onClick={() => {
       if (stalled) return;
 
       play(!playing);

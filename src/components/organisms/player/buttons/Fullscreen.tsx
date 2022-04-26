@@ -3,7 +3,7 @@ import { useVideoPlayer } from '../hooks/useVideoPlayer';
 import FullscreenExitRounded from '@material-ui/icons/FullscreenExitRounded';
 import FullscreenRounded from '@material-ui/icons/FullscreenRounded';
 import { ButtonProps } from './types';
-import '../styles/buttons.scss';
+import './buttons.scss';
 
 export const FullscreenButton = ({ size = 'medium' }: ButtonProps) => {
   const { toggleFullscreen, isFullscreen } = useVideoPlayer();

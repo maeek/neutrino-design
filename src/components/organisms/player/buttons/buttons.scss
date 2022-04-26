@@ -7,8 +7,32 @@
     cursor: pointer;
     position: relative;
     padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     @include box-sizing;
     @include default-font;
+
+    &-label {
+      color: #fff;
+      font-weight: 500;
+      text-shadow: 0 0 2px rgb(0 0 0 / 60%);
+      padding: 0.1rem 0.25rem;
+      border-radius: 0.2rem;
+      transition: background 0.1s cubic-bezier(0.4, 0, 1, 1);
+      white-space: nowrap;
+      margin-top: 0.5rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -0.5rem;
+        left: 0;
+        width: 100%;
+        height: 1rem;
+      }
+    }
 
     &-icon,
     &-icon svg {
@@ -48,7 +72,8 @@
     &--small.#{$prefix}-player-button-play--stalled &-icon svg,
     &--small.#{$prefix}-player-button-volume &-icon,
     &--small.#{$prefix}-player-button-volume &-icon svg,
-    &--small.#{$prefix}-player-button-pip &-icon,
+    &--small.#{$prefix}-player-button-info &-icon,
+    &--small.#{$prefix}-player-button-info &-icon svg &--small.#{$prefix}-player-button-pip &-icon,
     &--small.#{$prefix}-player-button-pip &-icon svg {
       width: 0.8rem;
       height: 0.8rem;
@@ -58,6 +83,8 @@
     &--medium.#{$prefix}-player-button-play--stalled &-icon svg,
     &--medium.#{$prefix}-player-button-volume &-icon,
     &--medium.#{$prefix}-player-button-volume &-icon svg,
+    &--medium.#{$prefix}-player-button-info &-icon,
+    &--medium.#{$prefix}-player-button-info &-icon svg,
     &--medium.#{$prefix}-player-button-pip &-icon,
     &--medium.#{$prefix}-player-button-pip &-icon svg {
       width: 1.5rem;
@@ -68,6 +95,8 @@
     &--large.#{$prefix}-player-button-play--stalled &-icon svg,
     &--large.#{$prefix}-player-button-volume &-icon,
     &--large.#{$prefix}-player-button-volume &-icon svg,
+    &--large.#{$prefix}-player-button-info &-icon,
+    &--large.#{$prefix}-player-button-info &-icon svg,
     &--large.#{$prefix}-player-button-pip &-icon,
     &--large.#{$prefix}-player-button-pip &-icon svg {
       width: 4.5rem;
