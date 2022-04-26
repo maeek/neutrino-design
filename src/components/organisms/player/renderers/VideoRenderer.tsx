@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import PlayArrowRounded from '@material-ui/icons/PlayArrowRounded';
 import PauseRounded from '@material-ui/icons/PauseRounded';
 import { useVideoPlayer } from '../hooks/useVideoPlayer';
-import '../styles/renderer.scss';
+import './renderer.scss';
 
 export interface VideoRendererProps {
   interactive?: boolean;
