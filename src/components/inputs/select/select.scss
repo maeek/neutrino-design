@@ -1,0 +1,102 @@
+@use '../../../styles/main' as *;
+
+.#{$prefix} {
+  &-select {
+    @include flexbox($justifyContent: flex-start, $alignItems: strech);
+    @include default-font;
+    @include box-sizing;
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    background-color: get-color('primary', 500);
+    color: get-color('basic', 100);
+    border-radius: 0.2rem;
+    font-size: get-font-size(250);
+    flex-direction: column;
+    appearance: none;
+
+    &-active {
+      width: 100%;
+      padding: 0.8rem;
+      height: 2.25rem;
+      cursor: pointer;
+      @include flexbox($justifyContent: space-between, $alignItems: center);
+      color: get-color('basic', 100);
+
+      &-icon {
+        @include flexbox($justifyContent: center, $alignItems: center);
+        font-size: 1rem;
+        height: 1rem;
+        width: 1rem;
+        transition: transform 0.25s;
+        color: get-color('basic', 100);
+
+        &--opened {
+          transform: rotateX(-180deg);
+        }
+      }
+
+      &--placeholder {
+        color: get-color('basic', 400);
+      }
+    }
+
+    &-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      position: absolute;
+      top: calc(100% + 0.1rem);
+      left: 0;
+      width: 100%;
+      max-height: 20rem;
+      overflow-y: auto;
+      background-color: get-color('primary', 600);
+      color: get-color('basic', 100);
+      border-radius: 0.2rem;
+      box-shadow: 0.1rem 0.8rem 1rem rgba(0, 0, 0, 0.2);
+      @include custom-scroll;
+
+      &-item {
+        padding: 0.8rem;
+        cursor: pointer;
+        border-left: 0.2rem solid transparent;
+
+        &:first-child {
+          border-radius: 0.2rem;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        &:last-child {
+          border-radius: 0.2rem;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+
+        &:hover,
+        &:focus-within {
+          background-color: get-color('primary', 500);
+        }
+
+        &--selected {
+          border-left: 0.2rem solid get-color('actions', 500);
+          background-color: get-color('primary', 900);
+
+          &:first-child {
+            border-top-left-radius: 0.2rem;
+          }
+
+          &:last-child {
+            border-bottom-left-radius: 0.2rem;
+          }
+        }
+
+        &-highlighted {
+          font-weight: 900;
+        }
+      }
+    }
+  }
+}

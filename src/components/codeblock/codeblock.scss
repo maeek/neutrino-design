@@ -1,0 +1,58 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.ne {
+  &-typo {
+    @include boxSizing;
+    &-code {
+      @include defaultFont;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      color: darken($secondaryColor, 10);
+      vertical-align: baseline;
+
+      &-line {
+        display: flex;
+        justify-content: stretch;
+        align-items: flex-start;
+
+        &-number {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          min-height: 1.5rem;
+          color: darken($secondaryColor, 25);
+          margin: 0.1rem 0.4rem 0 0;
+          border: 0.05rem solid transparent;
+          user-select: none;
+          cursor: default;
+          font-size: 0.8rem;
+          @include monoFont;
+        }
+
+        & &-content {
+          border-radius: 0.15rem;
+          border: 0.05rem solid lighten($darkerGray, 2);
+          background-color: $darkerGray;
+
+          &--wrap {
+            white-space: pre-wrap;
+          }
+        }
+
+        &:hover &-number {
+          color: darken($secondaryColor, 15);
+        }
+      }
+
+      &--block {
+        padding: 0.5rem 0.7rem;
+        border: 0.05rem solid $gray;
+        background-color: darken($altDarkGray, 30);
+        border-radius: 0.2rem;
+      }
+    }
+  }
+}

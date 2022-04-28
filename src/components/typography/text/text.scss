@@ -1,0 +1,77 @@
+@import '../../../styles/colors';
+@import '../../../styles/mixins';
+
+.ne {
+  &-typo {
+    @include defaultFont;
+    @include boxSizing;
+    &-text {
+      padding: 0;
+      margin: 0;
+      color: $secondaryColor;
+      font-size: 0.8rem;
+      font-weight: 400;
+      vertical-align: baseline;
+      padding: 0.15rem 0;
+
+      &--mono {
+        @include monoFont;
+      }
+
+      &--secondary {
+        color: darken($secondaryColor, 15);
+      }
+
+      &--success {
+        color: $green;
+      }
+
+      &--warning {
+        color: lighten(#ff9900, 5);
+      }
+
+      &--danger {
+        color: $lightRed;
+      }
+
+      &--link {
+        text-decoration: none;
+        font-weight: 400;
+        color: lighten($lightBlue, 5);
+        transition: 0.2s all;
+
+        &:hover {
+          color: lighten($lighterBlue, 5);
+        }
+      }
+
+      &--highlight {
+        border-radius: 0.15rem;
+        background-color: transparentize(#ff9900, 0.8);
+        &:hover {
+          background-color: transparentize(#ff9900, 0.7);
+        }
+      }
+
+      &--disabled {
+        color: darken($secondaryColor, 30);
+      }
+
+      &--strong {
+        font-weight: 700;
+      }
+
+      &--underline {
+        text-decoration: underline;
+      }
+
+      &--delete {
+        text-decoration: line-through;
+      }
+
+      &--pre {
+        white-space: pre-wrap;
+      }
+    }
+  }
+}

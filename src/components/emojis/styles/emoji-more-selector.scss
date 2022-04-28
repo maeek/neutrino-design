@@ -1,0 +1,72 @@
+@use '../../../styles/main' as *;
+
+.#{$prefix} {
+  &-emoji-selector-more {
+    width: 100%;
+    min-height: 20rem;
+    background-color: get-color('primary', 900);
+    color: get-color('basic', 300);
+    border-radius: 0.4rem;
+
+    @include box-sizing;
+    @include default-font;
+
+    &-header {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      overflow: auto;
+      padding: 0.4rem 0.5rem;
+
+      @include custom-scroll;
+
+      &-categories {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        font-weight: 900;
+        font-size: 1rem;
+        list-style: none;
+        padding: 0;
+        margin: 0.4rem;
+      }
+
+      &-category {
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+          color: get-color('actions', 200);
+        }
+
+        &-divider {
+          display: inline-flex;
+          width: 1rem;
+          height: 100%;
+          background-color: red;
+        }
+      }
+    }
+
+    &-body {
+      width: 100%;
+      overflow: auto;
+      padding: 0.4rem;
+      height: auto;
+      max-height: 30rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0;
+      z-index: 20;
+
+      @include custom-scroll;
+
+      &-item {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+  }
+}

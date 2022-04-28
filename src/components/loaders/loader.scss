@@ -1,0 +1,10 @@
+@import '../../styles/mixins';
+
+.ne {
+  &-loader {
+    display: inline-block;
+    min-height: 5.556rem;
+    min-width: 5.556rem;
+    @include loader('loaderStandalone', 0.556rem, 1.11rem);
+  }
+}

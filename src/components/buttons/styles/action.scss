@@ -1,0 +1,24 @@
+@use '../../../styles/main' as *;
+
+.#{$prefix} {
+  &-button {
+    .#{$prefix}-button_act &-item:not(.#{$prefix}-button-item--disabled) {
+      border: 0.15rem solid get-color('actions', 500);
+      background-color: get-color('actions', 500);
+      color: get-color('basic', 100);
+    }
+
+    .#{$prefix}-button_act &-item:not(.#{$prefix}-button-item--disabled):hover,
+    .#{$prefix}-button_act &-item:not(.#{$prefix}-button-item--disabled):focus {
+      cursor: pointer;
+      border: 0.15rem solid get-color('actions', 600);
+      background-color: get-color('actions', 600);
+    }
+
+    .#{$prefix}-button_act &-item:not(.#{$prefix}-button-item--disabled):active {
+      border: 0.15rem solid get-color('actions', 500);
+      border-bottom: 0.15rem solid get-color('actions', 700);
+      background-color: get-color('actions', 500);
+    }
+  }
+}
