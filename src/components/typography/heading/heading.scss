@@ -1,12 +1,12 @@
-@import '../../../styles/colors';
-@import '../../../styles/mixins';
+@use '../../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-typo {
-    @include defaultFont;
-    @include boxSizing;
+    @include box-sizing;
+    @include default-font;
+
     &-heading {
-      color: $primaryColor;
+      color: get-color('basic', 100);
 
       &-level-1 {
         margin: 1rem 0;

@@ -1,16 +1,13 @@
 @use '../../../styles/main' as *;
-@import '../../../styles/colors';
-@import '../../../styles/mixins';
 
 .#{$prefix} {
   &-input-slider {
     margin-top: 1rem;
-
     position: relative;
-    @include defaultFont;
-    @include boxSizing;
-    color: $disabledColor;
+    color: get-color('basic', 400);
     font-size: 0.6rem;
+    @include box-sizing;
+    @include default-font;
 
     &--horizontal {
       width: 100%;
@@ -62,14 +59,14 @@
     }
 
     &-bar {
-      background-color: $darkerGray;
+      background-color: get-color('primary', 900);
       border-radius: 4rem;
 
       &-selected {
         width: var(--w);
         height: 100%;
         border-radius: 1rem;
-        background-color: $darkGreen;
+        // background-color: $darkGreen;
       }
 
       &-steps {
@@ -82,14 +79,14 @@
           width: 0.5rem;
           height: 0.5rem;
           border-radius: 50%;
-          background-color: transparentize($gray, 0.8);
+          // background-color: transparentize($gray, 0.8);
           transition: background-color 0.1s;
           user-select: none;
           top: 0;
           position: absolute;
 
           &:hover {
-            background-color: transparentize($gray, 0.6);
+            // background-color: transparentize($gray, 0.6);
           }
 
           &-tooltip {
@@ -148,7 +145,7 @@
     &-thumb {
       width: 0.9rem;
       height: 0.9rem;
-      background-color: $green;
+      // background-color: $green;
       border-radius: 4rem;
       position: absolute;
       transform: translateX(var(--x)) translateY(var(--y));

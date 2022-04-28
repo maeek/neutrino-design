@@ -1,14 +1,10 @@
-@import '../../styles/colors';
-@import '../../styles/mixins';
+@use '../../styles/main' as *;
 
-$bg: $darkGray;
-$activeBg: $green;
-$color: $primaryColor;
-$focusColor: $lighterBlue;
-
-.ne {
+.#{$prefix} {
   &-context-menu {
     z-index: 400;
+    @include box-sizing;
+    @include default-font;
 
     &-mask {
       position: fixed;
@@ -35,9 +31,9 @@ $focusColor: $lighterBlue;
 
     &-list {
       list-style: none;
-      background: $darkerGray;
-      color: $color;
-      border: 0.05rem solid lighten($darkerGray, 10);
+      background: get-color('primary', 900);
+      color: get-color('basic', 100);
+      border: 0.05rem solid get-color('primary', 500);
       border-radius: 0.4rem;
       padding: 0;
       margin: 0;
@@ -48,7 +44,7 @@ $focusColor: $lighterBlue;
 
       &:hover,
       &:focus-within {
-        border: 0.05rem solid lighten($darkerGray, 15);
+        border: 0.05rem solid get-color('primary', 500);
       }
     }
   }

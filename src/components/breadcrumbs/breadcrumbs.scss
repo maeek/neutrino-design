@@ -1,7 +1,6 @@
-@import '../../styles/colors';
-@import '../../styles/mixins';
+@use '../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-breadcrumbs {
     display: flex;
     justify-content: flex-start;
@@ -12,7 +11,7 @@
     margin: 0;
     list-style: none;
 
-    @include defaultFont;
-    @include boxSizing;
+    @include box-sizing;
+    @include default-font;
   }
 }

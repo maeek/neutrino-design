@@ -1,18 +1,17 @@
-@import '../../styles/colors';
-@import '../../styles/mixins';
+@use '../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-breadcrumbs-separator {
     font-size: 1.2rem;
     font-weight: 900;
-    color: $lightBlue;
+    color: get-color('actions', 100);
     padding: 0 0.4rem;
     margin: 0;
     list-style: none;
     cursor: default;
     user-select: none;
 
-    @include defaultFont;
-    @include boxSizing;
+    @include box-sizing;
+    @include default-font;
   }
 }

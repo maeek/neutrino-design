@@ -1,14 +1,14 @@
-@import '../../../styles/colors';
-@import '../../../styles/mixins';
+@use '../../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-typo {
-    @include defaultFont;
-    @include boxSizing;
+    @include box-sizing;
+    @include default-font;
+
     &-paragraph {
       padding: 0;
       margin: 0;
-      color: $secondaryColor;
+      color: get-color('basic', 200);
       font-size: 0.8rem;
       font-weight: 400;
       line-height: 1.2rem;

@@ -1,9 +1,10 @@
-@import '../../../styles/colors';
-@import '../../../styles/mixins';
+@use '../../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-typo {
-    @include boxSizing;
+    @include box-sizing;
+    @include default-font;
+
     &-code {
       &-line {
         &-content {
@@ -16,7 +17,7 @@
           margin: 0.1rem;
           padding: 0.2rem 0.2rem;
           white-space: pre-line;
-          color: darken($secondaryColor, 10);
+          color: get-color('basic', 300);
 
           & .ne-typo-text {
             display: inline;
@@ -29,7 +30,7 @@
 
           & .ne-typo-text:empty::before {
             content: '↲';
-            color: darken($secondaryColor, 40);
+            color: get-color('basic', 400);
           }
         }
       }

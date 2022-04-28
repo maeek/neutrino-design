@@ -1,47 +1,47 @@
-@import '../../../styles/colors';
-@import '../../../styles/mixins';
+@use '../../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-typo {
-    @include defaultFont;
-    @include boxSizing;
+    @include box-sizing;
+    @include default-font;
+
     &-text {
       padding: 0;
       margin: 0;
-      color: $secondaryColor;
+      color: get-color('basic', 200);
       font-size: 0.8rem;
       font-weight: 400;
       vertical-align: baseline;
       padding: 0.15rem 0;
 
       &--mono {
-        @include monoFont;
+        @include mono-font;
       }
 
       &--secondary {
-        color: darken($secondaryColor, 15);
+        color: get-color('basic', 300);
       }
 
       &--success {
-        color: $green;
+        color: get-color('positive', 100);
       }
 
       &--warning {
-        color: lighten(#ff9900, 5);
+        color: get-color('warning', 400);
       }
 
       &--danger {
-        color: $lightRed;
+        color: get-color('negative', 100);
       }
 
       &--link {
         text-decoration: none;
         font-weight: 400;
-        color: lighten($lightBlue, 5);
-        transition: 0.2s all;
+        color: get-color('actions', 400);
+        transition: 0.1s all;
 
         &:hover {
-          color: lighten($lighterBlue, 5);
+          color: get-color('actions', 100);
         }
       }
 
@@ -54,7 +54,7 @@
       }
 
       &--disabled {
-        color: darken($secondaryColor, 30);
+        color: get-color('basic', 400);
       }
 
       &--strong {

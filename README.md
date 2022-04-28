@@ -33,8 +33,6 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [ ] Github Actions
 - [ ] Tests
 
-### Atoms
-
 - [x] Avatar
 - [x] AvatarCached
 - [x] Input - Range/Slider
@@ -60,18 +58,6 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [x] Paragraph
 - [x] Text
 - [ ] Progress
-
-### Layouts
-
-- [x] LayoutCenter
-- [x] LayoutContentFooter
-- [x] LayoutSideContent
-- [x] LayoutTopContent
-- [x] LayoutTopContentFooter
-- [x] LayoutTopSideContent
-
-### Molecules
-
 - [ ] Card
 - [ ] Setting with heading, description and checkbox
 - [ ] Navigation
@@ -91,17 +77,23 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [x] Breadcrumbs
 - [x] Code
 - [x] ContextMenu
-- [x] Drawer
+- [x] Drawer - TODO: fix animation
 - [x] Loader
-
-### Organisms
-
 - [ ] Stepper
 - [ ] Tabs
 - [ ] Bottom navigation
 - [ ] Gallery
 - [x] Player
 - [ ] Image editor
+
+### Layouts
+
+- [x] LayoutCenter
+- [x] LayoutContentFooter
+- [x] LayoutSideContent
+- [x] LayoutTopContent
+- [x] LayoutTopContentFooter
+- [x] LayoutTopSideContent
 
 ### Hooks
 

@@ -1,12 +1,6 @@
-@import '../../styles/colors';
-@import '../../styles/mixins';
+@use '../../styles/main' as *;
 
-$bg: $darkGray;
-$activeBg: $green;
-$color: $primaryColor;
-$focusColor: $lighterBlue;
-
-.ne {
+.#{$prefix} {
   &-context-menu-item {
     flex: 0 0 auto;
     display: flex;
@@ -17,9 +11,9 @@ $focusColor: $lighterBlue;
     padding: 0.4rem 1.4rem;
     width: 100%;
     cursor: pointer;
-    color: $color;
-    @include boxSizing;
-    @include defaultFont;
+    color: get-color('basic', 100);
+    @include box-sizing;
+    @include default-font;
 
     &-text {
       font-size: 0.75rem;
@@ -55,13 +49,13 @@ $focusColor: $lighterBlue;
     }
 
     &:hover {
-      background: lighten($darkerGray, 2);
-      color: $focusColor;
+      background: get-color('primary', 800);
+      color: get-color('actions', 100);
     }
 
-    &:focus > &-text,
-    &:focus > &-icon {
-      color: $focusColor;
+    &:focus-within > &-text,
+    &:focus-within > &-icon {
+      color: get-color('actions', 100);
     }
   }
 }

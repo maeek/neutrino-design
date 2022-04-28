@@ -1,7 +1,6 @@
-@import '../../styles/colors.scss';
-@import '../../styles/mixins.scss';
+@use '../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-nav {
     &-item {
       display: flex;
@@ -15,12 +14,12 @@
       cursor: pointer;
       user-select: none;
       background-color: transparent;
-      color: $primaryColor;
+      color: get-color('basic', 100);
       font-size: 0.8rem;
       font-weight: 400;
       transition: all 0.15s;
-      @include boxSizing;
-      @include defaultFont;
+      @include box-sizing;
+      @include default-font;
 
       &-content {
         position: relative;
@@ -48,7 +47,7 @@
           transition: all 0.05s;
           margin-left: 0.2rem;
           &:hover {
-            color: $lighterBlue;
+            color: get-color('actions', 100);
           }
         }
 
@@ -64,7 +63,7 @@
 
           &:hover,
           &:focus {
-            color: $lighterBlue;
+            color: get-color('actions', 100);
           }
         }
 
@@ -77,13 +76,9 @@
           }
         }
 
-        // &:hover {
-        //   background-color: $darkerGray;
-        // }
-
         &:hover &-icon,
         &:focus &-icon {
-          color: $lighterBlue;
+          color: get-color('actions', 100);
         }
       }
 

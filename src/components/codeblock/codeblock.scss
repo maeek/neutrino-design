@@ -1,16 +1,16 @@
-@import '../../styles/colors';
-@import '../../styles/mixins';
+@use '../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-typo {
-    @include boxSizing;
+    @include box-sizing;
+
     &-code {
-      @include defaultFont;
+      @include default-font;
       display: flex;
       flex-direction: column;
       padding: 0;
       margin: 0;
-      color: darken($secondaryColor, 10);
+      color: get-color('basic', 300);
       vertical-align: baseline;
 
       &-line {
@@ -23,19 +23,19 @@
           justify-content: flex-end;
           align-items: center;
           min-height: 1.5rem;
-          color: darken($secondaryColor, 25);
+          color: get-color('basic', 500);
           margin: 0.1rem 0.4rem 0 0;
           border: 0.05rem solid transparent;
           user-select: none;
           cursor: default;
           font-size: 0.8rem;
-          @include monoFont;
+          @include mono-font;
         }
 
         & &-content {
           border-radius: 0.15rem;
-          border: 0.05rem solid lighten($darkerGray, 2);
-          background-color: $darkerGray;
+          border: 0.05rem solid get-color('primary', 600);
+          background-color: get-color('primary', 1000);
 
           &--wrap {
             white-space: pre-wrap;
@@ -43,14 +43,14 @@
         }
 
         &:hover &-number {
-          color: darken($secondaryColor, 15);
+          color: get-color('basic', 300);
         }
       }
 
       &--block {
         padding: 0.5rem 0.7rem;
-        border: 0.05rem solid $gray;
-        background-color: darken($altDarkGray, 30);
+        border: 0.05rem solid get-color('primary', 600);
+        background-color: get-color('primary', 900);
         border-radius: 0.2rem;
       }
     }

@@ -1,6 +1,6 @@
-@import '../../../styles/mixins.scss';
+@use '../../../styles/main' as *;
 
-.ne {
+.#{$prefix} {
   &-layout {
     &-top-content {
       height: 100%;
@@ -12,7 +12,7 @@
       flex-wrap: nowrap;
       margin: 0;
       padding: 0;
-      @include boxSizing;
+      @include box-sizing;
 
       &-top {
         width: 100%;
@@ -24,7 +24,7 @@
         flex: 1 1 auto;
         margin: 0 auto;
         overflow: auto;
-        @include customScroll;
+        @include custom-scroll;
       }
     }
   }
