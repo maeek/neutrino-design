@@ -1,4 +1,4 @@
-import { ReactNode, memo, CSSProperties } from 'react';
+import { ReactNode, CSSProperties } from 'react';
 import classnames from 'classnames';
 import { Image } from '../image/Image';
 import './styles/avatar.scss';
@@ -55,6 +55,36 @@ export interface AvatarProps {
   [key: string]: any;
 }
 
+const getTypeClass = (type: AvatarTypes, baseClass = 'ne-avatar-content') => {
+  switch(type) {
+  case 'round':
+    return`${baseClass}--round`;
+  case 'rounded':
+    return`${baseClass}--rounded`;
+  case 'square':
+    return`${baseClass}--square`;
+  default:
+    return`${baseClass}--round`;
+  }
+};
+
+const getSizeClass = (size: AvatarSizes, baseClass = 'ne-avatar-content') => {
+  switch(size) {
+  case 'small':
+    return `${baseClass}--small`;
+  case 'medium':
+    return `${baseClass}--medium`;
+  case 'large':
+    return `${baseClass}--large`;
+  case 'larger':
+    return `${baseClass}--larger`;
+  case 'extra-large':
+    return `${baseClass}--extra-large`;
+  default:
+    return `${baseClass}--small`;
+  }
+};
+
 export const Avatar = (props: AvatarProps) => {
   const {
     children,
@@ -90,34 +120,6 @@ export const Avatar = (props: AvatarProps) => {
   );
 };
 
-const getTypeClass = (type: AvatarTypes, baseClass = 'ne-avatar-content') => {
-  switch(type) {
-  case 'round':
-    return`${baseClass}--round`;
-  case 'rounded':
-    return`${baseClass}--rounded`;
-  case 'square':
-    return`${baseClass}--square`;
-  default:
-    return`${baseClass}--round`;
-  }
-};
+Avatar.displayName = 'Avatar';
 
-const getSizeClass = (size: AvatarSizes, baseClass = 'ne-avatar-content') => {
-  switch(size) {
-  case 'small':
-    return `${baseClass}--small`;
-  case 'medium':
-    return `${baseClass}--medium`;
-  case 'large':
-    return `${baseClass}--large`;
-  case 'larger':
-    return `${baseClass}--larger`;
-  case 'extra-large':
-    return `${baseClass}--extra-large`;
-  default:
-    return `${baseClass}--small`;
-  }
-};
-
-export default memo(Avatar);
+export default Avatar;
