@@ -17,7 +17,7 @@ export const ImageContainer = Template.bind({});
 ImageContainer.args = {
   alt: 'text',
   src: 'https://static.suchanecki.me/tape2.jpg',
-  fallbackSrc: 'https://static.suchanecki.me/tape2.jpg',
+  fallback: 'https://static.suchanecki.me/tape2.jpg',
   onLoad: () => console.log('onLoad'),
   onError: (err) => console.log('onError', err)
 };
