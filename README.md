@@ -19,7 +19,7 @@ Some examples:
 
 ```javascript
 import { Button } from "@maeek/neutrino-design";
-import Button from "@maeek/neutrino-design/components/atoms/buttons/";
+import Button from "@maeek/neutrino-design/components/buttons/";
 
 import { PrimaryLoader } from "@maeek/neutrino-design/components/molecules/";
 import { PrimaryLoader } from "@maeek/neutrino-design/components/molecules/loaders/";
@@ -34,7 +34,6 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [ ] Tests
 
 - [x] Avatar
-- [x] AvatarCached
 - [x] Input - Range/Slider
 - [ ] Input - Multiline text
 - [x] Input - Select
@@ -50,7 +49,6 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [x] ProceedButton
 - [x] SecondaryButton
 - [x] Image
-- [x] ImageCached
 - [x] CheckBox
 - [x] Input
 - [x] Code
