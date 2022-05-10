@@ -14,7 +14,7 @@ Install package from command line
 npm install @maeek/neutrino-design
 ```
 
-After install is complete you can import it in your project  
+After install is complete you can import it in your project
 Some examples:
 
 ```javascript
@@ -33,17 +33,15 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [ ] Github Actions
 - [ ] Tests
 
-### Atoms
-
 - [x] Avatar
 - [x] AvatarCached
 - [x] Input - Range/Slider
 - [ ] Input - Multiline text
-- [ ] Input - Select
+- [x] Input - Select
 - [ ] Input - File Select
 - [ ] Tooltip
 - [ ] Badge
-- [ ] Chip
+- [x] Chip
 - [ ] Notification popup
 - [ ] Divider
 - [x] Button
@@ -59,18 +57,6 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [x] Heading
 - [x] Paragraph
 - [x] Text
-
-### Layouts
-
-- [x] LayoutCenter
-- [x] LayoutContentFooter
-- [x] LayoutSideContent
-- [x] LayoutTopContent
-- [x] LayoutTopContentFooter
-- [x] LayoutTopSideContent
-
-### Molecules
-
 - [ ] Progress
 - [ ] Card
 - [ ] Setting with heading, description and checkbox
@@ -91,17 +77,23 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [x] Breadcrumbs
 - [x] Code
 - [x] ContextMenu
-- [x] Drawer
+- [x] Drawer - TODO: fix animation
 - [x] Loader
-
-### Organisms
-
 - [ ] Stepper
 - [ ] Tabs
 - [ ] Bottom navigation
 - [ ] Gallery
-- [ ] Player
+- [x] Player
 - [ ] Image editor
+
+### Layouts
+
+- [x] LayoutCenter
+- [x] LayoutContentFooter
+- [x] LayoutSideContent
+- [x] LayoutTopContent
+- [x] LayoutTopContentFooter
+- [x] LayoutTopSideContent
 
 ### Hooks
 
@@ -110,3 +102,6 @@ import PrimaryLoader from "@maeek/neutrino-design/components/molecules/loaders/L
 - [x] useConnection
 - [x] useDelayUnmount
 - [x] usePagination
+- [x] useAccessibility
+- [x] useClickOutside
+- [x] useContinuativeSearch

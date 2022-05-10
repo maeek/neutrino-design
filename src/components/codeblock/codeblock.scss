@@ -1,0 +1,58 @@
+@use '../../styles/main' as *;
+
+.#{$prefix} {
+  &-typo {
+    @include box-sizing;
+
+    &-code {
+      @include default-font;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      color: get-color('basic', 300);
+      vertical-align: baseline;
+
+      &-line {
+        display: flex;
+        justify-content: stretch;
+        align-items: flex-start;
+
+        &-number {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          min-height: 1.5rem;
+          color: get-color('basic', 500);
+          margin: 0.1rem 0.4rem 0 0;
+          border: 0.05rem solid transparent;
+          user-select: none;
+          cursor: default;
+          font-size: 0.8rem;
+          @include mono-font;
+        }
+
+        & &-content {
+          border-radius: 0.15rem;
+          border: 0.05rem solid get-color('primary', 600);
+          background-color: get-color('primary', 1000);
+
+          &--wrap {
+            white-space: pre-wrap;
+          }
+        }
+
+        &:hover &-number {
+          color: get-color('basic', 300);
+        }
+      }
+
+      &--block {
+        padding: 0.5rem 0.7rem;
+        border: 0.05rem solid get-color('primary', 600);
+        background-color: get-color('primary', 900);
+        border-radius: 0.2rem;
+      }
+    }
+  }
+}

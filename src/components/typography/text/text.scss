@@ -1,0 +1,77 @@
+@use '../../../styles/main' as *;
+
+.#{$prefix} {
+  &-typo {
+    @include box-sizing;
+    @include default-font;
+
+    &-text {
+      padding: 0;
+      margin: 0;
+      color: get-color('basic', 200);
+      font-size: 0.8rem;
+      font-weight: 400;
+      vertical-align: baseline;
+      padding: 0.15rem 0;
+
+      &--mono {
+        @include mono-font;
+      }
+
+      &--secondary {
+        color: get-color('basic', 300);
+      }
+
+      &--success {
+        color: get-color('positive', 100);
+      }
+
+      &--warning {
+        color: get-color('warning', 400);
+      }
+
+      &--danger {
+        color: get-color('negative', 100);
+      }
+
+      &--link {
+        text-decoration: none;
+        font-weight: 400;
+        color: get-color('actions', 400);
+        transition: 0.1s all;
+
+        &:hover {
+          color: get-color('actions', 100);
+        }
+      }
+
+      &--highlight {
+        border-radius: 0.15rem;
+        background-color: transparentize(#ff9900, 0.8);
+        &:hover {
+          background-color: transparentize(#ff9900, 0.7);
+        }
+      }
+
+      &--disabled {
+        color: get-color('basic', 400);
+      }
+
+      &--strong {
+        font-weight: 700;
+      }
+
+      &--underline {
+        text-decoration: underline;
+      }
+
+      &--delete {
+        text-decoration: line-through;
+      }
+
+      &--pre {
+        white-space: pre-wrap;
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+@use '../../styles/main' as *;
+
+@keyframes ne-drawer-mask-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ne-drawer-mask-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@mixin getAnimation($name: 'right', $transform: translate3d(100%, 0, 0), $animationSpeed: 200) {
+  @keyframes ne-drawer-pos-#{$name} {
+    from {
+      transform: $transform;
+    }
+
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes ne-drawer-pos-#{$name}-out {
+    to {
+      transform: $transform;
+    }
+  }
+  & {
+    animation-name: ne-drawer-pos-#{$name}-out;
+    animation-timing-function: ease-in;
+    animation-duration: $animationSpeed;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+
+  &.animate {
+    animation-name: ne-drawer-pos-#{$name};
+    animation-timing-function: ease-in;
+    animation-duration: $animationSpeed;
+    animation-iteration-count: 1;
+    animation-fill-mode: backwards;
+  }
+}
+
+.#{$prefix} {
+  &-drawer {
+    position: relative;
+    opacity: 1;
+    @include box-sizing;
+    @include default-font;
+
+    &--opened {
+      opacity: 1;
+    }
+
+    &-mask {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      animation-name: ne-drawer-mask-out;
+      animation-timing-function: ease-in;
+      animation-duration: var(--animation-speed);
+      animation-iteration-count: 1;
+      animation-fill-mode: both;
+
+      &.animate {
+        animation-name: ne-drawer-mask-in;
+        animation-timing-function: ease-in;
+        animation-duration: var(--animation-speed);
+        animation-iteration-count: 1;
+        animation-fill-mode: both;
+      }
+    }
+
+    &-side {
+      position: fixed;
+      background-color: get-color('primary', 1000);
+
+      &-pos {
+        &-left {
+          top: 0;
+          left: 0;
+          height: 100%;
+          max-width: 95vw;
+          width: 25rem;
+          border-right: 0.05rem solid get-color('primary', 700);
+          @include getAnimation('left', translate3d(-100%, 0, 0), var(--animation-speed));
+
+          &:hover,
+          &:focus-within {
+            border-right: 0.05rem solid get-color('primary', 800);
+          }
+        }
+        &-right {
+          top: 0;
+          right: 0;
+          height: 100%;
+          max-width: 95vw;
+          width: 25rem;
+          border-left: 0.05rem solid get-color('primary', 700);
+          @include getAnimation('right', translate3d(100%, 0, 0), var(--animation-speed));
+
+          &:hover,
+          &:focus-within {
+            border-left: 0.05rem solid get-color('primary', 800);
+          }
+        }
+        &-top {
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 25rem;
+          max-height: 95vh;
+          border-bottom: 0.05rem solid get-color('primary', 700);
+          @include getAnimation('top', translate3d(0, -100%, 0), var(--animation-speed));
+
+          &:hover,
+          &:focus-within {
+            border-bottom: 0.05rem solid get-color('primary', 800);
+          }
+        }
+        &-bottom {
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 25rem;
+          max-height: 95vh;
+          border-top: 0.05rem solid get-color('primary', 700);
+          @include getAnimation('bottom', translate3d(0, 100%, 0), var(--animation-speed));
+
+          &:hover,
+          &:focus-within {
+            border-top: 0.05rem solid get-color('primary', 800);
+          }
+        }
+      }
+    }
+  }
+}

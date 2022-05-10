@@ -1,0 +1,51 @@
+@use '../../styles/main' as *;
+
+.#{$prefix} {
+  &-context-menu {
+    z-index: 400;
+    @include box-sizing;
+    @include default-font;
+
+    &-mask {
+      position: fixed;
+      left: 0;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.333);
+      height: 100%;
+      width: 100%;
+    }
+
+    &-wrapper {
+      width: max-content;
+      max-width: 16.667rem;
+      min-width: 8.333rem;
+      position: relative;
+
+      @media (max-width: 768px) {
+        max-width: 600px;
+        max-width: calc(100% - 1rem);
+        margin: 0 0.5rem;
+        position: sticky;
+      }
+    }
+
+    &-list {
+      list-style: none;
+      background: get-color('primary', 900);
+      color: get-color('basic', 100);
+      border: 0.05rem solid get-color('primary', 500);
+      border-radius: 0.4rem;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: stretch;
+      align-items: flex-start;
+      flex-direction: column;
+
+      &:hover,
+      &:focus-within {
+        border: 0.05rem solid get-color('primary', 500);
+      }
+    }
+  }
+}

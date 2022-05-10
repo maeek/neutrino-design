@@ -1,0 +1,17 @@
+@use '../../styles/main' as *;
+
+.#{$prefix} {
+  &-breadcrumbs-separator {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: get-color('actions', 100);
+    padding: 0 0.4rem;
+    margin: 0;
+    list-style: none;
+    cursor: default;
+    user-select: none;
+
+    @include box-sizing;
+    @include default-font;
+  }
+}

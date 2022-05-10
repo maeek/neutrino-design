@@ -1,0 +1,23 @@
+@use '../../../styles/main' as *;
+
+.#{$prefix} {
+  &-button {
+    .#{$prefix}-button_proceed &-item:not(.#{$prefix}-button-item--disabled) {
+      border: 0.15rem solid get-color('positive', 100);
+      background-color: get-color('positive', 100);
+      color: get-color('basic', 800);
+    }
+    .#{$prefix}-button_proceed &-item:not(.#{$prefix}-button-item--disabled):hover,
+    .#{$prefix}-button_proceed &-item:not(.#{$prefix}-button-item--disabled):focus {
+      cursor: pointer;
+      border: 0.15rem solid get-color('positive', 200);
+      background-color: get-color('positive', 200);
+    }
+    .#{$prefix}-button_proceed &-item:not(.#{$prefix}-button-item--disabled):active {
+      border: 0.15rem solid get-color('positive', 100);
+      border-bottom: 0.15rem solid get-color('positive', 300);
+      background-color: get-color('positive', 100);
+      color: get-color('primary', 9999);
+    }
+  }
+}

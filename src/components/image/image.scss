@@ -1,0 +1,41 @@
+@use '../../styles/main' as *;
+
+.#{$prefix} {
+  &-image {
+    @include box-sizing;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    > img {
+      width: 100%;
+      height: 100%;
+    }
+
+    &-loader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+
+      &--loading {
+        opacity: 1;
+      }
+    }
+
+    &--animated &-loader {
+      transition: opacity 0.25s ease;
+    }
+
+    &--animated > img {
+      transition: opacity 0.15s ease;
+    }
+  }
+}

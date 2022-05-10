@@ -1,0 +1,88 @@
+@use '../../../styles/main' as *;
+
+.#{$prefix} {
+  &-emoji-selector {
+    margin: 0.1rem 0;
+    padding: 0.4rem;
+    background: rgba(32, 34, 37, 0.9);
+    box-shadow: 0.1rem 0.8rem 1rem rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    color: get-color('basic', 300);
+
+    @include box-sizing;
+    @include default-font;
+
+    &-thumb {
+      position: absolute;
+      bottom: 0.25rem;
+      left: 0;
+      width: 1.6rem;
+      margin: 0 0.4rem;
+      height: 0.3rem;
+      border-radius: 0.3rem;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: get-color('actions', 400);
+      transition: transform 0.2s ease-out, opacity 0.1s;
+      transform: translateY(-0.2rem);
+      opacity: 0;
+
+      &--visible {
+        opacity: 1;
+      }
+
+      @for $i from 0 to 6 {
+        &[data-index='#{$i}'] {
+          transform: translateX(#{1.2 * ((2 * $i) + 0.5) - 0.2}rem);
+        }
+      }
+    }
+
+    &-quick {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    &-more-btn {
+      margin-left: 0.5rem;
+      height: 2rem;
+      width: 2rem;
+      border-radius: 0.8rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.15s;
+      line-height: 1rem;
+      background-color: get-color('primary', 700);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background-color: get-color('primary', 600);
+      }
+    }
+
+    &-more-container {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background: rgba(32, 34, 37, 1);
+      border-radius: 1rem;
+      padding: 0.4rem;
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      min-height: 100%;
+    }
+  }
+}

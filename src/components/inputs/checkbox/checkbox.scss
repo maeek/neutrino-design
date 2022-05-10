@@ -1,0 +1,67 @@
+@use '../../../styles/main' as *;
+
+.#{$prefix} {
+  &-checkbox {
+    @include flexbox($justifyContent: flex-start, $alignItems: center);
+    position: relative;
+    width: 2.5rem;
+    height: 1.31rem;
+    border-radius: 1.4rem;
+    background-color: get-color('primary', 400);
+    border: 0.1rem solid get-color('primary', 400);
+
+    @include default-font;
+    @include box-sizing;
+
+    &-control {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    &-decorator {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      &-slider {
+        @include flexbox($justifyContent: center, $alignItems: center);
+        outline: none;
+        position: absolute;
+        width: 1.11rem;
+        height: 1.11rem;
+        border-radius: 50%;
+        box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
+        transition: transform 0.1s, background-color 0.1s;
+        color: get-color('basic', 800);
+        background-color: get-color('basic', 400);
+        font-weight: 700;
+      }
+    }
+
+    &[data-required='true'] {
+      border: 0.1rem solid get-color('negative', 100);
+    }
+
+    &[data-required='true'][data-checked='true'] {
+      border: 0.1rem solid get-color('primary', 400);
+    }
+
+    &[data-checked='true'] &-decorator-slider {
+      transform: translateX(1.2rem);
+      background-color: get-color('positive', 100);
+    }
+
+    &[data-disabled='true'] {
+      border: 0.1rem solid get-color('basic', 700);
+      background-color: get-color('basic', 700);
+    }
+
+    &[data-disabled='false'][data-readonly='false'] &-decorator-slider:focus {
+      background-color: get-color('actions', 400) !important;
+    }
+  }
+}

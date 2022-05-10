@@ -1,0 +1,24 @@
+@use '../../../styles/main' as *;
+
+.#{$prefix} {
+  &-button {
+    .#{$prefix}-button_abort &-item:not(.#{$prefix}-button-item--disabled) {
+      border: 0.15rem solid get-color('negative', 100);
+      background-color: get-color('negative', 100);
+      color: get-color('basic', 100);
+    }
+
+    .#{$prefix}-button_abort &-item:not(.#{$prefix}-button-item--disabled):hover,
+    .#{$prefix}-button_abort &-item:not(.#{$prefix}-button-item--disabled):focus {
+      cursor: pointer;
+      border: 0.15rem solid get-color('negative', 200);
+      background-color: get-color('negative', 200);
+    }
+
+    .#{$prefix}-button_abort &-item:not(.#{$prefix}-button-item--disabled):active {
+      border: 0.15rem solid get-color('negative', 200);
+      border-bottom: 0.15rem solid get-color('negative', 300);
+      background-color: get-color('negative', 200);
+    }
+  }
+}
