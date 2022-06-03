@@ -18,15 +18,15 @@
       @include get-avatar-types();
       @include get-avatar-sizes();
 
-      &--selectable {
-        transition: border 0.1s;
-        border: 0.15rem solid transparent;
+      // &--selectable {
+      //   transition: border 0.1s;
+      //   border: 0.15rem solid transparent;
 
-        &:active,
-        &:focus {
-          border: 0.15rem solid get-color('actions', 500);
-        }
-      }
+      //   &:active,
+      //   &:focus {
+      //     border: 0.15rem solid get-color('actions', 500);
+      //   }
+      // }
 
       .#{$prefix}-image img {
         width: 100%;

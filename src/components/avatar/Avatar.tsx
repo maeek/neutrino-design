@@ -4,7 +4,7 @@ import { Image } from '../image/Image';
 import './styles/avatar.scss';
 
 export type AvatarTypes = 'round' | 'rounded' | 'square';
-export type AvatarSizes = 'small' | 'medium' | 'large' | 'larger' | 'extra-large';
+export type AvatarSizes = 'extra-small' | 'small' | 'medium' | 'large' | 'larger' | 'extra-large';
 
 export interface AvatarProps {
   /**
@@ -37,7 +37,7 @@ export interface AvatarProps {
    *
    * Defaults to 'medium'
    */
-  size?: 'small' | 'medium' | 'large' | 'larger' | 'extra-large';
+  size?: 'extra-small' | 'small' | 'medium' | 'large' | 'larger' | 'extra-large';
   /**
    * Should the avatar be selectable by keyboard navigation
    */
@@ -70,6 +70,8 @@ const getTypeClass = (type: AvatarTypes, baseClass = 'ne-avatar-content') => {
 
 const getSizeClass = (size: AvatarSizes, baseClass = 'ne-avatar-content') => {
   switch(size) {
+  case 'extra-small':
+    return `${baseClass}--extra-small`;
   case 'small':
     return `${baseClass}--small`;
   case 'medium':
