@@ -60,7 +60,7 @@ export const NavItem = (props: NavItemProps) => {
   const iconNode = icon && <span className="ne-nav-item-content-icon">{icon}</span>;
   const subItemsNode = subItems && subItems.length > 0 && isExpanded && (
     <ul className="ne-nav-item-sub">
-      {subItems.map((subItem) => subItem)}
+      {subItems.map((subItem) => subItem.children)}
     </ul>
   );
   const expandNode = (
