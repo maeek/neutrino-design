@@ -8,7 +8,7 @@
     position: relative;
     margin: 0;
     cursor: default;
-    transition: background 0.2s, color 0.15s, border-radius 0.15s;
+    transition: background 0.2s, color 0.15s, border-radius 0.15s, filter 0.15s;
     user-select: none;
 
     &--size-small {
@@ -100,10 +100,6 @@
         font-size: get-font-size(300);
         line-height: get-font-size(300);
       }
-
-      // &:hover {
-      //   color: get-color('basic', 100);
-      // }
     }
 
     &--disabled &-delete {
@@ -112,6 +108,10 @@
 
     &:hover &-delete {
       opacity: 1;
+    }
+
+    &:hover {
+      filter: brightness(1.2);
     }
   }
 }
