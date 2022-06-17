@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Input from './Input';
 
-describe('atoms/input/text', () => {
+describe('input/text', () => {
   it('should render input with label', () => {
     render(<Input renderLabel="Input" />);
 

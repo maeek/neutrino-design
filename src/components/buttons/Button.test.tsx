@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Button from './Button';
 
-describe('atoms/buttons/index', () => {
+describe('buttons/index', () => {
   it('should render', () => {
     render(<Button>test button</Button>);
-    
+
     expect(screen.getByText('test button')).toBeInTheDocument();
   });
 

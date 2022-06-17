@@ -8,8 +8,7 @@ export interface ModalProps {
   [key: string]: any;
 }
 
-export const Modal = (props: ModalProps) => {
-  const { mountPointId = 'ne-portal', children, className } = props;
+export const Modal = ({ mountPointId = 'ne-portal', children, className }: ModalProps) => {
   const mountPointRef = useRef<HTMLDivElement>(null);
   const [ portal, setPortal ] = useState<HTMLDivElement>(null as unknown as HTMLDivElement);
 

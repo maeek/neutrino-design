@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CheckBox from './Checkbox';
 
-describe('atoms/inputs/checkbox', () => {
+describe('inputs/checkbox', () => {
   it('should render', () => {
     render(<CheckBox data-testid="inputTest" />);
 

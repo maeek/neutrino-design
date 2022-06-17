@@ -6,16 +6,34 @@
     @include default-font;
     @include box-sizing;
     position: relative;
-    color: get-color('basic', 100);
-    background-color: var(--color, get-color('primary', 500));
-    padding: 0.3rem 0.4rem;
     margin: 0;
-    font-size: get-font-size(150);
-    font-weight: 500;
     cursor: default;
-    gap: 0.25rem;
-    max-width: 20rem;
-    transition: background 0.2s, color 0.15s, border-radius 0.15s;
+    transition: background 0.2s, color 0.15s, border-radius 0.15s, filter 0.15s;
+    user-select: none;
+
+    &--size-small {
+      font-size: get-font-size(100);
+      font-weight: 400;
+      gap: 0.2rem;
+      padding: 0.2rem 0.3rem;
+      max-width: 15rem;
+    }
+
+    &--size-medium {
+      font-size: get-font-size(200);
+      font-weight: 500;
+      gap: 0.25rem;
+      padding: 0.3rem 0.4rem;
+      max-width: 20rem;
+    }
+
+    &--size-large {
+      font-size: get-font-size(300);
+      font-weight: 700;
+      gap: 0.4rem;
+      padding: 0.5rem 0.75rem;
+      max-width: 40rem;
+    }
 
     &--round {
       border-radius: 2rem;
@@ -27,6 +45,11 @@
 
     &--square {
       border-radius: 0;
+    }
+
+    &--color-primary {
+      color: get-color('basic', 100);
+      background-color: var(--color, get-color('primary', 500));
     }
 
     &--color-blue {
@@ -70,17 +93,13 @@
       color: inherit;
       cursor: pointer;
       padding: 0;
-      opacity: 0;
+      opacity: 0.5;
       transition: opacity 0.1s;
 
       > svg {
         font-size: get-font-size(300);
         line-height: get-font-size(300);
       }
-
-      // &:hover {
-      //   color: get-color('basic', 100);
-      // }
     }
 
     &--disabled &-delete {
@@ -89,6 +108,10 @@
 
     &:hover &-delete {
       opacity: 1;
+    }
+
+    &:hover {
+      filter: brightness(1.2);
     }
   }
 }

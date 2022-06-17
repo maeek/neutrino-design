@@ -7,6 +7,7 @@ export interface ChipProps {
   icon?: ReactNode;
   children?: ReactNode;
   color?: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
+  size: 'small' | 'medium' | 'large';
   deletable?: boolean;
   onDelete?: MouseEventHandler;
   onClick?: MouseEventHandler;
@@ -21,6 +22,7 @@ export const Chip = (props: ChipProps) => {
     type = 'rounded',
     icon,
     color,
+    size = 'medium',
     children,
     deletable = false,
     onDelete,
@@ -33,7 +35,9 @@ export const Chip = (props: ChipProps) => {
   const classes = classNames(
     'ne-chip',
     `ne-chip--${type}`,
+    'ne-chip--color-primary',
     `ne-chip--color-${color}`,
+    `ne-chip--size-${size}`,
     {
       'ne-chip--disabled': disabled,
       'ne-chip--deletable': deletable,
