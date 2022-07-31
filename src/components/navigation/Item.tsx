@@ -9,8 +9,8 @@ import {
 import classNames from 'classnames';
 import './item.scss';
 import { Text } from '../typography';
-import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
-import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
+import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 export interface NavSubItemProps {
   active?: boolean;
   title?: string;

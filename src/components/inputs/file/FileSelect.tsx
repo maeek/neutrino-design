@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Button from '../../buttons/Action';
 import { Heading } from '../../typography/heading';
 import { Paragraph } from '../../typography/paragraph';
-import {  AddRounded } from '@material-ui/icons';
+import {  AddRounded } from '@mui/icons-material';
 import './file-select.scss';
 
 export interface FileSelectProps {

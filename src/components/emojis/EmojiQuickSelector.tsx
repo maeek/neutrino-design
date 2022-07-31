@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { AddRounded } from '@material-ui/icons';
+import { AddRounded } from '@mui/icons-material';
 import { EmojiButton } from './EmojiButton';
 import './styles/emoji-quick-selector.scss';
 

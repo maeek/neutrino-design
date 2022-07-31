@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import './styles/bubble-reactions.scss';
-import { AddRounded } from '@material-ui/icons';
+import { AddRounded } from '@mui/icons-material';
 import { EmojiButton } from '../../atoms/emojis/EmojiButton';
 import { EmojiQuickSelector } from '../../atoms/emojis/EmojiQuickSelector';
 

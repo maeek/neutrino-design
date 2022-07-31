@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { VolumeMuteRounded, VolumeOffRounded, VolumeUpRounded } from '@material-ui/icons';
+import { VolumeMuteRounded, VolumeOffRounded, VolumeUpRounded } from '@mui/icons-material';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { SliderInput as SliderInputComponent, SliderInputProps } from './Slider';

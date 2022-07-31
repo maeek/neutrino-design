@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useVideoPlayer } from '../hooks/useVideoPlayer';
-import InfoRounded from '@material-ui/icons/InfoRounded';
+import InfoRounded from '@mui/icons-material/InfoRounded';
 import { ButtonProps } from './types';
 import './buttons.scss';
 

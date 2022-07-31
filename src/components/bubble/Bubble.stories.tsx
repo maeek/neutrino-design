@@ -1,8 +1,8 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
-import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticonRounded';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticonRounded';
 
 import { Bubble as BubbleComponent, BubbleProps } from './Bubble';
-import { DeleteForeverRounded, MoreHorizRounded } from '@material-ui/icons';
+import { DeleteForeverRounded, MoreHorizRounded } from '@mui/icons-material';
 import ContextMenu from '../context-menu/Menu';
 
 export default {

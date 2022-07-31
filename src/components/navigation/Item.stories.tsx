@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import {
   PeopleRounded, ChatRounded //, SendRounded
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { NavItem, NavItemProps } from './Item';
 

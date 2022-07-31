@@ -1,6 +1,6 @@
 import { createRef, ReactNode, useEffect, useRef, useState, KeyboardEvent, useMemo } from 'react';
 import classNames from 'classnames';
-import { KeyboardArrowDown } from '@material-ui/icons';
+import { KeyboardArrowDown } from '@mui/icons-material';
 import { useAccessibility } from '../../../hooks/useAccessibility';
 import { useContinuativeSearch } from '../../../hooks/useContinuativeSearch';
 import { useClickOutside } from '../../../hooks/useClickOutside';

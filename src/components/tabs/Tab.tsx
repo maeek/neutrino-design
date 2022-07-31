@@ -1,6 +1,6 @@
 import { ReactNode, MouseEventHandler, CSSProperties, forwardRef, DragEventHandler } from 'react';
 import classNames from 'classnames';
-import { CloseRounded } from '@material-ui/icons';
+import { CloseRounded } from '@mui/icons-material';
 import { useAccessibility } from '../../hooks/useAccessibility';
 import './styles/tab.scss';
 

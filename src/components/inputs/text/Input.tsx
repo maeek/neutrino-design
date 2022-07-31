@@ -12,8 +12,8 @@ import {
 } from 'react';
 import classNames from 'classnames';
 import useInput from '../../../hooks/inputs/useInput';
-import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
-import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import './input.scss';
 
 export type InputSupportedTypes = 'text'

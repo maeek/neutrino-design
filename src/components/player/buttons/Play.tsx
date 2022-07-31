@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useVideoPlayer } from '../hooks/useVideoPlayer';
-import PauseRounded from '@material-ui/icons/PauseRounded';
-import PlayArrowRounded from '@material-ui/icons/PlayArrowRounded';
+import PauseRounded from '@mui/icons-material/PauseRounded';
+import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import { ButtonProps } from './types';
 import './buttons.scss';
 

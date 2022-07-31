@@ -1,4 +1,4 @@
-import { PersonRounded } from '@material-ui/icons';
+import { PersonRounded } from '@mui/icons-material';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { Chip as ChipComponent, ChipProps } from './Chip';

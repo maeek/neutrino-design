@@ -14,7 +14,7 @@ import {
 } from 'react';
 import classNames from 'classnames';
 import { Tab } from './Tab';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 
 import './styles/tabs.scss';
 

@@ -1,4 +1,4 @@
-import { ShareRounded, VisibilityRounded } from '@material-ui/icons';
+import { ShareRounded, VisibilityRounded } from '@mui/icons-material';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { useState } from 'react';
 

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useVideoPlayer } from '../hooks/useVideoPlayer';
-import PictureInPictureRounded from '@material-ui/icons/PictureInPictureRounded';
+import PictureInPictureRounded from '@mui/icons-material/PictureInPictureRounded';
 import { ButtonProps } from './types';
 import './buttons.scss';
 

@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { useVideoPlayer } from '../hooks/useVideoPlayer';
-import VolumeDownRounded from '@material-ui/icons/VolumeDownRounded';
-import VolumeOffRounded from '@material-ui/icons/VolumeOffRounded';
-import VolumeUpRounded from '@material-ui/icons/VolumeUpRounded';
-import VolumeMuteRounded from '@material-ui/icons/VolumeMuteRounded';
+import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
+import VolumeOffRounded from '@mui/icons-material/VolumeOffRounded';
+import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
+import VolumeMuteRounded from '@mui/icons-material/VolumeMuteRounded';
 import { ButtonProps } from './types';
 import './buttons.scss';
 import './volume-button.scss';

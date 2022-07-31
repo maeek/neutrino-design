@@ -1,4 +1,4 @@
-import { PeopleRounded } from '@material-ui/icons';
+import { PeopleRounded } from '@mui/icons-material';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import ItemComponent, { ItemProps } from './Item';

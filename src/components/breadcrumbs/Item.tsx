@@ -9,8 +9,8 @@ import {
   useState
 } from 'react';
 import classNames from 'classnames';
-import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
-import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import ContextMenu, { ContextMenuItems } from '../context-menu/Menu';
 import './item.scss';
 

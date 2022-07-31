@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useVideoPlayer } from '../hooks/useVideoPlayer';
-import FullscreenExitRounded from '@material-ui/icons/FullscreenExitRounded';
-import FullscreenRounded from '@material-ui/icons/FullscreenRounded';
+import FullscreenExitRounded from '@mui/icons-material/FullscreenExitRounded';
+import FullscreenRounded from '@mui/icons-material/FullscreenRounded';
 import { ButtonProps } from './types';
 import './buttons.scss';
 

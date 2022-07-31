@@ -1,6 +1,6 @@
 import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
-import { CloseRounded } from '@material-ui/icons';
+import { CloseRounded } from '@mui/icons-material';
 import './chip.scss';
 
 export interface ChipProps {

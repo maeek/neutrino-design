@@ -1,7 +1,7 @@
 import { CSSProperties, RefObject } from 'react';
 import classNames from 'classnames';
-import PlayArrowRounded from '@material-ui/icons/PlayArrowRounded';
-import PauseRounded from '@material-ui/icons/PauseRounded';
+import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
+import PauseRounded from '@mui/icons-material/PauseRounded';
 import { useVideoPlayer } from '../hooks/useVideoPlayer';
 import './renderer.scss';
 
