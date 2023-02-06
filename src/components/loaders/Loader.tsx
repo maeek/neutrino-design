@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import React from 'react';
 import { CSSProperties } from 'react';
 import './loader.scss';
 
