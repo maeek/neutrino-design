@@ -3,11 +3,9 @@ import classNames from 'classnames';
 import { BubbleContent, ContentType } from './BubbleContent';
 import { BubbleAction, BubbleActions } from './BubbleActions';
 import { BubbleTimestamp } from './BubbleTimestamp';
-import { BubbleAvatar } from './BubbleAvatar';
+import { BubbleAvatar, BubbleType } from './BubbleAvatar';
 import { BubbleReactions, Reaction } from './BubbleReactions';
 import './styles/bubble.scss';
-
-export type BubbleType = 'sender' | 'recipient';
 
 export interface BubbleProps {
   sender?: string;

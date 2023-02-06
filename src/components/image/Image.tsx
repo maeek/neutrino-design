@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import React from 'react';
 import { ReactNode, useEffect, useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import { Blurhash } from 'react-blurhash';
 import './image.scss';
