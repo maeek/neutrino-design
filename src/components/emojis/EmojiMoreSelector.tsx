@@ -19,19 +19,15 @@ export interface EmojiMoreSelectorProps {
   customizable?: boolean;
   onCustomize?: (quickAccessEmojis: [string, string, string, string, string, string, ]) => void;
   emojis?: EmojisType;
+  excludeCategories?: string[];
 }
 
 export const EmojiMoreSelector = (props: EmojiMoreSelectorProps) => {
   const {
-    quickAccessEmojis,
     className,
-    style,
-    onSelect,
     onClose,
     onOpen,
-    selectedEmoji,
     customizable,
-    onCustomize,
     emojis = emojisJson,
     excludeCategories = [ 'modifier' ]
   } = props;
@@ -105,7 +101,7 @@ export const EmojiMoreSelector = (props: EmojiMoreSelectorProps) => {
           getEmojiByCategory(selectedCategory).map((emoji) => (
             <div key={emoji.name} className="ne-emoji-selector-more-body-item">
               <Suspense fallback={null}>
-                <EmojiButton emoji={emoji} />
+                <EmojiButton emoji={emoji} id={emoji.code_points.fully_qualified} />
               </Suspense>
             </div>
           ))

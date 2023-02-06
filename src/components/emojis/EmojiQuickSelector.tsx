@@ -21,15 +21,11 @@ export interface EmojiQuickSelectorProps {
 export const EmojiQuickSelector = (props: EmojiQuickSelectorProps) => {
   const {
     quickAccessEmojis,
-    className,
-    style,
     onSelect,
     onClose,
     onOpen,
-    renderMoreSelector,
-    customizable
-  } = props;
-  const [ index, setIndex ] = useState(null);
+    renderMoreSelector  } = props;
+  const [ index, setIndex ] = useState<number | null>(null);
   const [ isInit, setIsInit ] = useState(false);
   const [ isOpen, setIsOpen ] = useState(false);
 
@@ -64,7 +60,7 @@ export const EmojiQuickSelector = (props: EmojiQuickSelectorProps) => {
       <ul className="ne-emoji-selector-quick">
         {
           quickAccessEmojis?.map((emoji, i) => (
-            <EmojiButton key={emoji} onClick={() => selectEmoji(emoji, i)}>{emoji}</EmojiButton>
+            <EmojiButton id={emoji} key={emoji} onClick={() => selectEmoji(emoji, i)}>{emoji}</EmojiButton>
           ))
         }
       </ul>

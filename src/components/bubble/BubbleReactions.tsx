@@ -1,9 +1,6 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import classNames from 'classnames';
 import './styles/bubble-reactions.scss';
-import { AddRounded } from '@material-ui/icons';
-import { EmojiButton } from '../../atoms/emojis/EmojiButton';
-import { EmojiQuickSelector } from '../../atoms/emojis/EmojiQuickSelector';
 
 export interface Reaction {
   id: string;
@@ -16,13 +13,13 @@ export interface Reaction {
 export interface BubbleReactionsProps {
   className?: string;
   showCount?: boolean;
-  reactions: Reaction[];
+  reactions?: Reaction[];
   onReact?: (reaction: Reaction, allReactions: Reaction[]) => void;
   onReactRemove?: (reactionId: string, allReactions: Reaction[]) => void;
 }
 
 export const BubbleReactions = (props: BubbleReactionsProps) => {
-  const { className, showCount, reactions, onReact, onReactRemove } = props;;
+  const { className } = props;;
 
   const classes = classNames('ne-bubble-reactions', className);
 

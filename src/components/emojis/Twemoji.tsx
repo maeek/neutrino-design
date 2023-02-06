@@ -10,7 +10,7 @@ export interface TwemojiProps {
 export const Twemoji = (props: TwemojiProps) => {
   const { children, options, tag = 'div', ...others } = props;
   const rootRef = useRef(null);
-  const childrenNodes = useRef({});
+  const childrenNodes = useRef<{ [key: number]: ReactNode }>({});
 
   useLayoutEffect(() => {
     if (rootRef.current) {
@@ -38,7 +38,7 @@ export const Twemoji = (props: TwemojiProps) => {
           }
 
           childrenNodes.current[ i ] = child;
-          return cloneElement(child as any, { ref: childrenNodes[ i ] });
+          return cloneElement(child as any, { ref: childrenNodes.current[ i ] });
         })
       }
     </>

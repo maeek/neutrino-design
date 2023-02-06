@@ -22,8 +22,13 @@ export interface BubbleContent {
 export const BubbleContent = (props: BubbleContent) => {
   const { type, content, className, bubbleType } = props;
 
-  const contentNode = {
-    text: content
+  const contentNode: { [key in ContentType]: ReactNode} = {
+    text: content,
+    image: undefined,
+    file: undefined,
+    video: undefined,
+    audio: undefined,
+    sticker: undefined
   };
 
   const classes = classNames(

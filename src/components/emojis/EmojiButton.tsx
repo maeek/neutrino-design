@@ -44,7 +44,9 @@ export const EmojiButton = (props: EmojiButtonProps) => {
   useEffect(() => {
     if (!emoji && native) return;
 
-    const emojiItem = typeof emoji === 'string' ? emojisJson[ emoji ] : emoji;
+    const emojiItem = typeof emoji === 'string' ? emojisJson[ emoji as keyof typeof emojisJson ] as EmojiType : emoji;
+
+    if (!emojiItem) return;
 
     setEmojiDescriptor(emojiItem);
     setDiversity(emojiItem?.diversity_children);
@@ -53,7 +55,7 @@ export const EmojiButton = (props: EmojiButtonProps) => {
   const emojiNode = emojiDescriptor && convertEmojiFromCodePoint(emojiDescriptor.code_points.fully_qualified);
   const emojiToUse = isEmojiOverride ? emojiNode : children;
 
-  const onEmojiSelect = useCallback((emoji) => (evt: MouseEvent) => {
+  const onEmojiSelect = useCallback((emoji: string) => (evt: MouseEvent) => {
     onClick?.(emoji, evt);
   }, [ onClick ]);
 

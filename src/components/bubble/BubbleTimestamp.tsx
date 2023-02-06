@@ -21,7 +21,7 @@ export const BubbleTimestamp = (props: BubbleTimestampProps) => {
     isLastInBulk
   } = props;
 
-  const [ realTimestamp, setRealTimestamp ] = useState(null);
+  const [ realTimestamp, setRealTimestamp ] = useState<string | null>(null);
 
   useEffect(() => {
     if (!timestamp) return;
