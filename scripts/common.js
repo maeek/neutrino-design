@@ -48,6 +48,7 @@ const copyFiles = (files = [], destination = path.join(__dirname, '..', config.o
 
 const getScssFiles = (rootPath) => getFilesWithExt([ '.scss' ], rootPath);
 const getTypescriptFiles = (rootPath) => getFilesWithExt([ '.ts', '.tsx' ], rootPath);
+const getCopyFilesFiles = (rootPath) => getFilesWithExt([ '.json' ], rootPath);
 
 const saveFile = (filepath, data) => {
   createDir(path.dirname(filepath));
@@ -60,8 +61,8 @@ const getEntries = (rootPath, arr = []) => {
   const relativePath = getRelativePath(rootPath) || '/src';
 
   let componentType = path.dirname(relativePath).substr(1);
-  componentType = (componentType.startsWith('components') 
-    ? componentType.substr(11) 
+  componentType = (componentType.startsWith('components')
+    ? componentType.substr(11)
     : componentType) || path.basename(relativePath);
 
   // atom, molecule..
@@ -70,10 +71,11 @@ const getEntries = (rootPath, arr = []) => {
 
   const typescript = filterNonProductionFiles(getTypescriptFiles(rootPath));
   const scss = filterNonProductionFiles(getScssFiles(
-    stylesFolderExists 
-      ? path.resolve(rootPath, config.stylesFolder) 
+    stylesFolderExists
+      ? path.resolve(rootPath, config.stylesFolder)
       : rootPath
   ));
+  const copyFiles = filterNonProductionFiles(getCopyFilesFiles(rootPath));
 
   if (componentType) {
     arr.push({
@@ -85,11 +87,13 @@ const getEntries = (rootPath, arr = []) => {
         componentType,
         typescriptCount: typescript.length,
         scssCount: scss.length,
-        count: typescript.length + scss.length
+        count: typescript.length + scss.length + copyFiles.length,
+        copyFilesCount: copyFiles.length
       },
       files: {
         typescript,
-        scss
+        scss,
+        copyFiles
       }
     });
   }
@@ -97,7 +101,7 @@ const getEntries = (rootPath, arr = []) => {
     const buildPath = path.join(rootPath, folder);
     getEntries(buildPath, arr);
   });
-  
+
   return arr.filter((f) => f.meta.count > 0);
 };
 

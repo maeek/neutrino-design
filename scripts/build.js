@@ -31,9 +31,17 @@ loadedModulesFlat.forEach((mod) => {
     if (mod.meta.typescriptCount > 0) {
       processTypescript(mod.rootPath, mod.files.typescript);
     }
-    
+
     if (mod.meta.scssCount > 0) {
       processScss(mod.rootPath);
+    }
+
+    if (mod.meta.copyFilesCount > 0) {
+      console.log(`[${chalk.green('✓')}] [${chalk.gray(mod.meta.type)}][${mod.meta.name}]${new Array(insertTabs).join(' ')} Copying files...`);
+      util.copyFiles(
+        mod.files.copyFiles.map((f) => path.resolve(mod.rootPath, f)),
+        path.join(__dirname, '..', 'dist', mod.relativePath)
+      );
     }
 
     console.timeEnd(`[${chalk.green('✓')}] [${chalk.gray(mod.meta.type)}][${mod.meta.name}]${new Array(insertTabs).join(' ')} Compilation successful, time elapsed`);
