@@ -32,7 +32,7 @@ export const Image = forwardRef((props: ImageProps, ref) => {
     src,
     alt,
     fallback,
-    lazy = true,
+    lazy,
     loader,
     blurhash,
     className,
