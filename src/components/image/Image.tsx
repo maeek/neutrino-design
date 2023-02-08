@@ -11,7 +11,7 @@ export interface ImageProps {
   src: ImageUrl;
   alt?: string;
 
-  fallback?: ImageUrl;
+  fallback?: ImageUrl | ReactNode;
 
   lazy?: boolean;
   loader?: ReactNode;

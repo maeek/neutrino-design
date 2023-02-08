@@ -37,5 +37,9 @@
     &--animated > img {
       transition: opacity 0.15s ease;
     }
+
+    &-fallback {
+      height: 100%;
+    }
   }
 }
