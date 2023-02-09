@@ -64,8 +64,8 @@ export const Image = forwardRef((props: ImageProps, ref) => {
     imgRef.current.onload = () => {
       if (isCancelled) return;
 
-      if (onLoad) onLoad();
       setIsLoading(false);
+      if (onLoad) onLoad();
     };
     imgRef.current.onerror = (error) => {
       if (isCancelled) return;

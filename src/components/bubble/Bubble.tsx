@@ -89,7 +89,7 @@ export const Bubble = (props: BubbleProps) => {
               type={contentType}
               content={content}
             />
-            <BubbleActions actions={actions} />
+            <BubbleActions actions={actions} type={type} />
           </div>
         </div>
       </div>
