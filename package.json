@@ -45,7 +45,7 @@
     "test:watch": "jest --watch",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
-    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006 -h localhost",
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006 --disable-telemetry --no-open",
     "build-storybook": "build-storybook"
   },
   "browserslist": {
