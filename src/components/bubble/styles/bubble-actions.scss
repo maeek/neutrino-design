@@ -14,6 +14,7 @@
       font-size: 1.4rem;
       line-height: 1rem;
       z-index: 10;
+      -webkit-tap-highlight-color: transparent;
 
       &:focus-within {
         z-index: 100;

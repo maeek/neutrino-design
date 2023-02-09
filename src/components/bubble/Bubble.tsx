@@ -13,8 +13,8 @@ import { BubbleAction, BubbleActions } from './BubbleActions';
 import { BubbleTimestamp } from './BubbleTimestamp';
 import { BubbleAvatar, BubbleType } from './BubbleAvatar';
 import { BubbleReactions, Reaction } from './BubbleReactions';
-import './styles/bubble.scss';
 import { useMediaQuery } from 'react-responsive';
+import './styles/bubble.scss';
 
 export interface BubbleProps {
   sender?: string;
@@ -61,8 +61,6 @@ export const Bubble = (props: BubbleProps) => {
     isLastInBulk
   } = props;
   const [ actionsVisible, setActionsVisible ] = useState(false);
-  const [ isScrolling, setIsScrolling ] = useState(false);
-  const pressTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const rowRef = useRef<HTMLDivElement>(null);
   const isPc = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -107,46 +105,10 @@ export const Bubble = (props: BubbleProps) => {
     }
   }, [ actionsVisible, isPc ]);
 
-  const onPressDown = () => {
-    if (isPc || isScrolling) return;
-
-    if (pressTimeoutRef.current) {
-      clearTimeout(pressTimeoutRef.current);
-    }
-    pressTimeoutRef.current = setTimeout(() => {
-      navigator.vibrate(10);
-      setActionsVisible(true);
-    }, 500);
+  const onContextMenu = (event: ReactMouseEvent) => {
+    event.preventDefault();
+    setActionsVisible(true);
   };
-
-  const onPressUp = () => {
-    if (pressTimeoutRef.current) {
-      clearTimeout(pressTimeoutRef.current);
-    }
-  };
-
-  useEffect(() => {
-    let mounted = true;
-    let timeout: NodeJS.Timeout;
-
-    const handleScroll = () => {
-      setIsScrolling(true);
-      clearTimeout(timeout);
-      if (pressTimeoutRef.current) clearTimeout(pressTimeoutRef.current);
-
-      timeout = setTimeout(() => {
-        if (!mounted) return;
-        setIsScrolling(false);
-      }, 100);
-    };
-
-    document.addEventListener('scroll', handleScroll);
-    return () => {
-      clearTimeout(timeout);
-      mounted = false;
-      document.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <div className={classes} style={style} ref={rowRef}>
@@ -160,10 +122,8 @@ export const Bubble = (props: BubbleProps) => {
               bubbleType={type}
               type={contentType}
               content={content}
-              onMouseDown={onPressDown}
-              onMouseUp={onPressUp}
-              onTouchStart={onPressDown}
-              onTouchEnd={onPressUp}
+              onContextMenu={onContextMenu}
+              onClick={() => setActionsVisible(true)}
             />
             <BubbleActions visible={actionsVisible} actions={actions} type={type} />
           </div>
