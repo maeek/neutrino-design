@@ -12,15 +12,15 @@ export type AdvancedContentType = {
 export type DefaultContentType = 'text';
 export type ContentType = DefaultContentType | 'image' | 'file' | 'video' | 'audio' | 'sticker';
 
-export interface BubbleContent {
+export interface BubbleContentProps extends React.HTMLAttributes<HTMLDivElement> {
   type: ContentType;
   content?: ReactNode;
   bubbleType?: 'sender' | 'recipient';
   className?: string;
 }
 
-export const BubbleContent = (props: BubbleContent) => {
-  const { type, content, className, bubbleType } = props;
+export const BubbleContent = (props: BubbleContentProps) => {
+  const { type, content, className, bubbleType, ...rest } = props;
 
   const contentNode: { [key in ContentType]: ReactNode} = {
     text: content,
@@ -40,7 +40,7 @@ export const BubbleContent = (props: BubbleContent) => {
   );
 
   return (
-    <div className={classes}>
+    <div className={classes} {...rest}>
       {contentNode[ type ]}
     </div>
   );

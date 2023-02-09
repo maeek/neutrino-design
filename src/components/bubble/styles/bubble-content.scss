@@ -41,6 +41,10 @@
       justify-items: center;
       align-items: center;
 
+      @media (max-width: 768px) {
+        user-select: none;
+      }
+
       &--sender {
         margin-right: 0.5rem;
         background: #267ce0;

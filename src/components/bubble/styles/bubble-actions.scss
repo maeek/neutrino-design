@@ -44,8 +44,12 @@
       }
     }
 
-    &:hover &-actions,
-    &:focus-within &-actions {
+    &-actions--visible {
+      visibility: visible;
+    }
+
+    &:hover &-actions--pc,
+    &:focus-within &-actions--pc {
       visibility: visible;
     }
 

@@ -1,4 +1,12 @@
-import {  CSSProperties, ReactNode, MouseEvent, KeyboardEvent } from 'react';
+import {
+  CSSProperties,
+  ReactNode,
+  MouseEvent as ReactMouseEvent,
+  KeyboardEvent,
+  useState,
+  useRef,
+  useEffect
+} from 'react';
 import classNames from 'classnames';
 import { BubbleContent, ContentType } from './BubbleContent';
 import { BubbleAction, BubbleActions } from './BubbleActions';
@@ -6,12 +14,13 @@ import { BubbleTimestamp } from './BubbleTimestamp';
 import { BubbleAvatar, BubbleType } from './BubbleAvatar';
 import { BubbleReactions, Reaction } from './BubbleReactions';
 import './styles/bubble.scss';
+import { useMediaQuery } from 'react-responsive';
 
 export interface BubbleProps {
   sender?: string;
   type?: BubbleType;
   avatar?: string | ReactNode | null;
-  onAvatarInteraction?: (event: MouseEvent | KeyboardEvent) => void;
+  onAvatarInteraction?: (event: ReactMouseEvent | KeyboardEvent) => void;
 
   showReactions?: boolean;
   reactions?: Reaction[];
@@ -51,6 +60,11 @@ export const Bubble = (props: BubbleProps) => {
     isFirstInBulk,
     isLastInBulk
   } = props;
+  const [ actionsVisible, setActionsVisible ] = useState(false);
+  const [ isScrolling, setIsScrolling ] = useState(false);
+  const pressTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const rowRef = useRef<HTMLDivElement>(null);
+  const isPc = useMediaQuery({ query: '(min-width: 768px)' });
 
   const classes = classNames(
     'ne-bubble',
@@ -76,8 +90,66 @@ export const Bubble = (props: BubbleProps) => {
     <BubbleTimestamp timestamp={timestamp} isLastInBulk={isLastInBulk} inBulk={inBulk} />
   );
 
+  useEffect(() => {
+    if (actionsVisible && !isPc) {
+      const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+        if (rowRef.current && !rowRef.current.contains(event.target as Node)) {
+          setActionsVisible(false);
+        }
+      };
+
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('touchstart', handleClickOutside);
+      };
+    }
+  }, [ actionsVisible, isPc ]);
+
+  const onPressDown = () => {
+    if (isPc || isScrolling) return;
+
+    if (pressTimeoutRef.current) {
+      clearTimeout(pressTimeoutRef.current);
+    }
+    pressTimeoutRef.current = setTimeout(() => {
+      navigator.vibrate(10);
+      setActionsVisible(true);
+    }, 500);
+  };
+
+  const onPressUp = () => {
+    if (pressTimeoutRef.current) {
+      clearTimeout(pressTimeoutRef.current);
+    }
+  };
+
+  useEffect(() => {
+    let mounted = true;
+    let timeout: NodeJS.Timeout;
+
+    const handleScroll = () => {
+      setIsScrolling(true);
+      clearTimeout(timeout);
+      if (pressTimeoutRef.current) clearTimeout(pressTimeoutRef.current);
+
+      timeout = setTimeout(() => {
+        if (!mounted) return;
+        setIsScrolling(false);
+      }, 100);
+    };
+
+    document.addEventListener('scroll', handleScroll);
+    return () => {
+      clearTimeout(timeout);
+      mounted = false;
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={classes} style={style}>
+    <div className={classes} style={style} ref={rowRef}>
       <div className="ne-bubble-row">
         {avatarNode}
 
@@ -88,8 +160,12 @@ export const Bubble = (props: BubbleProps) => {
               bubbleType={type}
               type={contentType}
               content={content}
+              onMouseDown={onPressDown}
+              onMouseUp={onPressUp}
+              onTouchStart={onPressDown}
+              onTouchEnd={onPressUp}
             />
-            <BubbleActions actions={actions} type={type} />
+            <BubbleActions visible={actionsVisible} actions={actions} type={type} />
           </div>
         </div>
       </div>
