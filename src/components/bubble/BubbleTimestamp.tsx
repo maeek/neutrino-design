@@ -40,6 +40,7 @@ export const BubbleTimestamp = (props: BubbleTimestampProps) => {
   const timestampNodeClasses = classNames(
     'ne-bubble-timestamp',
     inBulk && !isLastInBulk && 'ne-bubble-timestamp--not-last-in-bulked',
+    inBulk && isLastInBulk && 'ne-bubble-timestamp--last-in-bulked',
     !inBulk
       ? 'ne-bubble-timestamp--single'
       : 'ne-bubble-timestamp--bulked',

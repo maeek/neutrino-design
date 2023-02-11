@@ -62,7 +62,7 @@ export interface InputProps {
   [key: string]: any;
 }
 
-export const Input = forwardRef<InputRef, InputProps>((props: InputProps, ref: any) => {
+export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   const {
     type,
     name,

@@ -33,6 +33,8 @@
       margin-left: 3rem;
     }
 
+    &-timestamp--last-in-bulked,
+    &-timestamp--single,
     &:hover + .#{$prefix}-bubble--last-in-bulked &-timestamp,
     &:focus-within + .#{$prefix}-bubble--last-in-bulked &-timestamp,
     &:hover &-timestamp:not(.#{$prefix}-bubble-timestamp--not-last-in-bulked),
