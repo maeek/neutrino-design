@@ -7,7 +7,7 @@ export const useContinuativeSearch = (items: string[], timeout = CANCEL_TIMEOUT)
   const [ value, setValue ] = useState('');
   const [ firstIndex, setFirstIndex ] = useState<number | null>(null);
   const [ foundItems, setFoundItems ] = useState<string[]>([]);
-  const resetTimeout = useRef(null);
+  const resetTimeout = useRef<NodeJS.Timeout | null>(null);
   const {
     onEnterOrSpace,
     onEscape
