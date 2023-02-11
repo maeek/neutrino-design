@@ -119,7 +119,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
 
   useEffect(() => {
     if (innerRef.current && ref) {
-      (ref.current as InputRef) = {
+      ((ref as any).current as InputRef) = {
         value,
         setValue,
         isValid: validateInput(value),
