@@ -89,7 +89,7 @@ export const Bubble = (props: BubbleProps) => {
   );
 
   useEffect(() => {
-    if (actionsVisible && !isPc) {
+    if (actionsVisible) {
       const handleClickOutside = (event: MouseEvent | TouchEvent) => {
         if (rowRef.current && !rowRef.current.contains(event.target as Node)) {
           setActionsVisible(false);
@@ -103,11 +103,18 @@ export const Bubble = (props: BubbleProps) => {
         document.removeEventListener('touchstart', handleClickOutside);
       };
     }
-  }, [ actionsVisible, isPc ]);
+  }, [ actionsVisible ]);
 
   const onContextMenu = (event: ReactMouseEvent) => {
+    if (actionsVisible) return;
+
     event.preventDefault();
     setActionsVisible(true);
+  };
+
+  const onReactHandler = (reaction: Reaction, allReactions: Reaction[]) => {
+    setActionsVisible(false);
+    onReact?.(reaction, allReactions || []);
   };
 
   return (
@@ -123,14 +130,14 @@ export const Bubble = (props: BubbleProps) => {
               type={contentType}
               content={content}
               onContextMenu={onContextMenu}
-              onClick={() => setActionsVisible(true)}
+              onClick={() => !isPc && setActionsVisible(true)}
             />
             <BubbleActions visible={actionsVisible} actions={actions} type={type} />
           </div>
         </div>
       </div>
       <div className="ne-bubble-row">
-        <BubbleReactions reactions={reactions} onReact={onReact} />
+        {actionsVisible && <BubbleReactions reactions={reactions} onReact={onReactHandler} />}
       </div>
       <div className="ne-bubble-row">
         {!inBulk || isLastInBulk ? timestampNode : null}
