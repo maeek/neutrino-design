@@ -3,13 +3,14 @@ import classNames from 'classnames';
 import Button from '../../buttons/Action';
 import { Heading } from '../../typography/heading';
 import { Paragraph } from '../../typography/paragraph';
-import {  AddRounded } from '@material-ui/icons';
+import { AddRounded } from '@material-ui/icons';
 import './file-select.scss';
+import React from 'react';
 
 export interface FileSelectProps {
   name?: string;
   description?: string;
-  onChange?: (files: FileList) => void;
+  onChange?: (files: FileList | null) => void;
   dragAndDrop?: boolean;
   accept?: string;
   multiple?: boolean;
@@ -24,8 +25,11 @@ const convertBytesToHumanReadable = (bytes: number) => {
   if (bytes === 0) {
     return '0 Byte';
   }
-  const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)).toString(), 10);
-  return `${Math.round(bytes / Math.pow(1024, i), 2)} ${sizes[ i ]}`;
+  const i = parseInt(
+    Math.floor(Math.log(bytes) / Math.log(1024)).toString(),
+    10
+  );
+  return `${Math.round(bytes / Math.pow(1024, i))} ${sizes[ i ]}`;
 };
 
 export const FileSelect = (props: FileSelectProps) => {
@@ -33,7 +37,6 @@ export const FileSelect = (props: FileSelectProps) => {
     name,
     description,
     onChange,
-    dragAndDrop,
     accept,
     multiple,
     disabled,
@@ -41,7 +44,7 @@ export const FileSelect = (props: FileSelectProps) => {
     style
   } = props;
   const inputRef = useRef<HTMLInputElement>(null);
-  const [ files, setFiles ] = useState<FileList>(null);
+  const [ files, setFiles ] = useState<FileList | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -65,8 +68,12 @@ export const FileSelect = (props: FileSelectProps) => {
 
   return (
     <div className={classNames('ne-file-select', className)} style={style}>
-      <Heading level={4} className="ne-file-select-name">{name}</Heading>
-      <Paragraph className="ne-file-select-description">{description}</Paragraph>
+      <Heading level={4} className="ne-file-select-name">
+        {name}
+      </Heading>
+      <Paragraph className="ne-file-select-description">
+        {description}
+      </Paragraph>
 
       <div className="ne-file-select-label">
         <input
@@ -80,45 +87,41 @@ export const FileSelect = (props: FileSelectProps) => {
           onChange={handleChange}
         />
 
-        {
-          files && files.length > 0
-            ? (
-              <ul className="ne-file-select-files">
-                {
-                  Array.from(files).map((file, index) => (
-                    <li key={index} className="ne-file-select-file">
-                      {file.name} ({convertBytesToHumanReadable(file.size)})
-                    </li>
-                  ))
-                }
-              </ul>
-            )
-            : null
-        }
+        {files && files.length > 0 ? (
+          <ul className="ne-file-select-files">
+            {Array.from(files).map((file, index) => (
+              <li key={index} className="ne-file-select-file">
+                {file.name} ({convertBytesToHumanReadable(file.size)})
+              </li>
+            ))}
+          </ul>
+        ) : null}
 
         <ul className="ne-file-select-summary">
           <li className="ne-file-select-summary-item">
-            {
-              (!files || files.length === 0)
-                ? `Click the button below to select ${ multiple ? 'files' : 'a file' }.`
-                : (
-                  <>
-                    Files selected: <b>{ files.length }</b>
-                  </>
-                )
-            }
+            {!files || files.length === 0 ? (
+              `Click the button below to select ${
+                multiple ? 'files' : 'a file'
+              }.`
+            ) : (
+              <>
+                Files selected: <b>{files.length}</b>
+              </>
+            )}
           </li>
-          {
-            files && (
-              <li className="ne-file-select-summary-item">
-              Size: <b>{
-                  convertBytesToHumanReadable(
-                    Array.from(files).reduce((total, file) => total + file.size, 0)
+          {files && (
+            <li className="ne-file-select-summary-item">
+              Size:{' '}
+              <b>
+                {convertBytesToHumanReadable(
+                  Array.from(files).reduce(
+                    (total, file) => total + file.size,
+                    0
                   )
-                }</b>
-              </li>
-            )
-          }
+                )}
+              </b>
+            </li>
+          )}
         </ul>
 
         <Button className="ne-file-select-btn" onClick={handleClick}>
@@ -127,6 +130,5 @@ export const FileSelect = (props: FileSelectProps) => {
         </Button>
       </div>
     </div>
-
   );
 };
