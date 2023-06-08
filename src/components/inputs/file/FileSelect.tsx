@@ -167,7 +167,7 @@ export const FileSelect = forwardRef((props: FileSelectProps, ref: any) => {
           {(files && files.length > 0)
             ? buttonText || 'Add More Files'
             : buttonText || 'Add Files'}
-          <AddRounded />
+          {!buttonText && <AddRounded />}
         </Button>
       </div>
     </div>
