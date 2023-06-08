@@ -1,4 +1,12 @@
-import { CSSProperties, MouseEvent, DragEvent, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  MouseEvent,
+  DragEvent,
+  useRef,
+  useState,
+  forwardRef,
+  useImperativeHandle
+} from 'react';
 import classNames from 'classnames';
 import Button from '../../buttons/Action';
 import { Heading } from '../../typography/heading';
@@ -33,7 +41,7 @@ const convertBytesToHumanReadable = (bytes: number) => {
   return `${Math.round(bytes / Math.pow(1024, i))} ${sizes[ i ]}`;
 };
 
-export const FileSelect = (props: FileSelectProps) => {
+export const FileSelect = forwardRef((props: FileSelectProps, ref: any) => {
   const {
     name,
     description,
@@ -48,6 +56,12 @@ export const FileSelect = (props: FileSelectProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [ files, setFiles ] = useState<FileList | null>(null);
   const [ isDragOver, setIsDragOver ] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    clear: () => {
+      setFiles(null);
+    }
+  }));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -85,7 +99,9 @@ export const FileSelect = (props: FileSelectProps) => {
 
   return (
     <div
-      className={classNames('ne-file-select', className, { 'ne-file-select--on-over': isDragOver })}
+      className={classNames('ne-file-select', className, {
+        'ne-file-select--on-over': isDragOver
+      })}
       style={style}
       onDragOver={onDragOver}
       onDragLeave={() => setIsDragOver(false)}
@@ -148,14 +164,14 @@ export const FileSelect = (props: FileSelectProps) => {
         </ul>
 
         <Button className="ne-file-select-btn" onClick={handleClick}>
-          {
-            buttonText || (files && files.length > 0)
-              ? 'Add More Files'
-              : 'Add Files'
-          }
+          {(files && files.length > 0)
+            ? buttonText || 'Add More Files'
+            : buttonText || 'Add Files'}
           <AddRounded />
         </Button>
       </div>
     </div>
   );
-};
+});
+
+FileSelect.displayName = 'FileSelect';
