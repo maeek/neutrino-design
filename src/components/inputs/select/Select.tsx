@@ -1,4 +1,14 @@
-import { createRef, ReactNode, useEffect, useRef, useState, KeyboardEvent, useMemo } from 'react';
+import {
+  createRef,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+  KeyboardEvent,
+  useMemo,
+  MutableRefObject,
+  RefObject
+} from 'react';
 import classNames from 'classnames';
 import { KeyboardArrowDown } from '@material-ui/icons';
 import { useAccessibility } from '../../../hooks/useAccessibility';
@@ -43,8 +53,8 @@ export const Select = (props: SelectProps) => {
     onArrowDown,
     onEscape
   } = useAccessibility();
-  const selectRef = useRef(null);
-  const itemsRef = useRef([]);
+  const selectRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<RefObject<HTMLLIElement>[]>([]);
   const [ selectedItems, setSelectItems ] = useState<number[] | null | undefined>();
   const [ isOpened, setIsOpened ] = useState<boolean | null>(null);
   const itemsValues = useMemo(() => items.map(item => item.value), [ items ]);
@@ -52,7 +62,7 @@ export const Select = (props: SelectProps) => {
 
   useClickOutside(() => {
     setIsOpened(false);
-  }, selectRef);
+  }, selectRef as MutableRefObject<HTMLDivElement>);
 
   const handleChange = (item: ItemDefinition) => {
     if (multiple) {
@@ -67,7 +77,7 @@ export const Select = (props: SelectProps) => {
   };
 
   const onItemKeyUpHandler = (item: ItemDefinition, i: number) => (e: any) => {
-    onEnterOrSpace((evt) => {
+    onEnterOrSpace((evt: KeyboardEvent) => {
       evt.stopPropagation();
       if (selectedIndexes === undefined) {
         handleChange(item);
@@ -75,32 +85,32 @@ export const Select = (props: SelectProps) => {
 
       if (evt.key !== ' ') {
         setIsOpened(false);
-        selectRef.current.focus();
+        selectRef.current?.focus();
       }
     })(e);
 
-    onArrowUp((evt) => {
+    onArrowUp((evt: KeyboardEvent) => {
       evt.stopPropagation();
       if (i === 0) {
-        itemsRef.current[ items.length - 1 ]?.current.focus();
+        itemsRef.current[ items.length - 1 ]?.current?.focus();
       } else {
-        itemsRef.current[ i - 1 ]?.current.focus();
+        itemsRef.current[ i - 1 ]?.current?.focus();
       }
     })(e);
 
-    onArrowDown((evt) => {
+    onArrowDown((evt: KeyboardEvent) => {
       evt.stopPropagation();
       if (i === items.length - 1) {
-        itemsRef.current[ 0 ]?.current.focus();
+        itemsRef.current[ 0 ]?.current?.focus();
       } else {
-        itemsRef.current[ i + 1 ]?.current.focus();
+        itemsRef.current[ i + 1 ]?.current?.focus();
       }
     })(e);
 
-    onEscape((evt) => {
+    onEscape((evt: KeyboardEvent) => {
       evt.stopPropagation();
       setIsOpened(false);
-      selectRef.current.focus();
+      selectRef.current?.focus();
     })(e);
 
     search(e);
@@ -140,7 +150,7 @@ export const Select = (props: SelectProps) => {
 
   useEffect(() => {
     if (isOpened === false && selectedIndexes === undefined) {
-      onChange?.(selectedItems);
+      onChange?.(selectedItems || []);
     }
 
     if (isOpened) {
@@ -160,9 +170,9 @@ export const Select = (props: SelectProps) => {
     <ul className={classNames('ne-select-list')}>
       {
         items?.map((item, i) => {
-          let ref = itemsRef.current[ i ];
+          let ref: RefObject<HTMLLIElement> = itemsRef.current[ i ];
           if (!itemsRef.current[ i ]) {
-            ref = createRef();
+            ref = createRef<HTMLLIElement>();
             itemsRef.current.push(ref);
           }
 
@@ -180,7 +190,7 @@ export const Select = (props: SelectProps) => {
                   handleChange(item);
                 }
 
-                selectRef.current.focus();
+                selectRef.current?.focus();
               }}
             >
               {
