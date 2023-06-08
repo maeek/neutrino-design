@@ -1,4 +1,4 @@
-import { CSSProperties, MouseEvent, useEffect, useRef, useState } from 'react';
+import { CSSProperties, MouseEvent, DragEvent, useRef, useState } from 'react';
 import classNames from 'classnames';
 import Button from '../../buttons/Action';
 import { Heading } from '../../typography/heading';
@@ -18,6 +18,7 @@ export interface FileSelectProps {
   disabled?: boolean;
   className?: string;
   style?: CSSProperties;
+  buttonText?: string;
 }
 
 const convertBytesToHumanReadable = (bytes: number) => {
@@ -41,14 +42,17 @@ export const FileSelect = (props: FileSelectProps) => {
     multiple,
     disabled,
     className,
-    style
+    style,
+    buttonText
   } = props;
   const inputRef = useRef<HTMLInputElement>(null);
   const [ files, setFiles ] = useState<FileList | null>(null);
+  const [ isDragOver, setIsDragOver ] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
     setFiles(files);
+    onChange?.(files);
   };
 
   const handleClick = (e: MouseEvent) => {
@@ -60,14 +64,33 @@ export const FileSelect = (props: FileSelectProps) => {
     }
   };
 
-  useEffect(() => {
-    if (onChange) {
-      onChange(files);
-    }
-  }, [ files, onChange ]);
+  const onFileDrop = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const { files } = e.dataTransfer || {};
+
+    setIsDragOver(false);
+
+    if (!files || files.length === 0) return;
+
+    setFiles(files);
+    onChange?.(files);
+  };
+
+  const onDragOver = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(true);
+  };
 
   return (
-    <div className={classNames('ne-file-select', className)} style={style}>
+    <div
+      className={classNames('ne-file-select', className, { 'ne-file-select--on-over': isDragOver })}
+      style={style}
+      onDragOver={onDragOver}
+      onDragLeave={() => setIsDragOver(false)}
+      onDrop={onFileDrop}
+    >
       <Heading level={4} className="ne-file-select-name">
         {name}
       </Heading>
@@ -125,7 +148,11 @@ export const FileSelect = (props: FileSelectProps) => {
         </ul>
 
         <Button className="ne-file-select-btn" onClick={handleClick}>
-          {files && files.length > 0 ? 'Add More Files' : 'Add Files'}
+          {
+            buttonText || (files && files.length > 0)
+              ? 'Add More Files'
+              : 'Add Files'
+          }
           <AddRounded />
         </Button>
       </div>

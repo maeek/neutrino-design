@@ -12,6 +12,12 @@
     background-color: get-color('primary', 500);
     border-radius: 0.2rem;
     font-size: get-font-size(300);
+    border: 0.1rem solid transparent;
+
+    &--on-over {
+      background-color: get-color('primary', 400);
+      border: 0.1rem solid get-color('primary', 300);
+    }
 
     &-input {
       display: none;
