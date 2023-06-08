@@ -114,10 +114,6 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   }, [ validate ]);
 
   useEffect(() => {
-    if (onChange) onChange(value);
-  }, [ onChange, value ]);
-
-  useEffect(() => {
     if (innerRef.current && ref) {
       ((ref as any).current as InputRef) = {
         value,
@@ -189,7 +185,10 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
           disabled={disabled}
           readOnly={readOnly}
           className="ne-input-control"
-          {...bind}
+          {...{ ...bind, onChange: (e: any) => {
+            bind.onChange(e);
+            onChange?.(e.target.value);
+          } }}
           {...rest}
         />
         {
