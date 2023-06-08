@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export const usePagination = <T = unknown>(array: T[], perPage = 20) => {
+export const usePagination = <T = unknown,>(array: T[], perPage = 20) => {
   const [ currentPage, setCurrentPage ] = useState(0);
-  const [ page, setPage ] = useState<unknown[]>([]);
+  const [ page, setPage ] = useState<T[]>([]);
 
   useEffect(() => {
     const startIndex = currentPage * perPage;
