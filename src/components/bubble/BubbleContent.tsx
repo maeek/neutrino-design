@@ -24,9 +24,9 @@ export const BubbleContent = (props: BubbleContentProps) => {
 
   const contentNode: { [key in ContentType]: ReactNode} = {
     text: content,
-    image: undefined,
-    file: undefined,
-    video: undefined,
+    image: content,
+    file: content,
+    video: content,
     audio: undefined,
     sticker: undefined
   };
