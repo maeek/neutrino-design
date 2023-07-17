@@ -26,8 +26,7 @@
       "jest",
       "@types/react",
       "@testing-library/jest-dom",
-      "@testing-library/react",
-      "./src/index.d.ts"
+      "@testing-library/react"
     ],
     "paths": {
       "@/*": [ "src/*" ]
