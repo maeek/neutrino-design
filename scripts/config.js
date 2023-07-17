@@ -1,6 +1,6 @@
-const tsconfig = require('../tsconfig.json');
-const babelCfg = require('../babel.config');
 const autoprefixer = require('autoprefixer');
+const babelCfg = require('../babel.config');
+const tsconfig = require('../tsconfig.json');
 
 const config = {
   entryFolder: 'src',
@@ -19,11 +19,9 @@ const config = {
   babelConfig: babelCfg,
   sass: {},
   postcss: {
-    plugins: [ autoprefixer ]
+    plugins: [autoprefixer]
   },
-  postCompile: [
-    (code) => code.replace(/require\("(.+)\.scss"\)/gm, 'require("$1.css")')
-  ]
+  postCompile: [code => code.replace(/require\("(.+)\.scss"\)/gm, 'require("$1.css")')]
 };
 
 module.exports = {

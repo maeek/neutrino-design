@@ -2,29 +2,26 @@ const path = require('path');
 const fs = require('fs-extra');
 const { config } = require('./config');
 
-const getRelativePath = (rootPath) => rootPath.replace(
-  path.resolve(__dirname, '..', config.entryFolder),
-  ''
-);
+const getRelativePath = rootPath => rootPath.replace(path.resolve(__dirname, '..', config.entryFolder), '');
 
-const getFolders = (rootPath) => {
-  return fs.readdirSync(rootPath)
-    .filter((folder) => fs.statSync(path.join(rootPath, folder)).isDirectory() && folder);
+const getFolders = rootPath => {
+  return fs.readdirSync(rootPath).filter(folder => fs.statSync(path.join(rootPath, folder)).isDirectory() && folder);
 };
 
 const getFilesWithExt = (exts = [], rootPath) => {
-  return fs.readdirSync(rootPath)
-    .filter((file) => fs.statSync(path.join(rootPath, file)).isFile() && file)
-    .filter((file) => exts.includes(path.extname(file)));
+  return fs
+    .readdirSync(rootPath)
+    .filter(file => fs.statSync(path.join(rootPath, file)).isFile() && file)
+    .filter(file => exts.includes(path.extname(file)));
 };
 
 const filterNonProductionFiles = (fileList = []) => {
   const nonProd = config.exclude;
 
-  return fileList.filter((file) => {
+  return fileList.filter(file => {
     let include = true;
 
-    nonProd.forEach((regex) => {
+    nonProd.forEach(regex => {
       if (regex.test(file)) include = false;
     });
 
@@ -32,7 +29,7 @@ const filterNonProductionFiles = (fileList = []) => {
   });
 };
 
-const createDir = (dir) => {
+const createDir = dir => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
@@ -41,14 +38,14 @@ const createDir = (dir) => {
 };
 
 const copyFiles = (files = [], destination = path.join(__dirname, '..', config.outDir)) => {
-  files.forEach((file) => {
+  files.forEach(file => {
     fs.copySync(file, path.join(destination, path.basename(file)));
   });
 };
 
-const getScssFiles = (rootPath) => getFilesWithExt([ '.scss' ], rootPath);
-const getTypescriptFiles = (rootPath) => getFilesWithExt([ '.ts', '.tsx' ], rootPath);
-const getCopyFilesFiles = (rootPath) => getFilesWithExt([ '.json' ], rootPath);
+const getScssFiles = rootPath => getFilesWithExt(['.scss'], rootPath);
+const getTypescriptFiles = rootPath => getFilesWithExt(['.ts', '.tsx'], rootPath);
+const getCopyFilesFiles = rootPath => getFilesWithExt(['.json'], rootPath);
 
 const saveFile = (filepath, data) => {
   createDir(path.dirname(filepath));
@@ -61,21 +58,18 @@ const getEntries = (rootPath, arr = []) => {
   const relativePath = getRelativePath(rootPath) || '/src';
 
   let componentType = path.dirname(relativePath).substr(1);
-  componentType = (componentType.startsWith('components')
-    ? componentType.substr(11)
-    : componentType) || path.basename(relativePath);
+  componentType =
+    (componentType.startsWith('components') ? componentType.substr(11) : componentType) || path.basename(relativePath);
 
   // atom, molecule..
   const type = componentType.substr(0, componentType.indexOf('/') || componentType.length) || componentType;
   const name = path.basename(relativePath);
 
   const typescript = filterNonProductionFiles(getTypescriptFiles(rootPath));
-  const scss = filterNonProductionFiles(getScssFiles(
-    stylesFolderExists
-      ? path.resolve(rootPath, config.stylesFolder)
-      : rootPath
-  ));
-  const copyFiles = filterNonProductionFiles(getCopyFilesFiles(rootPath));
+  const scss = filterNonProductionFiles(
+    getScssFiles(stylesFolderExists ? path.resolve(rootPath, config.stylesFolder) : rootPath)
+  );
+  const copyFilesNew = filterNonProductionFiles(getCopyFilesFiles(rootPath));
 
   if (componentType) {
     arr.push({
@@ -87,22 +81,22 @@ const getEntries = (rootPath, arr = []) => {
         componentType,
         typescriptCount: typescript.length,
         scssCount: scss.length,
-        count: typescript.length + scss.length + copyFiles.length,
-        copyFilesCount: copyFiles.length
+        count: typescript.length + scss.length + copyFilesNew.length,
+        copyFilesCount: copyFilesNew.length
       },
       files: {
         typescript,
         scss,
-        copyFiles
+        copyFiles: copyFilesNew
       }
     });
   }
-  folders.forEach((folder) => {
+  folders.forEach(folder => {
     const buildPath = path.join(rootPath, folder);
     getEntries(buildPath, arr);
   });
 
-  return arr.filter((f) => f.meta.count > 0);
+  return arr.filter(f => f.meta.count > 0);
 };
 
 module.exports = {
