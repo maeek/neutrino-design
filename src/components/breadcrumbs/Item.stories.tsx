@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { DnsRounded } from '@material-ui/icons';
-import { Story, Meta } from '@storybook/react/types-6-0';
+import { Story, Meta } from '@storybook/react';
 import { Item as BreadcrumbItemComponent, BreadcrumbItemProps } from './Item';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   component: BreadcrumbItemComponent
 } as Meta;
 
-const Template: Story<BreadcrumbItemProps> = (args) => (
+const Template: Story<BreadcrumbItemProps> = args => (
   <BreadcrumbItemComponent {...args}>Channels</BreadcrumbItemComponent>
 );
 

@@ -1,4 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import { ButtonProps } from '../Button';
 import SecondaryButtonComponent from '../Secondary';
 
@@ -7,7 +8,7 @@ export default {
   component: SecondaryButtonComponent
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => (
+const Template: Story<ButtonProps> = args => (
   <SecondaryButtonComponent {...args}>Get more info</SecondaryButtonComponent>
 );
 export const Secondary = Template.bind({});

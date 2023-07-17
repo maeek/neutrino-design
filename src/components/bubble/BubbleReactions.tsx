@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import './styles/bubble-reactions.scss';
 
@@ -19,18 +19,14 @@ export interface BubbleReactionsProps {
 }
 
 export const BubbleReactions = (props: BubbleReactionsProps) => {
-  const { className } = props;;
+  const { className } = props;
 
   const classes = classNames('ne-bubble-reactions', className);
 
   return (
     <div className={classes}>
-      <div className="ne-bubble-reactions-container">
-
-      </div>
-      <div className="ne-bubble-reactions-counter">
-
-      </div>
+      <div className='ne-bubble-reactions-container'></div>
+      <div className='ne-bubble-reactions-counter'></div>
       {/* <EmojiQuickSelector quickAccessEmojis={[
         '😀',
         '🤯',

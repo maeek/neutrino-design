@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Button from './Button';
@@ -12,10 +13,10 @@ describe('buttons/index', () => {
   it('should render as link type', () => {
     render(
       <Button
-        type="link"
-        href="https://example.com/"
-        target="_blank"
-        rel="noreferrer"
+        type='link'
+        href='https://example.com/'
+        target='_blank'
+        rel='noreferrer'
       >
         test button
       </Button>
@@ -72,13 +73,7 @@ describe('buttons/index', () => {
   it('should invoke onClick when pressed enter or space on focus', () => {
     const onClickMock = jest.fn();
 
-    render(
-      <Button
-        onClick={onClickMock}
-      >
-        test button
-      </Button>
-    );
+    render(<Button onClick={onClickMock}>test button</Button>);
 
     userEvent.tab();
     userEvent.type(screen.getByText('test button'), '{enter}', { skipClick: true });
@@ -88,7 +83,7 @@ describe('buttons/index', () => {
   });
 
   it('should combine classNames', () => {
-    const { container } = render(<Button className="test-classname">test button</Button>);
+    const { container } = render(<Button className='test-classname'>test button</Button>);
 
     expect(container.firstChild).toHaveClass('ne-button');
     expect(container.firstChild).toHaveClass('test-classname');

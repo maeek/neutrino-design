@@ -1,8 +1,15 @@
-import { CSSProperties, KeyboardEvent as ReactKeyboardEvent, MouseEvent, MouseEventHandler, ReactNode } from 'react';
+import React, {
+  CSSProperties,
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent,
+  MouseEventHandler,
+  ReactNode,
+  HTMLAttributes
+} from 'react';
 import classNames from 'classnames';
 import './styles/button.scss';
 
-interface ButtonTypeBase {
+interface ButtonTypeBase extends HTMLAttributes<HTMLDivElement> {
   type?: 'button';
 
   onClick?: MouseEventHandler<HTMLDivElement>;
@@ -18,7 +25,6 @@ interface ButtonTypeBase {
    */
   disabled?: boolean;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export interface ButtonTypeLinkProps extends Omit<ButtonTypeBase, 'type'> {
@@ -31,42 +37,33 @@ export interface ButtonTypeLinkProps extends Omit<ButtonTypeBase, 'type'> {
    * Disable buttons onClick and href action
    */
   disabled?: boolean;
-   /**
+  /**
    * Only with type = 'link'
    */
   href?: string;
   /**
-    * Only with type = 'link'
-    */
+   * Only with type = 'link'
+   */
   target?: string;
   /**
    * Only with type = 'link'
    */
   rel?: string;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export type ButtonProps = ButtonTypeLinkProps | ButtonTypeBase;
 
 export const Button = (props: ButtonProps) => {
-  const {
-    type,
-    onClick,
-    title,
-    children,
-    className,
-    disabled = false,
-    ...rest
-  } = props;
+  const { type, onClick, title, children, className, disabled = false, ...rest } = props;
 
   const onClickHandler = (e: MouseEvent<HTMLDivElement>) => {
     if (onClick && !disabled) onClick(e);
   };
 
   const onKeyUpHandler = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-    if ([ 'Enter', ' ' ].includes(e.key) && onClick) {
-      onClick(e as any);
+    if (['Enter', ' '].includes(e.key) && onClick) {
+      onClick(e as unknown as MouseEvent<HTMLDivElement>);
     }
   };
 
@@ -82,6 +79,7 @@ export const Button = (props: ButtonProps) => {
       onKeyUp={onKeyUpHandler}
       title={title}
       data-type={type}
+      role='button'
       data-disabled={!!disabled}
       tabIndex={type === 'link' ? -1 : 0}
       {...rest}
@@ -92,7 +90,7 @@ export const Button = (props: ButtonProps) => {
 
   const containerClasses = classNames({
     'ne-button': true,
-    ...(className && { [ className ]: true })
+    ...(className && { [className]: true })
   });
 
   let btnNode = buttonBody;
@@ -101,7 +99,7 @@ export const Button = (props: ButtonProps) => {
     const { href, target, rel } = rest as ButtonTypeLinkProps;
     btnNode = (
       <a
-        className="ne-button-anchor"
+        className='ne-button-anchor'
         href={href}
         target={target}
         title={title}
@@ -112,11 +110,7 @@ export const Button = (props: ButtonProps) => {
     );
   }
 
-  return (
-    <div className={containerClasses}>
-      {btnNode}
-    </div>
-  );
+  return <div className={containerClasses}>{btnNode}</div>;
 };
 
 export default Button;

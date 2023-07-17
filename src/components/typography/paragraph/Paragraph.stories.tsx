@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import ParagraphComponent, { ParagraphProps } from './Paragraph';
 
 export default {
@@ -8,10 +8,7 @@ export default {
   component: ParagraphComponent
 } as Meta;
 
-const Template: Story<ParagraphProps> = (args) => (
-  <ParagraphComponent {...args}>
-    {args.children}
-  </ParagraphComponent>);
+const Template: Story<ParagraphProps> = args => <ParagraphComponent {...args}>{args.children}</ParagraphComponent>;
 
 const text = `Paragraph. Neutrino Design
 

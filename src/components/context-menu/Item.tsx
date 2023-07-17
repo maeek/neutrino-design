@@ -1,5 +1,4 @@
-import classNames from 'classnames';
-import {
+import React, {
   KeyboardEvent as ReactKeyboardEvent,
   MouseEvent,
   MouseEventHandler,
@@ -8,6 +7,7 @@ import {
   KeyboardEventHandler,
   CSSProperties
 } from 'react';
+import classNames from 'classnames';
 import { Text } from '../typography';
 import './item.scss';
 
@@ -20,12 +20,11 @@ export interface ItemProps {
   className?: string;
   onClick?: MouseEventHandler<HTMLLIElement>;
   closeOnClick?: boolean;
-  closeHandler?: Function;
+  closeHandler?: (...args: unknown[]) => unknown;
   disabled?: boolean;
   onKeyUp?: KeyboardEventHandler;
   onKeyDown?: KeyboardEventHandler;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const Item = forwardRef<HTMLLIElement, ItemProps>((props, ref) => {
@@ -55,20 +54,18 @@ export const Item = forwardRef<HTMLLIElement, ItemProps>((props, ref) => {
   };
 
   const onKeyUpHandler = (e: ReactKeyboardEvent) => {
-    if ([ 'Enter', ' ' ].includes(e.key)) onClickHandler(e as any);
+    if (['Enter', ' '].includes(e.key)) onClickHandler(e as unknown as MouseEvent<HTMLLIElement>);
 
-    if(onKeyUp) onKeyUp(e);
+    if (onKeyUp) onKeyUp(e);
   };
 
   const iconNode = icon && (
-    <span className={`ne-context-menu-item-icon ne-context-menu-item-icon--${iconPosition}`}>
-      {icon}
-    </span>
+    <span className={`ne-context-menu-item-icon ne-context-menu-item-icon--${iconPosition}`}>{icon}</span>
   );
 
   const classes = classNames({
     'ne-context-menu-item': true,
-    ...(className ? { [ className ]: true } : {})
+    ...(className ? { [className]: true } : {})
   });
 
   return (
@@ -79,12 +76,13 @@ export const Item = forwardRef<HTMLLIElement, ItemProps>((props, ref) => {
       onKeyUp={onKeyUpHandler}
       onKeyDown={onKeyDown}
       tabIndex={0}
+      role='menuitem'
       title={text}
       data-disabled={!!disabled}
       {...rest}
     >
       {iconPosition === 'left' && iconNode}
-      {children || <Text className="ne-context-menu-item-text">{text}</Text>}
+      {children || <Text className='ne-context-menu-item-text'>{text}</Text>}
       {iconPosition === 'right' && iconNode}
     </li>
   );

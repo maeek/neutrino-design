@@ -4,25 +4,21 @@ import { useAccessibility } from './useAccessibility';
 const CANCEL_TIMEOUT = 1000;
 
 export const useContinuativeSearch = (items: string[], timeout = CANCEL_TIMEOUT) => {
-  const [ value, setValue ] = useState('');
-  const [ firstIndex, setFirstIndex ] = useState<number | null>(null);
-  const [ foundItems, setFoundItems ] = useState<string[]>([]);
+  const [value, setValue] = useState('');
+  const [firstIndex, setFirstIndex] = useState<number | null>(null);
+  const [foundItems, setFoundItems] = useState<string[]>([]);
   const resetTimeout = useRef<NodeJS.Timeout | null>(null);
-  const {
-    onEnterOrSpace,
-    onEscape
-  } = useAccessibility();
+  const { onEnterOrSpace, onEscape } = useAccessibility();
 
   useEffect(() => {
     if (value.length > 1) {
-      const index = items.findIndex((item) => item.toLowerCase().startsWith(value));
+      const index = items.findIndex(item => item.toLowerCase().startsWith(value));
       setFirstIndex(index);
-      setFoundItems(items.filter((item) => item.toLowerCase().startsWith(value)));
-    }
-    else {
+      setFoundItems(items.filter(item => item.toLowerCase().startsWith(value)));
+    } else {
       setFirstIndex(null);
     }
-  }, [ items, value ]);
+  }, [items, value]);
 
   useEffect(() => {
     const cancelQuery = () => {
@@ -36,26 +32,28 @@ export const useContinuativeSearch = (items: string[], timeout = CANCEL_TIMEOUT)
     };
   }, []);
 
-  const search = useCallback((e: KeyboardEvent) => {
-    e.stopPropagation();
-    const acceptedKeys = [ 'Key', 'Digit', 'Numpad' ];
+  const search = useCallback(
+    (e: KeyboardEvent) => {
+      e.stopPropagation();
+      const acceptedKeys = ['Key', 'Digit', 'Numpad'];
 
-    if (acceptedKeys.some(key => e.code.toLowerCase().startsWith(key.toLowerCase()))) {
-      if (resetTimeout.current) clearTimeout(resetTimeout.current);
+      if (acceptedKeys.some(key => e.code.toLowerCase().startsWith(key.toLowerCase()))) {
+        if (resetTimeout.current) clearTimeout(resetTimeout.current);
 
-      setValue(v => v + e.key.toLowerCase());
-      resetTimeout.current = setTimeout(() => setValue(''), timeout);
-    }
+        setValue(v => v + e.key.toLowerCase());
+        resetTimeout.current = setTimeout(() => setValue(''), timeout);
+      }
 
-    const cancelQuery = () => {
-      if (resetTimeout.current) clearTimeout(resetTimeout.current);
-      setValue('');
-    };
+      const cancelQuery = () => {
+        if (resetTimeout.current) clearTimeout(resetTimeout.current);
+        setValue('');
+      };
 
-    onEnterOrSpace(cancelQuery)(e);
-    onEscape(cancelQuery)(e);
-
-  }, [ onEnterOrSpace, onEscape, timeout ]);
+      onEnterOrSpace(cancelQuery)(e);
+      onEscape(cancelQuery)(e);
+    },
+    [onEnterOrSpace, onEscape, timeout]
+  );
 
   return {
     value,

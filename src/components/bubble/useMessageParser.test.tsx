@@ -2,7 +2,6 @@ import { renderHook } from '@testing-library/react-hooks';
 import { parse, parseLinks, parseMentions, useMessageParser } from './useMessageParser';
 
 describe('useMessageParser', () => {
-
   describe('parseLinks', () => {
     it('should parse empty string', () => {
       const text = '';
@@ -17,12 +16,14 @@ describe('useMessageParser', () => {
 
       const links = parseLinks(text);
 
-      expect(links).toEqual([ {
-        parts: [ '', '' ],
-        url: 'https://neutrino.chat/',
-        start: 0,
-        end: text.length
-      } ]);
+      expect(links).toEqual([
+        {
+          parts: ['', ''],
+          url: 'https://neutrino.chat/',
+          start: 0,
+          end: text.length
+        }
+      ]);
     });
 
     it('should parse single link among text', () => {
@@ -30,12 +31,14 @@ describe('useMessageParser', () => {
 
       const links = parseLinks(text);
 
-      expect(links).toEqual([ {
-        parts: [ 'This is a message with a link ', ' between words' ],
-        url: 'https://neutrino.chat/u/maeek',
-        start: 30,
-        end: 59
-      } ]);
+      expect(links).toEqual([
+        {
+          parts: ['This is a message with a link ', ' between words'],
+          url: 'https://neutrino.chat/u/maeek',
+          start: 30,
+          end: 59
+        }
+      ]);
     });
 
     it('should parse multiple links', () => {
@@ -45,13 +48,13 @@ describe('useMessageParser', () => {
 
       expect(links).toEqual([
         {
-          parts: [ '', '\nhttps://github.com/maeek/neutrino-chat' ],
+          parts: ['', '\nhttps://github.com/maeek/neutrino-chat'],
           url: 'https://neutrino.chat/u/maeek',
           start: 0,
           end: 29
         },
         {
-          parts: [ 'https://neutrino.chat/u/maeek\n', '' ],
+          parts: ['https://neutrino.chat/u/maeek\n', ''],
           url: 'https://github.com/maeek/neutrino-chat',
           start: 30,
           end: 68
@@ -74,12 +77,14 @@ describe('useMessageParser', () => {
 
       const mentions = parseMentions(text);
 
-      expect(mentions).toEqual([ {
-        parts: [ '', '' ],
-        name: 'maeek',
-        start: 0,
-        end: 6
-      } ]);
+      expect(mentions).toEqual([
+        {
+          parts: ['', ''],
+          name: 'maeek',
+          start: 0,
+          end: 6
+        }
+      ]);
     });
 
     it('parses multiple mentions from string', () => {
@@ -89,13 +94,13 @@ describe('useMessageParser', () => {
 
       expect(mentions).toEqual([
         {
-          parts: [ 'Hi ', ', @test how are you?' ],
+          parts: ['Hi ', ', @test how are you?'],
           name: 'maeek',
           start: 3,
           end: 9
         },
         {
-          parts: [ 'Hi @maeek, ', ' how are you?' ],
+          parts: ['Hi @maeek, ', ' how are you?'],
           name: 'test',
           start: 11,
           end: 16
@@ -110,11 +115,13 @@ describe('useMessageParser', () => {
 
       const lines = parse(text);
 
-      expect(lines).toEqual([ {
-        line: '',
-        links: [],
-        mentions: []
-      } ]);
+      expect(lines).toEqual([
+        {
+          line: '',
+          links: [],
+          mentions: []
+        }
+      ]);
     });
 
     it('parses message', () => {
@@ -132,23 +139,27 @@ describe('useMessageParser', () => {
         },
         {
           line: '        This is a message with a link https://neutrino.chat/u/maeek between words',
-          links: [ {
-            parts: [ '        This is a message with a link ', ' between words' ],
-            url: 'https://neutrino.chat/u/maeek',
-            start: 38,
-            end: 67
-          } ],
+          links: [
+            {
+              parts: ['        This is a message with a link ', ' between words'],
+              url: 'https://neutrino.chat/u/maeek',
+              start: 38,
+              end: 67
+            }
+          ],
           mentions: []
         },
         {
           line: '        and a mention @maeek and a link :)',
           links: [],
-          mentions: [ {
-            parts: [ '        and a mention ', ' and a link :)' ],
-            name: 'maeek',
-            start: 22,
-            end: 28
-          } ]
+          mentions: [
+            {
+              parts: ['        and a mention ', ' and a link :)'],
+              name: 'maeek',
+              start: 22,
+              end: 28
+            }
+          ]
         }
       ]);
     });
@@ -177,23 +188,27 @@ describe('useMessageParser', () => {
         },
         {
           line: '        This is a message with a link https://neutrino.chat/u/maeek between words',
-          links: [ {
-            parts: [ '        This is a message with a link ', ' between words' ],
-            url: 'https://neutrino.chat/u/maeek',
-            start: 38,
-            end: 67
-          } ],
+          links: [
+            {
+              parts: ['        This is a message with a link ', ' between words'],
+              url: 'https://neutrino.chat/u/maeek',
+              start: 38,
+              end: 67
+            }
+          ],
           mentions: []
         },
         {
           line: '        and a mention @maeek and a link :)',
           links: [],
-          mentions: [ {
-            parts: [ '        and a mention ', ' and a link :)' ],
-            name: 'maeek',
-            start: 22,
-            end: 28
-          } ]
+          mentions: [
+            {
+              parts: ['        and a mention ', ' and a link :)'],
+              name: 'maeek',
+              start: 22,
+              end: 28
+            }
+          ]
         }
       ]);
     });

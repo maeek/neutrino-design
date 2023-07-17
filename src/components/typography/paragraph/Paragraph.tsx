@@ -1,32 +1,25 @@
+import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
-import { CSSProperties, ReactNode } from 'react';
 import Text from '../text/Text';
 import './paragraph.scss';
 
-export interface ParagraphProps {
+export interface ParagraphProps extends HTMLAttributes<HTMLParagraphElement> {
   children: ReactNode;
   className?: string;
   pre?: boolean;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const Paragraph = (props: ParagraphProps) => {
-  const {
-    children,
-    className,
-    pre,
-    ...rest
-  } = props;
+  const { children, className, pre, ...rest } = props;
 
-  const classes = classNames(
-    'ne-typo', 'ne-typo-paragraph',
-    pre && 'ne-typo-paragraph--pre',
-    className
-  );
+  const classes = classNames('ne-typo', 'ne-typo-paragraph', pre && 'ne-typo-paragraph--pre', className);
 
   return (
-    <p className={classes} {...rest}>
+    <p
+      className={classes}
+      {...rest}
+    >
       <Text>{children}</Text>
     </p>
   );

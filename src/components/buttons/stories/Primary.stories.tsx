@@ -1,4 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import { Button, ButtonProps } from '../Button';
 
 export default {
@@ -6,9 +7,7 @@ export default {
   component: Button
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => (
-  <Button {...args}>Clear all sessions</Button>
-);
+const Template: Story<ButtonProps> = args => <Button {...args}>Clear all sessions</Button>;
 
 export const TypeButton = Template.bind({});
 TypeButton.args = {

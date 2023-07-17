@@ -2,34 +2,30 @@ import { useCallback, KeyboardEvent } from 'react';
 
 type EventHandlerMatcherType = string | string[] | (() => boolean | string | string[]) | boolean;
 
-export const keyboardEventHandler = (
-  handler: unknown,
-  match: EventHandlerMatcherType
-) => (
-  event: KeyboardEvent<Element>
-) => {
-  let matchResult: boolean = typeof match === 'boolean' ? match : false;
+export const keyboardEventHandler =
+  (handler: unknown, match: EventHandlerMatcherType) => (event: KeyboardEvent<Element>) => {
+    let matchResult: boolean = typeof match === 'boolean' ? match : false;
 
-  if (typeof match === 'function') {
-    match = match();
-  }
-  if (typeof match === 'string') {
-    matchResult = event.key === match;
-  }
-  if (Array.isArray(match)) {
-    matchResult = match.includes(event.key);
-  }
+    if (typeof match === 'function') {
+      match = match();
+    }
+    if (typeof match === 'string') {
+      matchResult = event.key === match;
+    }
+    if (Array.isArray(match)) {
+      matchResult = match.includes(event.key);
+    }
 
-  if (matchResult) {
-    event.preventDefault();
-    (handler as Function)(event);
-  }
-};
+    if (matchResult) {
+      event.preventDefault();
+      (handler as (...args: unknown[]) => unknown)(event);
+    }
+  };
 
 export const useAccessibility = () => {
   const onEnter = useCallback((callback: unknown) => keyboardEventHandler(callback, 'Enter'), []);
   const onSpace = useCallback((callback: unknown) => keyboardEventHandler(callback, ' '), []);
-  const onEnterOrSpace = useCallback((callback: unknown) => keyboardEventHandler(callback, [ 'Enter', ' ' ]), []);
+  const onEnterOrSpace = useCallback((callback: unknown) => keyboardEventHandler(callback, ['Enter', ' ']), []);
   const onEscape = useCallback((callback: unknown) => keyboardEventHandler(callback, 'Escape'), []);
   const onArrowUp = useCallback((callback: unknown) => keyboardEventHandler(callback, 'ArrowUp'), []);
   const onArrowDown = useCallback((callback: unknown) => keyboardEventHandler(callback, 'ArrowDown'), []);

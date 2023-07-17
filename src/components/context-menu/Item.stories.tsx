@@ -1,6 +1,6 @@
+import React from 'react';
 import { PeopleRounded } from '@material-ui/icons';
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import { Story, Meta } from '@storybook/react';
 import ItemComponent, { ItemProps } from './Item';
 
 export default {
@@ -8,16 +8,12 @@ export default {
   component: ItemComponent
 } as Meta;
 
-const Template: Story<ItemProps> = (args) => (
-  <ItemComponent {...args}>Channels</ItemComponent>
-);
+const Template: Story<ItemProps> = args => <ItemComponent {...args}>Channels</ItemComponent>;
 
 export const Item = Template.bind({});
 Item.args = {};
 
-const TemplateWithIcon: Story<ItemProps> = (args) => (
-  <ItemComponent {...args}>Channels</ItemComponent>
-);
+const TemplateWithIcon: Story<ItemProps> = args => <ItemComponent {...args}>Channels</ItemComponent>;
 export const ItemWithIcon = TemplateWithIcon.bind({});
 ItemWithIcon.args = {
   icon: <PeopleRounded />

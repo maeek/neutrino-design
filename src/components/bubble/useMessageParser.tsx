@@ -27,10 +27,10 @@ export const parseLinks = (line: string) => {
   let linkMatch;
   while ((linkMatch = linkRegex.exec(line))) {
     links.push({
-      parts: line.split(linkMatch[ 1 ]),
-      url: linkMatch[ 1 ],
+      parts: line.split(linkMatch[1]),
+      url: linkMatch[1],
       start: linkMatch.index,
-      end: linkMatch.index + linkMatch[ 1 ].length
+      end: linkMatch.index + linkMatch[1].length
     });
   }
 
@@ -44,10 +44,10 @@ export const parseMentions = (line: string) => {
   let mentionMatch;
   while ((mentionMatch = mentionRegex.exec(line))) {
     mentions.push({
-      parts: line.split(mentionMatch[ 0 ]),
-      name: mentionMatch[ 0 ].substring(1),
+      parts: line.split(mentionMatch[0]),
+      name: mentionMatch[0].substring(1),
       start: mentionMatch.index,
-      end: mentionMatch.index + mentionMatch[ 0 ].length
+      end: mentionMatch.index + mentionMatch[0].length
     });
   }
 
@@ -56,7 +56,7 @@ export const parseMentions = (line: string) => {
 
 export const parse = (message: string): Line[] => {
   const lines = message.split('\n');
-  const parsedLines = lines.map((line) => {
+  const parsedLines = lines.map(line => {
     const links = parseLinks(line);
     const mentions = parseMentions(line);
 
@@ -70,14 +70,14 @@ export const parse = (message: string): Line[] => {
 };
 
 export const useMessageParser = (message: string) => {
-  const [ parsedMessage, setParsedMessage ] = useState<Line[] | null>(null);
+  const [parsedMessage, setParsedMessage] = useState<Line[] | null>(null);
 
   useEffect(() => {
     if (!message) return;
 
     const text = parse(message);
     setParsedMessage(text);
-  }, [ message ]);
+  }, [message]);
 
   return { message: parsedMessage };
 };

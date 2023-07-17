@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import LayoutSideContentComponent, { LayoutSideContentProps } from '.';
 
 export default {
@@ -17,7 +17,7 @@ const contStyle = {
   padding: '1rem'
 };
 
-const Template: Story<LayoutSideContentProps> = (args) => (
+const Template: Story<LayoutSideContentProps> = args => (
   <div style={{ height: '600px' }}>
     <LayoutSideContentComponent {...args}>
       <div style={contStyle}>Neutrino-design</div>
@@ -28,13 +28,15 @@ const Template: Story<LayoutSideContentProps> = (args) => (
 export const SideContent = Template.bind({});
 SideContent.args = {
   sideNode: (
-    <div style={{
-      width: '100%',
-      height: '100%',
-      backgroundColor: '#0f0f0f',
-      color: '#fff',
-      padding: '1rem'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#0f0f0f',
+        color: '#fff',
+        padding: '1rem'
+      }}
+    >
       Neutrino-design side bar
     </div>
   )

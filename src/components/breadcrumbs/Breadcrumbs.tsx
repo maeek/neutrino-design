@@ -1,9 +1,9 @@
-import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
+import React, { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
-import './breadcrumbs.scss';
-import Item from './Item';
 import { ContextMenuItems } from '../context-menu/Menu';
+import Item from './Item';
 import Separator from './Separator';
+import './breadcrumbs.scss';
 
 export interface Breadcrumb {
   text: string;
@@ -16,7 +16,6 @@ export interface BreadcrumbsProps {
   className?: string;
   separator?: ReactNode;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const Breadcrumbs = (props: BreadcrumbsProps) => {
@@ -24,7 +23,10 @@ export const Breadcrumbs = (props: BreadcrumbsProps) => {
 
   const classes = classNames('ne-breadcrumbs', className);
   return (
-    <ul className={classes} style={style}>
+    <ul
+      className={classes}
+      style={style}
+    >
       {items.map(({ text, menuItems, ...item }, i, arr) => {
         const disabled = i === arr.length - 1;
 
@@ -38,7 +40,7 @@ export const Breadcrumbs = (props: BreadcrumbsProps) => {
             >
               {text}
             </Item>
-            { !disabled && <Separator key={i}>{separator}</Separator> }
+            {!disabled && <Separator key={i}>{separator}</Separator>}
           </>
         );
       })}

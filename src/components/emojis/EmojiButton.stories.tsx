@@ -1,5 +1,4 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import { Story, Meta } from '@storybook/react';
 import { EmojiButton as EmojiButtonComponent, EmojiButtonProps } from './EmojiButton';
 
 export default {
@@ -7,7 +6,7 @@ export default {
   component: EmojiButtonComponent
 } as Meta;
 
-const Template: Story<EmojiButtonProps> = (args) => <EmojiButtonComponent {...args} />;
+const Template: Story<EmojiButtonProps> = args => <EmojiButtonComponent {...args} />;
 
 export const Button = Template.bind({});
 Button.args = {
@@ -32,23 +31,12 @@ ButtonFromEmojiType.args = {
     order: 1284,
     display: 1,
     shortname: ':thumbsup:',
-    shortname_alternates: [
-      ':+1:',
-      ':thumbup:'
-    ],
-    ascii: [
-      '(y)'
-    ],
+    shortname_alternates: [':+1:', ':thumbup:'],
+    ascii: ['(y)'],
     humanform: 1,
     diversity_base: 1,
     diversity: null,
-    diversity_children: [
-      '1f44d-1f3fb',
-      '1f44d-1f3fc',
-      '1f44d-1f3fd',
-      '1f44d-1f3fe',
-      '1f44d-1f3ff'
-    ],
+    diversity_children: ['1f44d-1f3fb', '1f44d-1f3fc', '1f44d-1f3fd', '1f44d-1f3fe', '1f44d-1f3ff'],
     gender: [],
     gender_children: [],
     code_points: {

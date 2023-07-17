@@ -1,6 +1,5 @@
+import React, { ReactNode, useEffect, useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import classNames from 'classnames';
-import React from 'react';
-import { ReactNode, useEffect, useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import { Blurhash } from 'react-blurhash';
 import './image.scss';
 
@@ -43,9 +42,9 @@ export const Image = forwardRef((props: ImageProps, ref) => {
     onLoad,
     animations = true
   } = props;
-  const [ isLoading, setIsLoading ] = useState(true);
-  const [ hasError, setHasError ] = useState<string | Event | null>(null);
-  const [ imageSrc, setImageSrc ] = useState<string | undefined>('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState<string | Event | null>(null);
+  const [imageSrc, setImageSrc] = useState<string | undefined>('');
   const containerRef = useRef<HTMLImageElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -67,7 +66,7 @@ export const Image = forwardRef((props: ImageProps, ref) => {
       setIsLoading(false);
       if (onLoad) onLoad();
     };
-    imgRef.current.onerror = (error) => {
+    imgRef.current.onerror = error => {
       if (isCancelled) return;
 
       setHasError(error);
@@ -80,7 +79,7 @@ export const Image = forwardRef((props: ImageProps, ref) => {
     return () => {
       isCancelled = true;
     };
-  }, [ src, onLoad ]);
+  }, [src, onLoad]);
 
   useEffect(() => {
     if (hasError) {
@@ -88,7 +87,7 @@ export const Image = forwardRef((props: ImageProps, ref) => {
 
       setImageSrc(undefined);
     }
-  }, [ hasError, onError ]);
+  }, [hasError, onError]);
 
   const imgStyle = {
     objectFit,
@@ -106,32 +105,22 @@ export const Image = forwardRef((props: ImageProps, ref) => {
     />
   );
 
-  const blurhashContainer = blurhash
-    ? (
-      <Blurhash
-        hash={blurhash}
-        width="100%"
-        height="100%"
-      />
-    )
-    : null;
+  const blurhashContainer = blurhash ? (
+    <Blurhash
+      hash={blurhash}
+      width='100%'
+      height='100%'
+    />
+  ) : null;
 
   const loaderClassNames = classNames(
     'ne-image-loader',
     lazy && isLoading && (loader || blurhash) && 'ne-image-loader--loading',
     hasError && 'ne-image-loader--error'
   );
-  const loaderContainer = (
-    <div className={loaderClassNames}>
-      {blurhashContainer || loader}
-    </div>
-  );
+  const loaderContainer = <div className={loaderClassNames}>{blurhashContainer || loader}</div>;
 
-  const fallbackContainer = (
-    <div className='ne-image-fallback'>
-      {fallback}
-    </div>
-  );
+  const fallbackContainer = <div className='ne-image-fallback'>{fallback}</div>;
 
   return (
     <div

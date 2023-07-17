@@ -1,14 +1,15 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-import LayoutCenterComponent  from './center';
-import LayoutSideContentComponent  from './side-content';
-import LayoutTopContentComponent from './top-content';
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
+import LayoutCenterComponent from './center';
 import LayoutContentFooterComponent from './content-footer';
+import LayoutSideContentComponent from './side-content';
+import LayoutTopContentComponent from './top-content';
 
 // import LayoutTopSideContentComponent, { LayoutTopSideContentProps } from '.';
 
 export default {
-  title: 'Layouts/Advanced Examples' 
-  // component: 
+  title: 'Layouts/Advanced Examples'
+  // component:
 } as Meta;
 const contStyle = {
   width: '100%',
@@ -19,7 +20,7 @@ const contStyle = {
   padding: '1rem'
 };
 
-const Template: Story<any> = (args) => (
+const Template: Story<any> = args => (
   <div style={{ height: '600px' }}>
     <LayoutTopContentComponent topNode={args.topNode}>
       <LayoutSideContentComponent sideNode={args.sideNode}>
@@ -36,35 +37,41 @@ const Template: Story<any> = (args) => (
 export const TopContentFooter = Template.bind({});
 TopContentFooter.args = {
   topNode: (
-    <div style={{
-      width: '100%',
-      height: '60px',
-      backgroundColor: '#0f0f0f',
-      color: '#fff',
-      padding: '1rem'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '60px',
+        backgroundColor: '#0f0f0f',
+        color: '#fff',
+        padding: '1rem'
+      }}
+    >
       Neutrino-design top bar
     </div>
   ),
   footerNode: (
-    <div style={{
-      width: '100%',
-      height: '60px',
-      backgroundColor: '#0f0f0f',
-      color: '#fff',
-      padding: '1rem'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '60px',
+        backgroundColor: '#0f0f0f',
+        color: '#fff',
+        padding: '1rem'
+      }}
+    >
       Neutrino-design footer
     </div>
   ),
   sideNode: (
-    <div style={{
-      width: '100%',
-      height: 'auto',
-      backgroundColor: '#1f1f1f',
-      color: '#fff',
-      padding: '1rem'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: 'auto',
+        backgroundColor: '#1f1f1f',
+        color: '#fff',
+        padding: '1rem'
+      }}
+    >
       <div>Neutrino-design sidebar</div>
     </div>
   )

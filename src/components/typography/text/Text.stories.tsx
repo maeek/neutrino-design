@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import TextComponent, { TextProps } from './Text';
 
 export default {
@@ -7,10 +7,7 @@ export default {
   component: TextComponent
 } as Meta;
 
-const Template: Story<TextProps> = (args) => (
-  <TextComponent {...args}>
-    {args.children}
-  </TextComponent>);
+const Template: Story<TextProps> = args => <TextComponent {...args}>{args.children}</TextComponent>;
 
 export const Default = Template.bind({});
 Default.args = {

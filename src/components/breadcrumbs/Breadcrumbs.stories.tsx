@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import BreadcrumbsComponent, { BreadcrumbsProps } from './Breadcrumbs';
 
 export default {
@@ -7,16 +7,13 @@ export default {
   component: BreadcrumbsComponent
 } as Meta;
 
-const Template: Story<BreadcrumbsProps> = (args) => (<BreadcrumbsComponent {...args}>/</BreadcrumbsComponent>);
+const Template: Story<BreadcrumbsProps> = args => <BreadcrumbsComponent {...args}>/</BreadcrumbsComponent>;
 
 export const Breadcrumbs = Template.bind({});
 Breadcrumbs.args = {
   items: [
     { text: 'Home', onClick: () => ({}) },
-    { text: 'Channels', onClick: () => ({}), menuItems: [
-      { text: 'Direct Messages' },
-      { text: 'Users' }
-    ] },
+    { text: 'Channels', onClick: () => ({}), menuItems: [{ text: 'Direct Messages' }, { text: 'Users' }] },
     { text: 'Main', onClick: () => ({}) }
   ]
 };
@@ -26,19 +23,27 @@ BreadcrumbsLongPath.args = {
   separator: '/',
   items: [
     { text: 'Home', onClick: () => ({}) },
-    { text: 'Channels', onClick: () => ({}), menuItems: [
-      { text: 'Direct Messages', closeOnClick: true },
-      { text: 'Users', closeOnClick: true }
-    ] },
+    {
+      text: 'Channels',
+      onClick: () => ({}),
+      menuItems: [
+        { text: 'Direct Messages', closeOnClick: true },
+        { text: 'Users', closeOnClick: true }
+      ]
+    },
     { text: 'Main', onClick: () => ({}) },
     { text: 'Groups', onClick: () => ({}) },
     { text: 'All', onClick: () => ({}) },
-    { text: 'Connection', onClick: () => ({}), menuItems: [
-      { text: 'Firewall', closeOnClick: true },
-      { text: 'Docker', closeOnClick: true },
-      { text: 'Kubernetes', closeOnClick: true },
-      { text: 'Mainframe', closeOnClick: true }
-    ] },
+    {
+      text: 'Connection',
+      onClick: () => ({}),
+      menuItems: [
+        { text: 'Firewall', closeOnClick: true },
+        { text: 'Docker', closeOnClick: true },
+        { text: 'Kubernetes', closeOnClick: true },
+        { text: 'Mainframe', closeOnClick: true }
+      ]
+    },
     { text: 'Internal', onClick: () => ({}) },
     { text: 'Routing', onClick: () => ({}) },
     { text: 'Advanced', onClick: () => ({}) },

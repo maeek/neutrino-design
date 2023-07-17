@@ -1,4 +1,4 @@
-import {
+import React, {
   CSSProperties,
   KeyboardEvent as ReactKeyboardEvent,
   KeyboardEventHandler,
@@ -6,15 +6,17 @@ import {
   MouseEventHandler,
   ReactNode,
   useRef,
-  useState
+  useState,
+  HTMLAttributes
 } from 'react';
-import classNames from 'classnames';
-import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
+import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
+import classNames from 'classnames';
+import { useAccessibility } from '../../hooks';
 import ContextMenu, { ContextMenuItems } from '../context-menu/Menu';
 import './item.scss';
 
-export interface BreadcrumbItemProps {
+export interface BreadcrumbItemProps extends HTMLAttributes<HTMLLIElement> {
   title?: string;
   children: ReactNode;
   className?: string;
@@ -23,24 +25,14 @@ export interface BreadcrumbItemProps {
   onKeyUp?: KeyboardEventHandler;
   disabled?: boolean;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const Item = (props: BreadcrumbItemProps) => {
-  const {
-    className,
-    children,
-    title,
-    onClick,
-    onKeyUp,
-    moreMenuItems,
-    disabled,
-    ...rest
-  } = props;
-
+  const { className, children, title, onClick, onKeyUp, moreMenuItems, disabled, ...rest } = props;
+  const { onEnter } = useAccessibility();
   const moreMenuRef = useRef(null);
   const expandRef = useRef<HTMLSpanElement>(null);
-  const [ showMore, setShowMore ] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   const onClickHandler = (e: MouseEvent<HTMLLIElement>) => {
     if (onClick && !disabled) onClick(e);
@@ -55,7 +47,7 @@ export const Item = (props: BreadcrumbItemProps) => {
   };
 
   const onKeyShowMoreHandler = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-    if ([ 'Enter', ' ' ].includes(e.key)) onClickShowMoreHandler();
+    if (['Enter', ' '].includes(e.key)) onClickShowMoreHandler();
   };
 
   const closeContextMenuMenu = (_: MouseEvent, isInside: boolean) => {
@@ -67,24 +59,27 @@ export const Item = (props: BreadcrumbItemProps) => {
 
   const classes = classNames({
     'ne-breadcrumbs-item': true,
-    ...(className ? { [ className ]: true } : {})
+    ...(className ? { [className]: true } : {})
   });
 
   const menuItems = (
     <>
       <span
-        className="ne-breadcrumbs-item-show-more"
+        role='button'
+        className='ne-breadcrumbs-item-show-more'
         onClick={onClickShowMoreHandler}
         onKeyUp={onKeyShowMoreHandler}
         tabIndex={0}
         ref={expandRef}
       >
-        {
-          showMore ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />
-        }
+        {showMore ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
       </span>
       {showMore && (
-        <ContextMenu closeContextMenu={closeContextMenuMenu} innerRef={moreMenuRef} items={moreMenuItems} />
+        <ContextMenu
+          closeContextMenu={closeContextMenuMenu}
+          innerRef={moreMenuRef}
+          items={moreMenuItems}
+        />
       )}
     </>
   );
@@ -95,18 +90,20 @@ export const Item = (props: BreadcrumbItemProps) => {
       title={title}
       data-disabled={!!disabled}
       onClick={onClickHandler}
+      tabIndex={0}
+      onKeyUp={onEnter(onClickHandler)}
+      role='menuitem'
       {...rest}
     >
       <div
-        className="ne-breadcrumbs-item-content"
+        role='button'
+        className='ne-breadcrumbs-item-content'
         tabIndex={disabled ? -1 : 0}
         onKeyUp={onKeyUpHandler}
       >
         {children}
       </div>
-      {
-        moreMenuItems && moreMenuItems.length > 0 && menuItems
-      }
+      {moreMenuItems && moreMenuItems.length > 0 && menuItems}
     </li>
   );
 };

@@ -1,13 +1,12 @@
-import { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import classnames from 'classnames';
-import LayoutTopContent, { LayoutTopContentProps } from '../top-content';
 import LayoutContentFooter from '../content-footer';
+import LayoutTopContent, { LayoutTopContentProps } from '../top-content';
 import './top-content-footer.scss';
 
 export interface LayoutTopContentFooterProps extends LayoutTopContentProps {
   footerNode: ReactNode;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const LayoutTopContentFooter = (props: LayoutTopContentFooterProps) => {
@@ -15,11 +14,12 @@ export const LayoutTopContentFooter = (props: LayoutTopContentFooterProps) => {
 
   const classes = classnames('ne-layout-top-content-footer', className);
   return (
-    <div className={classes} style={style}>
+    <div
+      className={classes}
+      style={style}
+    >
       <LayoutTopContent topNode={topNode}>
-        <LayoutContentFooter footerNode={footerNode}>
-          {content}
-        </LayoutContentFooter>
+        <LayoutContentFooter footerNode={footerNode}>{content}</LayoutContentFooter>
       </LayoutTopContent>
     </div>
   );

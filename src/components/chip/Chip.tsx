@@ -1,6 +1,7 @@
-import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
-import classNames from 'classnames';
+import React, { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 import { CloseRounded } from '@material-ui/icons';
+import classNames from 'classnames';
+import { useAccessibility } from '../../hooks';
 import './chip.scss';
 
 export interface ChipProps {
@@ -31,6 +32,7 @@ export const Chip = (props: ChipProps) => {
     className,
     disabled = false
   } = props;
+  const { onEnter } = useAccessibility();
 
   const classes = classNames(
     'ne-chip',
@@ -46,7 +48,7 @@ export const Chip = (props: ChipProps) => {
     className
   );
 
-  const onDeleteHandler: MouseEventHandler = (e) => {
+  const onDeleteHandler: MouseEventHandler = e => {
     e.stopPropagation();
 
     if (onDelete && !disabled && deletable) {
@@ -55,12 +57,19 @@ export const Chip = (props: ChipProps) => {
   };
 
   return (
-    <div className={classes} style={style} tabIndex={0} onClick={onClick}>
+    <div
+      className={classes}
+      style={style}
+      onClick={onClick}
+      tabIndex={disabled ? -1 : 0}
+      role='button'
+      onKeyDown={onEnter(onClick)}
+    >
       {icon && <span className='ne-chip-icon'>{icon}</span>}
       <span className='ne-chip-content'>{children}</span>
       {deletable && (
         <button
-          className="ne-chip-delete"
+          className='ne-chip-delete'
           onClick={onDeleteHandler}
           disabled={disabled}
         >

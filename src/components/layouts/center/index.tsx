@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import classnames from 'classnames';
 import './center.scss';
 
@@ -6,7 +6,6 @@ export interface LayoutCenterProps {
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const LayoutCenter = (props: LayoutCenterProps) => {
@@ -14,10 +13,11 @@ export const LayoutCenter = (props: LayoutCenterProps) => {
 
   const classes = classnames('ne-layout-center', className);
   return (
-    <div className={classes} style={style}>
-      <div className="ne-layout-center-inner">
-        {children}
-      </div>
+    <div
+      className={classes}
+      style={style}
+    >
+      <div className='ne-layout-center-inner'>{children}</div>
     </div>
   );
 };

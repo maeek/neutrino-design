@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const useConnection = (): boolean | null => {
-  const [ connectionState, setConnectionState ] = useState<boolean | null>(window.navigator.onLine);
+  const [connectionState, setConnectionState] = useState<boolean | null>(window.navigator.onLine);
 
   const updateNetwork = () => {
     if (window.navigator.onLine) {

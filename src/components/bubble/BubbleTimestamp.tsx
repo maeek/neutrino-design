@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import classNames from 'classnames';
 import './styles/bubble-timestamp.scss';
 
 dayjs.extend(relativeTime);
@@ -14,14 +14,9 @@ export interface BubbleTimestampProps {
 }
 
 export const BubbleTimestamp = (props: BubbleTimestampProps) => {
-  const {
-    className,
-    timestamp = new Date().getTime(),
-    inBulk,
-    isLastInBulk
-  } = props;
+  const { className, timestamp = new Date().getTime(), inBulk, isLastInBulk } = props;
 
-  const [ realTimestamp, setRealTimestamp ] = useState<string | null>(null);
+  const [realTimestamp, setRealTimestamp] = useState<string | null>(null);
 
   useEffect(() => {
     if (!timestamp) return;
@@ -35,20 +30,21 @@ export const BubbleTimestamp = (props: BubbleTimestampProps) => {
     return () => {
       clearInterval(interval);
     };
-  }, [ timestamp ]);
+  }, [timestamp]);
 
   const timestampNodeClasses = classNames(
     'ne-bubble-timestamp',
     inBulk && !isLastInBulk && 'ne-bubble-timestamp--not-last-in-bulked',
     inBulk && isLastInBulk && 'ne-bubble-timestamp--last-in-bulked',
-    !inBulk
-      ? 'ne-bubble-timestamp--single'
-      : 'ne-bubble-timestamp--bulked',
+    !inBulk ? 'ne-bubble-timestamp--single' : 'ne-bubble-timestamp--bulked',
     className
   );
 
   return (
-    <div className={timestampNodeClasses} title={dayjs(timestamp).format('D MMMM YYYY, HH:mm')}>
+    <div
+      className={timestampNodeClasses}
+      title={dayjs(timestamp).format('D MMMM YYYY, HH:mm')}
+    >
       {realTimestamp}
     </div>
   );

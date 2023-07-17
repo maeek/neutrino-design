@@ -1,16 +1,17 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Input from './Input';
 
 describe('input/text', () => {
   it('should render input with label', () => {
-    render(<Input renderLabel="Input" />);
+    render(<Input renderLabel='Input' />);
 
     expect(screen.getByLabelText('Input')).toBeInTheDocument();
   });
 
   it('should render input with placeholder', () => {
-    render(<Input placeholder="Input" />);
+    render(<Input placeholder='Input' />);
 
     expect(screen.getByPlaceholderText('Input')).toBeInTheDocument();
   });
@@ -18,7 +19,12 @@ describe('input/text', () => {
   it('should invoke onChange input', () => {
     const onChangeFn = jest.fn();
 
-    render(<Input onChange={onChangeFn} data-testid="inputTest" />);
+    render(
+      <Input
+        onChange={onChangeFn}
+        data-testid='inputTest'
+      />
+    );
 
     userEvent.type(screen.getByTestId('inputTest'), 'test');
 
@@ -28,7 +34,14 @@ describe('input/text', () => {
   it('should be disabled', () => {
     const onChangeFn = jest.fn();
 
-    render(<Input onChange={onChangeFn} disabled value="test" data-testid="inputTest" />);
+    render(
+      <Input
+        onChange={onChangeFn}
+        disabled
+        value='test'
+        data-testid='inputTest'
+      />
+    );
 
     userEvent.type(screen.getByTestId('inputTest'), 'something different');
 
@@ -38,7 +51,14 @@ describe('input/text', () => {
   it('should be readOnly', () => {
     const onChangeFn = jest.fn();
 
-    render(<Input onChange={onChangeFn} readOnly value="test" data-testid="inputTest" />);
+    render(
+      <Input
+        onChange={onChangeFn}
+        readOnly
+        value='test'
+        data-testid='inputTest'
+      />
+    );
 
     userEvent.type(screen.getByTestId('inputTest'), 'something different');
 
@@ -48,22 +68,33 @@ describe('input/text', () => {
   it('should validate input', () => {
     const validate = jest.fn((val: string) => val === 'test');
 
-    const { container } = render(<Input required validate={validate} data-testid="inputTest" />);
+    const { container } = render(
+      <Input
+        required
+        validate={validate}
+        data-testid='inputTest'
+      />
+    );
 
     userEvent.type(screen.getByTestId('inputTest'), 'te');
 
     for (let i = 0; i < 3; i++) {
-      expect(validate.mock.results[ i ].value).toBeFalsy();
+      expect(validate.mock.results[i].value).toBeFalsy();
     }
 
     userEvent.type(screen.getByTestId('inputTest'), 'st');
 
-    expect(validate.mock.results[ 4 ].value).toBeTruthy();
+    expect(validate.mock.results[4].value).toBeTruthy();
     expect(container.getElementsByClassName('ne-input-validation--valid')).toHaveLength(1);
   });
 
   it('should focus input on floating label click', () => {
-    render(<Input renderLabel="Input" data-testid="inputTest" />);
+    render(
+      <Input
+        renderLabel='Input'
+        data-testid='inputTest'
+      />
+    );
 
     userEvent.click(screen.getByText('Input'));
 
@@ -73,7 +104,12 @@ describe('input/text', () => {
   it('should handle onClick', () => {
     const onClick = jest.fn();
 
-    render(<Input onClick={onClick} data-testid="inputTest" />);
+    render(
+      <Input
+        onClick={onClick}
+        data-testid='inputTest'
+      />
+    );
 
     userEvent.click(screen.getByTestId('inputTest'));
 
@@ -81,13 +117,26 @@ describe('input/text', () => {
   });
 
   it('should show clear button when type search and value not empty', () => {
-    render(<Input type="search" clearButtonText="Clear" value="test" data-testid="inputTest" />);
+    render(
+      <Input
+        type='search'
+        clearButtonText='Clear'
+        value='test'
+        data-testid='inputTest'
+      />
+    );
 
     expect(screen.getByText('Clear')).toBeInTheDocument();
   });
 
   it('should hide clear button when type search and value empty', () => {
-    const { container } = render(<Input type="search" clearButtonText="Clear" data-testid="inputTest" />);
+    const { container } = render(
+      <Input
+        type='search'
+        clearButtonText='Clear'
+        data-testid='inputTest'
+      />
+    );
 
     expect(container.getElementsByClassName('ne-input-search-clear')).toHaveLength(0);
   });
@@ -96,11 +145,11 @@ describe('input/text', () => {
     const onSearchClear = jest.fn();
     const { container } = render(
       <Input
-        type="search"
-        clearButtonText="Clear"
+        type='search'
+        clearButtonText='Clear'
         onSearchClear={onSearchClear}
-        value="test"
-        data-testid="inputTest"
+        value='test'
+        data-testid='inputTest'
       />
     );
 

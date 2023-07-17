@@ -1,7 +1,6 @@
+import React, { useState } from 'react';
 import { ShareRounded, VisibilityRounded } from '@material-ui/icons';
-import { Story, Meta } from '@storybook/react/types-6-0';
-import { useState } from 'react';
-
+import { Story, Meta } from '@storybook/react';
 import ContextMenuComponent, { ContextMenuProps } from './Menu';
 
 export default {
@@ -9,9 +8,7 @@ export default {
   component: ContextMenuComponent
 } as Meta;
 
-const Template: Story<ContextMenuProps> = (args) => (
-  <ContextMenuComponent {...args} />
-);
+const Template: Story<ContextMenuProps> = args => <ContextMenuComponent {...args} />;
 
 export const Menu = Template.bind({});
 Menu.args = {
@@ -23,13 +20,13 @@ Menu.args = {
   ]
 };
 
-const TemplateShowHide: Story<ContextMenuProps> = (args) => {
-  const [ isShown, show ] = useState(false);
+const TemplateShowHide: Story<ContextMenuProps> = args => {
+  const [isShown, show] = useState(false);
 
   return (
     <>
-      <button onClick={() =>show((prev) => !prev)}>{isShown ? 'Hide' : 'Show'}</button>
-      {isShown ? <ContextMenuComponent {...args} /> : null }
+      <button onClick={() => show(prev => !prev)}>{isShown ? 'Hide' : 'Show'}</button>
+      {isShown ? <ContextMenuComponent {...args} /> : null}
     </>
   );
 };

@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import { Input as InputComponent, InputProps } from './Input';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   component: InputComponent
 } as Meta;
 
-const Template: Story<InputProps> = (args) => <InputComponent {...args} />;
+const Template: Story<InputProps> = args => <InputComponent {...args} />;
 
 export const Input = Template.bind({});
 Input.args = {

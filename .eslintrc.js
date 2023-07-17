@@ -1,70 +1,121 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: [
-    'eslint:recommended',
-    'prettier',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:testing-library/react',
-    'plugin:storybook/recommended'
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      excludedFiles: ['*.test.ts', '*.test.tsx'],
+      extends: [
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking'
+      ],
+      parserOptions: {
+        project: './tsconfig.json'
+      },
+      rules: {
+        '@typescript-eslint/no-non-null-assertion': 'off'
+      }
+    },
+    {
+      files: ['**/?(*.)+(test).[jt]s?(x)'],
+      plugins: ['jest', 'testing-library'],
+      extends: ['plugin:jest/recommended', 'plugin:testing-library/react'],
+      rules: {
+        'testing-library/render-result-naming-convention': 'off'
+      }
+    },
+    {
+      files: ['*.js'],
+      plugins: ['node'],
+      extends: ['plugin:node/recommended']
+    }
   ],
-  plugins: [ 'react', 'prettier', '@typescript-eslint' ],
   env: {
+    browser: true,
     node: true
   },
-  parserOptions: {
-    ecmaVersion: 2020,
-    ecmaFeatures: {
-      legacyDecorators: true,
-      jsx: true
-    }
+  globals: {
+    __DEV__: 'readonly',
+    __TEST__: 'readonly',
+    __MOCK__: 'readonly'
   },
   settings: {
     'import/resolver': {
-      node: {
-        extensions: [ '.js', '.jsx', '.ts', '.tsx' ]
-      },
-      typescript: {}
+      node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+      typescript: {
+        alwaysTryTypes: true,
+        project: './tsconfig.json'
+      }
     },
     react: {
       version: 'detect'
     }
   },
   rules: {
-    semi: [ 'error', 'always' ],
-    quotes: [ 'error', 'single' ],
-    'no-console': [ 'error', {
-      allow: [ 'warn', 'error' ]
-    } ],
-    'comma-dangle': [ 'error', 'never' ],
-    indent: [ 'error', 2 ],
-    'guard-for-in': 0,
-    'no-param-reassign': 0,
-    'react/require-default-props': 0,
-    'jsx-quotes': 0,
-    'react/prop-types': 0,
-    'react/jsx-fragments': 0,
-    'react/no-unused-prop-types': 0,
-    'react/react-in-jsx-scope': 0,
-    'import/export': 0,
-    'prettier/prettier': 0,
+    'max-len': [
+      'error',
+      {
+        code: 120,
+        ignoreUrls: true,
+        ignoreTrailingComments: true,
+        ignoreStrings: true
+      }
+    ],
     'linebreak-style': 0,
-    'no-multiple-empty-lines': [ 'error', {
-      max: 1,
-      maxEOF: 0
-    } ],
-    'eol-last': 2,
-    'object-curly-spacing': [ 'error', 'always' ],
-    'array-bracket-spacing': [ 'error', 'always' ],
-    'computed-property-spacing': [ 'error', 'always' ],
-    'quote-props': [ 'error', 'as-needed' ],
-    'max-len': [ 'error', {
-      code: 120,
-      ignoreUrls: true
-    } ],
-    '@typescript-eslint/no-unused-vars': [ 2, {
-      args: 'none'
-    } ]
-  }
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'arrow-parens': 'off',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
+    '@typescript-eslint/type-annotation-spacing': ['error'],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/comma-dangle': 'off',
+    'react/prop-types': 0,
+    'react/function-component-definition': 'off',
+    'react/display-name': 'off',
+    'jsx-quotes': ['warn', 'prefer-single'],
+    'prettier/prettier': 2,
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/named': 'off',
+    'import/no-unresolved': 'error',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never'
+      }
+    ],
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'object', 'type'],
+        pathGroups: [
+          { pattern: 'react', group: 'builtin', position: 'before' },
+          { pattern: '**/*.scss', group: 'type', position: 'after' },
+          { pattern: './*.scss', group: 'type', position: 'after' },
+          { pattern: '**/*.css', group: 'type', position: 'after' }
+        ],
+        pathGroupsExcludedImportTypes: ['react'],
+        'newlines-between': 'never',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true
+        },
+        warnOnUnassignedImports: true
+      }
+    ],
+    'node/no-unpublished-require': 'off'
+  },
+  extends: [
+    'eslint:recommended',
+    'prettier',
+    'plugin:import/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/eslint-recommended'
+  ],
+  plugins: ['prettier', 'import', 'jsx-a11y']
 };

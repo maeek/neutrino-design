@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import LayoutCenterComponent, { LayoutCenterProps } from './';
 
 export default {
@@ -16,7 +16,7 @@ const contStyle = {
   padding: '1rem'
 };
 
-const Template: Story<LayoutCenterProps> = (args) => (
+const Template: Story<LayoutCenterProps> = args => (
   <div style={{ height: '600px', backgroundColor: '#1f1f1f' }}>
     <LayoutCenterComponent {...args}>
       <div style={contStyle}>I'm centered</div>

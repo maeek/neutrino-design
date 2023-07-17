@@ -27,7 +27,7 @@ export enum Category {
   People = 'people',
   Regional = 'regional',
   Symbols = 'symbols',
-  Travel = 'travel',
+  Travel = 'travel'
 }
 
 export interface CodePoints {
@@ -43,7 +43,7 @@ export enum Diversity {
   The1F3Fc = '1f3fc',
   The1F3Fd = '1f3fd',
   The1F3Fe = '1f3fe',
-  The1F3Ff = '1f3ff',
+  The1F3Ff = '1f3ff'
 }
 
-export type EmojisType = { [ key: string ]: EmojiType };
+export type EmojisType = { [key: string]: EmojiType };

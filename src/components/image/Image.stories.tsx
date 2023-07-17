@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import { Image as ImageContainerComponent, ImageProps } from './Image';
 
 export default {
@@ -8,10 +8,16 @@ export default {
   component: ImageContainerComponent
 } as Meta;
 
-const Template: Story<ImageProps> = (args) => <div style={{
-  width: '700px',
-  height: '500px'
-}}><ImageContainerComponent {...args} /></div>;
+const Template: Story<ImageProps> = args => (
+  <div
+    style={{
+      width: '700px',
+      height: '500px'
+    }}
+  >
+    <ImageContainerComponent {...args} />
+  </div>
+);
 
 export const ImageContainer = Template.bind({});
 ImageContainer.args = {
@@ -19,7 +25,7 @@ ImageContainer.args = {
   src: 'https://static.suchanecki.me/tape2.jpg',
   fallback: 'https://static.suchanecki.me/tape2.jpg',
   onLoad: () => console.log('onLoad'),
-  onError: (err) => console.log('onError', err)
+  onError: err => console.log('onError', err)
 };
 
 export const ImageContainerWithLoader = Template.bind({});

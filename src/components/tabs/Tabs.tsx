@@ -1,4 +1,4 @@
-import {
+import React, {
   Children,
   cloneElement,
   createRef,
@@ -12,11 +12,11 @@ import {
   DragEvent,
   MutableRefObject
 } from 'react';
-import classNames from 'classnames';
-import { Tab } from './Tab';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
-
+import classNames from 'classnames';
+import { useAccessibility } from '../../hooks';
 import './styles/tabs.scss';
+import { Tab } from './Tab';
 
 export interface TabsProps {
   children: ReactElement;
@@ -31,27 +31,15 @@ export interface TabsProps {
 }
 
 export const Tabs = (props: TabsProps) => {
-  const {
-    children,
-    onTabClose,
-    onTabChange,
-    disabled,
-    className,
-    style,
-    showControlls,
-    type
-  } = props;
-  const [ selectedTab, setSelectedTab ] = useState<number | null>(null);
-  const [ order, setOrder ] = useState<number[]>([]);
+  const { children, onTabClose, onTabChange, disabled, className, style, showControlls, type } = props;
+  const [selectedTab, setSelectedTab] = useState<number | null>(null);
+  const { onEnter } = useAccessibility();
+  const [order, setOrder] = useState<number[]>([]);
   const scrollingPanel = useRef<HTMLUListElement>(null);
   const tabsRef = useRef<{ index: number; element: MutableRefObject<HTMLLIElement> }[]>([]);
 
   useEffect(() => {
-    const tabs = Children.map(
-      children,
-      child => child.type === Tab ? child : null
-    )
-      .filter(Boolean);
+    const tabs = Children.map(children, child => (child.type === Tab ? child : null)).filter(Boolean);
     const tabsLength = tabs.length;
 
     if (tabsLength > 0) {
@@ -60,12 +48,11 @@ export const Tabs = (props: TabsProps) => {
     } else {
       setSelectedTab(null);
     }
-  }, [ children ]);
+  }, [children]);
 
   const tabChildren = useMemo(
-    () => Children.map(children, child => child)
-      .filter(child => child.type === Tab),
-    [ children ]
+    () => Children.map(children, child => child).filter(child => child.type === Tab),
+    [children]
   );
 
   const onTabSelect = (index: number) => {
@@ -81,7 +68,7 @@ export const Tabs = (props: TabsProps) => {
     const newIndex = selectedTab - 1;
     const calculatedIndex = newIndex < 0 ? 0 : newIndex;
 
-    if (tabChildren[ calculatedIndex ].props.disabled) return;
+    if (tabChildren[calculatedIndex].props.disabled) return;
 
     setSelectedTab(newIndex < 0 ? 0 : newIndex);
   };
@@ -92,7 +79,7 @@ export const Tabs = (props: TabsProps) => {
     const newIndex = selectedTab + 1;
     const calculatedIndex = newIndex === tabChildren.length ? tabChildren.length - 1 : newIndex;
 
-    if (tabChildren[ calculatedIndex ].props.disabled) return;
+    if (tabChildren[calculatedIndex].props.disabled) return;
 
     setSelectedTab(calculatedIndex);
   };
@@ -126,62 +113,82 @@ export const Tabs = (props: TabsProps) => {
 
     if (dragIndex === hoverIndex) return;
 
-    const newOrder = [ ...order ];
-    newOrder.splice(hoverIndex, 0, newOrder.splice(dragIndex, 1)[ 0 ]);
+    const newOrder = [...order];
+    newOrder.splice(hoverIndex, 0, newOrder.splice(dragIndex, 1)[0]);
 
     setOrder(newOrder);
   };
 
   return (
-    <div className={classNames('ne-tabs', className)} style={style}>
-      <div className="ne-tabs-panel">
-        <ul className="ne-tabs-panel-left" onScroll={onScroll} onWheel={onWheel} ref={scrollingPanel}>
-          {
-            order.map((index, i) => {
-              const foundRef = tabsRef.current.find(ref => ref.index === index);
-              const currRef = foundRef?.element || createRef();
+    <div
+      className={classNames('ne-tabs', className)}
+      style={style}
+    >
+      <div className='ne-tabs-panel'>
+        <ul
+          className='ne-tabs-panel-left'
+          onScroll={onScroll}
+          onWheel={onWheel}
+          ref={scrollingPanel}
+        >
+          {order.map((index, i) => {
+            const foundRef = tabsRef.current.find(ref => ref.index === index);
+            const currRef = foundRef?.element || createRef();
 
-              if (!foundRef) {
-                tabsRef.current.push({
-                  index,
-                  element: currRef as MutableRefObject<HTMLLIElement>
-                });
-              }
-
-              return cloneElement(tabChildren[ index ], {
-                index: i,
-                ref: currRef,
-                type,
-                active: selectedTab === index,
-                onClick: () => onTabSelect(index),
-                onClose: () => onTabClose?.(index),
-                onDrag,
-                onDrop,
-                ...tabChildren[ index ].props,
-                disabled: tabChildren[ index ].props.disabled || disabled
+            if (!foundRef) {
+              tabsRef.current.push({
+                index,
+                element: currRef as MutableRefObject<HTMLLIElement>
               });
-            })
-          }
+            }
+
+            return cloneElement(tabChildren[index], {
+              index: i,
+              ref: currRef,
+              type,
+              active: selectedTab === index,
+              onClick: () => onTabSelect(index),
+              onClose: () => onTabClose?.(index),
+              onDrag,
+              onDrop,
+              ...tabChildren[index].props,
+              disabled: tabChildren[index].props.disabled || disabled
+            });
+          })}
         </ul>
-        {
-          showControlls && (
-            <div className="ne-tabs-panel-right">
-              <span className="ne-tabs-panel-btn" onClick={onLeftArrowClick}><KeyboardArrowLeft/></span>
-              <span className="ne-tabs-panel-btn" onClick={onRightArrowClick}><KeyboardArrowRight/></span>
-            </div>
-          )
-        }
+        {showControlls && (
+          <div className='ne-tabs-panel-right'>
+            <span
+              role='button'
+              className='ne-tabs-panel-btn'
+              onClick={onLeftArrowClick}
+              tabIndex={0}
+              onKeyUp={onEnter(onLeftArrowClick)}
+            >
+              <KeyboardArrowLeft />
+            </span>
+            <span
+              role='button'
+              className='ne-tabs-panel-btn'
+              onClick={onRightArrowClick}
+              tabIndex={0}
+              onKeyUp={onEnter(onRightArrowClick)}
+            >
+              <KeyboardArrowRight />
+            </span>
+          </div>
+        )}
       </div>
-      <div className="ne-tabs-content">
-        {
-          tabChildren.map((child, index) => {
+      <div className='ne-tabs-content'>
+        {tabChildren
+          .map((child, index) => {
             if (selectedTab === index) {
               return child.props.children;
             }
 
             return null;
-          }).filter(Boolean)
-        }
+          })
+          .filter(Boolean)}
       </div>
     </div>
   );

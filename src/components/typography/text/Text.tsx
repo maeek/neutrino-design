@@ -1,14 +1,10 @@
+import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
-import { CSSProperties, ReactNode } from 'react';
 import './text.scss';
 
-export type TextType = 'primary' |
-'secondary' |
-'warning' |
-'danger' |
-'success';
+export type TextType = 'primary' | 'secondary' | 'warning' | 'danger' | 'success';
 
-export interface TextProps {
+export interface TextProps extends HTMLAttributes<HTMLSpanElement | HTMLAnchorElement> {
   type?: TextType;
   children: ReactNode;
   className?: string;
@@ -21,7 +17,6 @@ export interface TextProps {
   link?: string;
   pre?: boolean;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const Text = (props: TextProps) => {
@@ -41,7 +36,8 @@ export const Text = (props: TextProps) => {
   } = props;
 
   const classes = classNames(
-    'ne-typo', 'ne-typo-text',
+    'ne-typo',
+    'ne-typo-text',
     `ne-typo-text--${type}`,
     disabled && 'ne-typo-text--disabled',
     highlight && 'ne-typo-text--highlight',
@@ -55,14 +51,21 @@ export const Text = (props: TextProps) => {
   );
 
   const linkType = (
-    <a href={link} className={classes} {...rest}>
+    <a
+      href={link}
+      className={classes}
+      {...rest}
+    >
       {children}
     </a>
   );
 
   return (
-    link && linkType || (
-      <span className={classes} {...rest}>
+    (link && linkType) || (
+      <span
+        className={classes}
+        {...rest}
+      >
         {children}
       </span>
     )

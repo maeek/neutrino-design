@@ -1,6 +1,6 @@
-import { ReactNode, MouseEventHandler, CSSProperties, forwardRef, DragEventHandler } from 'react';
-import classNames from 'classnames';
+import React, { ReactNode, MouseEventHandler, CSSProperties, forwardRef, DragEventHandler } from 'react';
 import { CloseRounded } from '@material-ui/icons';
+import classNames from 'classnames';
 import { useAccessibility } from '../../hooks/useAccessibility';
 import './styles/tab.scss';
 
@@ -35,9 +35,9 @@ export const Tab = forwardRef<HTMLLIElement | null, TabProps>((props, ref) => {
     className,
     type
   } = props;
-  const { onEnterOrSpace } = useAccessibility();
+  const { onEnterOrSpace, onEnter } = useAccessibility();
 
-  const onCloseClick: MouseEventHandler = (e) => {
+  const onCloseClick: MouseEventHandler = e => {
     if (disabled) return;
 
     e.stopPropagation();
@@ -61,28 +61,26 @@ export const Tab = forwardRef<HTMLLIElement | null, TabProps>((props, ref) => {
       onKeyUp={disabled ? undefined : onEnterOrSpace(onClick)}
       tabIndex={disabled ? -1 : 0}
       onDragStart={onDrag}
-      onDragOver={(e) => e.preventDefault()}
+      onDragOver={e => e.preventDefault()}
       onDrop={onDrop}
-      role="tab"
+      role='tab'
       draggable={draggable}
-      title={`${
-        typeof title === 'string'
-          ? title
-          : undefined
-      }${disabled && ' (Disabled)'}`
-      }
+      title={`${typeof title === 'string' ? title : undefined}${disabled && ' (Disabled)'}`}
       data-index={index}
     >
-      <div className="ne-tab-title">
-        {title}
-      </div>
-      {
-        onClose && !disabled && (
-          <div role="button" className="ne-tab-close" title="Close tab" onClick={onCloseClick}>
-            <CloseRounded />
-          </div>
-        )
-      }
+      <div className='ne-tab-title'>{title}</div>
+      {onClose && !disabled && (
+        <div
+          role='button'
+          className='ne-tab-close'
+          title='Close tab'
+          onClick={onCloseClick}
+          tabIndex={0}
+          onKeyUp={onEnter(onCloseClick)}
+        >
+          <CloseRounded />
+        </div>
+      )}
     </li>
   );
 });

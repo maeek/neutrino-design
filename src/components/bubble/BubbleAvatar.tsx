@@ -1,4 +1,4 @@
-import { ReactNode, MouseEvent, KeyboardEvent } from 'react';
+import React, { ReactNode, MouseEvent, KeyboardEvent } from 'react';
 import classNames from 'classnames';
 import { Avatar } from '../avatar';
 import './styles/bubble-avatar.scss';
@@ -18,36 +18,31 @@ export interface BubbleAvatarProps {
 }
 
 export const BubbleAvatar = (props: BubbleAvatarProps) => {
-  const {
-    className,
-    sender,
-    type = 'sender',
-    avatar,
-    inBulk,
-    isLastInBulk
-  } = props;
+  const { className, sender, type = 'sender', avatar, inBulk, isLastInBulk } = props;
 
   return (
     <div className={classNames('ne-bubble-avatar', className)}>
-      {
-        (!inBulk || (inBulk && isLastInBulk)) && (
-          typeof avatar === 'string'
-            ? (
-              <Avatar src={avatar} type="round" name={sender} />
-            )
-            : avatar
-        )
-      }
-      {
-        (!inBulk || (inBulk && isLastInBulk)) && type === 'recipient' && (
-          <>
-            <div className="ne-bubble-avatar-tooltip" title={sender}>
-              {sender}
-            </div>
-            <div className="ne-bubble-avatar-tooltip-arrow" />
-          </>
-        )
-      }
+      {(!inBulk || (inBulk && isLastInBulk)) &&
+        (typeof avatar === 'string' ? (
+          <Avatar
+            src={avatar}
+            type='round'
+            name={sender}
+          />
+        ) : (
+          avatar
+        ))}
+      {(!inBulk || (inBulk && isLastInBulk)) && type === 'recipient' && (
+        <>
+          <div
+            className='ne-bubble-avatar-tooltip'
+            title={sender}
+          >
+            {sender}
+          </div>
+          <div className='ne-bubble-avatar-tooltip-arrow' />
+        </>
+      )}
     </div>
   );
 };

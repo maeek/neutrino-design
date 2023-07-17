@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import { Select as SelectComponent, SelectProps } from './Select';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   component: SelectComponent
 } as Meta;
 
-const Template: Story<SelectProps> = (args) => <SelectComponent {...args} />;
+const Template: Story<SelectProps> = args => <SelectComponent {...args} />;
 
 export const Select = Template.bind({});
 Select.args = {

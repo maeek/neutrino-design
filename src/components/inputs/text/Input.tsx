@@ -1,4 +1,4 @@
-import {
+import React, {
   MouseEventHandler,
   MutableRefObject,
   ReactNode,
@@ -10,23 +10,18 @@ import {
   forwardRef,
   CSSProperties
 } from 'react';
-import classNames from 'classnames';
-import useInput from '../../../hooks/inputs/useInput';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import classNames from 'classnames';
+import { useAccessibility } from '../../../hooks';
+import useInput from '../../../hooks/inputs/useInput';
 import './input.scss';
 
-export type InputSupportedTypes = 'text'
-| 'search'
-| 'password'
-| 'email'
-| 'tel'
-| 'time'
-| 'url';
+export type InputSupportedTypes = 'text' | 'search' | 'password' | 'email' | 'tel' | 'time' | 'url';
 
 export interface InputRef {
   value: string;
-  setValue: any;
+  setValue: (value: string) => void;
   isValid: boolean;
   element: MutableRefObject<HTMLInputElement> | null;
 }
@@ -59,7 +54,6 @@ export interface InputProps {
   validate?: InputValidate;
   children: ReactNode;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
@@ -83,80 +77,85 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     style,
     ...rest
   } = props;
-  const innerRef: MutableRefObject<any> = useRef(null);
+  const innerRef = useRef<HTMLInputElement>(null);
   const { value, setValue, bind, reset } = useInput(initValue || '');
+  const { onEnter } = useAccessibility();
 
   const onClickHandler = (e: MouseEvent<HTMLDivElement>) => {
-    if (innerRef.current && !disabled && !readOnly) innerRef.current.focus();
+    if (innerRef.current && !disabled && !readOnly) innerRef.current?.focus();
     if (onClick && !disabled) onClick(e);
   };
 
   const onSearchClearHandler = () => {
     if (!readOnly && !disabled) {
       reset();
-      if (innerRef.current) innerRef.current.focus();
+      if (innerRef.current) innerRef.current?.focus();
       if (onSearchClear) onSearchClear();
     }
   };
 
   const onKeySearchClearHandler = (e: ReactKeyboardEvent<HTMLSpanElement>) => {
-    if ([ 'Enter', ' ' ].includes(e.key)) {
+    if (['Enter', ' '].includes(e.key)) {
       onSearchClearHandler();
     }
   };
 
-  const validateInput = useCallback((text: string) => {
-    if (validate) {
-      return validate(text);
-    }
+  const validateInput = useCallback(
+    (text: string) => {
+      if (validate) {
+        return validate(text);
+      }
 
-    return text.trim().length > 0;
-  }, [ validate ]);
+      return text.trim().length > 0;
+    },
+    [validate]
+  );
 
   useEffect(() => {
     if (innerRef.current && ref) {
-      ((ref as any).current as InputRef) = {
+      (ref as MutableRefObject<InputRef>).current = {
         value,
         setValue,
         isValid: validateInput(value),
-        element: innerRef.current
+        element: innerRef as MutableRefObject<HTMLInputElement>
       };
     }
-  }, [ innerRef, value, setValue, ref, validateInput ]);
+  }, [innerRef, value, setValue, ref, validateInput]);
 
   const classes = classNames({
     'ne-input': true,
-    ...(className ? { [ className ]: true } : {})
+    ...(className ? { [className]: true } : {})
   });
 
   const isValid = required && validateInput(value);
   const isEmpty = value.trim().length === 0;
 
   const floatingLabel = (
-    <span className="ne-input-label-content">{
-      typeof renderLabel === 'function'
+    <span className='ne-input-label-content'>
+      {typeof renderLabel === 'function'
         ? renderLabel(value, { type, readOnly, required, disabled, reset, setValue })
-        : renderLabel
-    }</span>
+        : renderLabel}
+    </span>
   );
 
   const validIndicator = (
-    <div className="ne-input-validation">
-      {
-        isValid
-          ? <CheckRoundedIcon className="ne-input-validation--valid" />
-          : <CloseRoundedIcon className="ne-input-validation--invalid" />
-      }
+    <div className='ne-input-validation'>
+      {isValid ? (
+        <CheckRoundedIcon className='ne-input-validation--valid' />
+      ) : (
+        <CloseRoundedIcon className='ne-input-validation--invalid' />
+      )}
     </div>
   );
 
   const clearSearch = (
     <span
-      aria-label="Clear search"
+      aria-label='Clear search'
       tabIndex={0}
+      role='button'
       onClick={onSearchClearHandler}
       onKeyUp={onKeySearchClearHandler}
-      className="ne-input-search-clear"
+      className='ne-input-search-clear'
     >
       {clearButtonText}
     </span>
@@ -166,6 +165,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     <div
       className={classes}
       title={title}
+      role='button'
       data-required={!!required}
       data-disabled={!!disabled}
       data-readonly={!!readOnly}
@@ -173,8 +173,10 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
       data-empty={isEmpty}
       onClick={onClickHandler}
       style={style}
+      tabIndex={0}
+      onKeyUp={onEnter(onClickHandler)}
     >
-      <label className="ne-input-label">
+      <label className='ne-input-label'>
         {renderLabel && !placeholder && floatingLabel}
         <input
           ref={innerRef}
@@ -184,16 +186,17 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
           required={required}
           disabled={disabled}
           readOnly={readOnly}
-          className="ne-input-control"
-          {...{ ...bind, onChange: (e: any) => {
-            bind.onChange(e);
-            onChange?.(e.target.value);
-          } }}
+          className='ne-input-control'
+          {...{
+            ...bind,
+            onChange: e => {
+              bind.onChange(e);
+              onChange?.(e.target.value);
+            }
+          }}
           {...rest}
         />
-        {
-          required && validIndicator
-        }
+        {required && validIndicator}
         {type === 'search' && !isEmpty && clearSearch}
       </label>
       {children}

@@ -1,9 +1,9 @@
-import { CSSProperties, MouseEventHandler, ReactNode, useRef } from 'react';
+import React, { CSSProperties, HTMLAttributes, MouseEventHandler, ReactNode, useRef } from 'react';
 import classnames from 'classnames';
 import { useDelayUnmount } from '../../hooks/useDelayUnmount';
 import './drawer.scss';
 
-export interface DrawerProps {
+export interface DrawerProps extends HTMLAttributes<HTMLElement> {
   /**
    * State of the drawer: showed/hidden
    */
@@ -34,7 +34,6 @@ export interface DrawerProps {
    */
   position?: 'left' | 'right' | 'top' | 'bottom';
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const Drawer = (props: DrawerProps) => {
@@ -51,22 +50,11 @@ export const Drawer = (props: DrawerProps) => {
   } = props;
   const ref = useRef(null);
   const shouldRender = useDelayUnmount(!!isOpened, animationSpeed);
-  const classes = classnames(
-    'ne-drawer',
-    isOpened && 'ne-drawer--opened',
-    className
-  );
+  const classes = classnames('ne-drawer', isOpened && 'ne-drawer--opened', className);
 
-  const drawerClasses = classnames(
-    'ne-drawer-side',
-    `ne-drawer-side-pos-${position}`,
-    isOpened && 'animate'
-  );
+  const drawerClasses = classnames('ne-drawer-side', `ne-drawer-side-pos-${position}`, isOpened && 'animate');
 
-  const maskClasses = classnames(
-    'ne-drawer-mask',
-    isOpened && 'animate'
-  );
+  const maskClasses = classnames('ne-drawer-mask', isOpened && 'animate');
 
   const joinedStyles = {
     ...style,
@@ -75,26 +63,23 @@ export const Drawer = (props: DrawerProps) => {
 
   return (
     <div className={classes}>
+      {shouldRender && showMask && (
+        <div
+          className={maskClasses}
+          onClick={onClose}
+          role='presentation'
+          style={{ '--animation-speed': `${animationSpeed}ms` } as CSSProperties}
+        />
+      )}
       {
-        shouldRender && showMask && (
-          <div
-            className={maskClasses}
-            onClick={onClose}
-            style={{ '--animation-speed': `${animationSpeed}ms` } as CSSProperties}
-          />
-        )
-      }
-      {
-        (
-          <aside
-            ref={ref}
-            className={drawerClasses}
-            style={joinedStyles}
-            {...rest}
-          >
-            {children}
-          </aside>
-        )
+        <aside
+          ref={ref}
+          className={drawerClasses}
+          style={joinedStyles}
+          {...rest}
+        >
+          {children}
+        </aside>
       }
     </div>
   );

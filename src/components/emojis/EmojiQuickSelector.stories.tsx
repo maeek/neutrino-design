@@ -1,5 +1,4 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import { Story, Meta } from '@storybook/react';
 import { EmojiQuickSelector as EmojiQuickSelectorComponent, EmojiQuickSelectorProps } from './EmojiQuickSelector';
 
 export default {
@@ -7,29 +6,15 @@ export default {
   component: EmojiQuickSelectorComponent
 } as Meta;
 
-const Template: Story<EmojiQuickSelectorProps> = (args) => <EmojiQuickSelectorComponent {...args} />;
+const Template: Story<EmojiQuickSelectorProps> = args => <EmojiQuickSelectorComponent {...args} />;
 
 export const QuickSelector = Template.bind({});
 QuickSelector.args = {
-  quickAccessEmojis: [
-    '😀',
-    '🤯',
-    '🥸',
-    '💣',
-    '🥺',
-    '❤'
-  ]
+  quickAccessEmojis: ['😀', '🤯', '🥸', '💣', '🥺', '❤']
 };
 
 export const QuickSelectorAdvanced = Template.bind({});
 QuickSelectorAdvanced.args = {
-  quickAccessEmojis: [
-    '😀',
-    '🤯',
-    '🥸',
-    '💣',
-    '🥺',
-    '❤'
-  ],
+  quickAccessEmojis: ['😀', '🤯', '🥸', '💣', '🥺', '❤'],
   renderMoreSelector: true
 };

@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import LayoutTopSideContentComponent, { LayoutTopSideContentProps } from '.';
 
 export default {
@@ -16,7 +16,7 @@ const contStyle = {
   padding: '1rem'
 };
 
-const Template: Story<LayoutTopSideContentProps> = (args) => (
+const Template: Story<LayoutTopSideContentProps> = args => (
   <div style={{ height: '600px' }}>
     <LayoutTopSideContentComponent {...args}>
       <div style={contStyle}>Neutrino-design</div>
@@ -27,24 +27,28 @@ const Template: Story<LayoutTopSideContentProps> = (args) => (
 export const TopSideContent = Template.bind({});
 TopSideContent.args = {
   topNode: (
-    <div style={{
-      width: '100%',
-      height: '60px',
-      backgroundColor: '#0f0f0f',
-      color: '#fff',
-      padding: '1rem'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '60px',
+        backgroundColor: '#0f0f0f',
+        color: '#fff',
+        padding: '1rem'
+      }}
+    >
       Neutrino-design top bar
     </div>
   ),
   sideNode: (
-    <div style={{
-      width: '300px',
-      height: '100%',
-      backgroundColor: '#1f1f1f',
-      color: '#fff',
-      padding: '1rem'
-    }}>
+    <div
+      style={{
+        width: '300px',
+        height: '100%',
+        backgroundColor: '#1f1f1f',
+        color: '#fff',
+        padding: '1rem'
+      }}
+    >
       Neutrino-design sidebar
     </div>
   )

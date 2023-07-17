@@ -1,13 +1,11 @@
+import React, { CSSProperties } from 'react';
 import classNames from 'classnames';
-import React from 'react';
-import { CSSProperties } from 'react';
 import './loader.scss';
 
 export interface LoaderProps {
   isVisible?: boolean;
   className?: string | { [key: string]: boolean };
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 export const Loader = (props: LoaderProps) => {
@@ -16,14 +14,17 @@ export const Loader = (props: LoaderProps) => {
 
   if (isVisible)
     return (
-      <div className={classes} {...rest}>
+      <div
+        className={classes}
+        {...rest}
+      >
         <div />
         <div />
         <div />
       </div>
     );
 
-  return <div className="ne-loader--hidden" />;
+  return <div className='ne-loader--hidden' />;
 };
 
 Loader.defaultProps = {

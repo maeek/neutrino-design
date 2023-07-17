@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
+import React from 'react';
 import {
-  PeopleRounded, ChatRounded //, SendRounded
+  PeopleRounded,
+  ChatRounded //, SendRounded
 } from '@material-ui/icons';
-import { Story, Meta } from '@storybook/react/types-6-0';
+import { Story, Meta } from '@storybook/react';
 import { NavItem, NavItemProps } from './Item';
 
 export default {
@@ -10,7 +12,7 @@ export default {
   component: NavItem
 } as Meta;
 
-const Template: Story<NavItemProps> = (args) => <NavItem {...args}>Contacts</NavItem>;
+const Template: Story<NavItemProps> = args => <NavItem {...args}>Contacts</NavItem>;
 
 // <NavItem icon={<SendRounded />}>Direct messages</NavItem>
 // <NavItem icon={<ChatRounded />}>Channels</NavItem>
@@ -29,7 +31,7 @@ ItemWithIcon.args = {
   icon: <PeopleRounded />
 };
 
-const TemplateSub: Story<NavItemProps> = (args) => <NavItem {...args}>Contacts</NavItem>;
+const TemplateSub: Story<NavItemProps> = args => <NavItem {...args}>Contacts</NavItem>;
 
 export const ItemWithSubitems = TemplateSub.bind({});
 ItemWithSubitems.args = {
@@ -38,8 +40,13 @@ ItemWithSubitems.args = {
   icon: <PeopleRounded />,
   collapsible: true,
   subItems: [
-    <NavItem key="k1" icon={<ChatRounded />}>Item</NavItem>,
-    <NavItem key="k2">Item</NavItem>,
-    <NavItem key="k3">Item</NavItem>
+    <NavItem
+      key='k1'
+      icon={<ChatRounded />}
+    >
+      Item
+    </NavItem>,
+    <NavItem key='k2'>Item</NavItem>,
+    <NavItem key='k3'>Item</NavItem>
   ]
 };

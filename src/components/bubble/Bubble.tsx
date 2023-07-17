@@ -1,4 +1,4 @@
-import {
+import React, {
   CSSProperties,
   ReactNode,
   MouseEvent as ReactMouseEvent,
@@ -8,12 +8,12 @@ import {
   useEffect
 } from 'react';
 import classNames from 'classnames';
-import { BubbleContent, ContentType } from './BubbleContent';
-import { BubbleAction, BubbleActions } from './BubbleActions';
-import { BubbleTimestamp } from './BubbleTimestamp';
-import { BubbleAvatar, BubbleType } from './BubbleAvatar';
-import { BubbleReactions, Reaction } from './BubbleReactions';
 import { useMediaQuery } from 'react-responsive';
+import { BubbleAction, BubbleActions } from './BubbleActions';
+import { BubbleAvatar, BubbleType } from './BubbleAvatar';
+import { BubbleContent, ContentType } from './BubbleContent';
+import { BubbleReactions, Reaction } from './BubbleReactions';
+import { BubbleTimestamp } from './BubbleTimestamp';
 import './styles/bubble.scss';
 
 export interface BubbleProps {
@@ -60,7 +60,7 @@ export const Bubble = (props: BubbleProps) => {
     isFirstInBulk,
     isLastInBulk
   } = props;
-  const [ actionsVisible, setActionsVisible ] = useState(false);
+  const [actionsVisible, setActionsVisible] = useState(false);
   const rowRef = useRef<HTMLDivElement>(null);
   const isPc = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -73,8 +73,8 @@ export const Bubble = (props: BubbleProps) => {
     className
   );
 
-  const avatarNode = type === 'recipient' && avatar
-    ? (
+  const avatarNode =
+    type === 'recipient' && avatar ? (
       <BubbleAvatar
         avatar={avatar}
         inBulk={inBulk}
@@ -85,7 +85,11 @@ export const Bubble = (props: BubbleProps) => {
     ) : null;
 
   const timestampNode = (
-    <BubbleTimestamp timestamp={timestamp} isLastInBulk={isLastInBulk} inBulk={inBulk} />
+    <BubbleTimestamp
+      timestamp={timestamp}
+      isLastInBulk={isLastInBulk}
+      inBulk={inBulk}
+    />
   );
 
   useEffect(() => {
@@ -103,7 +107,7 @@ export const Bubble = (props: BubbleProps) => {
         document.removeEventListener('touchstart', handleClickOutside);
       };
     }
-  }, [ actionsVisible ]);
+  }, [actionsVisible]);
 
   const onContextMenu = (event: ReactMouseEvent) => {
     if (actionsVisible) return;
@@ -118,11 +122,15 @@ export const Bubble = (props: BubbleProps) => {
   };
 
   return (
-    <div className={classes} style={style} ref={rowRef}>
-      <div className="ne-bubble-row">
+    <div
+      className={classes}
+      style={style}
+      ref={rowRef}
+    >
+      <div className='ne-bubble-row'>
         {avatarNode}
 
-        <div className="ne-bubble-content-wrapper">
+        <div className='ne-bubble-content-wrapper'>
           {/* {inBulk && !isLastInBulk ? timestampNode : null} */}
           <div className='ne-bubble-content-row'>
             <BubbleContent
@@ -132,16 +140,23 @@ export const Bubble = (props: BubbleProps) => {
               onContextMenu={onContextMenu}
               onClick={() => !isPc && setActionsVisible(true)}
             />
-            <BubbleActions visible={actionsVisible} actions={actions} type={type} />
+            <BubbleActions
+              visible={actionsVisible}
+              actions={actions}
+              type={type}
+            />
           </div>
         </div>
       </div>
-      <div className="ne-bubble-row">
-        {actionsVisible && <BubbleReactions reactions={reactions} onReact={onReactHandler} />}
+      <div className='ne-bubble-row'>
+        {actionsVisible && (
+          <BubbleReactions
+            reactions={reactions}
+            onReact={onReactHandler}
+          />
+        )}
       </div>
-      <div className="ne-bubble-row">
-        {!inBulk || isLastInBulk ? timestampNode : null}
-      </div>
+      <div className='ne-bubble-row'>{!inBulk || isLastInBulk ? timestampNode : null}</div>
     </div>
   );
 };

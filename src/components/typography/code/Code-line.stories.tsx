@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import CodeComponent, { CodeLineProps } from './Code-line';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   component: CodeComponent
 } as Meta;
 
-const Template: Story<CodeLineProps> = (args) => (<CodeComponent {...args}>{args.children}</CodeComponent>);
+const Template: Story<CodeLineProps> = args => <CodeComponent {...args}>{args.children}</CodeComponent>;
 
 const text = 'Code. Neutrino Design';
 

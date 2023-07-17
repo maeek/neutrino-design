@@ -1,5 +1,5 @@
-import classNames from 'classnames';
-import {
+import React, {
+  HTMLAttributes,
   CSSProperties,
   forwardRef,
   MouseEvent,
@@ -8,10 +8,11 @@ import {
   useImperativeHandle,
   useRef
 } from 'react';
+import classNames from 'classnames';
 import useCheckbox from '../../../hooks/inputs/useCheckbox';
 import './checkbox.scss';
 
-export interface CheckboxProps {
+export interface CheckboxProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
   name?: string;
 
   /**
@@ -28,23 +29,16 @@ export interface CheckboxProps {
   required?: boolean;
 }
 
-export const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
-  const {
-    name,
-    checked: value,
-    onChange,
-    className,
-    style,
-    disabled,
-    readOnly,
-    required,
-    ...rest
-  } = props;
+export interface CheckboxRef {
+  checked: boolean;
+  setChecked: (checked: boolean) => void;
+  element: HTMLInputElement | null;
+}
+
+export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
+  const { name, checked: value, onChange, className, style, disabled, readOnly, required, ...rest } = props;
   const innerRef = useRef<HTMLInputElement>(null);
-  const { checked, setChecked, bind } = useCheckbox(
-    value,
-    readOnly || disabled
-  );
+  const { checked, setChecked, bind } = useCheckbox(value, readOnly || disabled);
 
   useImperativeHandle(ref, () => ({
     checked,
@@ -56,27 +50,24 @@ export const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     if (value === undefined && onChange) {
       onChange(checked);
     }
-  }, [ checked, value, onChange ]);
+  }, [checked, value, onChange]);
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault();
 
     if (disabled || readOnly) return;
 
-    setChecked((isChecked) => !isChecked);
+    setChecked(isChecked => !isChecked);
   };
 
   const onSliderKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
-    if ([ 'Enter', ' ' ].includes(e.key)) {
-      setChecked((isChecked) => !isChecked);
+    if (['Enter', ' '].includes(e.key)) {
+      setChecked(isChecked => !isChecked);
     }
   };
 
   const sliderTitle =
-  (required && 'Required') ||
-  (disabled && 'Checkbox disabled') ||
-  (readOnly && 'Checkbox read only') ||
-  '';
+    (required && 'Required') || (disabled && 'Checkbox disabled') || (readOnly && 'Checkbox read only') || '';
 
   return (
     <label
@@ -90,24 +81,24 @@ export const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     >
       <input
         name={name}
-        className="ne-checkbox-control"
-        type="checkbox"
+        className='ne-checkbox-control'
+        type='checkbox'
         ref={innerRef}
         readOnly={readOnly}
         disabled={disabled}
         required={required}
         tabIndex={-1}
-        role="disabled"
         {...bind}
         {...rest}
       />
-      <div className="ne-checkbox-decorator">
+      <div className='ne-checkbox-decorator'>
         <div
-          className="ne-checkbox-decorator-slider"
+          className='ne-checkbox-decorator-slider'
           onKeyUp={onSliderKeyUp}
           onClick={onClick}
           tabIndex={0}
-          role="checkbox"
+          role='checkbox'
+          aria-checked={checked}
           title={sliderTitle}
         >
           {required && !checked && '!'}

@@ -3,7 +3,7 @@ import twemoji from 'twemoji';
 
 export interface TwemojiProps {
   children: ReactNode;
-  options?: {}
+  options?: {};
   tag?: string;
 }
 
@@ -23,7 +23,7 @@ export const Twemoji = (props: TwemojiProps) => {
       const node = child.current;
       twemoji.parse(node, options);
     }
-  }, [ options, rootRef, children ]);
+  }, [options, rootRef, children]);
 
   if (tag) {
     return createElement(tag, { ref: rootRef, ...others }, children);
@@ -31,16 +31,14 @@ export const Twemoji = (props: TwemojiProps) => {
 
   return (
     <>
-      {
-        Children.map(children, (child, i) => {
-          if ([ 'string' ].includes(typeof child)) {
-            return child;
-          }
+      {Children.map(children, (child, i) => {
+        if (['string'].includes(typeof child)) {
+          return child;
+        }
 
-          childrenNodes.current[ i ] = child;
-          return cloneElement(child as any, { ref: childrenNodes.current[ i ] });
-        })
-      }
+        childrenNodes.current[i] = child;
+        return cloneElement(child as any, { ref: childrenNodes.current[i] });
+      })}
     </>
   );
 };

@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import HeadingComponent, { HeadingProps } from './Heading';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   component: HeadingComponent
 } as Meta;
 
-const Template: Story<HeadingProps> = (args) => (
+const Template: Story<HeadingProps> = args => (
   <HeadingComponent {...args}>h{args.level}. Neutrino-design</HeadingComponent>
 );
 

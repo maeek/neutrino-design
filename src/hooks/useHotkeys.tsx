@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 
-export type UseHotKeysMapping = [
-  [string, (event: KeyboardEvent) => void, ...Array<(event: KeyboardEvent) => void>],
-];
+export type UseHotKeysMapping = [[string, (event: KeyboardEvent) => void, ...Array<(event: KeyboardEvent) => void>]];
 
 const shouldFire = (event: KeyboardEvent): boolean => {
   if (event.target instanceof HTMLElement) {
-    return ![ 'INPUT', 'TEXTAREA', 'SELECT' ].includes(event.target.tagName);
+    return !['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName);
   }
 
   return true;
@@ -21,7 +19,7 @@ interface NormalizedKeybinds {
   alt: boolean;
 }
 
-const SPECIAL_KEYS = [ 'meta', 'ctrl', 'shift', 'alt', 'mod' ];
+const SPECIAL_KEYS = ['meta', 'ctrl', 'shift', 'alt', 'mod'];
 const normalizeKeybinds = (mapping: string): NormalizedKeybinds => {
   const keybinds = mapping.split('+');
 
@@ -50,7 +48,7 @@ export const useHotkeys = (mapping: UseHotKeysMapping) => {
     const handleKeydown = (event: KeyboardEvent) => {
       if (!shouldFire(event)) return;
 
-      mapping.forEach(([ key, ...handlers ]) => {
+      mapping.forEach(([key, ...handlers]) => {
         const normalized = normalizeKeybinds(key.toLowerCase());
 
         if (isExactMatch(normalized, event)) {
@@ -64,5 +62,5 @@ export const useHotkeys = (mapping: UseHotKeysMapping) => {
     return () => {
       window.removeEventListener('keydown', handleKeydown);
     };
-  }, [ mapping ]);
+  }, [mapping]);
 };

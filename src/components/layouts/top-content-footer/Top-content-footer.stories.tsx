@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import LayoutTopContentFooterComponent, { LayoutTopContentFooterProps } from '.';
 
 export default {
@@ -16,7 +16,7 @@ const contStyle = {
   padding: '1rem'
 };
 
-const Template: Story<LayoutTopContentFooterProps> = (args) => (
+const Template: Story<LayoutTopContentFooterProps> = args => (
   <div style={{ height: '600px' }}>
     <LayoutTopContentFooterComponent {...args}>
       <div style={contStyle}>Neutrino-design</div>
@@ -27,24 +27,28 @@ const Template: Story<LayoutTopContentFooterProps> = (args) => (
 export const TopContentFooter = Template.bind({});
 TopContentFooter.args = {
   topNode: (
-    <div style={{
-      width: '100%',
-      height: '60px',
-      backgroundColor: '#0f0f0f',
-      color: '#fff',
-      padding: '1rem'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '60px',
+        backgroundColor: '#0f0f0f',
+        color: '#fff',
+        padding: '1rem'
+      }}
+    >
       Neutrino-design top bar
     </div>
   ),
   footerNode: (
-    <div style={{
-      width: '100%',
-      height: '60px',
-      backgroundColor: '#0f0f0f',
-      color: '#fff',
-      padding: '1rem'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '60px',
+        backgroundColor: '#0f0f0f',
+        color: '#fff',
+        padding: '1rem'
+      }}
+    >
       Neutrino-design footer
     </div>
   )

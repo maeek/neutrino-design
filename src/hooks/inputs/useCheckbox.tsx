@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 
 export interface UseCheckbox {
   checked: boolean;
@@ -6,19 +6,16 @@ export interface UseCheckbox {
   reset: () => void;
   bind: {
     checked: boolean;
-    onChange: (event: React.ChangeEvent<any>) => void;
+    onChange: (event: ChangeEvent<unknown>) => void;
   };
 }
 
-export const useCheckbox = (
-  initialValue?: boolean,
-  readOnly?: boolean
-): UseCheckbox => {
-  const [ checked, setChecked ] = useState(!!initialValue);
+export const useCheckbox = (initialValue?: boolean, readOnly?: boolean): UseCheckbox => {
+  const [checked, setChecked] = useState(!!initialValue);
 
   useEffect(() => {
     setChecked(!!initialValue);
-  }, [ initialValue ]);
+  }, [initialValue]);
 
   return {
     checked,
@@ -26,7 +23,7 @@ export const useCheckbox = (
     reset: () => setChecked(!!initialValue),
     bind: {
       checked,
-      onChange: (event) => !readOnly && setChecked(event.target.checked)
+      onChange: event => !readOnly && setChecked((event.target as HTMLInputElement).checked)
     }
   };
 };

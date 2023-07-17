@@ -6,12 +6,12 @@ export interface UseInput {
   reset: () => void;
   bind: {
     value: string;
-    onChange: (event: ChangeEvent<any>) => void;
+    onChange: (event: ChangeEvent<unknown>) => void;
   };
 }
 
 export const useInput = (initialValue: string): UseInput => {
-  const [ value, setValue ] = useState(initialValue);
+  const [value, setValue] = useState(initialValue);
 
   return {
     value,
@@ -19,7 +19,7 @@ export const useInput = (initialValue: string): UseInput => {
     reset: () => setValue(''),
     bind: {
       value,
-      onChange: (event) => setValue(event.target.value)
+      onChange: event => setValue((event.target as HTMLInputElement).value)
     }
   };
 };

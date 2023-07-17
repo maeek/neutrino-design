@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import LayoutTopContentComponent, { LayoutTopContentProps } from '.';
 
 export default {
@@ -16,7 +16,7 @@ const contStyle = {
   padding: '1rem'
 };
 
-const Template: Story<LayoutTopContentProps> = (args) => (
+const Template: Story<LayoutTopContentProps> = args => (
   <div style={{ height: '600px' }}>
     <LayoutTopContentComponent {...args}>
       <div style={contStyle}>Neutrino-design</div>
@@ -27,13 +27,15 @@ const Template: Story<LayoutTopContentProps> = (args) => (
 export const TopContent = Template.bind({});
 TopContent.args = {
   topNode: (
-    <div style={{
-      width: '100%',
-      height: '60px',
-      backgroundColor: '#0f0f0f',
-      color: '#fff',
-      padding: '1rem'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '60px',
+        backgroundColor: '#0f0f0f',
+        color: '#fff',
+        padding: '1rem'
+      }}
+    >
       Neutrino-design top bar
     </div>
   )

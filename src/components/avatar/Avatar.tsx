@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from 'react';
+import React, { ReactNode, CSSProperties, HTMLAttributes } from 'react';
 import classnames from 'classnames';
 import { Image } from '../image/Image';
 import './styles/avatar.scss';
@@ -6,7 +6,7 @@ import './styles/avatar.scss';
 export type AvatarTypes = 'round' | 'rounded' | 'square';
 export type AvatarSizes = 'extra-small' | 'small' | 'medium' | 'large' | 'larger' | 'extra-large';
 
-export interface AvatarProps {
+export interface AvatarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /**
    * Additional classname for the wrapper div
    */
@@ -52,38 +52,37 @@ export interface AvatarProps {
    */
   loader?: ReactNode;
   style?: CSSProperties;
-  [key: string]: any;
 }
 
 const getTypeClass = (type: AvatarTypes, baseClass = 'ne-avatar-content') => {
-  switch(type) {
-  case 'round':
-    return`${baseClass}--round`;
-  case 'rounded':
-    return`${baseClass}--rounded`;
-  case 'square':
-    return`${baseClass}--square`;
-  default:
-    return`${baseClass}--round`;
+  switch (type) {
+    case 'round':
+      return `${baseClass}--round`;
+    case 'rounded':
+      return `${baseClass}--rounded`;
+    case 'square':
+      return `${baseClass}--square`;
+    default:
+      return `${baseClass}--round`;
   }
 };
 
 const getSizeClass = (size: AvatarSizes, baseClass = 'ne-avatar-content') => {
-  switch(size) {
-  case 'extra-small':
-    return `${baseClass}--extra-small`;
-  case 'small':
-    return `${baseClass}--small`;
-  case 'medium':
-    return `${baseClass}--medium`;
-  case 'large':
-    return `${baseClass}--large`;
-  case 'larger':
-    return `${baseClass}--larger`;
-  case 'extra-large':
-    return `${baseClass}--extra-large`;
-  default:
-    return `${baseClass}--small`;
+  switch (size) {
+    case 'extra-small':
+      return `${baseClass}--extra-small`;
+    case 'small':
+      return `${baseClass}--small`;
+    case 'medium':
+      return `${baseClass}--medium`;
+    case 'large':
+      return `${baseClass}--large`;
+    case 'larger':
+      return `${baseClass}--larger`;
+    case 'extra-large':
+      return `${baseClass}--extra-large`;
+    default:
+      return `${baseClass}--small`;
   }
 };
 
@@ -109,15 +108,23 @@ export const Avatar = (props: AvatarProps) => {
   );
 
   return (
-    <div className={classnames('ne-avatar', className)} draggable={false} {...rest}>
-      <div className={classes} tabIndex={tabIndex}>
-        <Image src={src || ''} alt={name} loader={loader} draggable={false} />
+    <div
+      className={classnames('ne-avatar', className)}
+      draggable={false}
+      {...rest}
+    >
+      <div
+        className={classes}
+        tabIndex={tabIndex}
+      >
+        <Image
+          src={src || ''}
+          alt={name}
+          loader={loader}
+          draggable={false}
+        />
       </div>
-      {
-        typeof children === 'function'
-          ? children(src)
-          : children
-      }
+      {typeof children === 'function' ? children(src) : children}
     </div>
   );
 };

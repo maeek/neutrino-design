@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 import LoaderComponent, { LoaderProps } from './Loader';
 
 export default {
@@ -7,9 +7,7 @@ export default {
   component: LoaderComponent
 } as Meta;
 
-const Template: Story<LoaderProps> = (args) => (
-  <LoaderComponent {...args} />
-);
+const Template: Story<LoaderProps> = args => <LoaderComponent {...args} />;
 
 export const Loader = Template.bind({});
 Loader.args = {};

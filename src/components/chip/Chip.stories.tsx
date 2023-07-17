@@ -1,6 +1,6 @@
+import React from 'react';
 import { PersonRounded } from '@material-ui/icons';
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import { Story, Meta } from '@storybook/react';
 import { Chip as ChipComponent, ChipProps } from './Chip';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   component: ChipComponent
 } as Meta;
 
-const Template: Story<ChipProps> = (args) => <ChipComponent {...args} />;
+const Template: Story<ChipProps> = args => <ChipComponent {...args} />;
 
 export const Chip = Template.bind({});
 Chip.args = {
@@ -17,7 +17,7 @@ Chip.args = {
   deletable: true
 };
 
-const MultipleTemplate: Story<ChipProps> = (args) => (
+const MultipleTemplate: Story<ChipProps> = args => (
   <div style={{ display: 'flex', flexWrap: 'wrap' }}>
     <ChipComponent
       icon={<PersonRounded />}
@@ -49,14 +49,15 @@ const MultipleTemplate: Story<ChipProps> = (args) => (
       {...args}
       color='purple'
     >
-        Bobab Kowalczyk
+      Bobab Kowalczyk
     </ChipComponent>
     <ChipComponent
       icon={<PersonRounded />}
       style={{ margin: '0.1rem' }}
       {...args}
-      color='green'>
-        Bobab Kowalczyk
+      color='green'
+    >
+      Bobab Kowalczyk
     </ChipComponent>
   </div>
 );
